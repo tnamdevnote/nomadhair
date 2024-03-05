@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from './button';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -15,14 +16,19 @@ const meta: Meta<typeof Button> = {
     asChild: false,
   },
   argTypes: {
+    intent: {
+      options: ['primary', 'secondary', 'tertiary'],
+      defaultValue: 'primary',
+      control: { type: 'radio' },
+    },
     variant: {
-      options: ['default', 'outlined', 'text', 'link'],
-      defaultValue: 'default',
+      options: ['contained', 'outline', 'text', 'link'],
+      defaultValue: 'contained',
       control: { type: 'select' },
     },
     size: {
       options: ['default', 'lg', 'md', 'sm'],
-      defaultValue: 'lg',
+      defaultValue: 'md',
       control: { type: 'select' },
     },
   },
@@ -33,44 +39,44 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    variant: 'default',
+    intent: 'primary',
+    variant: 'contained',
   },
-  render: ({ variant, size }) => (
-    <Button variant={variant} size={size}>
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size}>
       Call To Action
     </Button>
   ),
 };
-
-export const Outlined: Story = {
+export const Outline: Story = {
   args: {
-    variant: 'outlined',
+    intent: 'primary',
+    variant: 'outline',
   },
-  render: ({ variant, size }) => (
-    <Button variant={variant} size={size}>
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size}>
       Call To Action
     </Button>
   ),
 };
-
 export const Text: Story = {
   args: {
+    intent: 'primary',
     variant: 'text',
   },
-  render: ({ variant, size }) => (
-    <Button variant={variant} size={size}>
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size}>
       Call To Action
     </Button>
   ),
 };
-
 export const Link: Story = {
   args: {
+    intent: 'primary',
     variant: 'link',
-    asChild: true,
   },
-  render: ({ variant, size }) => (
-    <Button variant={variant} size={size}>
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size}>
       Call To Action
     </Button>
   ),

@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
-    '@storybook/addon-accessibility',
+    '@storybook/addon-a11y',
     '@storybook/addon-designs',
   ],
   framework: {
