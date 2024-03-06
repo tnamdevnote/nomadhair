@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Button from '../button';
-import Link from 'next/link';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+import React, { useState } from "react";
+import Button from "../button";
+import Link from "next/link";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 function Logo({ className }: { className?: string }) {
   return (
@@ -80,14 +80,14 @@ function Logo({ className }: { className?: string }) {
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="fixed w-full flex justify-between items-center py-4 px-4 lg:py-16 lg:px-[200px]">
+    <header className="fixed flex w-full items-center justify-between px-4 py-4 lg:px-[200px] lg:py-16">
       <Link href="/">
         <Logo className="h-4 md:h-7" />
       </Link>
       <nav
-        className={`${isOpen ? '' : 'hidden'} fixed top-16 w-full left-0 md:block md:relative md:top-0 md:w-auto`}
+        className={`${isOpen ? "" : "hidden"} fixed left-0 top-16 w-full md:relative md:top-0 md:block md:w-auto`}
       >
-        <ul className="flex w-full px-4 flex-col gap-4 md:flex-row">
+        <ul className="flex w-full flex-col gap-4 px-4 md:flex-row">
           <li>
             <Button
               intent="primary"

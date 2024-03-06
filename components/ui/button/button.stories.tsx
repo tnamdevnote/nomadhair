@@ -1,35 +1,34 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { Button } from './button';
-import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button";
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
   parameters: {
     design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/cURR8cW2EUkTgpHLf5RiVW/NomadHair?type=design&node-id=14-3411&mode=design&t=KenYMZb4HvGFGrwj-4',
+      type: "figma",
+      url: "https://www.figma.com/file/cURR8cW2EUkTgpHLf5RiVW/NomadHair?type=design&node-id=14-3411&mode=design&t=KenYMZb4HvGFGrwj-4",
     },
-    layout: 'centered',
+    layout: "centered",
   },
   args: {
     asChild: false,
   },
   argTypes: {
     intent: {
-      options: ['primary', 'secondary', 'tertiary'],
-      defaultValue: 'primary',
-      control: { type: 'radio' },
+      options: ["primary", "secondary", "tertiary"],
+      defaultValue: "primary",
+      control: { type: "radio" },
     },
     variant: {
-      options: ['contained', 'outline', 'text', 'link'],
-      defaultValue: 'contained',
-      control: { type: 'select' },
+      options: ["contained", "outline", "text", "link"],
+      defaultValue: "contained",
+      control: { type: "select" },
     },
     size: {
-      options: ['default', 'lg', 'md', 'sm'],
-      defaultValue: 'md',
-      control: { type: 'select' },
+      options: ["default", "lg", "md", "sm"],
+      defaultValue: "md",
+      control: { type: "select" },
     },
   },
 };
@@ -39,8 +38,8 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    intent: 'primary',
-    variant: 'contained',
+    intent: "primary",
+    variant: "contained",
   },
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>
@@ -50,8 +49,8 @@ export const Default: Story = {
 };
 export const Outline: Story = {
   args: {
-    intent: 'primary',
-    variant: 'outline',
+    intent: "primary",
+    variant: "outline",
   },
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>
@@ -61,8 +60,8 @@ export const Outline: Story = {
 };
 export const Text: Story = {
   args: {
-    intent: 'primary',
-    variant: 'text',
+    intent: "primary",
+    variant: "text",
   },
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>
@@ -72,8 +71,8 @@ export const Text: Story = {
 };
 export const Link: Story = {
   args: {
-    intent: 'primary',
-    variant: 'link',
+    intent: "primary",
+    variant: "link",
   },
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>
