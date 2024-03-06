@@ -14,7 +14,7 @@ const buttonVariants = cva(
         tertiary: 'bg-tertiary-100 text-white hover:bg-tertiary-100/90',
       },
       variant: {
-        contained: '',
+        contained: undefined,
         outline: 'bg-transparent border border-current hover:border-current ',
         text: 'bg-transparent',
         link: 'bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent',
@@ -72,7 +72,10 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, intent, variant, size, asChild = false, ...props }, ref) => {
+  (
+    { className, intent = 'primary', variant, size, asChild = false, ...props },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button';
     return (
       <Comp
