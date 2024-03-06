@@ -85,7 +85,7 @@ function Header() {
         <Logo className="h-4 md:h-7" />
       </Link>
       <nav
-        className={`${isOpen ? '' : 'hidden'} fixed top-16 w-full left-0 md:block`}
+        className={`${isOpen ? '' : 'hidden'} fixed top-16 w-full left-0 md:block md:relative md:top-0 md:w-auto`}
       >
         <ul className="flex w-full px-4 flex-col gap-4 md:flex-row">
           <li>
@@ -137,6 +137,7 @@ function Header() {
         variant="text"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden"
       >
         <span className="sr-only">Toggle Menu Button</span>
         <HamburgerMenuIcon />
