@@ -87,7 +87,8 @@ export interface HeaderProps {
 function Header({ user }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="fixed flex w-full items-center px-4 py-4 lg:px-[200px] lg:py-16">
+    // setting fixed property will make header disappear on storybook
+    <header className="flex w-full items-center px-4 py-4 lg:px-[200px] lg:py-16">
       <Link href="/" aria-label="Home">
         <Logo className="h-4 md:h-7" />
       </Link>
@@ -119,7 +120,7 @@ function Header({ user }: HeaderProps) {
           </li>
         </ul>
       </nav>
-      <div className="ml-auto flex items-center gap-4 md:ml-0">
+      <div className="ml-auto flex items-center md:ml-0 md:gap-4">
         {user ? (
           <>
             <Button variant="text" size="sm" className="font-bold">
