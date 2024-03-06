@@ -80,18 +80,18 @@ function Logo({ className }: { className?: string }) {
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <header className="fixed flex w-full items-center justify-between px-4 py-4 lg:px-[200px] lg:py-16">
+    <header className="fixed flex w-full items-center px-4 py-4 lg:px-[200px] lg:py-16">
       <Link href="/">
         <Logo className="h-4 md:h-7" />
       </Link>
       <nav
-        className={`${isOpen ? "" : "hidden"} fixed left-0 top-16 w-full md:relative md:top-0 md:block md:w-auto`}
+        className={`${isOpen ? "" : "hidden"} fixed left-0 top-16 w-full md:relative md:top-0 md:ml-auto md:block md:w-auto`}
       >
-        <ul className="flex w-full flex-col gap-4 px-4 md:flex-row">
+        <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
           <li>
             <Button
               intent="primary"
-              variant="text"
+              variant="link"
               size="sm"
               asChild
               className="w-full"
@@ -102,7 +102,7 @@ function Header() {
           <li>
             <Button
               intent="primary"
-              variant="text"
+              variant="link"
               size="sm"
               asChild
               className="w-full"
@@ -110,28 +110,21 @@ function Header() {
               <Link href="/">About</Link>
             </Button>
           </li>
-          <li>
-            <Button
-              intent="primary"
-              variant="text"
-              size="sm"
-              className="w-full"
-            >
-              Login
-            </Button>
-          </li>
-          <li>
-            <Button
-              intent="primary"
-              variant="contained"
-              size="sm"
-              className="w-full"
-            >
-              Sign up
-            </Button>
-          </li>
         </ul>
       </nav>
+      <div className="ml-auto flex items-center md:ml-0">
+        <Button intent="primary" variant="link" size="sm" className="text-sm">
+          Login
+        </Button>
+        <Button
+          intent="primary"
+          variant="contained"
+          size="sm"
+          className="text-sm"
+        >
+          Sign up
+        </Button>
+      </div>
       <Button
         intent="primary"
         variant="text"
