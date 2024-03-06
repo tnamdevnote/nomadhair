@@ -77,11 +77,18 @@ function Logo({ className }: { className?: string }) {
   );
 }
 
-function Header() {
+type User = {
+  name: string;
+};
+export interface HeaderProps {
+  user: User;
+}
+
+function Header({ user }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="fixed flex w-full items-center px-4 py-4 lg:px-[200px] lg:py-16">
-      <Link href="/">
+      <Link href="/" aria-label="Home">
         <Logo className="h-4 md:h-7" />
       </Link>
       <nav
@@ -112,21 +119,26 @@ function Header() {
           </li>
         </ul>
       </nav>
-      <div className="ml-auto flex items-center md:ml-0">
-        <Button intent="primary" variant="link" size="sm" className="text-sm">
-          Login
-        </Button>
-        <Button
-          intent="primary"
-          variant="contained"
-          size="sm"
-          className="text-sm"
-        >
-          Sign up
-        </Button>
+      <div className="ml-auto flex items-center gap-4 md:ml-0">
+        {user ? (
+          <>
+            <Button variant="text" size="sm" className="font-bold">
+              Hi, {user.name}!
+            </Button>
+            <Button size="sm">Log out</Button>
+          </>
+        ) : (
+          <>
+            <Button variant="text" size="sm">
+              Login
+            </Button>
+            <Button variant="contained" size="sm">
+              Sign up
+            </Button>
+          </>
+        )}
       </div>
       <Button
-        intent="primary"
         variant="text"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}

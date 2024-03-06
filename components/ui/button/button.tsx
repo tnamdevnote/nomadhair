@@ -20,10 +20,9 @@ const buttonVariants = cva(
         link: "bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent",
       },
       size: {
-        default: "h-10 px-6 py-2 text-sm",
         sm: "h-9 rounded-md px-3 py-1 text-sm",
         md: "h-10 px-4 py-1.5 text-sm",
-        lg: "h-11 rounded-md px-6 py-2 text-base",
+        lg: "h-11 rounded-lg px-6 py-2 text-base",
       },
     },
     compoundVariants: [
@@ -60,7 +59,7 @@ const buttonVariants = cva(
     ],
     defaultVariants: {
       intent: "primary",
-      size: "default",
+      size: "md",
     },
   },
 );

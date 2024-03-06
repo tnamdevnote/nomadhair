@@ -12,22 +12,22 @@ const meta: Meta<typeof Button> = {
     layout: "centered",
   },
   args: {
+    intent: "primary",
+    variant: "contained",
     asChild: false,
+    size: "md",
   },
   argTypes: {
     intent: {
       options: ["primary", "secondary", "tertiary"],
-      defaultValue: "primary",
       control: { type: "radio" },
     },
     variant: {
       options: ["contained", "outline", "text", "link"],
-      defaultValue: "contained",
       control: { type: "select" },
     },
     size: {
-      options: ["default", "lg", "md", "sm"],
-      defaultValue: "md",
+      options: ["lg", "md", "sm"],
       control: { type: "select" },
     },
   },
@@ -38,7 +38,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    intent: "primary",
     variant: "contained",
   },
   render: ({ variant, intent, size }) => (
@@ -49,7 +48,6 @@ export const Default: Story = {
 };
 export const Outline: Story = {
   args: {
-    intent: "primary",
     variant: "outline",
   },
   render: ({ variant, intent, size }) => (
@@ -60,7 +58,6 @@ export const Outline: Story = {
 };
 export const Text: Story = {
   args: {
-    intent: "primary",
     variant: "text",
   },
   render: ({ variant, intent, size }) => (
@@ -71,12 +68,12 @@ export const Text: Story = {
 };
 export const Link: Story = {
   args: {
-    intent: "primary",
     variant: "link",
+    asChild: true,
   },
-  render: ({ variant, intent, size }) => (
-    <Button variant={variant} intent={intent} size={size}>
-      Call To Action
+  render: ({ variant, intent, size, asChild }) => (
+    <Button variant={variant} intent={intent} size={size} asChild={asChild}>
+      <a href="#">Call To Action</a>
     </Button>
   ),
 };
