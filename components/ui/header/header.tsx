@@ -79,4 +79,4 @@ function Header({ user }: HeaderProps) {
   );
 }
 
-export default Header;
+export { Header };
