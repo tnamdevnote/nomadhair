@@ -16,7 +16,7 @@ const buttonVariants = cva(
       variant: {
         contained: undefined,
         outline: "bg-transparent border border-current hover:border-current ",
-        text: "bg-transparent",
+        ghost: "bg-transparent",
         link: "bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent",
       },
       size: {
@@ -28,17 +28,17 @@ const buttonVariants = cva(
     compoundVariants: [
       {
         intent: "primary",
-        variant: ["outline", "text"],
+        variant: ["outline", "ghost"],
         className: "text-primary-100 hover:bg-primary-100/5",
       },
       {
         intent: "secondary",
-        variant: ["outline", "text"],
+        variant: ["outline", "ghost"],
         className: "text-secondary-100 hover:bg-secondary-100/5",
       },
       {
         intent: "tertiary",
-        variant: ["outline", "text"],
+        variant: ["outline", "ghost"],
         className: "text-tertiary-100 hover:bg-tertiary-100/5",
       },
       {

@@ -23,7 +23,7 @@ const meta: Meta<typeof Button> = {
       control: { type: "radio" },
     },
     variant: {
-      options: ["contained", "outline", "text", "link"],
+      options: ["contained", "outline", "ghost", "link"],
       control: { type: "select" },
     },
     size: {
@@ -58,7 +58,7 @@ export const Outline: Story = {
 };
 export const Text: Story = {
   args: {
-    variant: "text",
+    variant: "ghost",
   },
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>

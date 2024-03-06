@@ -123,14 +123,14 @@ function Header({ user }: HeaderProps) {
       <div className="ml-auto flex items-center md:ml-0 md:gap-4">
         {user ? (
           <>
-            <Button variant="text" size="sm" className="font-bold">
+            <Button variant="ghost" size="sm" className="font-bold">
               Hi, {user.name}!
             </Button>
             <Button size="sm">Log out</Button>
           </>
         ) : (
           <>
-            <Button variant="text" size="sm">
+            <Button variant="ghost" size="sm">
               Login
             </Button>
             <Button variant="contained" size="sm">
@@ -140,7 +140,7 @@ function Header({ user }: HeaderProps) {
         )}
       </div>
       <Button
-        variant="text"
+        variant="ghost"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="md:hidden"
