@@ -24,27 +24,22 @@ function Header({ user }: HeaderProps) {
       >
         <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
           <li>
-            <Button
-              intent="primary"
-              variant="link"
-              size="sm"
-              asChild
-              className="w-full"
-            >
+            <Button variant="link" size="sm" asChild className="w-full">
               <Link href="/">Home</Link>
             </Button>
           </li>
           <li>
-            <Button
-              intent="primary"
-              variant="link"
-              size="sm"
-              asChild
-              className="w-full"
-            >
+            <Button variant="link" size="sm" asChild className="w-full">
               <Link href="/">About</Link>
             </Button>
           </li>
+          {user ? (
+            <li>
+              <Button variant="link" size="sm" asChild className="w-full">
+                <Link href="/">My Appointment</Link>
+              </Button>
+            </li>
+          ) : null}
         </ul>
       </nav>
       <div className="ml-auto flex items-center md:ml-0 md:gap-4">
