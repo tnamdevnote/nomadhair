@@ -33,14 +33,19 @@ function Footer() {
       </div>
       <Separator className="my-4" />
       <div className="flex flex-col items-center gap-4 lg:flex-row lg:justify-between">
-        <p className="text-sm text-white">Copyright © 2024 tnamdevnote</p>
+        <p className="text-sm text-white">
+          {"Copyright © 2024 "}
+          <a href="https://tnam.dev" target="_blank">
+            tnamdevnote
+          </a>
+        </p>
         <div className="flex gap-4">
           <Button
             asChild
             size="sm"
-            className="h-8  w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
+            className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
           >
-            <Link href="#">
+            <Link href="#" aria-label="Github">
               <GitHubLogoIcon className="h-4 w-4" />
             </Link>
           </Button>
@@ -49,7 +54,7 @@ function Footer() {
             size="sm"
             className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
           >
-            <Link href="#">
+            <Link href="#" aria-label="LinkedIn">
               <LinkedInLogoIcon className="h-4 w-4" />
             </Link>
           </Button>
