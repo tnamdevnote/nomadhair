@@ -8,7 +8,7 @@ type User = {
   name: string;
 };
 export interface HeaderProps {
-  user: User;
+  user?: User;
 }
 
 function Header({ user }: HeaderProps) {
