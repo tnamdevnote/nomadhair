@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { poppins, inter } from "../lib/font";
 import "./globals.css";
-import PageTemplate from "@/components/templates";
+import PageTemplate from "@/templates";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import Container from "@/components/ui/Container";
