@@ -1,3 +1,4 @@
+import { montserrat, quicksand } from "./lib/font";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -52,6 +53,10 @@ const config = {
         "100": "#060609",
       },
     },
+    fontFamily: {
+      montserrat: ["var(--font-montserrat)"],
+      quicksand: ["var(--font-quicksand)"],
+    },
     fontSize: {
       sm: ["0.875rem", "150%"],
       base: ["1rem", "150%"],
@@ -59,10 +64,7 @@ const config = {
       xl: ["2rem", "150%"],
       "2xl": ["4rem", "150%"],
     },
-    fontFamily: {
-      poppins: ["var(--font-poppins)"],
-      inter: ["var(--font-inter)"],
-    },
+
     extend: {
       colors: {
         border: "hsl(var(--border))",

@@ -78,7 +78,7 @@
   h1,
   h2,
   h3 {
-    @apply font-inter;
+    @apply font-montserrat;
   }
 
   h1 {
@@ -105,8 +105,8 @@ body {
 }
 
 /* This is required to mock Inter font-family in storybook */
-h1,
+/* h1,
 h2,
 h3 {
-  font-family: var(--font-inter);
-}
+  font-family: var(--font-montserrat);
+} */

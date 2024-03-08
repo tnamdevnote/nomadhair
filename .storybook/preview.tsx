@@ -5,14 +5,25 @@ import {
 } from "@storybook/addon-viewport";
 
 import "../app/globals.css";
-import { poppins, inter } from "../lib/font.ts";
+import { Montserrat, Quicksand } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 import React from "react";
 
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <div className={`${poppins.className} ${inter.className}`}>
+      <div className={`${quicksand.className} ${montserrat.variable}`}>
         <Story />
       </div>
     ),

@@ -1,13 +1,13 @@
-import { Inter, Poppins } from "next/font/google";
+import { Montserrat, Quicksand } from "next/font/google";
 
-export const inter = Inter({
+export const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-montserrat",
   display: "swap",
 });
-export const poppins = Poppins({
-  weight: ["200", "400", "700"],
+
+export const quicksand = Quicksand({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-quicksand",
   display: "swap",
 });
