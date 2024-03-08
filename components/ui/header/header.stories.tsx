@@ -11,6 +11,11 @@ const meta: Meta<typeof Header> = {
     },
     layout: "fullscreen",
   },
+  render: ({ user }) => (
+    <div style={{ minHeight: "200px" }}>
+      <Header user={user} />
+    </div>
+  ),
 };
 
 export default meta;
