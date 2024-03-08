@@ -5,7 +5,7 @@ import Button from "../button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "../logo";
-import Container from "../Container";
+import Container from "../container";
 
 type User = {
   name: string;
@@ -18,13 +18,13 @@ function Header({ user }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     // setting fixed property will make header disappear on storybook
-    <header className="h-navbar-height-sm lg:h-navbar-height-lg fixed top-0 w-full bg-secondary-10">
+    <header className="fixed top-0 h-navbar-height-sm w-full bg-secondary-10 lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:px-[200px] lg:py-16">
         <Link href="/" aria-label="Home">
           <Logo className="h-4 md:h-7" />
         </Link>
         <nav
-          className={`${isOpen ? "visible" : "invisible"} top-navbar-height-sm fixed left-0 h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
+          className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
         >
           <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
             <li>

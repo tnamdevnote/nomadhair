@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import PageTemplate from "./PageTemplate";
+import PageTemplate from "./pageTemplate";
 import * as React from "react";
 
 const meta: Meta<typeof PageTemplate> = {

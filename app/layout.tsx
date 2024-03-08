@@ -4,7 +4,7 @@ import "./globals.css";
 import PageTemplate from "@/templates";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
-import Container from "@/components/ui/Container";
+import Container from "@/components/ui/container";
 import { Montserrat, Quicksand } from "next/font/google";
 
 const montserrat = Montserrat({

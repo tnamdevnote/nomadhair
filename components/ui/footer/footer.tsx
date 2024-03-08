@@ -9,7 +9,7 @@ import {
 } from "@radix-ui/react-icons";
 import Button from "../button";
 import Link from "next/link";
-import Container from "../Container";
+import Container from "../container";
 
 function Footer() {
   return (
