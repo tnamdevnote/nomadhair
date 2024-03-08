@@ -104,6 +104,10 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        "navbar-height-sm": "var(--navbar-height-sm)",
+        "navbar-height-lg": "var(--navbar-height-lg)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

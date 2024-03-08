@@ -10,7 +10,9 @@ function PageTemplate({ children }: PageTemplateProps) {
   return (
     <>
       <Header />
-      <main className="min-h-screen max-w-2xl">{children}</main>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        {children}
+      </main>
       <Footer />
     </>
   );

@@ -33,6 +33,9 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --navbar-height-lg: 10.25rem;
+    --navbar-height-sm: 4.25rem;
   }
 
   .dark {
@@ -97,11 +100,13 @@
 
 body {
   margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 /* This is required to mock Inter font-family in storybook */
 h1,
 h2,
 h3 {
-  font-family: "Inter";
+  font-family: var(--font-inter);
 }
