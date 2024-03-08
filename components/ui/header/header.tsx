@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
@@ -16,6 +16,28 @@ export interface HeaderProps {
 
 function Header({ user }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // scroll lock when navMenu is open
+  useEffect(() => {
+    const doc = document.querySelector("html");
+    if (doc) {
+      doc.classList.toggle("overflow-hidden", isOpen);
+    }
+  }, [isOpen]);
+
+  // close the navMenu when screen resizes
+  useEffect(() => {
+    const closeNaveMenu = () => setIsOpen(false);
+    window.addEventListener("orientationchange", closeNaveMenu);
+    window.addEventListener("resize", closeNaveMenu);
+
+    console.log("hello");
+    return () => {
+      window.removeEventListener("orientationchange", closeNaveMenu);
+      window.removeEventListener("resize", closeNaveMenu);
+    };
+  }, []);
+
   return (
     // setting fixed property will make header disappear on storybook
     <header className="fixed top-0 h-navbar-height-sm w-full bg-secondary-10 lg:h-navbar-height-lg">
