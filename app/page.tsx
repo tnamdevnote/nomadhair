@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <section aria-label="Hero">
-        <Container className="flex flex-col items-center gap-8 py-12 md:flex-row-reverse md:px-16 md:py-44 lg:px-32">
+        <Container className="flex flex-col items-center gap-8 py-12 md:flex-row-reverse md:py-44 ">
           <div className="flex w-full flex-1 justify-center">
             <Image src={barber} width={425} alt="barber image" />
           </div>
@@ -26,7 +26,7 @@ export default function Home() {
         </Container>
       </section>
       <section className="bg-secondary-15" aria-labelledby="about">
-        <Container className="flex flex-col items-center gap-8 py-12 md:flex-row md:px-16 md:py-44 lg:px-32">
+        <Container className="flex flex-col items-center gap-8 py-12 md:flex-row md:py-44">
           <div className="flex w-full flex-1 justify-center">
             <Image src={departing} width={425} alt="departing image" />
           </div>
