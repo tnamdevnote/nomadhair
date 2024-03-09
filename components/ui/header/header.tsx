@@ -41,7 +41,7 @@ function Header({ user }: HeaderProps) {
   return (
     // setting fixed property will make header disappear on storybook
     <header className="fixed top-0 h-navbar-height-sm w-full bg-secondary-10 lg:h-navbar-height-lg">
-      <Container className="flex items-center py-4 lg:px-[200px] lg:py-16">
+      <Container className="flex items-center py-4 md:px-16 lg:px-32 lg:py-16">
         <Link href="/" aria-label="Home">
           <Logo className="h-4 md:h-7" />
         </Link>

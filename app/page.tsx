@@ -52,7 +52,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-      <section>Reviews</section>
     </>
   );
 }

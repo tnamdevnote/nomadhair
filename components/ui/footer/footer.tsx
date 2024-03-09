@@ -14,7 +14,7 @@ import Container from "../container";
 function Footer() {
   return (
     <footer role="contentinfo" className="bg-primary-100 ">
-      <Container className="flex min-h-[450px] flex-col justify-center gap-6 lg:px-[200px]">
+      <Container className="flex min-h-[450px] flex-col justify-center gap-6 md:px-16 lg:px-32">
         <Logo mode="dark" className="h-4 w-fit md:h-7" />
         <h2 className="text-lg text-white">Get In Touch</h2>
         <div className="flex flex-col gap-6 md:flex-row [&_p]:flex [&_p]:items-center [&_p]:gap-2 [&_p]:text-sm [&_p]:text-white">
