@@ -56,7 +56,7 @@ export const Outline: Story = {
     </Button>
   ),
 };
-export const Text: Story = {
+export const Ghost: Story = {
   args: {
     variant: "ghost",
   },

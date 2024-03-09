@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import PageTemplate from "./pageTemplate";
+import Fallback from "@/components/ui/fallback/fallback";
 import * as React from "react";
 
 const meta: Meta<typeof PageTemplate> = {
@@ -25,13 +26,4 @@ function DummyComponent({ children }: { children: React.ReactNode }) {
   return <div>{children}</div>;
 }
 
-export const LoggedIn: Story = {
-  args: {
-    children: (
-      <DummyComponent>
-        Default template with scrollable header and navigation items
-      </DummyComponent>
-    ),
-  },
-};
-export const LoggedOut: Story = {};
+export const Default: Story = {};
