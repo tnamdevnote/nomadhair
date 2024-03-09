@@ -32,8 +32,13 @@ export default function Home() {
           </div>
           <div className="flex flex-1 flex-col items-center gap-10">
             <h2 className="text-center text-lg text-primary-100 md:text-left lg:text-xl">
-              <strong id="about" className="mb-4 block text-base font-normal">
+              <strong
+                id="about"
+                className="mb-4 flex items-center justify-center gap-2 text-base font-normal md:justify-start"
+              >
+                <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
                 ABOUT NOMADHAIR
+                <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
               </strong>
               Your friendly neighborhood hair designer
             </h2>
