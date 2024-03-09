@@ -35,10 +35,10 @@
 
     --radius: 0.5rem;
 
-    --navbar-height-lg: 10.25rem;
+    --navbar-height-lg: 6.25rem;
     --navbar-height-sm: 4.25rem;
   }
-
+  /* ShadcnUI variables */
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -104,10 +104,3 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
-/* This is required to mock Inter font-family in storybook */
-/* h1,
-h2,
-h3 {
-  font-family: var(--font-montserrat);
-} */

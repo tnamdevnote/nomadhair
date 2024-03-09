@@ -12,7 +12,7 @@ const meta: Meta<typeof Header> = {
     layout: "fullscreen",
   },
   render: ({ user }) => (
-    <div style={{ minHeight: "200px" }}>
+    <div style={{ minHeight: "100px" }}>
       <Header user={user} />
     </div>
   ),
