@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className="bg-secondary-10">
         <Header />
         <main className="min-h-screen pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
-          <Container>{children}</Container>
+          {children}
         </main>
         <Footer />
       </body>
