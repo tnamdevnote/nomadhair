@@ -2,6 +2,13 @@ import Button from "@/components/ui/button";
 import Image from "next/image";
 import { barber, departing } from "@/public/illustrations";
 import Container from "@/components/ui/container";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel/carousel";
 
 export default function Home() {
   return (
@@ -50,6 +57,32 @@ export default function Home() {
               <Button className="w-full md:w-auto">Learn More</Button>
             </div>
           </div>
+        </Container>
+      </section>
+      <section aria-labelledby="testimonials">
+        <Container className="flex flex-col items-center justify-center gap-8 py-12 md:py-44">
+          <h2 className="text-center text-lg text-primary-100 lg:text-xl">
+            <strong
+              id="testimonials"
+              className="mb-4 flex items-center justify-center gap-2 text-base font-normal"
+            >
+              <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+              TESTIMONIALS
+              <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+            </strong>
+            Sweet Reviews From My Clients
+          </h2>
+          <Carousel>
+            <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index} className="basis-1/3">
+                  <div>1</div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </Container>
       </section>
     </>
