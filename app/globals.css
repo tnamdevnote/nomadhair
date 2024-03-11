@@ -80,7 +80,7 @@
   h1,
   h2,
   h3 {
-    @apply font-montserrat;
+    @apply font-montserrat text-neutral-80;
   }
 
   h1 {
