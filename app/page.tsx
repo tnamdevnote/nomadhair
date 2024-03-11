@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel/carousel";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function Home() {
   return (
@@ -72,16 +73,31 @@ export default function Home() {
             </strong>
             Sweet Reviews From My Clients
           </h2>
-          <Carousel>
-            <CarouselContent>
+          <Carousel className="w-full">
+            <CarouselContent className="p-2">
               {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index} className="basis-1/3">
-                  <div>1</div>
+                <CarouselItem
+                  key={index}
+                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <Card className="min-w-0 ">
+                    <CardHeader
+                      headingLevel={3}
+                      title="Taek"
+                      subheader="hello"
+                    />
+                    <CardContent>
+                      “Lorem ipsum dolor sit amet, consec tetur adi piscing
+                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
+                      suscipit sodales ex. Vestibulum id varius risus. Fusce
+                      tempus tellus sed.”
+                    </CardContent>
+                  </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="p-1" />
+            <CarouselNext className="p-1" />
           </Carousel>
         </Container>
       </section>

@@ -7,7 +7,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
       <div
         ref={ref}
         className={cn(
-          "flex min-w-72 flex-col gap-4 px-10 py-12 shadow-md",
+          "flex min-w-56 flex-col gap-4 px-10 py-12 shadow-md",
           className,
         )}
         {...props}
