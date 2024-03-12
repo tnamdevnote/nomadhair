@@ -96,8 +96,8 @@ export default function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="p-1" />
-            <CarouselNext className="p-1" />
+            <CarouselPrevious className="bg-white p-1 text-neutral-80 hover:bg-neutral-10" />
+            <CarouselNext className="bg-white p-1 text-neutral-80 hover:bg-neutral-10" />
           </Carousel>
         </Container>
       </section>
