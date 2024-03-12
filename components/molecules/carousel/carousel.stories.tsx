@@ -6,10 +6,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./carousel";
-import Container from "../container";
+import Container from "@/components/templates/container";
 
 const meta: Meta<typeof Carousel> = {
-  title: "Components/Carousel",
+  title: "Molecules/Carousel",
   component: Carousel,
   parameters: {
     layout: "centered",

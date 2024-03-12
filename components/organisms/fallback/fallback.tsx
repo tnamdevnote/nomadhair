@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import NotFound from "./notfound";
-import Error from "./error";
-import Button from "../button";
+import Button from "@/components/atoms/button";
 
 export interface FallbackProps {
   image: React.ReactNode;

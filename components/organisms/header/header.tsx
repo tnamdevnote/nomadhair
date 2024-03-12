@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Button from "../button";
+import Button from "@/components/atoms/button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import Logo from "../logo";
-import Container from "../container";
+import Logo from "@/components/atoms/logo";
+import Container from "@/components/templates/container";
 
 type User = {
   name: string;

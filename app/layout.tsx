@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-// import { montserrat, quicksand } from "../lib/font";
 import "./globals.css";
-import PageTemplate from "@/templates";
-import Header from "@/components/ui/header";
-import Footer from "@/components/ui/footer";
-import Container from "@/components/ui/container";
+import Header from "@/components/organisms/header";
+import Footer from "@/components/organisms/footer";
 import { Montserrat, Quicksand } from "next/font/google";
 
 const montserrat = Montserrat({

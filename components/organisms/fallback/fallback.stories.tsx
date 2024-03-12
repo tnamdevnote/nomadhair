@@ -4,7 +4,7 @@ import NotFound from "./notfound";
 import Error from "./error";
 
 const meta: Meta<typeof Fallback> = {
-  title: "Components/Fallback",
+  title: "Organisms/Fallback",
   component: Fallback,
   parameters: {
     design: {

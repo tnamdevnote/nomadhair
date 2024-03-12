@@ -1,16 +1,16 @@
-import Button from "@/components/ui/button";
+import Button from "@/components/atoms/button";
 import Image from "next/image";
 import { barber, departing } from "@/public/illustrations";
-import Container from "@/components/ui/container";
+import Container from "@/components/templates/container";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel/carousel";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from "@/components/molecules/carousel/carousel";
+import { Card, CardContent, CardHeader } from "@/components/molecules/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
 const reviews = [
   {

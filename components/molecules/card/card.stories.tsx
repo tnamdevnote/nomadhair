@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Card, CardHeader, CardContent } from "./card";
-import { Avatar, AvatarFallback } from "../avatar";
+import { Avatar, AvatarFallback } from "@/components/atoms/avatar";
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: "Molecules/Card",
   component: Card,
   parameters: {
     layout: "centered",
