@@ -5,7 +5,7 @@ export interface ContainerProps {
   children: React.ReactNode;
 }
 
-export function Container({ className, children }: ContainerProps) {
+export default function Container({ className, children }: ContainerProps) {
   return (
     <div
       className={[

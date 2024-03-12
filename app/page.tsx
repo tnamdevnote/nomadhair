@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/button";
 import Image from "next/image";
 import { barber, departing } from "@/public/illustrations";
-import Container from "@/components/templates/container";
+import { Container, SplitContainer } from "@/components/templates/container";
 import {
   Carousel,
   CarouselContent,
@@ -63,11 +63,15 @@ export default function Home() {
   return (
     <>
       <section aria-label="Hero">
-        <Container className="flex flex-col items-center gap-8 py-12 md:flex-row-reverse md:py-44 ">
-          <div className="flex w-full flex-1 justify-center">
+        <SplitContainer
+          leftWeight={1}
+          rightWeight={1}
+          className="py-12 md:flex-row-reverse md:py-44"
+        >
+          <SplitContainer.Left className="flex justify-center">
             <Image src={barber} width={425} alt="barber image" />
-          </div>
-          <div className="flex flex-1 flex-col items-center gap-10">
+          </SplitContainer.Left>
+          <SplitContainer.Right className="flex flex-col items-center gap-10">
             <h1 className="text-center text-xl font-medium text-primary-100 md:text-left lg:text-2xl">
               Bringing style to your place
             </h1>
@@ -78,12 +82,12 @@ export default function Home() {
             <div className="w-full">
               <Button className="w-full md:w-auto">Book Appointment</Button>
             </div>
-          </div>
-        </Container>
+          </SplitContainer.Right>
+        </SplitContainer>
       </section>
       <section className="bg-secondary-15" aria-labelledby="about">
         <Container className="flex flex-col items-center gap-8 py-12 md:flex-row md:py-44">
-          <div className="flex w-full flex-1 justify-center">
+          <div className="flex flex-1 justify-center">
             <Image src={departing} width={425} alt="departing image" />
           </div>
           <div className="flex flex-1 flex-col items-center gap-10">
