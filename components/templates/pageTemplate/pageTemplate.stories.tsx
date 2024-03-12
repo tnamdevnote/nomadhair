@@ -17,12 +17,4 @@ const meta: Meta<typeof PageTemplate> = {
 export default meta;
 type Story = StoryObj<typeof PageTemplate>;
 
-type PageTemplateProps = {
-  type?: "default" | "sticky-header" | "basic";
-};
-
-function DummyComponent({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
-}
-
 export const Default: Story = {};

@@ -23,7 +23,9 @@ import React from "react";
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <div className={`${quicksand.className} ${montserrat.variable}`}>
+      <div
+        className={`bg-secondary-10 ${quicksand.className} ${montserrat.variable}`}
+      >
         <Story />
       </div>
     ),
