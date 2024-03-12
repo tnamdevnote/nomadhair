@@ -8,14 +8,23 @@ const meta: Meta<typeof Card> = {
   parameters: {
     layout: "centered",
   },
+  args: {
+    intent: "primary",
+  },
+  argTypes: {
+    intent: {
+      options: ["primary", "secondary", "tertiary"],
+      control: { type: "radio" },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
-  render: () => (
-    <Card className="w-96">
+  render: ({ intent }) => (
+    <Card className="w-96" intent={intent}>
       <CardHeader headingLevel={2} title="Title" subheader="subheading" />
       <CardContent>
         “Lorem ipsum dolor sit amet, consec tetur adi piscing elit. Praesent
@@ -27,12 +36,12 @@ export const Default: Story = {
 };
 
 export const WithAvatar: Story = {
-  render: () => (
-    <Card className="w-96">
+  render: ({ intent }) => (
+    <Card className="w-96" intent={intent}>
       <CardHeader
         avatar={
           <Avatar>
-            <AvatarFallback>TN</AvatarFallback>
+            <AvatarFallback className="text-neutral-90">TN</AvatarFallback>
           </Avatar>
         }
         headingLevel={2}

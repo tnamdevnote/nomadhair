@@ -10,6 +10,54 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel/carousel";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const reviews = [
+  {
+    id: 0,
+    avatar:
+      "https://images.unsplash.com/photo-1610483178766-8092d96033f3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjA2fHxsZWdvJTIwZmlndXJlfGVufDB8fDB8fHww",
+    name: "Eunsub Cho",
+    occupation: "Professor at Calvin University",
+    review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
+                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
+                      suscipit sodales ex. Vestibulum id varius risus. Fusce
+                      tempus tellus sed.”`,
+  },
+  {
+    id: 1,
+    avatar:
+      "https://images.unsplash.com/photo-1600637453426-7c64826b19d9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGxlZ28lMjBmaWd1cmV8ZW58MHx8MHx8fDA%3D",
+    name: "Moon Kim",
+    occupation: "Pastor at Korean Grace Church",
+    review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
+                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
+                      suscipit sodales ex. Vestibulum id varius risus. Fusce
+                      tempus tellus sed.”`,
+  },
+  {
+    id: 2,
+    avatar:
+      "https://images.unsplash.com/photo-1600637453281-b121a101f1fe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxlZ28lMjBmaWd1cmV8ZW58MHx8MHx8fDA%3D",
+    name: "Youngkwang Choi",
+    occupation: "Software Engineer at TwistThink",
+    review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
+                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
+                      suscipit sodales ex. Vestibulum id varius risus. Fusce
+                      tempus tellus sed.”`,
+  },
+  {
+    id: 3,
+    avatar:
+      "https://images.unsplash.com/photo-1599744249842-ada1047fd47e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg0fHxsZWdvJTIwZmlndXJlfGVufDB8fDB8fHww",
+    name: "HyeongGyu Jang",
+    occupation: "Software Engineer at Vervint",
+    review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
+                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
+                      suscipit sodales ex. Vestibulum id varius risus. Fusce
+                      tempus tellus sed.”`,
+  },
+];
 
 export default function Home() {
   return (
@@ -75,23 +123,24 @@ export default function Home() {
           </h2>
           <Carousel className="w-full">
             <CarouselContent className="p-2">
-              {Array.from({ length: 5 }).map((_, index) => (
+              {reviews.map(({ id, avatar, name, occupation, review }) => (
                 <CarouselItem
-                  key={index}
+                  key={id}
                   className="pl-4 md:basis-1/2 lg:basis-1/3"
                 >
-                  <Card className="min-w-0 ">
+                  <Card className="min-w-0">
                     <CardHeader
+                      avatar={
+                        <Avatar size="lg">
+                          <AvatarImage src={avatar} alt="profile" />
+                          <AvatarFallback />
+                        </Avatar>
+                      }
                       headingLevel={3}
-                      title="Taek"
-                      subheader="hello"
+                      title={name}
+                      subheader={occupation}
                     />
-                    <CardContent>
-                      “Lorem ipsum dolor sit amet, consec tetur adi piscing
-                      elit. Praesent tellus leo, vesti bulum a ipsum sed,
-                      suscipit sodales ex. Vestibulum id varius risus. Fusce
-                      tempus tellus sed.”
-                    </CardContent>
+                    <CardContent className="italic">{review}</CardContent>
                   </Card>
                 </CarouselItem>
               ))}
