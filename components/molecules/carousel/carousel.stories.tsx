@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./carousel";
-import Container from "@/components/templates/container";
+import { Container } from "@/components/templates/container";
 
 const meta: Meta<typeof Carousel> = {
   title: "Molecules/Carousel",
