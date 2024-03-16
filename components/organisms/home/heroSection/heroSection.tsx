@@ -4,7 +4,7 @@ import { barber } from "@/public/illustrations";
 import React from "react";
 import Button from "@/components/atoms/button";
 
-const Hero = () => {
+const HeroSection = () => {
   return (
     <section aria-label="Hero">
       <SplitContainer
@@ -32,4 +32,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroSection;

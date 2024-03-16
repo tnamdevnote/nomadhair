@@ -4,7 +4,7 @@ import { departing } from "@/public/illustrations";
 import React from "react";
 import Button from "@/components/atoms/button";
 
-const About = () => {
+const AboutSection = () => {
   return (
     <section className="bg-secondary-15" aria-labelledby="about">
       <SplitContainer leftWeight={1} rightWeight={1} className="py-12 md:py-44">
@@ -36,4 +36,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutSection;

@@ -1,5 +1,5 @@
-import Hero from "@/components/organisms/home/hero/hero";
-import About from "@/components/organisms/home/about/about";
-import Testimonials from "@/components/organisms/home/testimonials/testimonials";
+import HeroSection from "@/components/organisms/home/heroSection/heroSection";
+import AboutSection from "@/components/organisms/home/aboutSection/aboutSection";
+import TestimonialSection from "@/components/organisms/home/testimonialSection/testimonialSection";
 
-export { Hero, About, Testimonials };
+export { HeroSection, AboutSection, TestimonialSection };

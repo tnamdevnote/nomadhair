@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader } from "@/components/molecules/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 import React from "react";
 
-const Testimonials = () => {
+const TestimonialSection = () => {
   return (
     <section aria-labelledby="testimonials">
       <Container className="flex flex-col items-center justify-center gap-8 py-12 md:py-44">
@@ -54,7 +54,7 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+export default TestimonialSection;
 
 const reviews = [
   {
