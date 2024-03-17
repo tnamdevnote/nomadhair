@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
         <Header />
-        <main className="min-h-screen pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
+        <main className=" pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
           {children}
         </main>
         <Footer />

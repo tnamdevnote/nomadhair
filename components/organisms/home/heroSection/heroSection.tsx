@@ -20,7 +20,9 @@ const HeroSection = () => {
             tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
           </p>
           <div className="w-full">
-            <Button className="w-full md:w-auto">Book Appointment</Button>
+            <Button size="lg" className="w-full md:w-auto">
+              Book Appointment
+            </Button>
           </div>
         </SplitContainer.Right>
       </SplitContainer>
