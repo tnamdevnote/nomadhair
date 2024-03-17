@@ -55,7 +55,7 @@ function Header({ user }: HeaderProps) {
             </li>
             <li>
               <Button variant="link" size="sm" asChild className="w-full">
-                <Link href="/">About</Link>
+                <Link href="/about">About</Link>
               </Button>
             </li>
             {user ? (

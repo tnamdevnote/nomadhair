@@ -38,6 +38,9 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    nextjs: {
+      appDirectory: true,
+    },
     viewport: {
       viewports: {
         ...INITIAL_VIEWPORTS,

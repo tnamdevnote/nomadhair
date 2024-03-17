@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { SplitContainer } from "@/components/templates/container";
 import { departing } from "@/public/illustrations";
 import React from "react";
 import Button from "@/components/atoms/button";
+import { useRouter } from "next/navigation";
 
 const AboutSection = () => {
+  const router = useRouter();
   return (
     <section className="bg-secondary-15" aria-labelledby="about">
       <SplitContainer className="py-12 md:py-44">
@@ -30,7 +34,12 @@ const AboutSection = () => {
             Donec consequat ultrices quam, vitae dignissim mi sodales non.
           </p>
           <div className="w-full">
-            <Button className="w-full md:w-auto">Learn More</Button>
+            <Button
+              className="w-full md:w-auto"
+              onClick={() => router.push("/about")}
+            >
+              Learn More
+            </Button>
           </div>
         </SplitContainer.Right>
       </SplitContainer>
