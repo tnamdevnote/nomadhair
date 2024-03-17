@@ -3,17 +3,10 @@ import Container from "./container";
 
 export interface SplitContainerProps {
   className?: string;
-  leftWeight?: number;
-  rightWeight?: number;
   children: React.ReactNode[];
 }
 
-function SplitContainer({
-  className,
-  leftWeight = 1,
-  rightWeight = 1,
-  children,
-}: SplitContainerProps) {
+function SplitContainer({ className, children }: SplitContainerProps) {
   const [left, right] = children;
   return (
     <Container

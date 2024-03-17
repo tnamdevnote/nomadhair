@@ -7,11 +7,11 @@ import Button from "@/components/atoms/button";
 const AboutSection = () => {
   return (
     <section className="bg-secondary-15" aria-labelledby="about">
-      <SplitContainer leftWeight={1} rightWeight={1} className="py-12 md:py-44">
-        <SplitContainer.Left className="flex justify-center">
+      <SplitContainer className="py-12 md:py-44">
+        <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={departing} width={425} alt="departing image" />
         </SplitContainer.Left>
-        <SplitContainer.Right className="flex flex-col items-center gap-10">
+        <SplitContainer.Right className="flex basis-1/2 flex-col items-center gap-10">
           <h2 className="text-center text-lg text-primary-100 md:text-left lg:text-xl">
             <strong
               id="about"
