@@ -24,8 +24,10 @@ const AboutSection = () => {
             Your friendly neighborhood hair designer
           </h2>
           <p className="text-center md:text-left ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            tellus leo, vestibulum a ipsum sed, suscipit sodales ex. Vestibulum
+            id varius risus. Fusce tempus tellus sed erat scelerisque venenatis.
+            Donec consequat ultrices quam, vitae dignissim mi sodales non.
           </p>
           <div className="w-full">
             <Button className="w-full md:w-auto">Learn More</Button>
