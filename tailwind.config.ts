@@ -61,11 +61,14 @@ const config = {
       sm: ["0.875rem", "150%"],
       base: ["1rem", "150%"],
       lg: ["1.5rem", "150%"],
-      xl: ["2rem", "110%"],
-      "2xl": ["4rem", "110%"],
+      xl: ["2.25rem", "110%"],
+      "2xl": ["3.5rem", "110%"],
     },
 
     extend: {
+      screens: {
+        "2xl": "1440px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
