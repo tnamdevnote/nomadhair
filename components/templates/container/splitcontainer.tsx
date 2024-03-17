@@ -3,8 +3,8 @@ import Container from "./container";
 
 export interface SplitContainerProps {
   className?: string;
-  leftWeight: number;
-  rightWeight: number;
+  leftWeight?: number;
+  rightWeight?: number;
   children: React.ReactNode[];
 }
 
@@ -22,8 +22,8 @@ function SplitContainer({
         `${className}`,
       ].join(" ")}
     >
-      <div className={`flex-${leftWeight}`}>{left}</div>
-      <div className={`flex-${rightWeight}`}>{right}</div>
+      {left}
+      {right}
     </Container>
   );
 }
