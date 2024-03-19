@@ -5,7 +5,9 @@ import Link from "next/link";
 const Login = () => {
   return (
     <Container className="max-w-screen-xs flex min-h-dvh flex-col items-center justify-center">
-      <h1 className="w-full text-left text-primary-100">Login</h1>
+      <h1 className="w-full text-left text-xl text-primary-100 lg:text-2xl">
+        Login
+      </h1>
       <section
         aria-label="login form"
         className="mt-8 flex w-full flex-col gap-4"
