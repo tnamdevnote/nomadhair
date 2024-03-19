@@ -2,13 +2,7 @@
 
 name: "UI Tests"
 
-on: push:
-  branches:
-    - main
-  paths: [
-    "components/**",
-    "app/**",
-  ]
+on: push
 
 jobs:
   # Run interaction and accessibility tests
