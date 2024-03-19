@@ -10,8 +10,8 @@ const buttonVariants = cva(
     variants: {
       intent: {
         primary: "bg-primary-100 text-white hover:bg-primary-100/90",
-        secondary: "bg-secondary-100 text-white hover:bg-secondary-100/90",
-        tertiary: "bg-tertiary-100 text-white hover:bg-tertiary-100/90",
+        secondary: "bg-secondary-100 text-neutral-90 hover:bg-secondary-100/90",
+        tertiary: "bg-tertiary-100 text-neutral-90 hover:bg-tertiary-100/90",
       },
       variant: {
         contained: undefined,
