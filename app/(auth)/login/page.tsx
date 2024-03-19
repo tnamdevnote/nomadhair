@@ -2,7 +2,7 @@ import Button from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
 import Link from "next/link";
 
-const LoginPage = () => {
+const Login = () => {
   return (
     <Container className="max-w-screen-xs flex min-h-dvh flex-col items-center justify-center">
       <h1 className="w-full text-left text-primary-100">Login</h1>
@@ -27,4 +27,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;
