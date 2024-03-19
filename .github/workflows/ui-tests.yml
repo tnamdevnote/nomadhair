@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: "21.x"
       - name: Install dependencies
-        run: npm
+        run: npm ci
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Build Storybook
