@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./button";
+import { PlusIcon, icons } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -23,7 +24,7 @@ const meta: Meta<typeof Button> = {
       control: { type: "radio" },
     },
     variant: {
-      options: ["contained", "outline", "ghost", "link"],
+      options: ["contained", "outline", "ghost"],
       control: { type: "select" },
     },
     size: {
@@ -46,6 +47,7 @@ export const Default: Story = {
     </Button>
   ),
 };
+
 export const Outline: Story = {
   args: {
     variant: "outline",
@@ -56,6 +58,7 @@ export const Outline: Story = {
     </Button>
   ),
 };
+
 export const Ghost: Story = {
   args: {
     variant: "ghost",
@@ -66,14 +69,19 @@ export const Ghost: Story = {
     </Button>
   ),
 };
-export const Link: Story = {
-  args: {
-    variant: "link",
-    asChild: true,
-  },
-  render: ({ variant, intent, size, asChild }) => (
-    <Button variant={variant} intent={intent} size={size} asChild={asChild}>
-      <a href="#">Call To Action</a>
-    </Button>
+
+export const Icon: Story = {
+  render: ({ variant, intent, size }) => (
+    <div className="inline-flex gap-4">
+      <Button icon={<PlusIcon />} variant={variant} intent={intent} size={size}>
+        Call To Action
+      </Button>
+      <Button
+        icon={<PlusIcon />}
+        variant={variant}
+        intent={intent}
+        size={size}
+      />
+    </div>
   ),
 };
