@@ -24,7 +24,7 @@ const meta: Meta<typeof Button> = {
       control: { type: "radio" },
     },
     variant: {
-      options: ["contained", "outline", "ghost"],
+      options: ["contained", "outline", "ghost", "link"],
       control: { type: "select" },
     },
     size: {
@@ -66,6 +66,17 @@ export const Ghost: Story = {
   render: ({ variant, intent, size }) => (
     <Button variant={variant} intent={intent} size={size}>
       Call To Action
+    </Button>
+  ),
+};
+
+export const Link: Story = {
+  args: {
+    variant: "link",
+  },
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size} asChild>
+      <a href="#">Call To Action</a>
     </Button>
   ),
 };
