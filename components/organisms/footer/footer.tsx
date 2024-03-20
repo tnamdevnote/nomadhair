@@ -42,21 +42,19 @@ function Footer() {
           <div className="flex gap-4">
             <Button
               asChild
+              icon={<GitHubLogoIcon />}
               size="sm"
               className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
             >
-              <Link href="#" aria-label="Github">
-                <GitHubLogoIcon className="h-4 w-4" />
-              </Link>
+              <Link href="#" aria-label="Github" />
             </Button>
             <Button
               asChild
+              icon={<LinkedInLogoIcon />}
               size="sm"
               className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
             >
-              <Link href="#" aria-label="LinkedIn">
-                <LinkedInLogoIcon className="h-4 w-4" />
-              </Link>
+              <Link href="#" aria-label="LinkedIn" />
             </Button>
           </div>
         </div>
