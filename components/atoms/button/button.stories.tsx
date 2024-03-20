@@ -89,6 +89,7 @@ export const Icon: Story = {
       </Button>
       <Button
         icon={<PlusIcon />}
+        aria-label="add button"
         variant={variant}
         intent={intent}
         size={size}
