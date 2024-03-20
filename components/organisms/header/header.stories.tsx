@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./header";
-// import {within} from '@storybook/testing-library'
 import { within, userEvent, expect } from "@storybook/test";
 
 const meta: Meta<typeof Header> = {
@@ -42,7 +41,7 @@ export const MobileView: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const mobileNavButton = canvas.getByRole("button", {
-      name: /Toggle Menu Button/i,
+      name: /Toggle Menu/i,
     });
 
     expect(mobileNavButton).toBeInTheDocument();
