@@ -6,7 +6,7 @@ import Button from "@/components/atoms/button";
 
 function About() {
   return (
-    <div className="flex flex-col gap-16 py-8 md:mb-64">
+    <div className="flex flex-col gap-16 py-8 md:mb-32">
       <Container className="">
         <h1 className="text-lg text-primary-100 lg:text-2xl">About Me</h1>
       </Container>
