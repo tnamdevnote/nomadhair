@@ -13,7 +13,7 @@ const meta: Meta<typeof SignUp> = {
     layout: "fullscreen",
   },
   render: () => (
-    <PageTemplate>
+    <PageTemplate type="header">
       <SignUp />
     </PageTemplate>
   ),

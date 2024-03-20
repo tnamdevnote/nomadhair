@@ -13,7 +13,7 @@ const meta: Meta<typeof Login> = {
     layout: "fullscreen",
   },
   render: () => (
-    <PageTemplate>
+    <PageTemplate type="header">
       <Login />
     </PageTemplate>
   ),
