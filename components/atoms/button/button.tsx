@@ -86,6 +86,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     Omit<VariantProps<typeof buttonVariants>, "_hasChild"> {
   icon?: React.ReactElement<SVGSVGElement>;
+  iconPosition?: "before" | "after";
   asChild?: boolean;
   children?: React.ReactNode;
 }
@@ -98,6 +99,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant,
       size,
       icon,
+      iconPosition = "before",
       asChild = false,
       children,
       ...props
@@ -115,8 +117,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {icon}
+        {iconPosition === "before" ? icon : null}
         <Slottable>{children}</Slottable>
+        {iconPosition === "after" ? icon : null}
       </Comp>
     );
   },
