@@ -17,4 +17,8 @@ const meta: Meta<typeof PageTemplate> = {
 export default meta;
 type Story = StoryObj<typeof PageTemplate>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    children: <div className="min-h-dvh"></div>,
+  },
+};
