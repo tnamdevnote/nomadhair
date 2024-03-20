@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "./../../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       intent: {
@@ -20,9 +20,12 @@ const buttonVariants = cva(
         link: "bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent",
       },
       size: {
-        sm: "h-9 rounded-md px-3 py-1.5 text-sm",
-        md: "h-10 px-4 py-2 text-sm",
-        lg: "h-11 rounded-lg px-6 py-3 text-base",
+        sm: "h-9 px-3 py-1.5 text-sm [&_svg]:w-3.5 [&_svg]:h-3.5",
+        md: "h-10 px-4 py-2 text-sm [&_svg]:w-3.5 [&_svg]:h-3.5",
+        lg: "h-11 px-6 py-3 text-base [&_svg]:w-4 [&_svg]:h-4",
+      },
+      _hasChild: {
+        false: undefined,
       },
     },
     compoundVariants: [
@@ -56,6 +59,21 @@ const buttonVariants = cva(
         variant: "link",
         className: "text-tertiary-100",
       },
+      {
+        _hasChild: false,
+        size: "sm",
+        className: "h-9 w-9 p-1.5",
+      },
+      {
+        _hasChild: false,
+        size: "md",
+        className: "h-10 w-10 p-2",
+      },
+      {
+        _hasChild: false,
+        size: "lg",
+        className: "h-11 w-11 p-3",
+      },
     ],
     defaultVariants: {
       intent: "primary",
@@ -66,22 +84,40 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    Omit<VariantProps<typeof buttonVariants>, "_hasChild"> {
+  icon?: React.ReactElement<SVGSVGElement>;
   asChild?: boolean;
+  children?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, intent = "primary", variant, size, asChild = false, ...props },
+    {
+      className,
+      intent = "primary",
+      variant,
+      size,
+      icon,
+      asChild = false,
+      children,
+      ...props
+    },
     ref,
   ) => {
     const Comp = asChild ? Slot : "button";
+    // a private variant type used for icon button type
+    const _hasChild = !!children && true;
     return (
       <Comp
-        className={cn(buttonVariants({ intent, variant, size, className }))}
+        className={cn(
+          buttonVariants({ intent, variant, size, _hasChild, className }),
+        )}
         ref={ref}
         {...props}
-      />
+      >
+        {icon}
+        <Slottable>{children}</Slottable>
+      </Comp>
     );
   },
 );

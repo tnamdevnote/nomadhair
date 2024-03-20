@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./button";
+import { PlusIcon, icons } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -46,6 +47,7 @@ export const Default: Story = {
     </Button>
   ),
 };
+
 export const Outline: Story = {
   args: {
     variant: "outline",
@@ -56,6 +58,7 @@ export const Outline: Story = {
     </Button>
   ),
 };
+
 export const Ghost: Story = {
   args: {
     variant: "ghost",
@@ -66,14 +69,31 @@ export const Ghost: Story = {
     </Button>
   ),
 };
+
 export const Link: Story = {
   args: {
     variant: "link",
-    asChild: true,
   },
-  render: ({ variant, intent, size, asChild }) => (
-    <Button variant={variant} intent={intent} size={size} asChild={asChild}>
+  render: ({ variant, intent, size }) => (
+    <Button variant={variant} intent={intent} size={size} asChild>
       <a href="#">Call To Action</a>
     </Button>
+  ),
+};
+
+export const Icon: Story = {
+  render: ({ variant, intent, size }) => (
+    <div className="inline-flex gap-4">
+      <Button icon={<PlusIcon />} variant={variant} intent={intent} size={size}>
+        Call To Action
+      </Button>
+      <Button
+        icon={<PlusIcon />}
+        aria-label="add button"
+        variant={variant}
+        intent={intent}
+        size={size}
+      />
+    </div>
   ),
 };
