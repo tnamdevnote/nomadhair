@@ -31,7 +31,6 @@ function Header({ user }: HeaderProps) {
     window.addEventListener("orientationchange", closeNaveMenu);
     window.addEventListener("resize", closeNaveMenu);
 
-    console.log("hello");
     return () => {
       window.removeEventListener("orientationchange", closeNaveMenu);
       window.removeEventListener("resize", closeNaveMenu);
@@ -49,18 +48,36 @@ function Header({ user }: HeaderProps) {
         >
           <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
             <li>
-              <Button variant="link" size="sm" asChild className="w-full">
+              <Button
+                variant="link"
+                size="sm"
+                asChild
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 <Link href="/">Home</Link>
               </Button>
             </li>
             <li>
-              <Button variant="link" size="sm" asChild className="w-full">
+              <Button
+                variant="link"
+                size="sm"
+                asChild
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 <Link href="/about">About</Link>
               </Button>
             </li>
             {user ? (
               <li>
-                <Button variant="link" size="sm" asChild className="w-full">
+                <Button
+                  variant="link"
+                  size="sm"
+                  asChild
+                  className="w-full"
+                  onClick={() => setIsOpen(false)}
+                >
                   <Link href="/">My Appointment</Link>
                 </Button>
               </li>
@@ -87,14 +104,13 @@ function Header({ user }: HeaderProps) {
           )}
         </div>
         <Button
+          aria-label="Toggle Menu Button"
           variant="ghost"
+          icon={<HamburgerMenuIcon />}
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
-        >
-          <span className="sr-only">Toggle Menu Button</span>
-          <HamburgerMenuIcon />
-        </Button>
+        />
       </Container>
     </header>
   );
