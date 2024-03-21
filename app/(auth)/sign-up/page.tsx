@@ -1,11 +1,12 @@
 import Button from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
+import Link from "next/link";
 
 const SignUp = () => {
   return (
-    <Container className="max-w-screen-xs flex min-h-dvh flex-col items-center justify-center">
+    <Container className="flex min-h-dvh max-w-screen-xs flex-col items-center justify-center">
       <h1 className="w-full text-left text-xl text-primary-100 lg:text-2xl">
-        Sign Up
+        Sign up
       </h1>
       <section
         aria-label="sign up form"
@@ -17,6 +18,12 @@ const SignUp = () => {
         <Button className="w-full" intent="secondary" size="lg">
           Connect with Facebook
         </Button>
+        <div className="flex items-center justify-center text-sm">
+          <p>{"Don't have an account?"}</p>
+          <Button variant="link" size="sm" asChild className="font-bold">
+            <Link href="/login">Log in!</Link>
+          </Button>
+        </div>
       </section>
     </Container>
   );
