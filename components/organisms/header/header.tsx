@@ -6,6 +6,7 @@ import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "@/components/atoms/logo";
 import { Container } from "@/components/templates/container";
+import { LogOutIcon, ChevronRightIcon, LogInIcon } from "lucide-react";
 
 type User = {
   name: string;
@@ -31,7 +32,6 @@ function Header({ user }: HeaderProps) {
     window.addEventListener("orientationchange", closeNaveMenu);
     window.addEventListener("resize", closeNaveMenu);
 
-    console.log("hello");
     return () => {
       window.removeEventListener("orientationchange", closeNaveMenu);
       window.removeEventListener("resize", closeNaveMenu);
@@ -49,52 +49,90 @@ function Header({ user }: HeaderProps) {
         >
           <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
             <li>
-              <Button variant="link" size="sm" asChild className="w-full">
+              <Button
+                variant="link"
+                size="sm"
+                asChild
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 <Link href="/">Home</Link>
               </Button>
             </li>
             <li>
-              <Button variant="link" size="sm" asChild className="w-full">
+              <Button
+                variant="link"
+                size="sm"
+                asChild
+                className="w-full"
+                onClick={() => setIsOpen(false)}
+              >
                 <Link href="/about">About</Link>
               </Button>
             </li>
             {user ? (
               <li>
-                <Button variant="link" size="sm" asChild className="w-full">
+                <Button
+                  variant="link"
+                  size="sm"
+                  asChild
+                  className="w-full"
+                  onClick={() => setIsOpen(false)}
+                >
                   <Link href="/">My Appointment</Link>
                 </Button>
               </li>
             ) : null}
           </ul>
         </nav>
-        <div className="ml-auto flex items-center md:ml-0 md:gap-4">
+        <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
           {user ? (
             <>
-              <Button variant="ghost" size="sm" className="font-bold">
-                Hi, {user.name}!
+              <p className="text-sm font-bold">Hi, {user.name}!</p>
+              <Button
+                aria-label="Log out"
+                variant="ghost"
+                icon={<LogOutIcon />}
+                iconPosition="after"
+                size="sm"
+                className="font-bold"
+              >
+                <span className="hidden md:inline-flex">Logout</span>
               </Button>
-              <Button size="sm">Log out</Button>
             </>
           ) : (
             <>
-              <Button variant="ghost" size="sm">
-                Login
+              <Button
+                aria-label="Login"
+                icon={<LogInIcon />}
+                iconPosition="after"
+                variant="ghost"
+                size="sm"
+                asChild
+              >
+                <Link href="/login">Login</Link>
               </Button>
-              <Button variant="contained" size="sm">
-                Sign up
+              <Button
+                aria-label="Sign up"
+                icon={<ChevronRightIcon />}
+                iconPosition="after"
+                variant="contained"
+                size="sm"
+                asChild
+              >
+                <Link href="/sign-up">Sign up</Link>
               </Button>
             </>
           )}
         </div>
         <Button
+          aria-label="Toggle Menu Button"
           variant="ghost"
+          icon={<HamburgerMenuIcon />}
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
-        >
-          <span className="sr-only">Toggle Menu Button</span>
-          <HamburgerMenuIcon />
-        </Button>
+        />
       </Container>
     </header>
   );

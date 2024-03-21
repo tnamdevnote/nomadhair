@@ -82,9 +82,15 @@ export const Link: Story = {
 };
 
 export const Icon: Story = {
-  render: ({ variant, intent, size }) => (
+  render: ({ variant, intent, size, iconPosition }) => (
     <div className="inline-flex gap-4">
-      <Button icon={<PlusIcon />} variant={variant} intent={intent} size={size}>
+      <Button
+        icon={<PlusIcon />}
+        variant={variant}
+        intent={intent}
+        size={size}
+        iconPosition={iconPosition}
+      >
         Call To Action
       </Button>
       <Button
