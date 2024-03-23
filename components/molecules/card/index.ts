@@ -1,2 +1,2 @@
-import { Card, CardHeader, CardContent } from "./card";
-export { Card, CardHeader, CardContent };
+import { Card, CardHeader, CardContent, CardFooter } from "./card";
+export { Card, CardHeader, CardContent, CardFooter };
