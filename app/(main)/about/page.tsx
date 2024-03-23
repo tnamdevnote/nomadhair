@@ -14,7 +14,7 @@ function About() {
         <SplitContainer.Left className="flex justify-center px-12 md:basis-1/2 md:px-0">
           <Image
             src={Profile}
-            width={450}
+            width={350}
             alt="Profile Image"
             className="rounded-full shadow-xl md:shadow-2xl"
           />

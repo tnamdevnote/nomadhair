@@ -9,7 +9,7 @@ function MyAppointments() {
   const isMobile = /Mob/i.test(navigator.userAgent);
 
   return (
-    <div className="flex flex-col gap-8 py-16 md:pb-8">
+    <div className="relative flex flex-col gap-8 py-16 md:min-h-0">
       <Container className="flex justify-between">
         <h1 className="text-lg font-bold text-primary-100 lg:text-xl">
           My Appointments
@@ -17,13 +17,13 @@ function MyAppointments() {
         {/* Is there a better way to hide label on mobile? */}
         <Button
           icon={<PlusIcon />}
-          className="fixed bottom-8 right-4 md:hidden"
+          className="fixed bottom-12 right-8 bg-primary-90 md:hidden"
         >
           New Appointment
         </Button>
       </Container>
-      <SplitContainer>
-        <SplitContainer.Left className="w-full md:max-h-[40rem] md:overflow-auto md:pb-4">
+      <div className="grid grid-cols-6 p-4 md:grid-cols-12 md:p-16">
+        <div className="col-span-6 md:max-h-[40rem] md:overflow-auto md:pb-4">
           <section aria-labelledby="upcoming">
             <h2 id="upcoming" className="py-3 text-base font-bold">
               Upcoming
@@ -81,21 +81,50 @@ function MyAppointments() {
                   <p className="text-sm">3201 Burton Street SE</p>
                 </CardContent>
               </Card>
+              <Card className="bg-neutral-10">
+                <CardContent className="flex flex-col gap-2">
+                  <p className="inline-flex gap-2 text-base font-bold">
+                    <CalendarIcon />
+                    Monday, 12 June
+                  </p>
+                  <p className="inline-flex gap-2 text-base font-bold">
+                    <ClockIcon />
+                    12:30PM
+                  </p>
+                  <p className="text-sm">3201 Burton Street SE</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-neutral-10">
+                <CardContent className="flex flex-col gap-2">
+                  <p className="inline-flex gap-2 text-base font-bold">
+                    <CalendarIcon />
+                    Monday, 12 June
+                  </p>
+                  <p className="inline-flex gap-2 text-base font-bold">
+                    <ClockIcon />
+                    12:30PM
+                  </p>
+                  <p className="text-sm">3201 Burton Street SE</p>
+                </CardContent>
+              </Card>
             </div>
           </section>
-        </SplitContainer.Left>
-        <SplitContainer.Right className="sticky top-32 hidden w-full md:flex">
-          <Separator
-            orientation="vertical"
-            className="hidden h-auto md:block"
-          />
-          <section aria-labelledby="new-appointment">
+        </div>
+        <Separator orientation="vertical" className="hidden h-auto md:block" />
+        <div className="hidden md:sticky md:top-32 md:col-span-5 md:block">
+          <section
+            aria-labelledby="new-appointment"
+            className="flex h-full flex-col"
+          >
             <h2 id="new-appointment" className="py-3 text-base font-bold">
               New Appointment
             </h2>
+            <div className="h-full w-full rounded-2xl bg-white shadow-md">
+              {/* form goes here */}
+            </div>
           </section>
-        </SplitContainer.Right>
-      </SplitContainer>
+        </div>
+      </div>
     </div>
   );
 }
