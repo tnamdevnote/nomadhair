@@ -5,7 +5,11 @@ export interface SplitContainerProps {
   className?: string;
   children: React.ReactNode[];
 }
-
+/**
+ * @description
+ * A flex container that renders a split screen. You can
+ * adjust to proportion of each panel by applying basis-[x] classNames
+ */
 function SplitContainer({ className, children }: SplitContainerProps) {
   const [left, right] = children;
   return (
