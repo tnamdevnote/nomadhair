@@ -67,6 +67,7 @@ jobs:
       - name: echo database URL
         run: echo ${{ secrets.DATABASE_URL }}
         env: 
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Serve Storybook and run tests
