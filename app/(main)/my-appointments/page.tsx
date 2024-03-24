@@ -1,7 +1,13 @@
 import Button from "@/components/atoms/button";
 import Separator from "@/components/atoms/separator";
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
-import { Container, SplitContainer } from "@/components/templates/container";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from "@/components/molecules/drawer";
+import { Container } from "@/components/templates/container";
 import { CalendarIcon, ClockIcon, EditIcon, PlusIcon } from "lucide-react";
 import React from "react";
 
@@ -15,14 +21,20 @@ function MyAppointments() {
           My Appointments
         </h1>
         {/* Is there a better way to hide label on mobile? */}
-        <Button
-          icon={<PlusIcon />}
-          className="fixed bottom-12 right-8 bg-primary-90 md:hidden"
-        >
-          New Appointment
-        </Button>
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button
+              icon={<PlusIcon />}
+              size="lg"
+              className="fixed bottom-12 right-8 bg-primary-90 md:hidden"
+            />
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>This is a Drawer</DrawerHeader>
+          </DrawerContent>
+        </Drawer>
       </Container>
-      <div className="grid grid-cols-6 p-4 md:grid-cols-12 md:p-16">
+      <div className="mx-auto grid max-w-screen-2xl grid-cols-6 p-4 md:grid-cols-12 md:p-16">
         <div className="col-span-6 md:max-h-[40rem] md:overflow-auto md:pb-4">
           <section aria-labelledby="upcoming">
             <h2 id="upcoming" className="py-3 text-base font-bold">
@@ -55,6 +67,7 @@ function MyAppointments() {
                 </Button>
                 <Button
                   icon={<EditIcon />}
+                  variant="ghost"
                   size="sm"
                   className="flex-1 md:w-32 md:flex-none"
                 >
