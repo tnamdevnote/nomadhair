@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Input from "./input";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, KeyIcon, MailIcon, XIcon } from "lucide-react";
+import Button from "../button";
+import { useState } from "react";
 
 const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
@@ -34,5 +36,59 @@ export const Default: Story = {
     type: "text",
     placeholder: "Placeholder",
     size: "md",
+  },
+};
+
+export const InputAdornments: Story = {
+  args: {
+    type: "text",
+    size: "md",
+  },
+  render: ({ type, placeholder, size }) => {
+    const [textInput, setTextInput] = useState("Remove text input");
+    return (
+      <div className="flex flex-col gap-4">
+        <Input
+          type="email"
+          placeholder="Enter email"
+          size={size}
+          before={<MailIcon />}
+        />
+        <Input
+          type="password"
+          placeholder="Enter password"
+          size={size}
+          before={<KeyIcon />}
+        />
+        <Input
+          aria-label="form input"
+          type={type}
+          size={size}
+          placeholder="Type something and remove"
+          value={textInput}
+          after={
+            <Button
+              aria-label="clear"
+              variant="ghost"
+              size="sm"
+              icon={<XIcon />}
+              className="p-0"
+              onClick={() => setTextInput("")}
+            />
+          }
+          onChange={(e) => setTextInput(e.target.value)}
+        />
+      </div>
+    );
+  },
+};
+
+export const OnError: Story = {
+  args: {
+    type: "password",
+    placeholder: "Enter password",
+    size: "md",
+    value: "This is a password",
+    error: true,
   },
 };

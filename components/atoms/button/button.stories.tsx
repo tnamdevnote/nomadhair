@@ -29,7 +29,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       options: ["lg", "md", "sm"],
-      control: { type: "select" },
+      control: { type: "radio" },
     },
   },
 };

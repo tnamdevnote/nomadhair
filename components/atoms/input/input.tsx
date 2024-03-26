@@ -3,13 +3,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React, { ComponentPropsWithoutRef, forwardRef } from "react";
 
 const inputVariants = cva(
-  "flex h-10 w-full rounded-md border border-neutral-15 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+  "flex h-10 w-full gap-4 items-center [&_.inputAdornment>*]:text-muted-foreground rounded-md border border-neutral-15 bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary-100 has-[:focus-visible]:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {
-        lg: "h-12",
-        md: "h-10",
-        sm: "h-8",
+        lg: "h-12 [&_.inputAdornment>*]:w-5 [&_.inputAdornment>*]:h-5",
+        md: "h-10 [&_.inputAdornment>*]:w-4 [&_.inputAdornment>*]:h-4",
+        sm: "h-8 text-[0.75rem] [&_.inputAdornment>*]:w-4 [&_.inputAdornment>*]:h-4",
+      },
+      error: {
+        true: "border-danger-100",
       },
     },
     defaultVariants: {
@@ -20,16 +23,27 @@ const inputVariants = cva(
 
 export interface InputProps
   extends Omit<ComponentPropsWithoutRef<"input">, "size">,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  before?: React.ReactNode;
+  after?: React.ReactNode;
+}
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size, type, ...props }, ref) => {
+  ({ className, before, after, size, error, type, ...props }, ref) => {
     return (
-      <input
-        className={cn(inputVariants({ size, className }))}
-        type={type}
-        ref={ref}
-        {...props}
-      />
+      <div className={cn(inputVariants({ size, error, className }))}>
+        {before ? (
+          <div className="inputAdornment flex items-center">{before}</div>
+        ) : null}
+        <input
+          className="w-full focus-visible:outline-none"
+          type={type}
+          ref={ref}
+          {...props}
+        />
+        {after ? (
+          <div className="inputAdornment flex items-center">{after}</div>
+        ) : null}
+      </div>
     );
   },
 );
