@@ -66,13 +66,13 @@ jobs:
 
       - name: echo database URL
         env:
-          DATABASE_NAME: ${{ env.DATABASE_NAME }}
-          DATABASE_URL: ${{ env.DATABASE_URL }}
-        run: echo ${{ env.DATABASE_URL }}
+          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
+        run: echo ${{ vars.DATABASE_URL }}
 
       - name: Serve Storybook and run tests
         env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
