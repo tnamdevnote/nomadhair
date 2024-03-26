@@ -16,6 +16,10 @@ export default meta;
 type Story = StoryObj<typeof Label>;
 
 export const Default: Story = {
+  render: () => <Label>This is a form label</Label>,
+};
+
+export const WithInput: Story = {
   render: () => (
     <fieldset className="flex flex-col gap-2">
       <Label htmlFor="username">Username</Label>
