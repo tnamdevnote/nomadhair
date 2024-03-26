@@ -65,18 +65,18 @@ jobs:
         run: npm run build-storybook --quiet
 
       - name: echo database URL
-        run: echo ${{ env.DATABASE_URL }}
         env:
           DATABASE_NAME: ${{ env.DATABASE_NAME }}
           DATABASE_URL: ${{ env.DATABASE_URL }}
+        run: echo ${{ env.DATABASE_URL }}
 
       - name: Serve Storybook and run tests
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
             "npx wait-on tcp:6006 && npm run test-storybook"
-        env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
 
   # Run visual and composition tests with Chromatic
   visual-and-composition:
