@@ -2,18 +2,22 @@ import { cn } from "@/lib/utils";
 import React, { forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const cardVariants = cva("flex min-w-56 flex-col gap-4 px-10 py-12 shadow-md", {
-  variants: {
-    intent: {
-      primary: "bg-primary-90 text-neutral-10",
-      secondary: "bg-secondary-90 text-neutral-90",
-      tertiary: "bg-tertiary-90 text-neutral-90",
+const cardVariants = cva(
+  "flex min-w-56 flex-col gap-4 p-6 shadow-md rounded-2xl",
+  {
+    variants: {
+      intent: {
+        primary: "bg-primary-90 text-neutral-10",
+        secondary: "bg-secondary-90 text-neutral-90",
+        tertiary: "bg-tertiary-90 text-neutral-90",
+        neutral: "bg-white text-neutral-90",
+      },
+    },
+    defaultVariants: {
+      intent: "neutral",
     },
   },
-  defaultVariants: {
-    intent: "primary",
-  },
-});
+);
 
 const Card = forwardRef<
   HTMLDivElement,
@@ -70,4 +74,16 @@ const CardContent = forwardRef<
 });
 CardContent.displayName = "CardContent";
 
-export { Card, CardHeader, CardContent };
+const CardFooter = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div ref={ref} className={cn(className)} {...props}>
+      {children}
+    </div>
+  );
+});
+CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardContent, CardFooter };

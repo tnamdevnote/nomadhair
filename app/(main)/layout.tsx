@@ -8,7 +8,7 @@ function Layout({
 }>) {
   return (
     <>
-      <main className="pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
+      <main className="flex-grow pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
         {children}
       </main>
       <Footer />

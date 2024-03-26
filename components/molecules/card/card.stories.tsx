@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Card, CardHeader, CardContent } from "./card";
+import { Card, CardHeader, CardContent, CardFooter } from "./card";
 import { Avatar, AvatarFallback } from "@/components/atoms/avatar";
+import Button from "@/components/atoms/button";
 
 const meta: Meta<typeof Card> = {
   title: "Molecules/Card",
@@ -9,11 +10,11 @@ const meta: Meta<typeof Card> = {
     layout: "centered",
   },
   args: {
-    intent: "primary",
+    intent: "neutral",
   },
   argTypes: {
     intent: {
-      options: ["primary", "secondary", "tertiary"],
+      options: ["primary", "secondary", "tertiary", "neutral"],
       control: { type: "radio" },
     },
   },
@@ -23,6 +24,18 @@ export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
+  render: () => (
+    <Card className="w-96">
+      <CardContent>
+        “Lorem ipsum dolor sit amet, consec tetur adi piscing elit. Praesent
+        tellus leo, vesti bulum a ipsum sed, suscipit sodales ex. Vestibulum id
+        varius risus. Fusce tempus tellus sed.”
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const WithHeader: Story = {
   render: ({ intent }) => (
     <Card className="w-96" intent={intent}>
       <CardHeader headingLevel={2} title="Title" subheader="subheading" />
@@ -53,6 +66,22 @@ export const WithAvatar: Story = {
         tellus leo, vesti bulum a ipsum sed, suscipit sodales ex. Vestibulum id
         varius risus. Fusce tempus tellus sed.”
       </CardContent>
+    </Card>
+  ),
+};
+
+export const WithAction: Story = {
+  render: () => (
+    <Card className="w-96">
+      <CardContent>
+        “Lorem ipsum dolor sit amet, consec tetur adi piscing elit. Praesent
+        tellus leo, vesti bulum a ipsum sed, suscipit sodales ex. Vestibulum id
+        varius risus. Fusce tempus tellus sed.”
+      </CardContent>
+      <CardFooter className="inline-flex justify-end gap-4">
+        <Button variant="ghost">Cancel</Button>
+        <Button>Save</Button>
+      </CardFooter>
     </Card>
   ),
 };

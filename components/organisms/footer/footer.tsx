@@ -13,7 +13,7 @@ import { Container } from "@/components/templates/container";
 
 function Footer() {
   return (
-    <footer role="contentinfo" className="bg-primary-100 ">
+    <footer role="contentinfo" className="bg-primary-100">
       <Container className="flex min-h-[450px] flex-col justify-center gap-6">
         <Logo mode="dark" className="h-4 w-fit md:h-7" />
         <h2 className="text-lg text-white">Get In Touch</h2>

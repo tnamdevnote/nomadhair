@@ -29,7 +29,7 @@ const TestimonialSection = () => {
           <CarouselContent className="p-2">
             {reviews.map(({ id, avatar, name, occupation, review }) => (
               <CarouselItem key={id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="min-w-0">
+                <Card className="min-w-0" intent="primary">
                   <CardHeader
                     avatar={
                       <Avatar size="lg">
