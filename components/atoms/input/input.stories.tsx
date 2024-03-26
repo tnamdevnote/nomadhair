@@ -17,6 +17,12 @@ const meta: Meta<typeof Input> = {
       control: "text",
       description: "Placeholder text",
     },
+    size: {
+      options: ["sm", "md", "lg"],
+      control: { type: "radio" },
+      description:
+        "Custom size props. This property overrides native HTML size attributes on input.",
+    },
   },
 };
 
@@ -27,5 +33,6 @@ export const Default: Story = {
   args: {
     type: "text",
     placeholder: "Placeholder",
+    size: "md",
   },
 };
