@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Input from "./input";
+import { CalendarIcon } from "lucide-react";
 
 const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
@@ -22,7 +23,7 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const TextField: Story = {
+export const Default: Story = {
   args: {
     type: "text",
     placeholder: "Placeholder",
