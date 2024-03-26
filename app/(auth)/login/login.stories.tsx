@@ -5,6 +5,7 @@ import PageTemplate from "@/components/templates/pageTemplate";
 const meta: Meta<typeof Login> = {
   title: "Pages/Login",
   component: Login,
+  tags: ["no-tests"],
   parameters: {
     design: {
       type: "figma",

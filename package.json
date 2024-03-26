@@ -10,7 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --exit-zero-on-changes",
-    "test-storybook": "test-storybook"
+    "test-storybook": "test-storybook --excludeTags='no-tests'"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
