@@ -1,14 +1,19 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Input from "./input";
-import { CalendarIcon, KeyIcon, MailIcon, XIcon } from "lucide-react";
+import { KeyIcon, MailIcon, XIcon } from "lucide-react";
 import Button from "../button";
 import { useState } from "react";
+import { within, expect, userEvent } from "@storybook/test";
 
 const meta: Meta<typeof Input> = {
   title: "Atoms/Input",
   component: Input,
   parameters: {
     layout: "centered",
+  },
+  args: {
+    type: "text",
+    error: false,
   },
   argTypes: {
     type: {
@@ -23,7 +28,12 @@ const meta: Meta<typeof Input> = {
       options: ["sm", "md", "lg"],
       control: { type: "radio" },
       description:
-        "Custom size props. This property overrides native HTML size attributes on input.",
+        "Custom size prop. This property overrides native HTML size attributes on input.",
+    },
+    error: {
+      control: "boolean",
+      description:
+        "A prop that accepts boolean values to indicate error on input",
     },
   },
 };
@@ -39,7 +49,7 @@ export const Default: Story = {
   },
 };
 
-export const InputAdornments: Story = {
+export const InputDecorators: Story = {
   args: {
     type: "text",
     size: "md",
@@ -50,7 +60,7 @@ export const InputAdornments: Story = {
       <div className="flex flex-col gap-4">
         <Input
           type="email"
-          placeholder="Enter email"
+          placeholder="abcde@email.com"
           size={size}
           before={<MailIcon />}
         />
@@ -80,6 +90,23 @@ export const InputAdornments: Story = {
         />
       </div>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputDecoratorBtn = canvas.getByRole("button", { name: /clear/i });
+    const inputWithDecorator = canvas.getByRole("textbox", {
+      name: "form input",
+    });
+
+    expect(inputDecoratorBtn).toBeInTheDocument();
+    expect(inputWithDecorator).toHaveValue("Remove text input");
+    await userEvent.click(inputDecoratorBtn);
+    expect(inputWithDecorator).toHaveValue("");
+
+    await userEvent.type(inputWithDecorator, "Some placeholder text");
+    expect(inputWithDecorator).toHaveValue("Some placeholder text");
+    expect(inputWithDecorator).toHaveValue();
+    await userEvent.tab();
   },
 };
 
