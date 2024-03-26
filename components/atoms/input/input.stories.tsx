@@ -57,7 +57,7 @@ export const InputDecorators: Story = {
   render: ({ type, placeholder, size }) => {
     const [textInput, setTextInput] = useState("Remove text input");
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 p-8">
         <Input
           type="email"
           placeholder="abcde@email.com"
