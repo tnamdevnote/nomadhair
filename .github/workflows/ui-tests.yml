@@ -73,6 +73,7 @@ jobs:
       - name: Serve Storybook and run tests
         env:
           DATABASE_URL: ${{ vars.DATABASE_URL }}
+          PROJECT_ID: ${{ vars.PROJECT_ID }}
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
