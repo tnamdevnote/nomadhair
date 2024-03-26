@@ -4,17 +4,6 @@ name: "UI Tests"
 
 on: push
 
-# env:
-#   API_KEY=AIzaSyAv9b04OemLSnHVn0YpRh5e4bIV57Q1KEE,
-#   AUTH_DOMAIN=nomadhair-79e6c.firebaseapp.com,
-#   PROJECT_ID='nomadhair-79e6c',
-#   STORAGE_BUCKET=nomadhair-79e6c.appspot.com,
-#   MESSAGING_SENDER_ID="762670935291",
-#   APP_ID="1:762670935291:web:aa8c8eca1d606c2aa6145e",
-#   MEASUREMENT_ID=G-VKCJFH7TH6,
-#   DATABASE_NAME=nomadhair-79e6c-default-rtdb,
-#   DATABASE_URL=`https://${DATABASE_NAME}.firebaseio.com`,
-
 jobs:
   # Install and cache npm dependencies
   install-cache:
@@ -79,8 +68,6 @@ jobs:
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
             "npx wait-on tcp:6006 && npm run test-storybook"
-        env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
   # Run visual and composition tests with Chromatic
   visual-and-composition:
