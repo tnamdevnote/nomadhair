@@ -1,12 +1,16 @@
-'use client'
+"use client";
 
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
 import Link from "next/link";
-import { GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "@/server/initFirebase";
 import { MouseEvent } from "react";
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { useState } from "react";
 
@@ -26,7 +30,7 @@ const Login = () => {
           credential = await signInWithPopup(auth, provider);
           break;
       }
-      if (credential?.user.email){
+      if (credential?.user.email) {
         setCookie("email", credential.user.email);
         setLoggedIn(true);
       } else {
@@ -36,7 +40,7 @@ const Login = () => {
       // redirect("/")
       throw error;
     }
-  }
+  };
 
   if (loggedIn) redirect("/");
 
@@ -49,10 +53,19 @@ const Login = () => {
         aria-label="login form"
         className="mt-8 flex w-full flex-col gap-4"
       >
-        <Button onClick={e => handleAuth(e, "Google")} className="w-full" size="lg">
+        <Button
+          onClick={(e) => handleAuth(e, "Google")}
+          className="w-full"
+          size="lg"
+        >
           Continue with Google
         </Button>
-        <Button onClick={e => handleAuth(e, "Facebook")} className="w-full" intent="secondary" size="lg">
+        <Button
+          onClick={(e) => handleAuth(e, "Facebook")}
+          className="w-full"
+          intent="secondary"
+          size="lg"
+        >
           Continue with Facebook
         </Button>
         <div className="flex items-center justify-center text-sm">

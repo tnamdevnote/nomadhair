@@ -2,7 +2,7 @@ import Image from "next/image";
 import { SplitContainer } from "@/components/templates/container";
 import { barber } from "@/public/illustrations";
 import React from "react";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 
 const HeroSection = () => {
   return (

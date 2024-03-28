@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Popover, PopoverTrigger, PopoverContent } from "./popover";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import { within, userEvent, expect, screen } from "@storybook/test";
 
 const meta: Meta<typeof Popover> = {
@@ -30,7 +30,7 @@ export const Default: Story = {
     </Popover>
   ),
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement.ownerDocument.body);
     const button = canvas.getByRole("button", { name: /Open/i });
 
     expect(button).toBeInTheDocument();
@@ -39,7 +39,7 @@ export const Default: Story = {
     /** Ways to test modal in storybook
      * @link https://github.com/storybookjs/storybook/discussions/21971#discussioncomment-6153933
      */
-    const popover = screen.getByRole("dialog");
+    const popover = canvas.getByRole("dialog");
     expect(popover).toBeInTheDocument();
   },
 };

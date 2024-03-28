@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Card, CardHeader, CardContent, CardFooter } from "./card";
 import { Avatar, AvatarFallback } from "@/components/atoms/avatar";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 
 const meta: Meta<typeof Card> = {
   title: "Molecules/Card",
