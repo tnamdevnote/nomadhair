@@ -32,9 +32,7 @@ export const Default: Story = {
   render: () => {
     // define form validation schema
     const formSchema = z.object({
-      name: z
-        .string()
-        .min(2, { message: "Name must be at least 2 characters long." }),
+      name: z.string(),
     });
     // Infer types from the formSchema
     const form = useForm<z.infer<typeof formSchema>>({
