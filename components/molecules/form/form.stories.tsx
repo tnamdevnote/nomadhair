@@ -16,12 +16,18 @@ import Button from "@/components/atoms/button";
 import { Card } from "../card";
 import Separator from "@/components/atoms/separator";
 import { within, userEvent, expect } from "@storybook/test";
+import { useToast } from "../toast";
 
 const meta: Meta<typeof Form> = {
   title: "Molecules/Form",
   component: Form,
+  decorators: (Story) => (
+    <div className="flex min-h-96 w-full items-center justify-center">
+      <Story />
+    </div>
+  ),
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
   },
 };
 
@@ -42,6 +48,7 @@ export const Default: Story = {
       // Connect our schema to react-hook-form using zodResolver
       resolver: zodResolver(formSchema),
     });
+    const { toast } = useToast();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
@@ -49,7 +56,14 @@ export const Default: Story = {
         if (res) {
           throw new Error();
         }
-        console.log(values);
+        toast({
+          title: "Submitted value",
+          description: (
+            <pre className="rounded-lg bg-neutral-10 p-6 text-neutral-70 md:w-[340px]">
+              <code>{JSON.stringify(values, null, 2)}</code>
+            </pre>
+          ),
+        });
         form.reset();
       } catch (e) {
         console.log(e);
@@ -130,6 +144,7 @@ export const Validation: Story = {
       // Connect our schema to react-hook-form using zodResolver
       resolver: zodResolver(formSchema),
     });
+    const { toast } = useToast();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
@@ -137,7 +152,14 @@ export const Validation: Story = {
         if (res) {
           throw new Error();
         }
-        console.log(values);
+        toast({
+          title: "Submitted value",
+          description: (
+            <pre className="rounded-lg bg-neutral-10 p-6 text-neutral-70 md:w-[340px]">
+              <code className="w-full">{JSON.stringify(values, null, 2)}</code>
+            </pre>
+          ),
+        });
       } catch (e) {
         console.log(e);
       }

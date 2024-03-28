@@ -6,6 +6,7 @@ import {
 
 import "../app/globals.css";
 import { Montserrat, Quicksand } from "next/font/google";
+import { Toaster } from "../components/molecules/toast";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const preview: Preview = {
     (Story) => (
       <div className={` ${quicksand.className} ${montserrat.variable}`}>
         <Story />
+        <Toaster />
       </div>
     ),
   ],
@@ -36,6 +38,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    layout: "centered",
     nextjs: {
       appDirectory: true,
     },
