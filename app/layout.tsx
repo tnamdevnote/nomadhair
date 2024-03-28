@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/organisms/header";
 import Footer from "@/components/organisms/footer";
 import { Montserrat, Quicksand } from "next/font/google";
+import { Toaster } from "@/components/molecules/toast";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="bg-secondary-10">
         <Header />
         {children}
+        <Toaster />
       </body>
     </html>
   );
