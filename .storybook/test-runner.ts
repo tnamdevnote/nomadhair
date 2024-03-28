@@ -51,6 +51,9 @@ const config: TestRunnerConfig = {
       axeOptions: storyContext.parameters?.a11y?.options,
     });
   },
+  tags: {
+    exclude: ["no-tests", "tokens"],
+  },
 };
 
 export default config;
