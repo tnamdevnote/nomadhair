@@ -24,8 +24,8 @@ export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
-  render: () => (
-    <Card className="w-96">
+  render: ({ intent }) => (
+    <Card className="w-96" intent={intent}>
       <CardContent>
         “Lorem ipsum dolor sit amet, consec tetur adi piscing elit. Praesent
         tellus leo, vesti bulum a ipsum sed, suscipit sodales ex. Vestibulum id
@@ -71,8 +71,8 @@ export const WithAvatar: Story = {
 };
 
 export const WithAction: Story = {
-  render: () => (
-    <Card className="w-96">
+  render: ({ intent }) => (
+    <Card className="w-96" intent={intent}>
       <CardContent>
         “Lorem ipsum dolor sit amet, consec tetur adi piscing elit. Praesent
         tellus leo, vesti bulum a ipsum sed, suscipit sodales ex. Vestibulum id
