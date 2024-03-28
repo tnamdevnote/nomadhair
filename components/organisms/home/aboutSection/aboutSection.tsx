@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SplitContainer } from "@/components/templates/container";
 import { departing } from "@/public/illustrations";
 import React from "react";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import { useRouter } from "next/navigation";
 
 const AboutSection = () => {

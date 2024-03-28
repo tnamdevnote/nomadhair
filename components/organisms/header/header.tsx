@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "@/components/atoms/logo";

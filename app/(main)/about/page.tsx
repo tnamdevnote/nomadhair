@@ -2,7 +2,7 @@ import React from "react";
 import { Container, SplitContainer } from "@/components/templates/container";
 import Profile from "@/public/Profile.jpeg";
 import Image from "next/image";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 
 function About() {
   return (
