@@ -7,7 +7,7 @@ import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 import { Container } from "@/components/templates/container";
 

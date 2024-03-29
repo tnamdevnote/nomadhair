@@ -1,4 +1,4 @@
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import Separator from "@/components/atoms/separator";
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import {
