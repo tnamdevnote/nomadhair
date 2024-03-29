@@ -4,7 +4,6 @@ export enum UserType {
 }
 
 export type User = {
-    token: string,
     email: string,
     displayName: string,
     userType: UserType
