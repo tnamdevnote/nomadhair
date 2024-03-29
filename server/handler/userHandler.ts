@@ -1,13 +1,12 @@
 import { ref, set } from "firebase/database";
 import { database } from "../initFirebase";
 import { v4 } from "uuid";
-import { UserObject } from "../model/userObject";
+import { User } from "../model/user";
 
-export function createUser(user: UserObject) {
+export async function createUser(user: User) {
     console.log("CreateUser function is called...");
     const guid = v4();
     set(ref(database, 'users/' + guid), {
-      token: user.token,
       displayName: user.displayName,
       email: user.email,
       userType : user.userType

@@ -3,7 +3,7 @@ enum UserType {
     customer = 1
 }
 
-export type UserObject = {
+export type User = {
     token: string,
     email: string,
     displayName: string,
