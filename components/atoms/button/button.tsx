@@ -15,7 +15,7 @@ const buttonVariants = cva(
       },
       variant: {
         contained: undefined,
-        outline: "bg-transparent border border-current hover:border-current ",
+        outline: "bg-transparent border border-current hover:border-current",
         ghost: "bg-transparent",
         link: "bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent",
       },
