@@ -12,7 +12,7 @@ import {
 } from "./form";
 import { useForm } from "react-hook-form";
 import Input from "@/components/atoms/input";
-import Button from "@/components/atoms/button";
+import { Button } from "@/components/atoms/button";
 import { Card } from "../card";
 import Separator from "@/components/atoms/separator";
 import { within, userEvent, expect } from "@storybook/test";
