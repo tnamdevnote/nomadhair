@@ -23,4 +23,5 @@ export const Default: Story = {
       <AppointmentForm />
     </div>
   ),
+  // TODO: Add interaction testing
 };

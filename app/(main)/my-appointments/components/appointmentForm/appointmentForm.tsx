@@ -18,13 +18,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  date: z.string(),
-  time: z.string(),
-  address1: z.string(),
+  date: z.string().min(1, "Required"),
+  time: z.string().min(1, "Required"),
+  address1: z.string().min(1, "Required"),
   address2: z.string().optional(),
-  city: z.string().max(30),
-  state: z.string().length(2),
-  zipCode: z.string().length(5),
+  city: z.string().max(30).min(2, "State must contain at least 2 characters"),
+  state: z.string().length(2, "State must contain exactly 2 characters"),
+  zipCode: z.string().length(5, "Zip code must be 5 digits long."),
   note: z.string().max(50).optional(),
 });
 
@@ -47,12 +47,8 @@ export const AppointmentForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const res = await new Promise((resolve, reject) =>
-        setTimeout(resolve, 2000),
-      );
-      if (res) {
-        throw new Error();
-      }
+      // submit logic comes here
+
       toast({
         title: "Your appointment has been successfully booked!",
         description: (
@@ -77,15 +73,15 @@ export const AppointmentForm = () => {
         className="flex w-full flex-col gap-4"
       >
         <fieldset className="grid grid-cols-6 gap-2">
-          <legend className="sr-only">Select your appointment date</legend>
+          <legend className="mb-2 text-sm font-bold text-primary-100">
+            Select your appointment date
+          </legend>
           <FormField
             control={form.control}
             name="date"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-3">
-                <FormLabel className="text-sm font-medium">
-                  Select Date
-                </FormLabel>
+                <FormLabel className="sr-only">Select Date</FormLabel>
                 <FormControl>
                   <Input error={!!fieldState.error} type="date" {...field} />
                 </FormControl>
@@ -99,9 +95,7 @@ export const AppointmentForm = () => {
             name="time"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-3">
-                <FormLabel className="text-sm font-medium">
-                  Select Time
-                </FormLabel>
+                <FormLabel className="sr-only">Select Time</FormLabel>
                 <FormControl>
                   <Input error={!!fieldState.error} type="time" {...field} />
                 </FormControl>
@@ -112,7 +106,9 @@ export const AppointmentForm = () => {
           />
         </fieldset>
         <fieldset className="grid grid-cols-6 gap-x-2">
-          <legend className="text-sm font-medium">Address</legend>
+          <legend className="mb-2 text-sm font-bold text-primary-100">
+            Address
+          </legend>
           <FormField
             control={form.control}
             name="address1"
@@ -206,7 +202,9 @@ export const AppointmentForm = () => {
           />
         </fieldset>
         <fieldset>
-          <legend className="text-sm font-medium">Note</legend>
+          <legend className="mb-2 text-sm font-bold text-primary-100">
+            Note
+          </legend>
           <FormField
             control={form.control}
             name="note"
