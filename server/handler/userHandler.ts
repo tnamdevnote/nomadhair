@@ -3,9 +3,8 @@ import { database } from "../initFirebase";
 import { v4 } from "uuid";
 import { User } from "../model/user";
 
-export async function createUser(user: User) {
+export function createUser(user: User, guid: string) {
     console.log("CreateUser function is called...");
-    const guid = v4();
     set(ref(database, 'users/' + guid), {
       displayName: user.displayName,
       email: user.email,

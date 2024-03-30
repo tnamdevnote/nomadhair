@@ -12,9 +12,9 @@ const meta: Meta<typeof Header> = {
     },
     layout: "fullscreen",
   },
-  render: ({ user }) => (
+  render: () => (
     <div style={{ minHeight: "100px" }}>
-      <Header user={user} />
+      <Header />
     </div>
   ),
 };
@@ -22,13 +22,7 @@ const meta: Meta<typeof Header> = {
 export default meta;
 type Story = StoryObj<typeof Header>;
 
-export const LoggedIn: Story = {
-  args: {
-    user: {
-      name: "Taek",
-    },
-  },
-};
+export const LoggedIn: Story = {};
 
 export const LoggedOut: Story = {};
 

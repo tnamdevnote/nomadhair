@@ -1,4 +1,4 @@
-enum UserType {
+export enum UserType {
     stylist = 0,
     customer = 1
 }

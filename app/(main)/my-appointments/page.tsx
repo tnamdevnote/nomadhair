@@ -12,7 +12,7 @@ import { CalendarIcon, ClockIcon, EditIcon, PlusIcon } from "lucide-react";
 import React from "react";
 
 function MyAppointments() {
-  const isMobile = /Mob/i.test(navigator.userAgent);
+  // const isMobile = /Mob/i.test(navigator.userAgent);
 
   return (
     <div className="relative flex flex-col gap-8 py-16 md:min-h-0">
