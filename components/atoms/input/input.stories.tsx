@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Input from "./input";
+import { Input } from "./input";
 import { KeyIcon, MailIcon, XIcon } from "lucide-react";
 import { Button } from "../button";
 import { useState } from "react";
