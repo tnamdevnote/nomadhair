@@ -1,7 +1,7 @@
-import { UserObject, UserType } from "../model/userObject";
+import { User, UserType } from "../model/user";
 
 export function mapUser(response: any, userType: UserType) {
-    const result:UserObject = {
+    const result:User = {
         displayName: response.user.displayName,
         email: response.user.email,
         userType: userType
