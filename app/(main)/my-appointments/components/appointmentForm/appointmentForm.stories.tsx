@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { AppointmentForm } from "./appointmentForm";
 
 const meta: Meta<typeof AppointmentForm> = {
-  title: "Pages/MyAppointMents/AppointmentForm",
+  title: "Pages/MyAppointments/AppointmentForm",
   component: AppointmentForm,
   decorators: (Story) => (
     <div className="flex min-h-96 w-full items-center justify-center">
