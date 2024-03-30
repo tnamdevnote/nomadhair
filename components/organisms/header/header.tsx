@@ -1,22 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "@/components/atoms/logo";
 import { Container } from "@/components/templates/container";
 import { LogOutIcon, ChevronRightIcon, LogInIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-type User = {
-  name: string;
-};
-export interface HeaderProps {
-  user?: User;
-}
-
-function Header({ user }: HeaderProps) {
+function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [cookies, setCookies, removeCookies] = useCookies(["displayName", "email"]);
+  const router = useRouter();
+  const handleRefresh = () => {
+    router.refresh();
+  }
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -28,6 +28,7 @@ function Header({ user }: HeaderProps) {
 
   // close the navMenu when screen resizes
   useEffect(() => {
+    handleRefresh();
     const closeNaveMenu = () => setIsOpen(false);
     window.addEventListener("orientationchange", closeNaveMenu);
     window.addEventListener("resize", closeNaveMenu);
@@ -37,6 +38,12 @@ function Header({ user }: HeaderProps) {
       window.removeEventListener("resize", closeNaveMenu);
     };
   }, []);
+
+  const logOut = () => {
+    removeCookies("displayName");
+    removeCookies("email");
+    handleRefresh();
+  }
 
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
@@ -70,7 +77,7 @@ function Header({ user }: HeaderProps) {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {user ? (
+            {cookies.displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -86,9 +93,9 @@ function Header({ user }: HeaderProps) {
           </ul>
         </nav>
         <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
-          {user ? (
+          {cookies.displayName  ? (
             <>
-              <p className="text-sm font-bold">Hi, {user.name}!</p>
+              <p className="text-sm font-bold">Hi, {cookies.displayName}!</p>
               <Button
                 aria-label="Log out"
                 variant="ghost"
@@ -96,6 +103,7 @@ function Header({ user }: HeaderProps) {
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
+                onClick={() => logOut()}
               >
                 <span className="hidden md:inline-flex">Logout</span>
               </Button>
@@ -111,16 +119,6 @@ function Header({ user }: HeaderProps) {
                 asChild
               >
                 <Link href="/login">Login</Link>
-              </Button>
-              <Button
-                aria-label="Sign up"
-                icon={<ChevronRightIcon />}
-                iconPosition="after"
-                variant="contained"
-                size="sm"
-                asChild
-              >
-                <Link href="/sign-up">Sign up</Link>
               </Button>
             </>
           )}

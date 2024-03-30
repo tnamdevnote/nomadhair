@@ -9,10 +9,12 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "@/server/initFirebase";
-import { MouseEvent } from "react";
-import { redirect } from "next/navigation";
+import { MouseEvent, useEffect } from "react";
+import { redirect, useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { useState } from "react";
+import { createUser } from "@/server/handler/userHandler";
+import { mapUser } from "@/server/mapper/userMapper";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,14 +32,16 @@ const Login = () => {
           credential = await signInWithPopup(auth, provider);
           break;
       }
-      if (credential?.user.email) {
-        setCookie("email", credential.user.email);
+      const user = mapUser(credential, 1);
+      if (credential?.user.email && credential?.user.uid) {
+        setCookie("email", user.email);
+        setCookie("displayName", user.displayName);
+        await createUser(user, credential.user.uid);
         setLoggedIn(true);
       } else {
         throw new Error("Identity provider did not provide the user email");
       }
     } catch (error: any) {
-      // redirect("/")
       throw error;
     }
   };
@@ -68,12 +72,6 @@ const Login = () => {
         >
           Continue with Facebook
         </Button>
-        <div className="flex items-center justify-center text-sm">
-          <p>{"Don't have an account?"}</p>
-          <Button variant="link" size="sm" asChild className="font-bold">
-            <Link href="/sign-up">Join Now!</Link>
-          </Button>
-        </div>
       </section>
     </Container>
   );
