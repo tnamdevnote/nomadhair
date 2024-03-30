@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/atoms/button";
 import Separator from "@/components/atoms/separator";
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
@@ -10,6 +12,7 @@ import {
 import { Container } from "@/components/templates/container";
 import { CalendarIcon, ClockIcon, EditIcon, PlusIcon } from "lucide-react";
 import React from "react";
+import { AppointmentForm } from "./components/appointmentForm/appointmentForm";
 
 function MyAppointments() {
   // const isMobile = /Mob/i.test(navigator.userAgent);
@@ -133,7 +136,7 @@ function MyAppointments() {
               New Appointment
             </h2>
             <div className="h-full w-full rounded-2xl bg-white shadow-md">
-              {/* form goes here */}
+              <AppointmentForm />
             </div>
           </section>
         </div>

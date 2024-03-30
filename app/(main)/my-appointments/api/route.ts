@@ -7,12 +7,13 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PATCH(req: NextRequest) {
     const payload = await req.json();
     const guid = v4();
-    set(ref(database, 'appointment/' + guid), {
-        userId: payload.userId,
-        timeSlotId: payload.timeSlotId,
-        customerDetailId: payload.customerDetailId,
-        comment: payload.comment
-    });
+    console.log(payload);
+    // set(ref(database, 'appointment/' + guid), {
+    //     userId: payload.userId,
+    //     timeSlotId: payload.timeSlotId,
+    //     customerDetailId: payload.customerDetailId,
+    //     comment: payload.comment
+    // });
     const response = NextResponse.json(null, {status: 200});
     return response;
 }

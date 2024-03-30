@@ -42,6 +42,7 @@ function Header() {
   const logOut = () => {
     removeCookies("displayName");
     removeCookies("email");
+    router.push("/")
     handleRefresh();
   }
 
@@ -86,7 +87,7 @@ function Header() {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/">My Appointment</Link>
+                  <Link href="/my-appointments">My Appointment</Link>
                 </Button>
               </li>
             ) : null}

@@ -28,6 +28,10 @@ const formSchema = z.object({
   note: z.string().max(50).optional(),
 });
 
+// const  handleSubmit = async (formData: any) => {
+//   console.log(formData);
+// }
+
 export const AppointmentForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     // TODO: declaring defaultValues won't correctly validate empty form.
@@ -48,6 +52,13 @@ export const AppointmentForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // submit logic comes here
+      fetch("/my-appointments/api", 
+      { 
+        method: 'PATCH', 
+        body: JSON.stringify({
+          ...values
+        })
+      });
 
       toast({
         title: "Your appointment has been successfully booked!",
