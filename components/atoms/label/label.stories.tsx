@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Label from "./label";
 import { useState } from "react";
 import { within, expect, userEvent } from "@storybook/test";
-import Input from "../input";
+import { Input } from "../input";
 
 const meta: Meta<typeof Label> = {
   title: "Atoms/Label",
