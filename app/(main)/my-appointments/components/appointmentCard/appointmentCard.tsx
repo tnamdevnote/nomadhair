@@ -3,8 +3,81 @@
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { CalendarIcon, ClockIcon, EditIcon } from "lucide-react";
 import { Button } from "@/components/atoms/button";
+import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/molecules/dialog";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+  DrawerTitle,
+} from "@/components/molecules/drawer";
+import { AppointmentForm } from "../appointmentForm/appointmentForm";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 export const AppointmentCard = () => {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    window.addEventListener("resize", () => setMatches(media.matches));
+    return () =>
+      window.removeEventListener("resize", () => setMatches(media.matches));
+  }, [matches]);
+
+  const editAppointment = matches ? (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          icon={<EditIcon />}
+          variant="ghost"
+          size="sm"
+          className="flex-1 md:w-32 md:flex-none"
+        >
+          Edit
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Appointment</DialogTitle>
+          <DialogDescription>
+            Change your appointment details.
+          </DialogDescription>
+        </DialogHeader>
+        <AppointmentForm />
+      </DialogContent>
+    </Dialog>
+  ) : (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button
+          icon={<EditIcon />}
+          variant="ghost"
+          size="sm"
+          className="flex-1 md:w-32 md:flex-none"
+        >
+          Edit
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="p-6">
+        <DrawerHeader>
+          <DrawerTitle>Edit Appointment</DrawerTitle>
+        </DrawerHeader>
+        <AppointmentForm />
+      </DrawerContent>
+    </Drawer>
+  );
+
   return (
     <Card>
       <CardContent className="flex flex-col gap-4">
@@ -30,14 +103,7 @@ export const AppointmentCard = () => {
         >
           Cancel
         </Button>
-        <Button
-          icon={<EditIcon />}
-          variant="ghost"
-          size="sm"
-          className="flex-1 md:w-32 md:flex-none"
-        >
-          Edit
-        </Button>
+        {editAppointment}
       </CardFooter>
     </Card>
   );
