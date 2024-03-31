@@ -30,7 +30,6 @@ const formSchema = z.object({
 
 export const AppointmentForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
-    // TODO: declaring defaultValues won't correctly validate empty form.
     defaultValues: {
       date: "",
       time: "",
@@ -74,7 +73,7 @@ export const AppointmentForm = () => {
       >
         <fieldset className="grid grid-cols-6 gap-2">
           <legend className="mb-2 text-sm font-bold text-primary-100">
-            Select your appointment date
+            Appointment date
           </legend>
           <FormField
             control={form.control}
