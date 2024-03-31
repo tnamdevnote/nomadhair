@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { CalendarIcon, ClockIcon, EditIcon } from "lucide-react";
 import { Button } from "@/components/atoms/button";
