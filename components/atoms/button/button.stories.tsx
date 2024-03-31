@@ -20,7 +20,7 @@ const meta: Meta<typeof Button> = {
   },
   argTypes: {
     intent: {
-      options: ["primary", "secondary", "tertiary"],
+      options: ["primary", "secondary", "tertiary", "danger"],
       control: { type: "radio" },
     },
     variant: {
