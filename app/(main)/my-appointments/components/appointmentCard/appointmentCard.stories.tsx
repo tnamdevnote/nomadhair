@@ -12,3 +12,5 @@ export default meta;
 type Story = StoryObj<typeof AppointmentCard>;
 
 export const Default: Story = {};
+
+// TODO: add tests for loading, empty states.
