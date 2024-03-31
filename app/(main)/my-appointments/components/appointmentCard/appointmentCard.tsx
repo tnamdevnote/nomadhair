@@ -10,6 +10,8 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogFooter,
+  DialogClose,
 } from "@/components/molecules/dialog";
 import {
   Drawer,
@@ -20,6 +22,8 @@ import {
 } from "@/components/molecules/drawer";
 import { AppointmentForm } from "../appointmentForm/appointmentForm";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import Image from "next/image";
+import cancel_img from "./cancel_img.svg";
 
 export const AppointmentCard = () => {
   const [matches, setMatches] = useState(false);
@@ -34,6 +38,37 @@ export const AppointmentCard = () => {
     return () =>
       window.removeEventListener("resize", () => setMatches(media.matches));
   }, [matches]);
+
+  const cancelAppointment = (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="flex-1 md:w-32 md:flex-none"
+        >
+          Cancel
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <div className="flex flex-col items-center gap-4">
+          <Image className="my-8" src={cancel_img} width={200} alt="cancel" />
+          <DialogHeader>
+            <DialogTitle>Cancel appointment</DialogTitle>
+          </DialogHeader>
+          <DialogDescription>
+            Would you like to cancel your appointment?
+          </DialogDescription>
+        </div>
+        <DialogFooter className="gap-2">
+          <DialogClose asChild>
+            <Button variant={"ghost"}>No, keep it.</Button>
+          </DialogClose>
+          <Button intent={"danger"}>Yes, cancel it.</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
 
   const editAppointment = matches ? (
     <Dialog>
@@ -96,13 +131,7 @@ export const AppointmentCard = () => {
         </p>
       </CardContent>
       <CardFooter className="inline-flex justify-end gap-4">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="flex-1 md:w-32 md:flex-none"
-        >
-          Cancel
-        </Button>
+        {cancelAppointment}
         {editAppointment}
       </CardFooter>
     </Card>
