@@ -3,7 +3,7 @@ import { mapAppointment } from "@/server/mapper/appointmentMapper";
 import { get, set, ref, child, query, equalTo, orderByKey, orderByChild } from "firebase/database";
 import { v4 } from "uuid";
 import { NextRequest, NextResponse } from "next/server";
-import { convertToUnixTimeStamp } from "@/utils/convertToUnixTimeStamp";
+import { dateTimeToUnixTimeStamp } from "@/lib/utils";
 import { DayOfWeek } from "@/server/model/dayOfWeekEnum";
 import { createTimeSlot } from "@/server/handler/timeSlotHandler";
 import { mapTimeSlot } from "@/server/mapper/timeSlotMapper";
@@ -33,7 +33,7 @@ const filterAppointments = async (response: any, userId: string | null) => {
 export async function PATCH(req: NextRequest) {
     const payload = await req.json();
     // TODO: create time slot api and ui for this
-    const startTime = convertToUnixTimeStamp(payload.date, payload.time);
+    const startTime = dateTimeToUnixTimeStamp(payload.date, payload.time);
     const endTime = startTime + 3600 // 1 hour
     const dayOfWeek = DayOfWeek[new Date(startTime).getDay()];
     const timeSlot = mapTimeSlot({
