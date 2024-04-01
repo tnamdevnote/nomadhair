@@ -21,7 +21,7 @@ export async function PATCH(req: NextRequest) {
 export async function GET(req: NextRequest) {
     const pathElements = req.nextUrl.pathname.split("/");
     const id = pathElements[pathElements.length - 1]
-    const dbResponse = await get(ref(database, 'appointment/' + id));
+    const dbResponse = (await get(ref(database, 'appointment/' + id))).val();
     const result = mapAppointment(dbResponse);
     const response = NextResponse.json({result}, {status: 200});
     return response;

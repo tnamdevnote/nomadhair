@@ -18,6 +18,17 @@ import { v4 } from "uuid";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import useSWR from 'swr';
+
+async function getAppointment(id: string) {
+  const res = await fetch(`/my-appointments/api/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch appointment.");
+  }
+
+  return res.json();
+}
 
 const formSchema = z.object({
   date: z.string().min(1, "Required"),
@@ -32,6 +43,10 @@ const formSchema = z.object({
 
 
 export const AppointmentForm = () => {
+
+  const { toast } = useToast();
+  const [cookies, setCookies, removeCookies] = useCookies(["id"]);
+  const { data, isLoading, error } = useSWR('dbe3c254-e02f-4583-b3ea-60819d92237f', getAppointment)
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       date: "",
@@ -45,15 +60,11 @@ export const AppointmentForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const { toast } = useToast();
-  const [cookies, setCookies, removeCookies] = useCookies(["id"]);
-
+  console.log(  )
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const guid = v4();
-      // submit logic comes here
-      fetch("/my-appointments/api", 
+      const result = await fetch("/my-appointments/api", 
       { 
         method: 'PATCH', 
         body: JSON.stringify({
@@ -61,9 +72,13 @@ export const AppointmentForm = () => {
           userId: cookies.id
         }) // TODO: pass time slot ID intead of time
       });
+
+      if (!result.ok) {
+        throw new Error()
+      }
       
       // TODO: needs refactor
-      const res = await fetch("/my-appointments/api/email/", {
+      await fetch("/my-appointments/api/email/", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         // This is a mock data. Replace with proper form values later.
