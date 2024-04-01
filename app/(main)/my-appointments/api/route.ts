@@ -1,12 +1,34 @@
-import { database } from "@/server/initFirebase";
+import app, { database } from "@/server/initFirebase";
 import { mapAppointment } from "@/server/mapper/appointmentMapper";
-import { get, set, ref } from "firebase/database";
+import { get, set, ref, child, query, equalTo, orderByKey, orderByChild } from "firebase/database";
 import { v4 } from "uuid";
 import { NextRequest, NextResponse } from "next/server";
 import { convertToUnixTimeStamp } from "@/utils/convertToUnixTimeStamp";
 import { DayOfWeek } from "@/server/model/dayOfWeekEnum";
 import { createTimeSlot } from "@/server/handler/timeSlotHandler";
 import { mapTimeSlot } from "@/server/mapper/timeSlotMapper";
+import { Appointment } from "@/server/model/appointment";
+
+const filterAppointments = async (response: any, userId: string | null) => {
+    const appointmentIds = Object.keys(response);
+    const pastAppointments: Appointment[] = [];
+    const upcomingAppointments: Appointment[] = [];
+    for (let appointmentId of appointmentIds) {
+        if (response[appointmentId].userId !== userId) continue;
+        let appointment = mapAppointment(response[appointmentId]);
+        appointment.appointmentId = appointmentId; 
+        let timeSlotResponse = (await get(ref(database, "timeSlot/" + appointment.timeSlotId))).val();
+        let timeSlot = mapTimeSlot(timeSlotResponse);
+        appointment.timeSlot = timeSlot;
+        let timeNow = Math.floor(Date.now() / 1000);
+        if (timeSlot.startTime < timeNow) {
+            pastAppointments.push(appointment);
+        } else {
+            upcomingAppointments.push(appointment);
+        }
+    }
+    return {pastAppointments, upcomingAppointments};
+}
 
 export async function PATCH(req: NextRequest) {
     const payload = await req.json();
@@ -33,11 +55,9 @@ export async function PATCH(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-    const dbResponse = await get(ref(database, 'appointment/'));
-    const result = [];
-    for (let item in dbResponse) {
-        result.push(mapAppointment(item));
-    }
-    const response = NextResponse.json({appointments: [...result]}, {status: 200});
+    const userId = req.nextUrl.searchParams.get("userId");
+    const dbResponse = (await get(child(ref(database), 'appointment/'))).val();
+    const responseBody = await filterAppointments(dbResponse, userId);
+    const response = NextResponse.json(responseBody, {status: 200});
     return response;
 }
