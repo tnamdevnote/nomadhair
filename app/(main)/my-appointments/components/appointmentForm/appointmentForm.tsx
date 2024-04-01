@@ -47,20 +47,21 @@ export const AppointmentForm = () => {
   const { toast } = useToast();
   const [cookies, setCookies, removeCookies] = useCookies(["id"]);
   const { data, isLoading, error } = useSWR('dbe3c254-e02f-4583-b3ea-60819d92237f', getAppointment)
+  console.log( data )
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      date: "",
-      time: "",
-      address1: "",
-      address2: "",
-      city: "",
-      state: "",
-      zipCode: "",
+      date: data?.result.date,
+      time: data?.result.time,
+      address1: data?.result.address1,
+      address2: data?.result.address2,
+      city: data?.result.city,
+      state: data?.result.state,
+      zipCode: data?.result.zip,
+      note: data?.result.note
     },
     resolver: zodResolver(formSchema),
   });
 
-  console.log(  )
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
