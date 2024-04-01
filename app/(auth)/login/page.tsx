@@ -45,6 +45,7 @@ const Login = () => {
       if (credential?.user.email && credential?.user.uid) {
         setCookie("email", user.email);
         setCookie("displayName", user.displayName);
+        setCookie("id", credential.user.uid)
         await userPatchFetcher(user, credential.user.uid);
         setLoggedIn(true);
       } else {

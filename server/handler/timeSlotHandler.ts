@@ -15,6 +15,7 @@ export async function createTimeSlot(timeslot:TimeSlot) {
       reserved: timeslot.reserved
     });
     console.log("createTimeSlot is successfully called");
+    return guid;
 }
 
 export async function editTimeSlot(timeslot:TimeSlot, timeSlotId: string) {

@@ -14,6 +14,8 @@ import {
 import { useToast } from "@/components/molecules/toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 } from "uuid";
+import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -28,9 +30,6 @@ const formSchema = z.object({
   note: z.string().max(50).optional(),
 });
 
-// const  handleSubmit = async (formData: any) => {
-//   console.log(formData);
-// }
 
 export const AppointmentForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,16 +47,20 @@ export const AppointmentForm = () => {
   });
 
   const { toast } = useToast();
+  const [cookies, setCookies, removeCookies] = useCookies(["id"]);
+
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      const guid = v4();
       // submit logic comes here
       fetch("/my-appointments/api", 
       { 
         method: 'PATCH', 
         body: JSON.stringify({
-          ...values
-        })
+          ...values,
+          userId: cookies.id
+        }) // TODO: pass time slot ID intead of time
       });
 
       toast({
