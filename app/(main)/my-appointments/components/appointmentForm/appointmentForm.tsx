@@ -37,8 +37,8 @@ const formSchema = z.object({
   address2: z.string().optional(),
   city: z.string().max(30).min(2, "State must contain at least 2 characters"),
   state: z.string().length(2, "State must contain exactly 2 characters"),
-  zipCode: z.string().length(5, "Zip code must be 5 digits long."),
-  note: z.string().max(50).optional(),
+  zip: z.string().length(5, "Zip code must be 5 digits long."),
+  comment: z.string().max(50).optional(),
 });
 
 
@@ -56,8 +56,8 @@ export const AppointmentForm = () => {
       address2: data?.result.address2,
       city: data?.result.city,
       state: data?.result.state,
-      zipCode: data?.result.zip,
-      note: data?.result.note
+      zip: data?.result.zip,
+      comment: data?.result.comment
     },
     resolver: zodResolver(formSchema),
   });
@@ -86,7 +86,7 @@ export const AppointmentForm = () => {
         body: JSON.stringify({
           date: "2023-04-04",
           time: "14:30",
-          note: "This is a test email.",
+          comment: "This is a test email.",
         }),
       });
 
@@ -224,7 +224,7 @@ export const AppointmentForm = () => {
           />
           <FormField
             control={form.control}
-            name="zipCode"
+            name="zip"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-6">
                 <FormLabel className="sr-only">Zip Code</FormLabel>
@@ -248,7 +248,7 @@ export const AppointmentForm = () => {
           </legend>
           <FormField
             control={form.control}
-            name="note"
+            name="comment"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="sr-only">Note</FormLabel>
