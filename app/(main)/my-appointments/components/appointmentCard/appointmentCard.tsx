@@ -25,7 +25,7 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import cancel_img from "./cancel_img.svg";
 
-export const AppointmentCard = () => {
+export const AppointmentCard = (props: any) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -114,20 +114,19 @@ export const AppointmentCard = () => {
   );
 
   return (
-    <Card>
+    <Card key={props.props.appointmentId}>
       <CardContent className="flex flex-col gap-4">
         <p className="inline-flex gap-2 text-base font-bold">
           <CalendarIcon />
-          Monday, 12 June
+          {props.props.date}
         </p>
         <p className="inline-flex gap-2 text-base font-bold">
           <ClockIcon />
-          12:30PM
+          {props.props.time}
         </p>
-        <p className="text-sm">3201 Burton Street SE</p>
+        <p className="text-sm">{props.props.address1}</p>
         <p className="line-clamp-2 overflow-hidden text-ellipsis text-wrap text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          tellus leo, vestibulum a ipsum sed, suscipit sodales ex.{" "}
+          {props.props.comment}{" "}
         </p>
       </CardContent>
       <CardFooter className="inline-flex justify-end gap-4">
