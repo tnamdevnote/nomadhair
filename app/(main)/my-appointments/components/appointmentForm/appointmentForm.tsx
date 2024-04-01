@@ -61,6 +61,18 @@ export const AppointmentForm = () => {
           userId: cookies.id
         }) // TODO: pass time slot ID intead of time
       });
+      
+      const res = await fetch("api/send/", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          date: "2023-04-04",
+          time: "14:30",
+          note: "This is a test email.",
+        }),
+      });
+
+      console.log(res);
 
       toast({
         title: "Your appointment has been successfully booked!",

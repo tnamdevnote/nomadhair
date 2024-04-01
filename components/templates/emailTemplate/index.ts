@@ -1,0 +1,1 @@
+export { EmailTemplate } from "./emailTemplate";
