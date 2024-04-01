@@ -62,17 +62,17 @@ export const AppointmentForm = () => {
         }) // TODO: pass time slot ID intead of time
       });
       
-      const res = await fetch("api/send/", {
+      // TODO: needs refactor
+      const res = await fetch("/my-appointments/api/email/", {
         method: "POST",
         headers: { "Content-type": "application/json" },
+        // This is a mock data. Replace with proper form values later.
         body: JSON.stringify({
           date: "2023-04-04",
           time: "14:30",
           note: "This is a test email.",
         }),
       });
-
-      console.log(res);
 
       toast({
         title: "Your appointment has been successfully booked!",

@@ -9,11 +9,12 @@ export async function POST(request: Request) {
 
     const res = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
-      to: ["gyuhyeonggyu@gmail.com"],
+      to: ["taekbeen93@gmail.com"],
       subject: "Hello world",
       text: "",
+      // TODO: Requires updates along with EmailTemplate
       react: EmailTemplate({
-        firstName: "HyeongGyu",
+        firstName: "Taek",
         appointmentDetails: formData,
       }),
     });
