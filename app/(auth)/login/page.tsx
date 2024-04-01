@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
-import Link from "next/link";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -13,11 +12,21 @@ import { MouseEvent, useEffect } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { useState } from "react";
-import { createUser } from "@/server/handler/userHandler";
 import { mapUser } from "@/server/mapper/userMapper";
+import { User } from "@/server/model/user";
 
 const Login = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const userPatchFetcher = async (user: User, guid: string) => {
+    fetch('/login/api', 
+    { 
+      method: 'PATCH', 
+      body: JSON.stringify({
+        ...user,
+        guid
+      })
+    })
+  }
 
   const handleAuth = async (clickEvent: MouseEvent, providerName: string) => {
     try {
@@ -36,7 +45,8 @@ const Login = () => {
       if (credential?.user.email && credential?.user.uid) {
         setCookie("email", user.email);
         setCookie("displayName", user.displayName);
-        await createUser(user, credential.user.uid);
+        setCookie("id", credential.user.uid)
+        await userPatchFetcher(user, credential.user.uid);
         setLoggedIn(true);
       } else {
         throw new Error("Identity provider did not provide the user email");

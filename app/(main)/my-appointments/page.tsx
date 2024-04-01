@@ -1,6 +1,7 @@
+"use client"
+
 import { Button } from "@/components/atoms/button";
 import Separator from "@/components/atoms/separator";
-import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import {
   Drawer,
   DrawerContent,
@@ -12,9 +13,13 @@ import { PlusIcon } from "lucide-react";
 import React from "react";
 import { UpcomingAppointment, PastAppointment } from "./components";
 import NewAppointment from "./components/newAppointment/newAppointment";
+import { useCookies } from "react-cookie";
+
+
 
 function MyAppointments() {
   // const isMobile = /Mob/i.test(navigator.userAgent);
+  // const [cookies, setCookies, removeCookies] = useCookies(["id"]);
 
   return (
     <div className="relative flex flex-col gap-8 py-16 md:min-h-0">
@@ -40,8 +45,19 @@ function MyAppointments() {
           <UpcomingAppointment />
           <PastAppointment />
         </div>
-        <div className="hidden md:sticky md:top-32 md:col-start-8 md:col-end-13 md:block">
-          <NewAppointment />
+        <Separator orientation="vertical" className="hidden h-auto md:block" />
+        <div className="hidden md:sticky md:top-32 md:col-span-5 md:block">
+          <section
+            aria-labelledby="new-appointment"
+            className="flex h-full flex-col"
+          >
+            {/* <h2 id="new-appointment" className="py-3 text-base font-bold">
+              New Appointment
+            </h2> */}
+            <div className="hidden md:sticky md:top-32 md:col-start-8 md:col-end-13 md:block">
+              <NewAppointment />
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -49,3 +65,4 @@ function MyAppointments() {
 }
 
 export default MyAppointments;
+

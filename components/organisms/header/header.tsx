@@ -42,9 +42,10 @@ function Header() {
   const logOut = () => {
     removeCookies("displayName");
     removeCookies("email");
+    router.push("/")
     handleRefresh();
   }
-
+  
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-8">
@@ -86,7 +87,7 @@ function Header() {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/">My Appointment</Link>
+                  <Link href="/my-appointments">My Appointment</Link>
                 </Button>
               </li>
             ) : null}
