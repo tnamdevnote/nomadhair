@@ -18,6 +18,10 @@ async function getUpcomingAppointments() {
   return responseObj;
 }
 
+/**
+ * @description
+ * A client side component that renders a list of AppointmentCards.
+ */
 export function UpcomingAppointments() {
   const { data, isLoading, error, mutate } = useSWR(
     "/my-appointments/api",
@@ -57,6 +61,8 @@ export function UpcomingAppointments() {
     <>
       {data.upcomingAppointments.map((appointment: Appointment) => {
         return (
+          // Would it make more sense to store appointment Obj in a context?
+          // This way we can avoid prop drilling and access appointment information further down the React tree (e.g. Form)
           <AppointmentCard
             key={appointment.appointmentId}
             appointment={appointment}

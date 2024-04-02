@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
-import { CalendarIcon, ClockIcon, EditIcon } from "lucide-react";
+import { CalendarIcon, ClockIcon, Edit, EditIcon } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { useEffect, useState } from "react";
 import {
@@ -26,31 +26,13 @@ import Image from "next/image";
 import cancel_img from "./cancel_img.svg";
 import { Appointment } from "@/server/model/appointment";
 
-export const AppointmentCard = ({appointment}: {appointment: Appointment}) => {
-  const [matches, setMatches] = useState(false);
+import React from "react";
 
-  useEffect(() => {
-    const media = window.matchMedia("(min-width: 768px)");
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-
-    window.addEventListener("resize", () => setMatches(media.matches));
-    return () =>
-      window.removeEventListener("resize", () => setMatches(media.matches));
-  }, [matches]);
-
-  const cancelAppointment = (appointmentId: string) => (
+const CancelDialog = ({ children }: { children: React.ReactNode[] }) => {
+  const [openDialogButton, cancelAppointmentButton] = children;
+  return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="flex-1 md:w-32 md:flex-none"
-        >
-          Cancel
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{openDialogButton}</DialogTrigger>
       <DialogContent>
         <div className="flex flex-col items-center gap-4">
           <Image className="my-8" src={cancel_img} width={200} alt="cancel" />
@@ -65,24 +47,31 @@ export const AppointmentCard = ({appointment}: {appointment: Appointment}) => {
           <DialogClose asChild>
             <Button variant={"ghost"}>No, keep it.</Button>
           </DialogClose>
-          <Button intent={"danger"}>Yes, cancel it.</Button>
+          {cancelAppointmentButton}
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
+};
 
-  const editAppointment = (appointmentId: string) => matches ? (
+export const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
+  const [matches, setMatches] = useState(false);
+  const [button, appointmentForm] = children;
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    window.addEventListener("resize", () => setMatches(media.matches));
+    return () =>
+      window.removeEventListener("resize", () => setMatches(media.matches));
+  }, [matches]);
+
+  return matches ? (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          icon={<EditIcon />}
-          variant="ghost"
-          size="sm"
-          className="flex-1 md:w-32 md:flex-none"
-        >
-          Edit
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{button}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Appointment</DialogTitle>
@@ -90,51 +79,74 @@ export const AppointmentCard = ({appointment}: {appointment: Appointment}) => {
             Change your appointment details.
           </DialogDescription>
         </DialogHeader>
-        <AppointmentForm type="edit" id={appointmentId} />
+        {appointmentForm}
       </DialogContent>
     </Dialog>
   ) : (
     <Drawer>
-      <DrawerTrigger asChild>
-        <Button
-          icon={<EditIcon />}
-          variant="ghost"
-          size="sm"
-          className="flex-1 md:w-32 md:flex-none"
-        >
-          Edit
-        </Button>
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{button}</DrawerTrigger>
       <DrawerContent className="p-6">
         <DrawerHeader>
           <DrawerTitle>Edit Appointment</DrawerTitle>
         </DrawerHeader>
-        <AppointmentForm type="edit" id={appointmentId}/>
+        {appointmentForm}
       </DrawerContent>
     </Drawer>
   );
+};
+
+export const AppointmentCard = ({
+  appointment,
+}: {
+  appointment: Appointment;
+}) => {
+  const { timeSlot, address1, city, state, zip, comment } = appointment;
+
+  const date = timeSlot
+    ? new Date(timeSlot.startTime * 1000).toDateString()
+    : null;
+  const time = timeSlot
+    ? new Date(timeSlot.startTime * 1000).toLocaleTimeString()
+    : null;
 
   return (
     <Card>
       <CardContent className="flex flex-col gap-4">
         <p className="inline-flex gap-2 text-base font-bold">
           <CalendarIcon />
-          {/* {props.props.date} */}
+          {date}
         </p>
         <p className="inline-flex gap-2 text-base font-bold">
           <ClockIcon />
-          {/* {props.props.time} */}
+          {time}
         </p>
-        <p className="text-sm">
-          {/* {props.props.address1} */}
-          </p>
+        <p className="text-sm">{[address1, city, state, zip].join(", ")}</p>
         <p className="line-clamp-2 overflow-hidden text-ellipsis text-wrap text-sm">
-          {/* {props.props.comment}{" "} */}
+          {comment}
         </p>
       </CardContent>
       <CardFooter className="inline-flex justify-end gap-4">
-        {/* {cancelAppointment(props.props.appointmentId)}
-        {editAppointment(props.props.appointmentId)} */}
+        <CancelDialog>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex-1 md:w-32 md:flex-none"
+          >
+            Cancel
+          </Button>
+          <Button intent={"danger"}>Yes, cancel it.</Button>
+        </CancelDialog>
+        <EditDialog>
+          <Button
+            icon={<EditIcon />}
+            variant="ghost"
+            size="sm"
+            className="flex-1 md:w-32 md:flex-none"
+          >
+            Edit
+          </Button>
+          <AppointmentForm type="edit" />
+        </EditDialog>
       </CardFooter>
     </Card>
   );
