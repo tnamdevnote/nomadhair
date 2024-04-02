@@ -27,6 +27,7 @@ import cancel_img from "./cancel_img.svg";
 import { Appointment } from "@/server/model/appointment";
 
 import React from "react";
+import { cn } from "@/lib/utils";
 
 const CancelDialog = ({ children }: { children: React.ReactNode[] }) => {
   const [openDialogButton, cancelAppointmentButton] = children;
@@ -54,7 +55,7 @@ const CancelDialog = ({ children }: { children: React.ReactNode[] }) => {
   );
 };
 
-export const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
+const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
   const [matches, setMatches] = useState(false);
   const [button, appointmentForm] = children;
 
@@ -95,11 +96,15 @@ export const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
   );
 };
 
-export const AppointmentCard = ({
-  appointment,
-}: {
+interface AppointmentCardProps {
+  type?: "upcoming" | "past";
   appointment: Appointment;
-}) => {
+}
+
+export const AppointmentCard = ({
+  type = "upcoming",
+  appointment,
+}: AppointmentCardProps) => {
   const { timeSlot, address1, city, state, zip, comment } = appointment;
 
   const date = timeSlot
@@ -108,9 +113,9 @@ export const AppointmentCard = ({
   const time = timeSlot
     ? new Date(timeSlot.startTime * 1000).toLocaleTimeString()
     : null;
-
+  const val = type === "past" ? true : false;
   return (
-    <Card>
+    <Card className={cn({ "bg-neutral-10 shadow-none": type === "past" })}>
       <CardContent className="flex flex-col gap-4">
         <p className="inline-flex gap-2 text-base font-bold">
           <CalendarIcon />
@@ -121,33 +126,39 @@ export const AppointmentCard = ({
           {time}
         </p>
         <p className="text-sm">{[address1, city, state, zip].join(", ")}</p>
-        <p className="line-clamp-2 overflow-hidden text-ellipsis text-wrap text-sm">
-          {comment}
-        </p>
+        {type === "past" ? (
+          ""
+        ) : (
+          <p className="line-clamp-2 overflow-hidden text-ellipsis text-wrap text-sm">
+            {comment}
+          </p>
+        )}
       </CardContent>
-      <CardFooter className="inline-flex justify-end gap-4">
-        <CancelDialog>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="flex-1 md:w-32 md:flex-none"
-          >
-            Cancel
-          </Button>
-          <Button intent={"danger"}>Yes, cancel it.</Button>
-        </CancelDialog>
-        <EditDialog>
-          <Button
-            icon={<EditIcon />}
-            variant="ghost"
-            size="sm"
-            className="flex-1 md:w-32 md:flex-none"
-          >
-            Edit
-          </Button>
-          <AppointmentForm type="edit" />
-        </EditDialog>
-      </CardFooter>
+      {type === "upcoming" ? (
+        <CardFooter className="inline-flex justify-end gap-4">
+          <CancelDialog>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex-1 md:w-32 md:flex-none"
+            >
+              Cancel
+            </Button>
+            <Button intent={"danger"}>Yes, cancel it.</Button>
+          </CancelDialog>
+          <EditDialog>
+            <Button
+              icon={<EditIcon />}
+              variant="ghost"
+              size="sm"
+              className="flex-1 md:w-32 md:flex-none"
+            >
+              Edit
+            </Button>
+            <AppointmentForm type="edit" />
+          </EditDialog>
+        </CardFooter>
+      ) : null}
     </Card>
   );
 };

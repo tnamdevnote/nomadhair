@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import useSWR from 'swr';
+import useSWR from "swr";
 
 async function getAppointment(id: string) {
   const res = await fetch(`/my-appointments/api/${id}`);
@@ -42,45 +42,45 @@ const formSchema = z.object({
 
 interface AppointmentFormProps {
   id?: string;
-  type: 'new' | 'edit';
+  type?: "new" | "edit";
 }
 
-export const AppointmentForm = ({type = 'new'}: AppointmentFormProps) => {
-
+export const AppointmentForm = ({ type = "new" }: AppointmentFormProps) => {
   const { toast } = useToast();
   const [cookies, setCookies, removeCookies] = useCookies(["id"]);
-  const { data, isLoading, error } = useSWR('dbe3c254-e02f-4583-b3ea-60819d92237f', getAppointment)
+  const { data, isLoading, error } = useSWR(
+    "dbe3c254-e02f-4583-b3ea-60819d92237f",
+    getAppointment,
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      date: type === 'new' ? "" : data?.result.date,
-      time: type === 'new' ? "" : data?.result.time,
-      address1: type === 'new' ? "" : data?.result.address1,
-      address2: type === 'new' ? "" : data?.result.address2,
-      city: type === 'new' ? "" : data?.result.city,
-      state: type === 'new' ? "" : data?.result.state,
-      zip: type === 'new' ? "" : data?.result.zip,
-      comment: type === 'new' ? "" : data?.result.comment
+      date: type === "new" ? "" : data?.result.date,
+      time: type === "new" ? "" : data?.result.time,
+      address1: type === "new" ? "" : data?.result.address1,
+      address2: type === "new" ? "" : data?.result.address2,
+      city: type === "new" ? "" : data?.result.city,
+      state: type === "new" ? "" : data?.result.state,
+      zip: type === "new" ? "" : data?.result.zip,
+      comment: type === "new" ? "" : data?.result.comment,
     },
     resolver: zodResolver(formSchema),
   });
 
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const result = await fetch("/my-appointments/api", 
-      { 
-        method: 'PATCH', 
+      const result = await fetch("/my-appointments/api", {
+        method: "PATCH",
         body: JSON.stringify({
           ...values,
-          userId: cookies.id
-        }) // TODO: pass time slot ID intead of time
+          userId: cookies.id,
+        }), // TODO: pass time slot ID intead of time
       });
 
       if (!result.ok) {
-        throw new Error()
+        throw new Error();
       }
-      
+
       // TODO: needs refactor
       await fetch("/my-appointments/api/email/", {
         method: "POST",

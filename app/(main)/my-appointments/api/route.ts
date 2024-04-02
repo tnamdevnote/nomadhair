@@ -1,4 +1,3 @@
-import { PastAppointment } from "./../components/pastAppointment/pastAppointment";
 import app, { database } from "@/server/initFirebase";
 import { mapAppointment } from "@/server/mapper/appointmentMapper";
 import {

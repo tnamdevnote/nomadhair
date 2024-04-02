@@ -25,7 +25,7 @@ function Fallback({
     >
       {image}
       <div className="flex flex-col items-center">
-        <h2 className="text-center">{title}</h2>
+        <h2 className="text-center text-base">{title}</h2>
         <p className="text-center">{body}</p>
       </div>
       <Button size="md" onClick={onButtonClick}>
