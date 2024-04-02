@@ -9,12 +9,9 @@ import {
 } from "@/components/molecules/drawer";
 import { Container } from "@/components/templates/container";
 import { PlusIcon } from "lucide-react";
-import NewAppointment from "./components/newAppointment/newAppointment";
-import { useCookies } from "react-cookie";
-import { AppointmentForm, AppointmentList } from "./components";
+import { AppointmentForm, AppointmentList, NewAppointment } from "./components";
 
 function MyAppointments() {
-  // const isMobile = /Mob/i.test(navigator.userAgent);
   return (
     <div className="relative flex flex-col gap-8 py-16 md:min-h-0">
       <Container className="flex justify-between">

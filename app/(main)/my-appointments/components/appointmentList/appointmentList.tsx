@@ -15,7 +15,7 @@ async function getAppointments() {
   return responseObj;
 }
 
-const AppointmentList = () => {
+export const AppointmentList = () => {
   const { data, isLoading, error, mutate } = useSWR(
     "/my-appointments/api",
     getAppointments,
@@ -101,5 +101,3 @@ const AppointmentList = () => {
     </>
   );
 };
-
-export { AppointmentList };
