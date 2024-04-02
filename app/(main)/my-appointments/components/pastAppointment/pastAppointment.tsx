@@ -27,9 +27,9 @@ export const PastAppointment = (props: any) => {
         Past
       </h2>
       <div className="flex h-full flex-col gap-4">
-        {props.appointments.map((appointment: any) => {
+        {/* {props.appointments.map((appointment: any) => {
           return pastApppointmentCard(appointment);
-        })}
+        })} */}
       </div>
     </section>
   );

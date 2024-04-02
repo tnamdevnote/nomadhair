@@ -1,10 +1,10 @@
 import { AppointmentCard } from "./appointmentCard/appointmentCard";
 import { AppointmentForm } from "./appointmentForm/appointmentForm";
-import { UpcomingAppointment } from "./upcomingAppointment/upcomingAppointment";
+import { UpcomingAppointments } from "./upcomingAppointments/upcomingAppointments";
 import { PastAppointment } from "./pastAppointment/pastAppointment";
 export {
   AppointmentForm,
   AppointmentCard,
-  UpcomingAppointment,
+  UpcomingAppointments,
   PastAppointment,
 };

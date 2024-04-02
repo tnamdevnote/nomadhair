@@ -14,7 +14,6 @@ import {
 import { useToast } from "@/components/molecules/toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { v4 } from "uuid";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -41,23 +40,27 @@ const formSchema = z.object({
   comment: z.string().max(50).optional(),
 });
 
+interface AppointmentFormProps {
+  id?: string;
+  type: 'new' | 'edit';
+}
 
-export const AppointmentForm = () => {
+export const AppointmentForm = ({type = 'new'}: AppointmentFormProps) => {
 
   const { toast } = useToast();
   const [cookies, setCookies, removeCookies] = useCookies(["id"]);
   const { data, isLoading, error } = useSWR('dbe3c254-e02f-4583-b3ea-60819d92237f', getAppointment)
-  console.log( data )
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      date: data?.result.date,
-      time: data?.result.time,
-      address1: data?.result.address1,
-      address2: data?.result.address2,
-      city: data?.result.city,
-      state: data?.result.state,
-      zip: data?.result.zip,
-      comment: data?.result.comment
+      date: type === 'new' ? "" : data?.result.date,
+      time: type === 'new' ? "" : data?.result.time,
+      address1: type === 'new' ? "" : data?.result.address1,
+      address2: type === 'new' ? "" : data?.result.address2,
+      city: type === 'new' ? "" : data?.result.city,
+      state: type === 'new' ? "" : data?.result.state,
+      zip: type === 'new' ? "" : data?.result.zip,
+      comment: type === 'new' ? "" : data?.result.comment
     },
     resolver: zodResolver(formSchema),
   });

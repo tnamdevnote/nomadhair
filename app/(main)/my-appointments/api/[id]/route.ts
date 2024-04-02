@@ -39,7 +39,6 @@ export async function GET(req: NextRequest) {
         note: appointmentObj.comment,
 
     }
-    console.log(result)
     const response = NextResponse.json({result}, {status: 200});
     return response;
 }

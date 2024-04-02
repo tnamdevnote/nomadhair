@@ -24,8 +24,9 @@ import { AppointmentForm } from "../appointmentForm/appointmentForm";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import cancel_img from "./cancel_img.svg";
+import { Appointment } from "@/server/model/appointment";
 
-export const AppointmentCard = (props: any) => {
+export const AppointmentCard = ({appointment}: {appointment: Appointment}) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export const AppointmentCard = (props: any) => {
       window.removeEventListener("resize", () => setMatches(media.matches));
   }, [matches]);
 
-  const cancelAppointment = (
+  const cancelAppointment = (appointmentId: string) => (
     <Dialog>
       <DialogTrigger asChild>
         <Button
@@ -70,7 +71,7 @@ export const AppointmentCard = (props: any) => {
     </Dialog>
   );
 
-  const editAppointment = matches ? (
+  const editAppointment = (appointmentId: string) => matches ? (
     <Dialog>
       <DialogTrigger asChild>
         <Button
@@ -89,7 +90,7 @@ export const AppointmentCard = (props: any) => {
             Change your appointment details.
           </DialogDescription>
         </DialogHeader>
-        <AppointmentForm />
+        <AppointmentForm type="edit" id={appointmentId} />
       </DialogContent>
     </Dialog>
   ) : (
@@ -108,30 +109,32 @@ export const AppointmentCard = (props: any) => {
         <DrawerHeader>
           <DrawerTitle>Edit Appointment</DrawerTitle>
         </DrawerHeader>
-        <AppointmentForm />
+        <AppointmentForm type="edit" id={appointmentId}/>
       </DrawerContent>
     </Drawer>
   );
 
   return (
-    <Card key={props.props.appointmentId}>
+    <Card>
       <CardContent className="flex flex-col gap-4">
         <p className="inline-flex gap-2 text-base font-bold">
           <CalendarIcon />
-          {props.props.date}
+          {/* {props.props.date} */}
         </p>
         <p className="inline-flex gap-2 text-base font-bold">
           <ClockIcon />
-          {props.props.time}
+          {/* {props.props.time} */}
         </p>
-        <p className="text-sm">{props.props.address1}</p>
+        <p className="text-sm">
+          {/* {props.props.address1} */}
+          </p>
         <p className="line-clamp-2 overflow-hidden text-ellipsis text-wrap text-sm">
-          {props.props.comment}{" "}
+          {/* {props.props.comment}{" "} */}
         </p>
       </CardContent>
       <CardFooter className="inline-flex justify-end gap-4">
-        {cancelAppointment}
-        {editAppointment}
+        {/* {cancelAppointment(props.props.appointmentId)}
+        {editAppointment(props.props.appointmentId)} */}
       </CardFooter>
     </Card>
   );
