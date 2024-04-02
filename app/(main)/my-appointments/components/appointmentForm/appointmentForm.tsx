@@ -11,22 +11,25 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/molecules/form";
-import { useToast } from "@/components/molecules/toast";
 import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useCookies } from "react-cookie";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import useSWR from "swr";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useToast } from "@/components/molecules/toast";
+import { Appointment } from "@/server/model/appointment";
+import { unixToDateTimeStrings } from "@/lib/utils";
 
-async function getAppointment(id: string) {
-  const res = await fetch(`/my-appointments/api/${id}`);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch appointment.");
-  }
-
-  return res.json();
+async function sendEmail() {
+  await fetch("/my-appointments/api/email/", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    // This is a mock data. Replace with proper form values later.
+    body: JSON.stringify({
+      date: "2023-04-04",
+      time: "14:30",
+      comment: "This is a test email.",
+    }),
+  });
 }
 
 const formSchema = z.object({
@@ -40,30 +43,46 @@ const formSchema = z.object({
   comment: z.string().max(50).optional(),
 });
 
+const INITIAL_FORM_VALUES: z.infer<typeof formSchema> = {
+  date: "",
+  time: "",
+  address1: "",
+  address2: "",
+  city: "",
+  state: "",
+  zip: "",
+  comment: "",
+};
+
 interface AppointmentFormProps {
   id?: string;
-  type?: "new" | "edit";
+  mode?: "create" | "edit";
+  appointment?: Appointment;
 }
 
-export const AppointmentForm = ({ type = "new" }: AppointmentFormProps) => {
+export const AppointmentForm = ({
+  mode = "create",
+  appointment,
+}: AppointmentFormProps) => {
   const { toast } = useToast();
-  const [cookies, setCookies, removeCookies] = useCookies(["id"]);
-  const { data, isLoading, error } = useSWR(
-    "dbe3c254-e02f-4583-b3ea-60819d92237f",
-    getAppointment,
-  );
-
   const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues: {
-      date: type === "new" ? "" : data?.result.date,
-      time: type === "new" ? "" : data?.result.time,
-      address1: type === "new" ? "" : data?.result.address1,
-      address2: type === "new" ? "" : data?.result.address2,
-      city: type === "new" ? "" : data?.result.city,
-      state: type === "new" ? "" : data?.result.state,
-      zip: type === "new" ? "" : data?.result.zip,
-      comment: type === "new" ? "" : data?.result.comment,
-    },
+    defaultValues:
+      mode === "edit" && !!appointment
+        ? {
+            date: appointment.timeSlot
+              ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
+              : "",
+            time: appointment.timeSlot
+              ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
+              : "",
+            address1: appointment.address1,
+            address2: appointment.address2,
+            city: appointment.city,
+            state: appointment.state,
+            zip: appointment.zip,
+            comment: appointment.comment,
+          }
+        : INITIAL_FORM_VALUES,
     resolver: zodResolver(formSchema),
   });
 
@@ -72,8 +91,8 @@ export const AppointmentForm = ({ type = "new" }: AppointmentFormProps) => {
       const result = await fetch("/my-appointments/api", {
         method: "PATCH",
         body: JSON.stringify({
+          appointmentId: appointment?.appointmentId ?? null,
           ...values,
-          userId: cookies.id,
         }), // TODO: pass time slot ID intead of time
       });
 
@@ -82,16 +101,7 @@ export const AppointmentForm = ({ type = "new" }: AppointmentFormProps) => {
       }
 
       // TODO: needs refactor
-      await fetch("/my-appointments/api/email/", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        // This is a mock data. Replace with proper form values later.
-        body: JSON.stringify({
-          date: "2023-04-04",
-          time: "14:30",
-          comment: "This is a test email.",
-        }),
-      });
+      await sendEmail();
 
       toast({
         title: "Your appointment has been successfully booked!",

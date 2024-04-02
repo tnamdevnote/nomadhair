@@ -107,23 +107,19 @@ export const AppointmentCard = ({
 }: AppointmentCardProps) => {
   const { timeSlot, address1, city, state, zip, comment } = appointment;
 
-  const date = timeSlot
-    ? new Date(timeSlot.startTime * 1000).toDateString()
-    : null;
-  const time = timeSlot
-    ? new Date(timeSlot.startTime * 1000).toLocaleTimeString()
-    : null;
-  const val = type === "past" ? true : false;
+  const date = timeSlot ? new Date(timeSlot.startTime * 1000) : null;
+  const time = timeSlot ? new Date(timeSlot.startTime * 1000) : null;
+
   return (
     <Card className={cn({ "bg-neutral-10 shadow-none": type === "past" })}>
       <CardContent className="flex flex-col gap-4">
         <p className="inline-flex gap-2 text-base font-bold">
           <CalendarIcon />
-          {date}
+          {date?.toDateString()}
         </p>
         <p className="inline-flex gap-2 text-base font-bold">
           <ClockIcon />
-          {time}
+          {time?.toLocaleTimeString()}
         </p>
         <p className="text-sm">{[address1, city, state, zip].join(", ")}</p>
         {type === "past" ? (
@@ -155,7 +151,7 @@ export const AppointmentCard = ({
             >
               Edit
             </Button>
-            <AppointmentForm type="edit" />
+            <AppointmentForm mode="edit" appointment={appointment} />
           </EditDialog>
         </CardFooter>
       ) : null}
