@@ -12,7 +12,8 @@ import { useRouter } from "next/navigation";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookies] = useCookies(["displayName", "email"]);
+  const [cookies, setCookies, removeCookies] = useCookies(["displayName", "email", "id"]);
+  const [displayName, setDisplayName] = useState();
   const router = useRouter();
   const handleRefresh = () => {
     router.refresh();
@@ -39,9 +40,16 @@ function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    setDisplayName(cookies.displayName);
+    handleRefresh();
+  }, [cookies.displayName])
+
   const logOut = () => {
     removeCookies("displayName");
     removeCookies("email");
+    removeCookies("id");
+    setDisplayName(cookies.displayName);
     router.push("/")
     handleRefresh();
   }
@@ -78,7 +86,7 @@ function Header() {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {cookies.displayName ? (
+            {displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -94,7 +102,7 @@ function Header() {
           </ul>
         </nav>
         <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
-          {cookies.displayName  ? (
+          {displayName ? (
             <>
               <p className="text-sm font-bold">Hi, {cookies.displayName}!</p>
               <Button
