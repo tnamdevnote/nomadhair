@@ -11,11 +11,18 @@ const meta: Meta<typeof Toast> = {
     layout: "fullscreen",
   },
   args: {
+    title: "Your appointment has been scheduled!",
+    description: "This is a toast",
     intent: "default",
   },
   argTypes: {
+    title: { control: "text", description: "Title of the toast component." },
+    description: {
+      control: "text",
+      description: "Description for the toast component.",
+    },
     intent: {
-      options: ["default", "danger"],
+      options: ["default", "danger", "success"],
       control: { type: "radio" },
     },
   },
@@ -32,15 +39,15 @@ export default meta;
 type Story = StoryObj<typeof Toast>;
 
 export const Default: Story = {
-  render: ({ intent }) => {
+  render: ({ title, description, intent }) => {
     const { toast } = useToast();
     return (
       <div className="flex min-h-96 w-full items-center justify-center">
         <Button
           onClick={() => {
             toast({
-              title: "Your appointment has been scheduled!",
-              description: "Please check your e-mail for confirmation.",
+              title,
+              description,
               intent,
             });
           }}

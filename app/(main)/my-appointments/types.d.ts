@@ -1,10 +1,11 @@
-interface Appointment {
+export interface Appointment {
   id: string;
-  dateTime: Date;
+  date: string;
+  time: string;
   address1: string;
-  address2: string;
+  address2?: string;
   city: string;
   state: string;
-  zipCode: number;
-  note: string;
+  zip: string;
+  comment?: string;
 }

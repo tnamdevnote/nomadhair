@@ -32,8 +32,8 @@ export async function editTimeSlot(timeslot:TimeSlot, timeSlotId: string) {
 
 export async function getTimeSlot(timeSlotId: string) {
     console.log(`getTimeSlot is called for slot id: ${timeSlotId}`);
-    const resonse = await get(ref(database, 'timeSlot/' + timeSlotId));
-    const result = mapTimeSlot(resonse);
+    const response = (await get(ref(database, 'timeSlot/' + timeSlotId))).val();
+    const result = mapTimeSlot(response);
     console.log("editTimeSlot is successfully called");
     return result;
 }

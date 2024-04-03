@@ -14,8 +14,8 @@ export function dateTimeToUnixTimeStamp(date: string, time: string) {
 
 export function unixToDateTimeStrings(unixTimeStamp: number) {
   const dateTime = new Date(unixTimeStamp * 1000);
-  const date = dateTime.toLocaleDateString();
-  const time = dateTime.toLocaleTimeString();
+  const date = dateTime.toISOString().slice(0,10);
+  const time = dateTime.toTimeString().slice(0,5);
 
   return {date, time}
 }
