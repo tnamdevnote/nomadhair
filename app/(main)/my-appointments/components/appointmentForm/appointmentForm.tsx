@@ -18,9 +18,29 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@/components/molecules/toast";
 import { Appointment } from "@/server/model/appointment";
 import { unixToDateTimeStrings } from "@/lib/utils";
+import { mutate } from "swr";
+
+/**
+ * Extracted async calls into its own functions to manage them separate from rendering logic.
+ * We can potentially make them into server actions.
+ */
+async function patchAppointment(formValues: Partial<Appointment>) {
+  const res = await fetch("/my-appointments/api", {
+    method: "PATCH",
+    body: JSON.stringify({
+      ...formValues,
+    }), // TODO: pass time slot ID intead of time
+  });
+
+  if (!res.ok) {
+    throw new Error();
+  }
+
+  return Response.json(res);
+}
 
 async function sendEmail() {
-  await fetch("/my-appointments/api/email/", {
+  const res = await fetch("/my-appointments/api/email/", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     // This is a mock data. Replace with proper form values later.
@@ -30,6 +50,8 @@ async function sendEmail() {
       comment: "This is a test email.",
     }),
   });
+
+  return Response.json(res);
 }
 
 const formSchema = z.object({
@@ -60,10 +82,14 @@ interface AppointmentFormProps {
   appointment?: Appointment;
 }
 
+/**
+ * A client side form component that handles both creating and editing appointments.
+ */
 export const AppointmentForm = ({
   mode = "create",
   appointment,
 }: AppointmentFormProps) => {
+  const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues:
@@ -88,34 +114,23 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const result = await fetch("/my-appointments/api", {
-        method: "PATCH",
-        body: JSON.stringify({
-          appointmentId: appointment?.appointmentId ?? null,
-          ...values,
-        }), // TODO: pass time slot ID intead of time
+      await patchAppointment({
+        ...values,
+        appointmentId: appointment?.appointmentId ?? undefined,
       });
-
-      if (!result.ok) {
-        throw new Error();
-      }
-
-      // TODO: needs refactor
       await sendEmail();
-
+      // Re-validates the <AppointmentList /> successful submission.
+      mutate("/my-appointments/api");
       toast({
         title: "Your appointment has been successfully booked!",
-        description: (
-          <pre className="rounded-lg bg-neutral-10 p-6 text-neutral-70 md:w-[340px]">
-            <code className="w-full">{JSON.stringify(values, null, 2)}</code>
-          </pre>
-        ),
+        intent: "success",
       });
-      form.reset({});
+      form.reset(INITIAL_FORM_VALUES);
+
+      // TODO: close dialog/drawer upon successful submission.
     } catch (e) {
       toast({
         title: "Oops! Something went wrong! Please try again.",
-        description: "",
         intent: "danger",
       });
     }
@@ -137,7 +152,12 @@ export const AppointmentForm = ({
               <FormItem className="col-span-3">
                 <FormLabel className="sr-only">Select Date</FormLabel>
                 <FormControl>
-                  <Input error={!!fieldState.error} type="date" {...field} />
+                  <Input
+                    className="h-8 md:h-10"
+                    error={!!fieldState.error}
+                    type="date"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription />
                 <FormMessage />
@@ -151,7 +171,12 @@ export const AppointmentForm = ({
               <FormItem className="col-span-3">
                 <FormLabel className="sr-only">Select Time</FormLabel>
                 <FormControl>
-                  <Input error={!!fieldState.error} type="time" {...field} />
+                  <Input
+                    className="h-8 md:h-10"
+                    error={!!fieldState.error}
+                    type="time"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription />
                 <FormMessage />
@@ -171,6 +196,7 @@ export const AppointmentForm = ({
                 <FormLabel className="sr-only">Address 1</FormLabel>
                 <FormControl>
                   <Input
+                    className="h-8 md:h-10"
                     error={!!fieldState.error}
                     placeholder="Address 1"
                     {...field}
@@ -189,6 +215,7 @@ export const AppointmentForm = ({
                 <FormLabel className="sr-only">Address 2</FormLabel>
                 <FormControl>
                   <Input
+                    className="h-8 md:h-10"
                     error={!!fieldState.error}
                     placeholder="Address 2"
                     {...field}
@@ -207,6 +234,7 @@ export const AppointmentForm = ({
                 <FormLabel className="sr-only">City</FormLabel>
                 <FormControl>
                   <Input
+                    className="h-8 md:h-10"
                     error={!!fieldState.error}
                     placeholder="City"
                     {...field}
@@ -225,6 +253,7 @@ export const AppointmentForm = ({
                 <FormLabel className="sr-only">State</FormLabel>
                 <FormControl>
                   <Input
+                    className="h-8 md:h-10"
                     error={!!fieldState.error}
                     placeholder="State"
                     {...field}
@@ -243,6 +272,7 @@ export const AppointmentForm = ({
                 <FormLabel className="sr-only">Zip Code</FormLabel>
                 <FormControl>
                   <Input
+                    className="h-8 md:h-10"
                     type="number"
                     error={!!fieldState.error}
                     placeholder="Zip Code"
@@ -286,7 +316,7 @@ export const AppointmentForm = ({
           disabled={form.formState.isSubmitting}
           className="self-end"
         >
-          {form.formState.isSubmitting ? "Processing..." : "Book Appointment"}
+          {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
         </Button>
       </form>
     </Form>

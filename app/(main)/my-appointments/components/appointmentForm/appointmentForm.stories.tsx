@@ -19,7 +19,7 @@ type Story = StoryObj<typeof AppointmentForm>;
 
 export const Default: Story = {
   render: () => (
-    <div className="my-24 max-w-lg">
+    <div className="my-auto flex min-h-screen w-full max-w-lg items-center justify-center p-8">
       <AppointmentForm />
     </div>
   ),

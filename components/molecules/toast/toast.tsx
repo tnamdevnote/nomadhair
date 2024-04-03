@@ -30,6 +30,8 @@ const toastVariants = cva(
     variants: {
       intent: {
         default: "border border-primary-100 border-2 text-neutral-80",
+        success:
+          "success-100 group border-success-100 border-2 text-success-100 [&_svg]:text-success-100",
         danger:
           "danger-100 group border-danger-100 border-2 text-danger-100 [&_svg]:text-danger-100",
       },

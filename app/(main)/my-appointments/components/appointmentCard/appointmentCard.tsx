@@ -143,12 +143,7 @@ export const AppointmentCard = ({
             <Button intent={"danger"}>Yes, cancel it.</Button>
           </CancelDialog>
           <EditDialog>
-            <Button
-              icon={<EditIcon />}
-              variant="ghost"
-              size="sm"
-              className="flex-1 md:w-32 md:flex-none"
-            >
+            <Button size="sm" className="flex-1 md:w-32 md:flex-none">
               Edit
             </Button>
             <AppointmentForm mode="edit" appointment={appointment} />
