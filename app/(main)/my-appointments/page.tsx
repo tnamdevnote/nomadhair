@@ -23,7 +23,9 @@ function MyAppointments() {
               icon={<PlusIcon />}
               size="lg"
               className="fixed bottom-12 right-8 bg-primary-90 md:hidden"
-            />
+            >
+              New Appointment
+            </Button>
           </DrawerTrigger>
           <DrawerContent className="p-6">
             <DrawerHeader>
