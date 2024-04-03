@@ -1,5 +1,4 @@
 import { Button } from "@/components/atoms/button";
-import Separator from "@/components/atoms/separator";
 import {
   Drawer,
   DrawerContent,
@@ -34,12 +33,11 @@ function MyAppointments() {
           </DrawerContent>
         </Drawer>
       </Container>
-      <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-6 p-4 md:grid-cols-12 md:p-16">
+      <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:p-16">
         <div className="col-span-6 md:max-h-[40rem] md:overflow-auto md:pb-4">
           <AppointmentList />
         </div>
-        <Separator orientation="vertical" className="hidden h-auto md:block" />
-        <div className="hidden md:sticky md:top-32 md:col-span-5 md:block">
+        <div className="hidden md:sticky md:top-32 md:col-span-6 md:block">
           <NewAppointment />
         </div>
       </div>
