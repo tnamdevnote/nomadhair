@@ -33,9 +33,9 @@ import { useToast } from "@/components/molecules/toast";
 
 const cancelAppointment = async (
   url: string,
-  { arg }: { arg: { timeSlotId: string; appointmentId?: string } },
+  { arg }: { arg: { timeSlotId: string; appointmentId: string } },
 ) => {
-  const res = await fetch("/my-appointments/api", {
+  const res = await fetch(url, {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
@@ -50,7 +50,7 @@ const cancelAppointment = async (
 
 interface CancelDialogProps {
   timeSlotId: string;
-  appointmentId?: string;
+  appointmentId: string;
   trigger: React.ReactNode;
 }
 
@@ -200,7 +200,7 @@ export const AppointmentCard = ({
       {type === "upcoming" ? (
         <CardFooter className="inline-flex justify-end gap-4">
           <CancelDialog
-            appointmentId={appointment?.appointmentId}
+            appointmentId={appointment.appointmentId as string}
             timeSlotId={appointment.timeSlotId}
             trigger={
               <Button
