@@ -73,6 +73,7 @@ export async function DELETE(req: NextRequest) {
     ref(database, "appointment/" + appointmentId),
     null,
   );
+  // TODO: Make sure to update the logic to set "reserved" to false, instead of removing entire appointment slot.
   const timeSlotResponse = set(ref(database, "timeSlot/" + timeSlotId), null);
 
   return NextResponse.json(

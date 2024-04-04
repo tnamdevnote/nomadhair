@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
-import { CalendarIcon, ClockIcon, Edit, EditIcon } from "lucide-react";
+import { CalendarIcon, ClockIcon } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { useEffect, useState } from "react";
 import {
@@ -31,12 +31,6 @@ import { cn } from "@/lib/utils";
 import useSWRMutation from "swr/mutation";
 import { useToast } from "@/components/molecules/toast";
 
-interface CancelDialogProps {
-  timeSlotId: string;
-  appointmentId?: string;
-  trigger: React.ReactNode;
-}
-
 const cancelAppointment = async (
   url: string,
   { arg }: { arg: { timeSlotId: string; appointmentId?: string } },
@@ -52,9 +46,13 @@ const cancelAppointment = async (
   if (!res.ok) {
     throw new Error("Could not delete the appointment. Please try again.");
   }
-
-  return res.json();
 };
+
+interface CancelDialogProps {
+  timeSlotId: string;
+  appointmentId?: string;
+  trigger: React.ReactNode;
+}
 
 const CancelDialog = ({
   timeSlotId,
