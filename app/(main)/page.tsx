@@ -1,8 +1,4 @@
-import {
-  HeroSection,
-  AboutSection,
-  TestimonialSection,
-} from "@/components/organisms/home";
+import { HeroSection, AboutSection, TestimonialSection } from "./components";
 
 export default function Home() {
   return (

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import TestimonialSection from "./testimonialSection";
 
 const meta: Meta<typeof TestimonialSection> = {
-  title: "Organisms/Home/TestimonialSection",
+  title: "Pages/Home/TestimonialSection",
   component: TestimonialSection,
   parameters: {
     design: {
