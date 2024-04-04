@@ -61,15 +61,15 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
-      <Container className="flex items-center py-4 lg:py-8">
+    <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
+      <Container className="flex items-center py-4 lg:py-5">
         <Link href="/" aria-label="Home">
           <Logo className="h-5 lg:h-7" />
         </Link>
         <nav
-          className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
+          className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto md:bg-transparent`}
         >
-          <ul className="flex w-full flex-col gap-2 px-4 md:flex-row md:px-0">
+          <ul className=" mt-16 flex w-full flex-col gap-2 px-4 md:mt-0 md:flex-row md:px-0">
             <li>
               <Button
                 variant="link"
@@ -107,14 +107,13 @@ function Header() {
             ) : null}
           </ul>
         </nav>
-        <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
+        <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
           {displayName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
                 <AvatarImage src={cookies.photo} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
-              {/* <p className="text-sm font-bold">Hi, {cookies.displayName}!</p> */}
               <Button
                 aria-label="Sign out"
                 variant="ghost"
