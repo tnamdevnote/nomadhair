@@ -64,7 +64,7 @@ function Header() {
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-8">
         <Link href="/" aria-label="Home">
-          <Logo className="h-4 md:h-7" />
+          <Logo className="h-5 lg:h-7" />
         </Link>
         <nav
           className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
@@ -124,7 +124,7 @@ function Header() {
                 className="font-bold"
                 onClick={() => signOut()}
               >
-                <span className="hidden md:inline-flex">Sign out</span>
+                Sign out
               </Button>
             </>
           ) : (
