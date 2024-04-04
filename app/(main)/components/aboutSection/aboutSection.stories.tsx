@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import AboutSection from "./aboutSection";
 
 const meta: Meta<typeof AboutSection> = {
-  title: "Organisms/Home/AboutSection",
+  title: "Pages/Home/AboutSection",
   component: AboutSection,
   parameters: {
     design: {
