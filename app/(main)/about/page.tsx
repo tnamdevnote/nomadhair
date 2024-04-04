@@ -6,9 +6,9 @@ import { Button } from "@/components/atoms/button";
 
 function About() {
   return (
-    <div className="flex flex-col gap-16 py-8 md:pb-32">
+    <div className="flex flex-col gap-8 py-8 md:pb-32">
       <Container>
-        <h1 className="text-lg font-bold text-primary-100 lg:text-xl">
+        <h1 className="text-lg font-medium text-primary-100 lg:text-xl">
           About Me
         </h1>
       </Container>
@@ -16,7 +16,7 @@ function About() {
         <SplitContainer.Left className="flex justify-center px-12 md:basis-1/2 md:px-0">
           <Image
             src={Profile}
-            width={350}
+            width={300}
             alt="Profile Image"
             className="rounded-full shadow-xl md:shadow-2xl"
           />

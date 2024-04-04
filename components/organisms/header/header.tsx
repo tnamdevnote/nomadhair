@@ -7,8 +7,9 @@ import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "@/components/atoms/logo";
 import { Container } from "@/components/templates/container";
-import { LogOutIcon, ChevronRightIcon, LogInIcon } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ function Header() {
     "displayName",
     "email",
     "id",
+    "photo",
   ]);
   const [displayName, setDisplayName] = useState();
   const router = useRouter();
@@ -67,7 +69,7 @@ function Header() {
         <nav
           className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
         >
-          <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
+          <ul className="flex w-full flex-col gap-2 px-4 md:flex-row md:px-0">
             <li>
               <Button
                 variant="link"
@@ -108,7 +110,11 @@ function Header() {
         <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
           {displayName ? (
             <>
-              <p className="text-sm font-bold">Hi, {cookies.displayName}!</p>
+              <Avatar className="ring-1 ring-neutral-15">
+                <AvatarImage src={cookies.photo} alt="profile" />
+                <AvatarFallback>TN</AvatarFallback>
+              </Avatar>
+              {/* <p className="text-sm font-bold">Hi, {cookies.displayName}!</p> */}
               <Button
                 aria-label="Sign out"
                 variant="ghost"

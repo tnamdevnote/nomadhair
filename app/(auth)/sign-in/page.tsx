@@ -45,6 +45,7 @@ const SignIn = () => {
         setCookie("email", user.email);
         setCookie("displayName", user.displayName);
         setCookie("id", credential.user.uid);
+        setCookie("photo", credential.user.photoURL);
         await userPatchFetcher(user, credential.user.uid);
         setSignedIn(true);
       } else {
@@ -58,8 +59,8 @@ const SignIn = () => {
   if (signedIn) redirect("/");
 
   return (
-    <Container className="flex min-h-dvh max-w-screen-xs flex-col items-center justify-center">
-      <h1 className="w-full text-left text-xl text-primary-100 lg:text-2xl">
+    <Container className="flex min-h-dvh max-w-screen-sm flex-col items-center justify-center">
+      <h1 className="w-full text-left text-xl text-primary-100 lg:text-xl">
         Sign in
       </h1>
       <section
