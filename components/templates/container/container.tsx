@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export interface ContainerProps {
@@ -8,10 +9,10 @@ export interface ContainerProps {
 export default function Container({ className, children }: ContainerProps) {
   return (
     <div
-      className={[
+      className={cn(
         "mx-auto w-full max-w-screen-xl px-4 md:px-32",
         `${className}`,
-      ].join(" ")}
+      )}
     >
       {children}
     </div>
