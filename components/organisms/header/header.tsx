@@ -7,17 +7,23 @@ import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Logo from "@/components/atoms/logo";
 import { Container } from "@/components/templates/container";
-import { LogOutIcon, ChevronRightIcon, LogInIcon } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookies] = useCookies(["displayName", "email", "id"]);
+  const [cookies, setCookies, removeCookies] = useCookies([
+    "displayName",
+    "email",
+    "id",
+    "photo",
+  ]);
   const [displayName, setDisplayName] = useState();
   const router = useRouter();
   const handleRefresh = () => {
     router.refresh();
-  }
+  };
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -43,27 +49,27 @@ function Header() {
   useEffect(() => {
     setDisplayName(cookies.displayName);
     handleRefresh();
-  }, [cookies.displayName])
+  }, [cookies.displayName]);
 
-  const logOut = () => {
+  const signOut = () => {
     removeCookies("displayName");
     removeCookies("email");
     removeCookies("id");
     setDisplayName(cookies.displayName);
-    router.push("/")
+    router.push("/");
     handleRefresh();
-  }
-  
+  };
+
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-8">
         <Link href="/" aria-label="Home">
-          <Logo className="h-4 md:h-7" />
+          <Logo className="h-5 lg:h-7" />
         </Link>
         <nav
           className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto`}
         >
-          <ul className="flex w-full flex-col gap-4 px-4 md:flex-row md:px-0">
+          <ul className="flex w-full flex-col gap-2 px-4 md:flex-row md:px-0">
             <li>
               <Button
                 variant="link"
@@ -95,7 +101,7 @@ function Header() {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/my-appointments">My Appointment</Link>
+                  <Link href="/my-appointments">My Appointments</Link>
                 </Button>
               </li>
             ) : null}
@@ -104,30 +110,32 @@ function Header() {
         <div className="ml-auto mr-2 flex items-center gap-1 md:ml-0 md:gap-2">
           {displayName ? (
             <>
-              <p className="text-sm font-bold">Hi, {cookies.displayName}!</p>
+              <Avatar className="ring-1 ring-neutral-15">
+                <AvatarImage src={cookies.photo} alt="profile" />
+                <AvatarFallback>TN</AvatarFallback>
+              </Avatar>
+              {/* <p className="text-sm font-bold">Hi, {cookies.displayName}!</p> */}
               <Button
-                aria-label="Log out"
+                aria-label="Sign out"
                 variant="ghost"
                 icon={<LogOutIcon />}
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
-                onClick={() => logOut()}
+                onClick={() => signOut()}
               >
-                <span className="hidden md:inline-flex">Logout</span>
+                Sign out
               </Button>
             </>
           ) : (
             <>
               <Button
-                aria-label="Login"
-                icon={<LogInIcon />}
+                aria-label="Sign in"
                 iconPosition="after"
-                variant="ghost"
                 size="sm"
                 asChild
               >
-                <Link href="/login">Login</Link>
+                <Link href="/sign-in">Sign in</Link>
               </Button>
             </>
           )}

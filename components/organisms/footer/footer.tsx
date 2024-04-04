@@ -14,10 +14,10 @@ import { Container } from "@/components/templates/container";
 function Footer() {
   return (
     <footer role="contentinfo" className="bg-primary-100">
-      <Container className="flex min-h-[450px] flex-col justify-center gap-6">
+      <Container className="flex min-h-[300px] flex-col justify-center gap-4">
         <Logo mode="dark" className="h-4 w-fit md:h-7" />
-        <h2 className="text-lg text-white">Get In Touch</h2>
-        <div className="flex flex-col gap-6 md:flex-row [&_p]:flex [&_p]:items-center [&_p]:gap-2 [&_p]:text-sm [&_p]:text-white">
+        <h2 className="text-sm text-white md:text-base">Get In Touch</h2>
+        <div className="flex flex-col gap-2 md:flex-row md:gap-4 [&_p]:flex [&_p]:items-center [&_p]:gap-2 [&_p]:text-sm [&_p]:text-white">
           <p>
             <GlobeIcon type="solid" className="h-4 w-4 text-tertiary-100" />{" "}
             Grand Rapids, MI
@@ -31,7 +31,7 @@ function Footer() {
             7534
           </p>
         </div>
-        <Separator className="my-4" />
+        <Separator className="my-1 bg-white" />
         <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
           <p className="text-sm text-white">
             {"Copyright © 2024 "}

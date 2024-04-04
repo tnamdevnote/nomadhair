@@ -12,9 +12,9 @@ import { AppointmentForm, AppointmentList, NewAppointment } from "./components";
 
 function MyAppointments() {
   return (
-    <div className="relative flex flex-col gap-8 py-16 md:min-h-0">
+    <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
       <Container className="flex justify-between">
-        <h1 className="text-lg font-bold text-primary-100 lg:text-xl">
+        <h1 className="text-lg font-medium text-primary-100 lg:text-xl">
           My Appointments
         </h1>
         <Drawer>
@@ -35,7 +35,7 @@ function MyAppointments() {
           </DrawerContent>
         </Drawer>
       </Container>
-      <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:p-16">
+      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:px-32">
         <div className="col-span-6 md:max-h-[40rem] md:overflow-auto md:pb-4">
           <AppointmentList />
         </div>
