@@ -3,7 +3,6 @@ import { SplitContainer } from "@/components/templates/container";
 import { departing } from "@/public/illustrations";
 import React from "react";
 import { Button } from "@/components/atoms/button";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const AboutSection = () => {
