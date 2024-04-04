@@ -35,6 +35,14 @@ const filterAppointments = async (response: any, userId?: string) => {
   return { pastAppointments, upcomingAppointments };
 };
 
+export async function GET(req: NextRequest) {
+  const userId = cookies().get("id")?.value;
+  const dbResponse = (await get(child(ref(database), "appointment/"))).val();
+  const responseBody = await filterAppointments(dbResponse, userId);
+  const response = NextResponse.json(responseBody, { status: 200 });
+  return response;
+}
+
 export async function PATCH(req: NextRequest) {
   const userId = cookies().get("id")?.value;
   const payload = await req.json().then((data) => ({ ...data, userId }));
@@ -59,10 +67,16 @@ export async function PATCH(req: NextRequest) {
   return response;
 }
 
-export async function GET(req: NextRequest) {
-  const userId = cookies().get("id")?.value;
-  const dbResponse = (await get(child(ref(database), "appointment/"))).val();
-  const responseBody = await filterAppointments(dbResponse, userId);
-  const response = NextResponse.json(responseBody, { status: 200 });
-  return response;
+export async function DELETE(req: NextRequest) {
+  const { appointmentId, timeSlotId } = await req.json();
+  const appointmentResponse = set(
+    ref(database, "appointment/" + appointmentId),
+    null,
+  );
+  const timeSlotResponse = set(ref(database, "timeSlot/" + timeSlotId), null);
+
+  return NextResponse.json(
+    { appointmentResponse, timeSlotResponse },
+    { status: 200 },
+  );
 }

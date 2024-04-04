@@ -80,6 +80,7 @@ interface AppointmentFormProps {
   id?: string;
   mode?: "create" | "edit";
   appointment?: Appointment;
+  onClose?: () => void;
 }
 
 /**
@@ -88,6 +89,7 @@ interface AppointmentFormProps {
 export const AppointmentForm = ({
   mode = "create",
   appointment,
+  onClose,
 }: AppointmentFormProps) => {
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
@@ -121,8 +123,9 @@ export const AppointmentForm = ({
       await sendEmail();
       // Re-validates the <AppointmentList /> successful submission.
       mutate("/my-appointments/api");
+      onClose ? onClose() : null;
       toast({
-        title: "Your appointment has been successfully booked!",
+        title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
         intent: "success",
       });
       form.reset(INITIAL_FORM_VALUES);

@@ -28,15 +28,68 @@ import { Appointment } from "@/server/model/appointment";
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import useSWRMutation from "swr/mutation";
+import { useToast } from "@/components/molecules/toast";
 
-const CancelDialog = ({ children }: { children: React.ReactNode[] }) => {
-  const [openDialogButton, cancelAppointmentButton] = children;
+interface CancelDialogProps {
+  timeSlotId: string;
+  appointmentId?: string;
+  trigger: React.ReactNode;
+}
+
+const cancelAppointment = async (
+  url: string,
+  { arg }: { arg: { timeSlotId: string; appointmentId?: string } },
+) => {
+  const res = await fetch("/my-appointments/api", {
+    method: "DELETE",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({
+      ...arg,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Could not delete the appointment. Please try again.");
+  }
+
+  return res.json();
+};
+
+const CancelDialog = ({
+  timeSlotId,
+  appointmentId,
+  trigger,
+}: CancelDialogProps) => {
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false);
+  const { trigger: swrTrigger, isMutating } = useSWRMutation(
+    "/my-appointments/api",
+    cancelAppointment,
+  );
+
+  const handleClick = async () => {
+    try {
+      await swrTrigger({ timeSlotId, appointmentId });
+      if (!isMutating) {
+        setOpen(false);
+        toast({
+          title: "Your appointment has been cancelled!",
+        });
+      }
+    } catch (e) {
+      toast({
+        title: "Oops! Something went wrong! Please try again.",
+        intent: "danger",
+      });
+    }
+  };
   return (
-    <Dialog>
-      <DialogTrigger asChild>{openDialogButton}</DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
-        <div className="flex flex-col items-center gap-4">
-          <Image className="my-8" src={cancel_img} width={200} alt="cancel" />
+        <div className="flex flex-col items-center gap-4 py-4">
+          <Image className="my-8" src={cancel_img} width={150} alt="cancel" />
           <DialogHeader>
             <DialogTitle>Cancel appointment</DialogTitle>
           </DialogHeader>
@@ -48,16 +101,24 @@ const CancelDialog = ({ children }: { children: React.ReactNode[] }) => {
           <DialogClose asChild>
             <Button variant={"ghost"}>No, keep it.</Button>
           </DialogClose>
-          {cancelAppointmentButton}
+          <Button disabled={isMutating} intent={"danger"} onClick={handleClick}>
+            {isMutating ? "Processing..." : "Yes, cancel it."}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
 
-const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
+const EditDialog = ({
+  trigger,
+  appointment,
+}: {
+  trigger: React.ReactNode;
+  appointment: Appointment;
+}) => {
   const [matches, setMatches] = useState(false);
-  const [button, appointmentForm] = children;
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 768px)");
@@ -71,8 +132,8 @@ const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
   }, [matches]);
 
   return matches ? (
-    <Dialog>
-      <DialogTrigger asChild>{button}</DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Appointment</DialogTitle>
@@ -80,17 +141,25 @@ const EditDialog = ({ children }: { children: React.ReactNode[] }) => {
             Change your appointment details.
           </DialogDescription>
         </DialogHeader>
-        {appointmentForm}
+        <AppointmentForm
+          mode="edit"
+          appointment={appointment}
+          onClose={() => setOpen(false)}
+        />
       </DialogContent>
     </Dialog>
   ) : (
-    <Drawer>
-      <DrawerTrigger asChild>{button}</DrawerTrigger>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent className="p-6">
         <DrawerHeader>
           <DrawerTitle>Edit Appointment</DrawerTitle>
         </DrawerHeader>
-        {appointmentForm}
+        <AppointmentForm
+          mode="edit"
+          appointment={appointment}
+          onClose={() => setOpen(false)}
+        />
       </DrawerContent>
     </Drawer>
   );
@@ -132,22 +201,27 @@ export const AppointmentCard = ({
       </CardContent>
       {type === "upcoming" ? (
         <CardFooter className="inline-flex justify-end gap-4">
-          <CancelDialog>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex-1 md:w-32 md:flex-none"
-            >
-              Cancel
-            </Button>
-            <Button intent={"danger"}>Yes, cancel it.</Button>
-          </CancelDialog>
-          <EditDialog>
-            <Button size="sm" className="flex-1 md:w-32 md:flex-none">
-              Edit
-            </Button>
-            <AppointmentForm mode="edit" appointment={appointment} />
-          </EditDialog>
+          <CancelDialog
+            appointmentId={appointment?.appointmentId}
+            timeSlotId={appointment.timeSlotId}
+            trigger={
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 md:w-32 md:flex-none"
+              >
+                Cancel
+              </Button>
+            }
+          />
+          <EditDialog
+            trigger={
+              <Button size="sm" className="flex-1 md:w-32 md:flex-none">
+                Edit
+              </Button>
+            }
+            appointment={appointment}
+          />
         </CardFooter>
       ) : null}
     </Card>
