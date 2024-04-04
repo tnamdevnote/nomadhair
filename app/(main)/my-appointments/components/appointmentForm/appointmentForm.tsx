@@ -11,7 +11,7 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/molecules/form";
-import { cn } from "@/lib/utils";
+import { cn, toDateInputValue } from "@/lib/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -135,6 +135,7 @@ export const AppointmentForm = ({
       });
     }
   };
+
   return (
     <Form {...form}>
       <form
@@ -156,6 +157,7 @@ export const AppointmentForm = ({
                     className="h-8 md:h-10"
                     error={!!fieldState.error}
                     type="date"
+                    min={toDateInputValue(new Date())}
                     {...field}
                   />
                 </FormControl>
