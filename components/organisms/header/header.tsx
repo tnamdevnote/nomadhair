@@ -12,12 +12,16 @@ import { useRouter } from "next/navigation";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookies] = useCookies(["displayName", "email", "id"]);
+  const [cookies, setCookies, removeCookies] = useCookies([
+    "displayName",
+    "email",
+    "id",
+  ]);
   const [displayName, setDisplayName] = useState();
   const router = useRouter();
   const handleRefresh = () => {
     router.refresh();
-  }
+  };
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -43,17 +47,17 @@ function Header() {
   useEffect(() => {
     setDisplayName(cookies.displayName);
     handleRefresh();
-  }, [cookies.displayName])
+  }, [cookies.displayName]);
 
-  const logOut = () => {
+  const signOut = () => {
     removeCookies("displayName");
     removeCookies("email");
     removeCookies("id");
     setDisplayName(cookies.displayName);
-    router.push("/")
+    router.push("/");
     handleRefresh();
-  }
-  
+  };
+
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-opacity-95 lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-8">
@@ -95,7 +99,7 @@ function Header() {
                   className="w-full"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/my-appointments">My Appointment</Link>
+                  <Link href="/my-appointments">My Appointments</Link>
                 </Button>
               </li>
             ) : null}
@@ -106,28 +110,26 @@ function Header() {
             <>
               <p className="text-sm font-bold">Hi, {cookies.displayName}!</p>
               <Button
-                aria-label="Log out"
+                aria-label="Sign out"
                 variant="ghost"
                 icon={<LogOutIcon />}
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
-                onClick={() => logOut()}
+                onClick={() => signOut()}
               >
-                <span className="hidden md:inline-flex">Logout</span>
+                <span className="hidden md:inline-flex">Sign out</span>
               </Button>
             </>
           ) : (
             <>
               <Button
-                aria-label="Login"
-                icon={<LogInIcon />}
+                aria-label="Sign in"
                 iconPosition="after"
-                variant="ghost"
                 size="sm"
                 asChild
               >
-                <Link href="/login">Login</Link>
+                <Link href="/sign-in">Sign in</Link>
               </Button>
             </>
           )}

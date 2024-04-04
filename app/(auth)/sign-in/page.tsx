@@ -8,25 +8,24 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "@/server/initFirebase";
-import { MouseEvent, useEffect } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { MouseEvent } from "react";
+import { redirect } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { useState } from "react";
 import { mapUser } from "@/server/mapper/userMapper";
 import { User } from "@/server/model/user";
 
-const Login = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const SignIn = () => {
+  const [signedIn, setSignedIn] = useState(false);
   const userPatchFetcher = async (user: User, guid: string) => {
-    fetch('/login/api', 
-    { 
-      method: 'PATCH', 
+    fetch("/sign-in/api", {
+      method: "PATCH",
       body: JSON.stringify({
         ...user,
-        guid
-      })
-    })
-  }
+        guid,
+      }),
+    });
+  };
 
   const handleAuth = async (clickEvent: MouseEvent, providerName: string) => {
     try {
@@ -45,9 +44,9 @@ const Login = () => {
       if (credential?.user.email && credential?.user.uid) {
         setCookie("email", user.email);
         setCookie("displayName", user.displayName);
-        setCookie("id", credential.user.uid)
+        setCookie("id", credential.user.uid);
         await userPatchFetcher(user, credential.user.uid);
-        setLoggedIn(true);
+        setSignedIn(true);
       } else {
         throw new Error("Identity provider did not provide the user email");
       }
@@ -56,15 +55,15 @@ const Login = () => {
     }
   };
 
-  if (loggedIn) redirect("/");
+  if (signedIn) redirect("/");
 
   return (
     <Container className="flex min-h-dvh max-w-screen-xs flex-col items-center justify-center">
       <h1 className="w-full text-left text-xl text-primary-100 lg:text-2xl">
-        Login
+        Sign in
       </h1>
       <section
-        aria-label="login form"
+        aria-label="sign in form"
         className="mt-8 flex w-full flex-col gap-4"
       >
         <Button
@@ -87,4 +86,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

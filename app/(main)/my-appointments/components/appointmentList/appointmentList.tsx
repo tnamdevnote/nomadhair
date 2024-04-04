@@ -7,6 +7,8 @@ import { Skeleton } from "@/components/atoms/skeleton";
 import { Error, Fallback } from "@/components/organisms/fallback";
 import { AppointmentCard } from "../appointmentCard/appointmentCard";
 import { Appointment } from "@/server/model/appointment";
+import Image from "next/image";
+import { booking } from "@/public/illustrations";
 
 async function getAppointments() {
   const res = await fetch(`/my-appointments/api`);
@@ -14,6 +16,19 @@ async function getAppointments() {
 
   return responseObj;
 }
+
+const AppointmentPlaceHolder = () => {
+  return (
+    <div className="flex h-52 w-full flex-col items-center justify-center gap-4">
+      <Image
+        src={booking}
+        width={150}
+        alt="book appointment placeholder image"
+      />
+      <p className=" text-primary-100">There are no upcoming appointments.</p>
+    </div>
+  );
+};
 
 export const AppointmentList = () => {
   const { data, isLoading, error, mutate } = useSWR(
@@ -61,20 +76,24 @@ export const AppointmentList = () => {
             </Card>
           ) : (
             <>
-              {data.upcomingAppointments.map((appointment: Appointment) => (
-                <AppointmentCard
-                  key={appointment.appointmentId}
-                  type="upcoming"
-                  appointment={appointment}
-                />
-              ))}
+              {data.upcomingAppointments.length === 0 ? (
+                <AppointmentPlaceHolder />
+              ) : (
+                data.upcomingAppointments.map((appointment: Appointment) => (
+                  <AppointmentCard
+                    key={appointment.appointmentId}
+                    type="upcoming"
+                    appointment={appointment}
+                  />
+                ))
+              )}
             </>
           )}
         </div>
       </section>
       <section aria-labelledby="past" className="mt-8 font-bold">
         <h2 id="past" className="py-3 text-base">
-          Past
+          Expired
         </h2>
         <div className="flex h-full flex-col gap-4">
           {isLoading ? (

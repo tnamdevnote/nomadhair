@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { SplitContainer } from "@/components/templates/container";
 import { barber } from "@/public/illustrations";
 import React from "react";
 import { Button } from "@/components/atoms/button";
+import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <section aria-label="Hero">
       <SplitContainer className="py-12 md:flex-row-reverse md:justify-between md:py-44">
@@ -20,8 +24,12 @@ const HeroSection = () => {
             tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
           </p>
           <div className="w-full">
-            <Button size="lg" className="w-full md:w-auto">
-              Book Appointment
+            <Button
+              size="lg"
+              className="w-full md:w-auto"
+              onClick={() => router.push("/login")}
+            >
+              Get started!
             </Button>
           </div>
         </SplitContainer.Right>
