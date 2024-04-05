@@ -49,7 +49,7 @@ async function sendEmail(formValues: z.infer<typeof formSchema>) {
     // This is a mock data. Replace with proper form values later.
     body: JSON.stringify({
       date: new Date(date).toDateString(),
-      time: new Date(time).toLocaleTimeString(),
+      time,
       location,
       comment,
     }),
@@ -124,6 +124,7 @@ export const AppointmentForm = ({
         ...values,
         appointmentId: appointment?.appointmentId ?? undefined,
       });
+      console.log(values.time);
       await sendEmail(values);
       // Re-validates the <AppointmentList /> successful submission.
       mutate("/my-appointments/api");

@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Container,
   Column,
   Head,
@@ -13,7 +12,6 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import {} from "@/public/logo-dark.png";
 
 interface ConfirmationEmailProps {
   username: string;
@@ -23,10 +21,6 @@ interface ConfirmationEmailProps {
   comment?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
-
 export const ConfirmationEmail = ({
   username,
   date,
@@ -34,15 +28,10 @@ export const ConfirmationEmail = ({
   location,
   comment,
 }: ConfirmationEmailProps) => {
-  // const formattedDate = new Intl.DateTimeFormat("en", {
-  //   dateStyle: "long",
-  //   timeStyle: "short",
-  // }).format(date);
-
   return (
     <Html>
       <Head />
-      <Preview>Appointment Confirmation.</Preview>
+      <Preview>Here is your appointment details.</Preview>
 
       <Body style={main}>
         <Container>
@@ -108,12 +97,12 @@ export const ConfirmationEmail = ({
                   See you soon!
                 </Heading>
 
-                <Text style={paragraph}>
-                  <b>Time: </b>
+                <Text style={{ ...paragraph, marginTop: "56px" }}>
+                  <b>Date: </b>
                   {date}
                 </Text>
                 <Text style={{ ...paragraph, marginTop: -5 }}>
-                  <b>Date: </b>
+                  <b>Time: </b>
                   {time}
                 </Text>
                 <Text style={{ ...paragraph, marginTop: -5 }}>
@@ -168,17 +157,8 @@ const logo = {
   backgroundColor: "#3f3d56",
 };
 
-const button = {
-  backgroundColor: "#3f3d56",
-  borderRadius: 999,
-  color: "#FFF",
-  fontWeight: "medium",
-  border: "1px solid rgb(0,0,0, 0.1)",
-  cursor: "pointer",
-  padding: "12px 30px",
-};
-
 const content = {
+  padding: "0 0 32px 0",
   border: "1px solid rgb(0,0,0, 0.1)",
   borderRadius: "3px",
   overflow: "hidden",
@@ -191,8 +171,4 @@ const image = {
 
 const boxInfos = {
   padding: "20px",
-};
-
-const containerImageFooter = {
-  padding: "45px 0 0 0",
 };

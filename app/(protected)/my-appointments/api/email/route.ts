@@ -12,12 +12,11 @@ export async function POST(req: Request) {
     const res = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["taekbeen93@gmail.com"],
-      subject: "Hello world",
-      // TODO: Requires updates along with EmailTemplate
+      subject: "Appointment Confirmation",
       react: React.createElement(ConfirmationEmail, {
         username: cookies().get("displayName")?.value ?? "",
-        time: payload.time,
         date: payload.date,
+        time: payload.time,
         location: payload.location,
         comment: payload.comment,
       }),
