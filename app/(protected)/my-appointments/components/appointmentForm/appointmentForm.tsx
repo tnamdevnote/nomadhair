@@ -39,15 +39,19 @@ async function patchAppointment(formValues: Partial<Appointment>) {
   return Response.json(res);
 }
 
-async function sendEmail() {
+async function sendEmail(formValues: z.infer<typeof formSchema>) {
+  const { date, time, address1, address2, city, state, zip, comment } =
+    formValues;
+  const location = [address1, address2, city, state, zip].join(", ");
   const res = await fetch("/my-appointments/api/email/", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     // This is a mock data. Replace with proper form values later.
     body: JSON.stringify({
-      date: "2023-04-04",
-      time: "14:30",
-      comment: "This is a test email.",
+      date: new Date(date).toDateString(),
+      time: new Date(time).toLocaleTimeString(),
+      location,
+      comment,
     }),
   });
 
@@ -120,7 +124,7 @@ export const AppointmentForm = ({
         ...values,
         appointmentId: appointment?.appointmentId ?? undefined,
       });
-      await sendEmail();
+      await sendEmail(values);
       // Re-validates the <AppointmentList /> successful submission.
       mutate("/my-appointments/api");
       onClose ? onClose() : null;
@@ -129,8 +133,6 @@ export const AppointmentForm = ({
         intent: "success",
       });
       form.reset(INITIAL_FORM_VALUES);
-
-      // TODO: close dialog/drawer upon successful submission.
     } catch (e) {
       toast({
         title: "Oops! Something went wrong! Please try again.",
