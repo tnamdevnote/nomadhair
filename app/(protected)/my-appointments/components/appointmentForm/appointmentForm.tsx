@@ -124,7 +124,7 @@ export const AppointmentForm = ({
         ...values,
         appointmentId: appointment?.appointmentId ?? undefined,
       });
-      console.log(values.time);
+
       await sendEmail(values);
       // Re-validates the <AppointmentList /> successful submission.
       mutate("/my-appointments/api");
