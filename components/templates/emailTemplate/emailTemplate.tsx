@@ -1,3 +1,5 @@
+import Logo from "@/components/atoms/logo";
+
 interface EmailTemplateProps {
   firstName: string;
   appointmentDetails: { date: string; time: string; note: string };
@@ -10,8 +12,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   firstName,
   appointmentDetails,
 }) => (
-  <div>
-    <h1>Welcome, {firstName}!</h1>
+  <div className="flex w-full flex-col items-center gap-2">
+    <Logo />
+    <h1 className="text-primary-100">Welcome, {firstName}!</h1>
     <p>{`Here is your appointment details: ${appointmentDetails.date} ${appointmentDetails.time} ${appointmentDetails.note}`}</p>
   </div>
 );
