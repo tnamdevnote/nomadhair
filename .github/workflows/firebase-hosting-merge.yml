@@ -2,7 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+"on":
   push:
     branches:
       - main
@@ -20,12 +20,13 @@ jobs:
       MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
       DATABASE_NAME: ${{ vars.DATABASE_NAME }}
       DATABASE_URL: ${{ vars.DATABASE_URL }}
+      RESEND_API_KEY: ${{ vars.RESEND_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOMADHAIR }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOMADHAIR }}"
           channelId: live
           projectId: nomadhair-79e6c
