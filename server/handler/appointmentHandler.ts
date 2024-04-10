@@ -10,7 +10,6 @@ export async function createAppointment(appointment:Appointment) {
     set(ref(database, 'appointment/' + guid), {
       userId: appointment.userId,
       timeSlotId: appointment.timeSlotId,
-      customerDetailId: appointment.customerDetailId,
       comment : appointment.comment
     });
     console.log("createTimeSlot is successfully called");
@@ -21,7 +20,6 @@ export async function editAppointment(appointment:Appointment, appointmentId: st
     await update(ref(database, 'appointment/' + appointmentId), {
         userId: appointment.userId,
         timeSlotId: appointment.timeSlotId,
-        customerDetailId: appointment.customerDetailId,
         comment : appointment.comment
     });
     console.log("editAppointment is successfully called");
