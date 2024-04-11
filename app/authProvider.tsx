@@ -11,7 +11,7 @@ import {
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
-  User,
+  User as FirebaseUser,
   signInWithPopup,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -22,16 +22,19 @@ import { mapUser } from "@/server/mapper/userMapper";
 
 export interface AuthContext {
   /** Accepts firebase User interface */
-  user: User | null;
+  user: FirebaseUser | null;
   signIn: (providerName: "Google" | "Facebook") => Promise<void>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
 
+/**
+ * A context provider to manage authentication information on the client side.
+ */
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // The initialUser comes from the server via a server component
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<FirebaseUser | null>(null);
   const router = useRouter();
 
   useEffect(() => {

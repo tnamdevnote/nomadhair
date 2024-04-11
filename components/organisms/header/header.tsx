@@ -9,6 +9,11 @@ import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
+/**
+ * userName prop comes from the cookie via a server component (layout.tsx)
+ * This is just a temporary workaround to prevent flickering login state upon refresh.
+ * Be sure to remove this once server side authentication is properly implemented.
+ */
 function Header({ userName }: { userName?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuthContext();
@@ -71,7 +76,7 @@ function Header({ userName }: { userName?: string }) {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {userName ?? user?.displayName ? (
+            {userName || user?.displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -87,7 +92,7 @@ function Header({ userName }: { userName?: string }) {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {userName ?? user?.displayName ? (
+          {userName || user?.displayName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
                 <AvatarImage src={user?.photoURL ?? ""} alt="profile" />
