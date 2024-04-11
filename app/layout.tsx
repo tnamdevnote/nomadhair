@@ -5,6 +5,7 @@ import Footer from "@/components/organisms/footer";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
 import { cookies } from "next/headers";
+import { AuthProvider } from "./authProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -29,12 +30,15 @@ export default function RootLayout({
 }>) {
   const userName = cookies().get("displayName")?.value;
   const photoURL = cookies().get("photoURL")?.value;
+
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
-        <Header userName={userName} photoURL={photoURL} />
-        {children}
-        <Toaster />
+        <AuthProvider>
+          <Header userName={userName} photoURL={photoURL} />
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
