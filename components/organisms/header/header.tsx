@@ -1,17 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/atoms/button";
 import Link from "next/link";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import Logo from "@/components/atoms/logo";
-import { Container } from "@/components/templates/container";
-import { LogOutIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
-import { onAuthStateChanged } from "@/lib/auth";
-import { auth } from "@/server/initFirebase";
+import { LogOutIcon, MenuIcon } from "lucide-react";
 import { useAuthContext } from "@/app/authProvider";
+import { Container } from "@/components/templates/container";
+import { Button } from "@/components/atoms/button";
+import Logo from "@/components/atoms/logo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
 interface HeaderProps {
   userName?: string;
@@ -20,7 +16,6 @@ interface HeaderProps {
 
 function Header({ userName, photoURL }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
   const { user, signOut } = useAuthContext();
 
   // scroll lock when navMenu is open
@@ -106,7 +101,7 @@ function Header({ userName, photoURL }: HeaderProps) {
               <Button
                 aria-label="Sign out"
                 variant="ghost"
-                icon={<LogOutIcon />}
+                icon={<LogOutIcon size={16} />}
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
@@ -131,7 +126,7 @@ function Header({ userName, photoURL }: HeaderProps) {
         <Button
           aria-label="Toggle Menu Button"
           variant="ghost"
-          icon={<HamburgerMenuIcon />}
+          icon={<MenuIcon size={16} />}
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
