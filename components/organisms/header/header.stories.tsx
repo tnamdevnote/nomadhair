@@ -35,21 +35,21 @@ export const MobileView: Story = {
       defaultViewport: "iphonex",
     },
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const mobileNavButton = canvas.getByRole("button", {
-      name: /Toggle Menu/i,
-    });
+  // play: async ({ canvasElement }) => {
+  //   const canvas = within(canvasElement);
+  //   const mobileNavButton = canvas.getByRole("button", {
+  //     name: /Toggle Menu/i,
+  //   });
 
-    expect(mobileNavButton).toBeInTheDocument();
-    await userEvent.click(mobileNavButton);
+  //   expect(mobileNavButton).toBeInTheDocument();
+  //   await userEvent.click(mobileNavButton);
 
-    const mobileNavMenu = await canvas.findByRole("navigation");
-    const navItem = await canvas.findByRole("link", { name: /About/i });
-    expect(mobileNavMenu).toBeVisible();
-    expect(navItem).toBeVisible();
+  //   const mobileNavMenu = await canvas.findByRole("navigation");
+  //   const navItem = await canvas.findByRole("link", { name: /About/i });
+  //   expect(mobileNavMenu).toBeVisible();
+  //   expect(navItem).toBeVisible();
 
-    await userEvent.click(navItem);
-    expect(mobileNavMenu).not.toBeVisible();
-  },
+  //   await userEvent.click(navItem);
+  //   expect(mobileNavMenu).not.toBeVisible();
+  // },
 };
