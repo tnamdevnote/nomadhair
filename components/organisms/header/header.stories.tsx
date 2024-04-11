@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./header";
 import { within, userEvent, expect } from "@storybook/test";
+import { AuthProvider } from "@/app/authProvider";
 
 const meta: Meta<typeof Header> = {
   title: "Organisms/Header",
@@ -14,7 +15,9 @@ const meta: Meta<typeof Header> = {
   },
   render: () => (
     <div style={{ minHeight: "100px" }}>
-      <Header />
+      <AuthProvider>
+        <Header />
+      </AuthProvider>
     </div>
   ),
 };
