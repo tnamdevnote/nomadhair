@@ -2,56 +2,13 @@
 
 import { Button } from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
-import {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth } from "@/server/initFirebase";
-import { MouseEvent } from "react";
 import { redirect } from "next/navigation";
-import { useState } from "react";
-import { mapUser } from "@/server/mapper/userMapper";
-import { User } from "@/server/model/user";
+import { useAuthContext } from "@/app/authProvider";
 
 const SignIn = () => {
-  const [signedIn, setSignedIn] = useState(false);
-  const userPatchFetcher = async (user: User, guid: string) => {
-    fetch("/api/sign-in", {
-      method: "PATCH",
-      body: JSON.stringify({
-        ...user,
-        guid,
-      }),
-    });
-  };
+  const { user, signIn } = useAuthContext();
 
-  const handleAuth = async (clickEvent: MouseEvent, providerName: string) => {
-    try {
-      let credential, provider;
-      switch (providerName) {
-        case "Google":
-          provider = new GoogleAuthProvider();
-          credential = await signInWithPopup(auth, provider);
-          break;
-        case "Facebook":
-          provider = new FacebookAuthProvider();
-          credential = await signInWithPopup(auth, provider);
-          break;
-      }
-      const user = mapUser(credential, 1);
-      if (credential?.user.email && credential?.user.uid) {
-        await userPatchFetcher(user, credential.user.uid);
-        setSignedIn(true);
-      } else {
-        throw new Error("Identity provider did not provide the user email");
-      }
-    } catch (error: any) {
-      throw error;
-    }
-  };
-
-  if (signedIn) redirect("/");
+  if (user) redirect("/");
 
   return (
     <Container className="flex min-h-dvh max-w-screen-sm flex-col items-center justify-center">
@@ -62,18 +19,14 @@ const SignIn = () => {
         aria-label="sign in form"
         className="mt-8 flex w-full flex-col gap-4"
       >
-        <Button
-          onClick={(e) => handleAuth(e, "Google")}
-          className="w-full"
-          size="lg"
-        >
+        <Button className="w-full" size="lg" onClick={() => signIn("Google")}>
           Continue with Google
         </Button>
         <Button
-          onClick={(e) => handleAuth(e, "Facebook")}
           className="w-full"
           intent="secondary"
           size="lg"
+          onClick={() => signIn("Facebook")}
         >
           Continue with Facebook
         </Button>
