@@ -11,10 +11,10 @@ export interface PageTemplateProps {
 function PageTemplate({ type = "default", children }: PageTemplateProps) {
   if (type === "header") {
     return (
-      <>
+      <AuthProvider>
         <Header />
         <main className="bg-secondary-10">{children}</main>
-      </>
+      </AuthProvider>
     );
   }
   return (

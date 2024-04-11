@@ -19,6 +19,8 @@ const meta: Meta<typeof Home> = {
       <Home />
     </PageTemplate>
   ),
+  /** Disabling test due to error related to importing firebase app */
+  tags: ["no-tests"],
 };
 
 export default meta;

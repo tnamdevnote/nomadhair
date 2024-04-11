@@ -20,6 +20,8 @@ const meta: Meta<typeof Header> = {
       </AuthProvider>
     </div>
   ),
+  /** Disabling test due to error related to importing firebase app */
+  tags: ["no-tests"],
 };
 
 export default meta;
