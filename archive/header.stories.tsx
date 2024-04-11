@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Header } from "./header";
+import Header from "../components/organisms/header";
 import { within, userEvent, expect } from "@storybook/test";
 import { AuthProvider } from "@/app/authProvider";
 
