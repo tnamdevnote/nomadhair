@@ -29,13 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const userName = cookies().get("displayName")?.value;
-  const photoURL = cookies().get("photoURL")?.value;
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
         <AuthProvider>
-          <Header userName={userName} photoURL={photoURL} />
+          <Header userName={userName} />
           {children}
           <Toaster />
         </AuthProvider>
