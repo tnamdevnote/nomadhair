@@ -10,10 +10,16 @@ const AboutSection = () => {
     <section className="bg-secondary-15" aria-labelledby="about">
       <SplitContainer className="py-12 md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
-          <Image src={departing} width={300} alt="departing image" />
+          <Image src={departing} width={300} alt="departing image" priority />
         </SplitContainer.Left>
-        <SplitContainer.Right className="flex basis-1/2 flex-col items-center gap-10">
-          <h2 className="text-center text-lg text-primary-100 md:text-left lg:text-xl">
+        <SplitContainer.Right
+          className="animate-fade-in flex basis-1/2 flex-col items-center gap-10"
+          style={{ "--index": 3 } as React.CSSProperties}
+        >
+          <h2
+            className="text-center text-lg text-primary-100 md:text-left lg:text-xl"
+            style={{ "--index": 2 } as React.CSSProperties}
+          >
             <strong
               id="about"
               className="mb-4 flex items-center justify-center gap-2 text-base font-normal md:justify-start"
@@ -24,13 +30,16 @@ const AboutSection = () => {
             </strong>
             Your friendly neighborhood hair designer
           </h2>
-          <p className="text-center md:text-left ">
+          <p className="animate-fade-in text-center md:text-left">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             tellus leo, vestibulum a ipsum sed, suscipit sodales ex. Vestibulum
             id varius risus. Fusce tempus tellus sed erat scelerisque venenatis.
             Donec consequat ultrices quam, vitae dignissim mi sodales non.
           </p>
-          <div className="w-full">
+          <div
+            className="animate-fade-in w-full"
+            style={{ "--index": 3 } as React.CSSProperties}
+          >
             <Button className="w-full md:w-auto" asChild>
               <Link href={"/about"}>Learn More</Link>
             </Button>

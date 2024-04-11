@@ -61,7 +61,7 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
+    <header className="fixed top-0 z-10 h-navbar-height-sm w-full border-b-[0.5px] border-primary-10/90 bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-5">
         <Link href="/" aria-label="Home">
           <Logo className="h-5 lg:h-7" />
@@ -110,7 +110,7 @@ function Header() {
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
           {displayName ? (
             <>
-              <Avatar className="ring-1 ring-neutral-15">
+              <Avatar size="sm" className="ring-1 ring-neutral-15">
                 <AvatarImage src={cookies.photo} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
