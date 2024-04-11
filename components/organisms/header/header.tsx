@@ -11,41 +11,17 @@ import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 import { onAuthStateChanged } from "@/lib/auth";
 import { auth } from "@/server/initFirebase";
+import { useAuthContext } from "@/app/authProvider";
 
 interface HeaderProps {
   userName?: string;
   photoURL?: string;
 }
 
-interface CurrentUser {
-  userName?: string;
-  photoURL?: string;
-}
-
-function useUserSession(initialUser: CurrentUser) {
-  // The initialUser comes from the server via a server component
-  const [user, setUser] = useState<CurrentUser | null>(initialUser);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged((authUser) => {
-      setUser((prev) => ({
-        ...prev,
-        userName: authUser?.displayName ?? "",
-        photoURL: authUser?.photoURL ?? "",
-      }));
-    });
-
-    return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return user;
-}
-
 function Header({ userName, photoURL }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const user = useUserSession({ userName, photoURL });
+  const { user, signOut } = useAuthContext();
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -66,17 +42,6 @@ function Header({ userName, photoURL }: HeaderProps) {
       window.removeEventListener("resize", closeNaveMenu);
     };
   }, []);
-
-  const handleSignOut = async () => {
-    auth.signOut();
-    const res = await fetch("/api/sign-out", {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      router.push("/");
-      router.refresh();
-    }
-  };
 
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full border-b-[0.5px] border-primary-10/90 bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
@@ -116,7 +81,7 @@ function Header({ userName, photoURL }: HeaderProps) {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {user?.userName ? (
+            {user?.displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -132,10 +97,10 @@ function Header({ userName, photoURL }: HeaderProps) {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {user?.userName ? (
+          {user?.displayName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
-                <AvatarImage src={user?.photoURL} alt="profile" />
+                <AvatarImage src={user?.photoURL ?? ""} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
               <Button
@@ -145,7 +110,7 @@ function Header({ userName, photoURL }: HeaderProps) {
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
-                onClick={() => handleSignOut()}
+                onClick={signOut}
               >
                 Sign out
               </Button>
