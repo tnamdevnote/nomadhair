@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
@@ -10,20 +9,43 @@ import { Container } from "@/components/templates/container";
 import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import { onAuthStateChanged } from "@/lib/auth";
+import { auth } from "@/server/initFirebase";
 
-function Header() {
+interface HeaderProps {
+  userName?: string;
+  photoURL?: string;
+}
+
+interface CurrentUser {
+  userName?: string;
+  photoURL?: string;
+}
+
+function useUserSession(initialUser: CurrentUser) {
+  // The initialUser comes from the server via a server component
+  const [user, setUser] = useState<CurrentUser | null>(initialUser);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged((authUser) => {
+      setUser((prev) => ({
+        ...prev,
+        userName: authUser?.displayName ?? "",
+        photoURL: authUser?.photoURL ?? "",
+      }));
+    });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return user;
+}
+
+function Header({ userName, photoURL }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookies] = useCookies([
-    "displayName",
-    "email",
-    "id",
-    "photo",
-  ]);
-  const [displayName, setDisplayName] = useState();
   const router = useRouter();
-  const handleRefresh = () => {
-    router.refresh();
-  };
+  const user = useUserSession({ userName, photoURL });
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -35,7 +57,6 @@ function Header() {
 
   // close the navMenu when screen resizes
   useEffect(() => {
-    handleRefresh();
     const closeNaveMenu = () => setIsOpen(false);
     window.addEventListener("orientationchange", closeNaveMenu);
     window.addEventListener("resize", closeNaveMenu);
@@ -46,18 +67,15 @@ function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    setDisplayName(cookies.displayName);
-    handleRefresh();
-  }, [cookies.displayName]);
-
-  const signOut = () => {
-    removeCookies("displayName");
-    removeCookies("email");
-    removeCookies("id");
-    setDisplayName(cookies.displayName);
-    router.push("/");
-    handleRefresh();
+  const handleSignOut = async () => {
+    auth.signOut();
+    const res = await fetch("/api/sign-out", {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      router.push("/");
+      router.refresh();
+    }
   };
 
   return (
@@ -92,7 +110,7 @@ function Header() {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {displayName ? (
+            {user?.userName ? (
               <li>
                 <Button
                   variant="link"
@@ -108,10 +126,10 @@ function Header() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {displayName ? (
+          {user?.userName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
-                <AvatarImage src={cookies.photo} alt="profile" />
+                <AvatarImage src={user?.photoURL} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
               <Button
@@ -121,7 +139,7 @@ function Header() {
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
-                onClick={() => signOut()}
+                onClick={() => handleSignOut()}
               >
                 Sign out
               </Button>
