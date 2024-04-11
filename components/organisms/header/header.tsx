@@ -9,12 +9,7 @@ import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
-interface HeaderProps {
-  userName?: string;
-  photoURL?: string;
-}
-
-function Header({ userName, photoURL }: HeaderProps) {
+function Header({ userName }: { userName?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuthContext();
 
@@ -70,7 +65,7 @@ function Header({ userName, photoURL }: HeaderProps) {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {user?.displayName ? (
+            {userName ?? user?.displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -86,7 +81,7 @@ function Header({ userName, photoURL }: HeaderProps) {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {user?.displayName ? (
+          {userName ?? user?.displayName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
                 <AvatarImage src={user?.photoURL ?? ""} alt="profile" />

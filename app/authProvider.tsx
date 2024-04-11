@@ -21,9 +21,10 @@ import { auth } from "@/server/initFirebase";
 import { mapUser } from "@/server/mapper/userMapper";
 
 export interface AuthContext {
+  /** Accepts firebase User interface */
   user: User | null;
-  signIn: (providerName: "Google" | "Facebook") => void;
-  signOut: () => void;
+  signIn: (providerName: "Google" | "Facebook") => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -33,6 +34,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    // onAuthStateChanged listens for updates in user's auth state.
+    const unsubscribe = onAuthStateChanged(setUser);
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const signIn = useCallback(async (providerName: "Google" | "Facebook") => {
     let credential, provider;
 
@@ -40,10 +49,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       switch (providerName) {
         case "Google":
           provider = new GoogleAuthProvider();
+          provider.setCustomParameters({ prompt: "select_account" });
           credential = await signInWithPopup(auth, provider);
           break;
         case "Facebook":
           provider = new FacebookAuthProvider();
+          provider.setCustomParameters({ prompt: "select_account" });
           credential = await signInWithPopup(auth, provider);
           break;
       }
@@ -76,14 +87,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (error) {
       console.error("Error signing out.", error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    // onAuthStateChanged listens for updates in user's auth state.
-    const unsubscribe = onAuthStateChanged(setUser);
-
-    return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
