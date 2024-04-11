@@ -26,10 +26,10 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <div className={` ${quicksand.className} ${montserrat.variable}`}>
-        <AuthProvider>
-          <Story />
-          <Toaster />
-        </AuthProvider>
+        {/* <AuthProvider> */}
+        <Story />
+        <Toaster />
+        {/* </AuthProvider> */}
       </div>
     ),
   ],
