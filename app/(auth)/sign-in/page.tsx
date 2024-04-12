@@ -10,7 +10,6 @@ import {
 import { auth } from "@/server/initFirebase";
 import { MouseEvent } from "react";
 import { redirect } from "next/navigation";
-import { setCookie } from "cookies-next";
 import { useState } from "react";
 import { mapUser } from "@/server/mapper/userMapper";
 import { User } from "@/server/model/user";
@@ -18,7 +17,7 @@ import { User } from "@/server/model/user";
 const SignIn = () => {
   const [signedIn, setSignedIn] = useState(false);
   const userPatchFetcher = async (user: User, guid: string) => {
-    fetch("/sign-in/api", {
+    fetch("/api/sign-in", {
       method: "PATCH",
       body: JSON.stringify({
         ...user,
@@ -42,10 +41,6 @@ const SignIn = () => {
       }
       const user = mapUser(credential, 1);
       if (credential?.user.email && credential?.user.uid) {
-        setCookie("email", user.email);
-        setCookie("displayName", user.displayName);
-        setCookie("id", credential.user.uid);
-        setCookie("photo", credential.user.photoURL);
         await userPatchFetcher(user, credential.user.uid);
         setSignedIn(true);
       } else {
