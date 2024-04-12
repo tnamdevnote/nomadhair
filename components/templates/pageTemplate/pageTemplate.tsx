@@ -1,6 +1,7 @@
 import Header from "@/components/organisms/header";
 import Footer from "@/components/organisms/footer";
 import React from "react";
+import { AuthProvider } from "@/app/authProvider";
 
 export interface PageTemplateProps {
   type?: "default" | "header";
@@ -17,13 +18,13 @@ function PageTemplate({ type = "default", children }: PageTemplateProps) {
     );
   }
   return (
-    <>
+    <AuthProvider>
       <Header />
       <main className="bg-secondary-10 pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
         {children}
       </main>
       <Footer />
-    </>
+    </AuthProvider>
   );
 }
 

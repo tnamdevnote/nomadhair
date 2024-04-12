@@ -7,7 +7,6 @@ import {
 import "../app/globals.css";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "../components/molecules/toast";
-import { AuthProvider } from "../app/authProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,10 +25,8 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <div className={` ${quicksand.className} ${montserrat.variable}`}>
-        {/* <AuthProvider> */}
         <Story />
         <Toaster />
-        {/* </AuthProvider> */}
       </div>
     ),
   ],
