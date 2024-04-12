@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Header } from "./header";
-import { within, userEvent, expect } from "@storybook/test";
+import { within, userEvent, expect, waitFor } from "@storybook/test";
 
 const meta: Meta<typeof Header> = {
   title: "Organisms/Header",
@@ -44,7 +44,7 @@ export const MobileView: Story = {
     const mobileNavMenu = await canvas.findByRole("navigation");
     const navItem = await canvas.findByRole("link", { name: /About/i });
     expect(mobileNavMenu).toBeVisible();
-    expect(navItem).toBeVisible();
+    await waitFor(() => expect(navItem).toBeVisible());
 
     await userEvent.click(navItem);
     expect(mobileNavMenu).not.toBeVisible();
