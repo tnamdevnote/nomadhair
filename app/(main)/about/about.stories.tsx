@@ -1,8 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import About from "./page";
-import PageTemplate from "@/components/templates/pageTemplate";
-
-/** TODO: Do more research if this story belongs in app directory */
 
 const meta: Meta<typeof About> = {
   title: "Pages/About",
@@ -12,15 +9,8 @@ const meta: Meta<typeof About> = {
       type: "figma",
       url: "https://www.figma.com/file/cURR8cW2EUkTgpHLf5RiVW/NomadHair?type=design&node-id=664-4897&mode=design&t=YvqownauNObC4p76-4",
     },
-    layout: "fullscreen",
+    layout: "centered",
   },
-  render: () => (
-    <PageTemplate>
-      <About />
-    </PageTemplate>
-  ),
-  /** Disabling test due to error related to importing firebase app */
-  tags: ["no-tests"],
 };
 
 export default meta;
