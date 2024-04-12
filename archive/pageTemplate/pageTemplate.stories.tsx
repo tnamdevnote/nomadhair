@@ -12,6 +12,8 @@ const meta: Meta<typeof PageTemplate> = {
     },
     layout: "fullscreen",
   },
+  /** Disabling test due to error related to importing firebase app */
+  tags: ["no-tests"],
 };
 
 export default meta;

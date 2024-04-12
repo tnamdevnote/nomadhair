@@ -4,6 +4,8 @@ import Header from "@/components/organisms/header";
 import Footer from "@/components/organisms/footer";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
+import { cookies } from "next/headers";
+import { AuthProvider } from "./authProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,12 +28,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userName = cookies().get("displayName")?.value;
+
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
-        <Header />
-        {children}
-        <Toaster />
+        <AuthProvider>
+          <Header userName={userName} />
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );

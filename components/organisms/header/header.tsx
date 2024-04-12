@@ -1,29 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { Button } from "@/components/atoms/button";
 import Link from "next/link";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import Logo from "@/components/atoms/logo";
+import { LogOutIcon, MenuIcon } from "lucide-react";
+import { useAuthContext } from "@/app/authProvider";
 import { Container } from "@/components/templates/container";
-import { LogOutIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/atoms/button";
+import Logo from "@/components/atoms/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
 
-function Header() {
+/**
+ * userName prop comes from the cookie via a server component (layout.tsx)
+ * This is just a temporary workaround to prevent flickering login state upon refresh.
+ * Be sure to remove this once server side authentication is properly implemented.
+ */
+function Header({ userName }: { userName?: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookies] = useCookies([
-    "displayName",
-    "email",
-    "id",
-    "photo",
-  ]);
-  const [displayName, setDisplayName] = useState();
-  const router = useRouter();
-  const handleRefresh = () => {
-    router.refresh();
-  };
+  const { user, signOut } = useAuthContext();
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -35,7 +28,6 @@ function Header() {
 
   // close the navMenu when screen resizes
   useEffect(() => {
-    handleRefresh();
     const closeNaveMenu = () => setIsOpen(false);
     window.addEventListener("orientationchange", closeNaveMenu);
     window.addEventListener("resize", closeNaveMenu);
@@ -45,20 +37,6 @@ function Header() {
       window.removeEventListener("resize", closeNaveMenu);
     };
   }, []);
-
-  useEffect(() => {
-    setDisplayName(cookies.displayName);
-    handleRefresh();
-  }, [cookies.displayName]);
-
-  const signOut = () => {
-    removeCookies("displayName");
-    removeCookies("email");
-    removeCookies("id");
-    setDisplayName(cookies.displayName);
-    router.push("/");
-    handleRefresh();
-  };
 
   return (
     <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
@@ -92,7 +70,7 @@ function Header() {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {displayName ? (
+            {userName || user?.displayName ? (
               <li>
                 <Button
                   variant="link"
@@ -108,20 +86,20 @@ function Header() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {displayName ? (
+          {userName || user?.displayName ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
-                <AvatarImage src={cookies.photo} alt="profile" />
+                <AvatarImage src={user?.photoURL ?? ""} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
               <Button
                 aria-label="Sign out"
                 variant="ghost"
-                icon={<LogOutIcon />}
+                icon={<LogOutIcon size={16} />}
                 iconPosition="after"
                 size="sm"
                 className="font-bold"
-                onClick={() => signOut()}
+                onClick={signOut}
               >
                 Sign out
               </Button>
@@ -142,7 +120,7 @@ function Header() {
         <Button
           aria-label="Toggle Menu Button"
           variant="ghost"
-          icon={<HamburgerMenuIcon />}
+          icon={<MenuIcon size={16} />}
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
