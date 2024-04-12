@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   description: "Welcome to NomadHair",
 };
 
+/** Welcome to NomadHair */
 export default function RootLayout({
   children,
 }: Readonly<{
