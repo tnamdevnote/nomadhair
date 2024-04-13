@@ -9,6 +9,8 @@ import { AppointmentCard } from "../appointmentCard/appointmentCard";
 import { Appointment } from "@/server/model/appointment";
 import Image from "next/image";
 import { booking } from "@/public/illustrations";
+import { Button } from "@/components/atoms/button";
+import Link from "next/link";
 
 async function getAppointments() {
   const res = await fetch(`/my-appointments/api`);
@@ -46,11 +48,14 @@ export const AppointmentList = () => {
         aria-label="something went wrong"
       >
         <Fallback
+          className="h-full gap-4 lg:p-16"
           image={<Error className="h-2/3 w-2/3" />}
           title="Oops! Something went wrong."
-          buttonText="Try Again"
-          onButtonClick={() => mutate("/my-appointments/api")}
-        />
+        >
+          <Button onClick={() => mutate("/my-appointments/api")}>
+            Try again
+          </Button>
+        </Fallback>
       </section>
     );
   }

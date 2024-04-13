@@ -2,6 +2,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import Fallback from "./fallback";
 import NotFound from "./notfound";
 import Error from "./error";
+import { Button } from "@/components/atoms/button";
+import Link from "next/link";
 
 const meta: Meta<typeof Fallback> = {
   title: "Organisms/Fallback",
@@ -22,16 +24,26 @@ export const Status404: Story = {
     image: <NotFound className="aspect-auto h-48 lg:h-72" />,
     title: "Oops! Looks like you are lost.",
     body: "The page you are looking for doesn’t exits.",
-    buttonText: "Back To Home",
-    redirect: "/",
   },
+  render: ({ image, title, body }) => (
+    <Fallback image={image} title={title} body={body}>
+      <Button size="md" asChild>
+        <Link href="/">Back to home</Link>
+      </Button>
+    </Fallback>
+  ),
 };
 export const Status500: Story = {
   args: {
     image: <Error className="aspect-auto h-48 lg:h-72" />,
     title: "Oops! Something went wrong. ",
     body: "Please try again later.",
-    buttonText: "Back To Home",
-    redirect: "/",
   },
+  render: ({ image, title, body }) => (
+    <Fallback image={image} title={title} body={body}>
+      <Button size="md" asChild>
+        <Link href="/">Back to home</Link>
+      </Button>
+    </Fallback>
+  ),
 };
