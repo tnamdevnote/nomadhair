@@ -1,7 +1,7 @@
-import React from "react";
-import Container from "./container";
+import React, { ComponentPropsWithoutRef } from "react";
+import Container, { ContainerProps } from "./container";
 
-export interface SplitContainerProps {
+export interface SplitContainerProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
   children: React.ReactNode[];
 }
@@ -10,7 +10,11 @@ export interface SplitContainerProps {
  * A flex container that renders a split screen. You can
  * adjust to proportion of each panel by applying basis-[x] classNames
  */
-function SplitContainer({ className, children }: SplitContainerProps) {
+function SplitContainer({
+  className,
+  children,
+  ...props
+}: SplitContainerProps) {
   const [left, right] = children;
   return (
     <Container
@@ -18,6 +22,7 @@ function SplitContainer({ className, children }: SplitContainerProps) {
         "flex flex-col items-center gap-8 md:flex-row",
         `${className}`,
       ].join(" ")}
+      {...props}
     >
       {left}
       {right}
@@ -25,24 +30,20 @@ function SplitContainer({ className, children }: SplitContainerProps) {
   );
 }
 
-function Left({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return <div className={className}>{children}</div>;
+function Left({ className, children, ...props }: ContainerProps) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
 }
 
-function Right({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return <div className={className}>{children}</div>;
+function Right({ className, children, ...props }: ContainerProps) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
 }
 
 SplitContainer.Left = Left;

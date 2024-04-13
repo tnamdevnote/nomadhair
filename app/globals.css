@@ -100,6 +100,10 @@
   min-height: 0;
 }
 
+.animate-fade-in {
+  animation-delay: calc(var(--index) * 130ms);
+}
+
 body {
   margin: 0;
   min-width: 320px;

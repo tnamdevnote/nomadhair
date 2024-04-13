@@ -8,6 +8,8 @@ import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import { onAuthStateChanged } from "@/lib/auth";
+import { auth } from "@/server/initFirebase";
 
 /**
  * userName prop comes from the cookie via a server component (layout.tsx)
@@ -39,7 +41,7 @@ function Header({ userName }: { userName?: string }) {
   }, []);
 
   return (
-    <header className="fixed top-0 z-10 h-navbar-height-sm w-full bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
+    <header className="fixed top-0 z-10 h-navbar-height-sm w-full border-b-[0.5px] border-primary-10/90 bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
       <Container className="flex items-center py-4 lg:py-5">
         <Link href="/" aria-label="Home">
           <Logo className="h-5 lg:h-7" />
@@ -47,8 +49,11 @@ function Header({ userName }: { userName?: string }) {
         <nav
           className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto md:bg-transparent`}
         >
-          <ul className=" mt-16 flex w-full flex-col gap-2 px-4 md:mt-0 md:flex-row md:px-0">
-            <li>
+          <ul className="mt-16 flex w-full flex-col gap-2 px-4 md:mt-0 md:flex-row md:px-0">
+            <li
+              className={`${isOpen ? "animate-fade-in" : ""}`}
+              style={{ "--index": 1 } as React.CSSProperties}
+            >
               <Button
                 variant="link"
                 size="sm"
@@ -59,7 +64,10 @@ function Header({ userName }: { userName?: string }) {
                 <Link href="/">Home</Link>
               </Button>
             </li>
-            <li>
+            <li
+              className={`${isOpen ? "animate-fade-in" : ""}`}
+              style={{ "--index": 2 } as React.CSSProperties}
+            >
               <Button
                 variant="link"
                 size="sm"
