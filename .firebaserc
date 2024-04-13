@@ -1,8 +1,5 @@
 {
   "projects": {
-    "default": "nomadhair-dev",
-    "dev": "nomadhair-dev"
-  },
-  "targets": {},
-  "etags": {}
+    "default": "nomadhair-dev-aa43e"
+  }
 }
