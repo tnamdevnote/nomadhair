@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "nomadhair-79e6c"
+    "default": "nomadhair-79e6c",
+    "dev": "nomadhair-79e6c"
   }
 }

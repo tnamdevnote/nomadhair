@@ -20,6 +20,7 @@ jobs:
       MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
       DATABASE_NAME: ${{ vars.DATABASE_NAME }}
       DATABASE_URL: ${{ vars.DATABASE_URL }}
+      RESEND_API_KEY: ${{ vars.RESEND_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
