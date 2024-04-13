@@ -13,7 +13,7 @@ import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 
 async function getAppointments() {
-  const res = await fetch(`/my-appointments/api`);
+  const res = await fetch(`/api/my-appointments`);
   const responseObj = await res.json();
 
   return responseObj;
@@ -34,7 +34,7 @@ const AppointmentPlaceHolder = () => {
 
 export const AppointmentList = () => {
   const { data, isLoading, error, mutate } = useSWR(
-    "/my-appointments/api",
+    "/api/my-appointments",
     getAppointments,
     {
       revalidateOnFocus: false,
@@ -52,7 +52,7 @@ export const AppointmentList = () => {
           image={<Error className="h-2/3 w-2/3" />}
           title="Oops! Something went wrong."
         >
-          <Button onClick={() => mutate("/my-appointments/api")}>
+          <Button onClick={() => mutate("/api/my-appointments")}>
             Try again
           </Button>
         </Fallback>

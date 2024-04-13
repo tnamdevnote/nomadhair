@@ -62,7 +62,7 @@ const CancelDialog = ({
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const { trigger: swrTrigger, isMutating } = useSWRMutation(
-    "/my-appointments/api",
+    "/api/my-appointments",
     cancelAppointment,
   );
 

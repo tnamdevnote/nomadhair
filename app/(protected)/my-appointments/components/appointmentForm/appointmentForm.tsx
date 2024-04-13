@@ -25,7 +25,7 @@ import { mutate } from "swr";
  * We can potentially make them into server actions.
  */
 async function patchAppointment(formValues: Partial<Appointment>) {
-  const res = await fetch("/my-appointments/api", {
+  const res = await fetch("/api/my-appointments", {
     method: "PATCH",
     body: JSON.stringify({
       ...formValues,
@@ -43,7 +43,7 @@ async function sendEmail(formValues: z.infer<typeof formSchema>) {
   const { date, time, address1, address2, city, state, zip, comment } =
     formValues;
   const location = [address1, address2, city, state, zip].join(", ");
-  const res = await fetch("/my-appointments/api/email/", {
+  const res = await fetch("/api/email", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     // This is a mock data. Replace with proper form values later.
@@ -127,7 +127,7 @@ export const AppointmentForm = ({
 
       await sendEmail(values);
       // Re-validates the <AppointmentList /> successful submission.
-      mutate("/my-appointments/api");
+      mutate("/api/my-appointments");
       onClose ? onClose() : null;
       toast({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
