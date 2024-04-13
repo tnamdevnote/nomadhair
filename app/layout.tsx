@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/organisms/header";
-import Footer from "@/components/organisms/footer";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
 import { cookies } from "next/headers";
