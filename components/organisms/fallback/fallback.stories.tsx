@@ -23,6 +23,7 @@ export const Status404: Story = {
     title: "Oops! Looks like you are lost.",
     body: "The page you are looking for doesn’t exits.",
     buttonText: "Back To Home",
+    redirect: "/",
   },
 };
 export const Status500: Story = {
@@ -31,5 +32,6 @@ export const Status500: Story = {
     title: "Oops! Something went wrong. ",
     body: "Please try again later.",
     buttonText: "Back To Home",
+    redirect: "/",
   },
 };
