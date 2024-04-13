@@ -8,13 +8,25 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy:
+    environment: dev
     runs-on: ubuntu-latest
+    env:
+      API_KEY: ${{ vars.API_KEY }}
+      AUTH_DOMAIN: ${{ vars.AUTH_DOMAIN }}
+      PROJECT_ID: ${{ vars.PROJECT_ID }}
+      STORAGE_BUCKET: ${{ vars.STORAGE_BUCKET }}
+      MESSAGING_SENDER_ID: ${{ vars.MESSAGING_SENDER_ID }}
+      APP_ID: ${{ vars.APP_ID }}
+      MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
+      DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
+      - run: firebase use nomadhair-79e6c
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOMADHAIR_79E6C }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOMADHAIR }}"
           channelId: live
           projectId: nomadhair-79e6c
