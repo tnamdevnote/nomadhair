@@ -8,6 +8,8 @@ import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import { onAuthStateChanged } from "@/lib/auth";
+import { auth } from "@/server/initFirebase";
 
 /**
  * userName prop comes from the cookie via a server component (layout.tsx)
