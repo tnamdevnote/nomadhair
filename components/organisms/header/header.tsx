@@ -79,7 +79,10 @@ function Header({ userName }: { userName?: string }) {
               </Button>
             </li>
             {userName || user?.displayName ? (
-              <li>
+              <li
+                className={`${isOpen ? "animate-fade-in" : ""}`}
+                style={{ "--index": 3 } as React.CSSProperties}
+              >
                 <Button
                   variant="link"
                   size="sm"
