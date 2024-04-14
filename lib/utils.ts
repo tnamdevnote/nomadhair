@@ -1,5 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { get, set, ref, child } from "firebase/database";
+import { mapTimeSlot } from "@/server/mapper/timeSlotMapper";
+import { mapAppointment } from "@/server/mapper/appointmentMapper";
+import { database } from "@/server/initFirebase";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,3 +31,28 @@ export function toDateInputValue(date: Date) {
   const day = parseInt(dateArr[1]) < 10 ? "0" + dateArr[1] : dateArr[1];
   return year + "-" + month + "-" + day;
 }
+
+export const filterAppointments = async (response: any, userId?: string) => {
+  const appointmentIds = Object.keys(response);
+  const pastAppointments: Appointment[] = [];
+  const upcomingAppointments: Appointment[] = [];
+  for (let appointmentId of appointmentIds) {
+    if (response[appointmentId].userId !== userId) continue;
+    let appointment = mapAppointment(response[appointmentId]);
+    appointment.appointmentId = appointmentId;
+
+    let timeSlotResponse = (
+      await get(ref(database, "timeSlot/" + appointment.timeSlotId))
+    ).val();
+    let timeSlot = mapTimeSlot(timeSlotResponse);
+    appointment.timeSlot = timeSlot;
+
+    let timeNow = Math.floor(Date.now() / 1000);
+    if (timeSlot.startTime < timeNow) {
+      pastAppointments.push(appointment);
+    } else {
+      upcomingAppointments.push(appointment);
+    }
+  }
+  return { pastAppointments, upcomingAppointments };
+};
