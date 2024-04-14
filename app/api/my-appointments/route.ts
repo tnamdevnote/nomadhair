@@ -9,40 +9,20 @@ import { dateTimeToUnixTimeStamp, filterAppointments } from "@/lib/utils";
 import { DayOfWeek } from "@/server/model/dayOfWeekEnum";
 import { createTimeSlot } from "@/server/handler/timeSlotHandler";
 import { cookies } from "next/headers";
-import { Appointment } from "@/server/model/appointment";
 
 export async function GET(req: NextRequest) {
   try {
     const userId = cookies().get("id")?.value;
-    const dbResponse = (await get(child(ref(database), "appointment/")))?.val();
-    console.log("db", dbResponse);
-    // const responseBody = await filterAppointments(dbResponse, userId);
-    const appointmentIds = Object.keys(dbResponse);
-    const pastAppointments: Appointment[] = [];
-    const upcomingAppointments: Appointment[] = [];
-    for (let appointmentId of appointmentIds) {
-      if (dbResponse[appointmentId].userId !== userId) continue;
-      let appointment = mapAppointment(dbResponse[appointmentId]);
-      appointment.appointmentId = appointmentId;
-
-      let timeSlotResponse = (
-        await get(ref(database, "timeSlot/" + appointment.timeSlotId))
-      ).val();
-      let timeSlot = mapTimeSlot(timeSlotResponse);
-      appointment.timeSlot = timeSlot;
-
-      let timeNow = Math.floor(Date.now() / 1000);
-      if (timeSlot.startTime < timeNow) {
-        pastAppointments.push(appointment);
-      } else {
-        upcomingAppointments.push(appointment);
-      }
-    }
-    console.log("filter", { pastAppointments, upcomingAppointments });
-    const response = NextResponse.json(
-      { pastAppointments, upcomingAppointments },
-      { status: 200 },
-    );
+    const dbResponse = (
+      await get(
+        child(
+          ref(database),
+          "/https://nomadhair-79e6c-default-rtdb.firebaseio.com/appointment/",
+        ),
+      )
+    ).val();
+    const responseBody = await filterAppointments(dbResponse, userId);
+    const response = NextResponse.json(responseBody, { status: 200 });
     return response;
   } catch (error) {
     console.log(error);
