@@ -11,11 +11,17 @@ import { createTimeSlot } from "@/server/handler/timeSlotHandler";
 import { cookies } from "next/headers";
 
 export async function GET(req: NextRequest) {
-  const userId = cookies().get("id")?.value;
-  const dbResponse = (await get(child(ref(database), "appointment/"))).val();
-  const responseBody = await filterAppointments(dbResponse, userId);
-  const response = NextResponse.json(responseBody, { status: 200 });
-  return response;
+  try {
+    const userId = cookies().get("id")?.value;
+    const dbResponse = (await get(child(ref(database), "appointment/"))).val();
+    console.log("db", dbResponse);
+    const responseBody = await filterAppointments(dbResponse, userId);
+    console.log("filter", responseBody);
+    const response = NextResponse.json(responseBody, { status: 200 });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function PATCH(req: NextRequest) {
