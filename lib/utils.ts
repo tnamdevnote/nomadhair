@@ -4,6 +4,7 @@ import { get, set, ref, child } from "firebase/database";
 import { mapTimeSlot } from "@/server/mapper/timeSlotMapper";
 import { mapAppointment } from "@/server/mapper/appointmentMapper";
 import { database } from "@/server/initFirebase";
+import { Appointment } from "@/server/model/appointment";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
