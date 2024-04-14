@@ -13,14 +13,7 @@ import { cookies } from "next/headers";
 export async function GET(req: NextRequest) {
   try {
     const userId = cookies().get("id")?.value;
-    const dbResponse = (
-      await get(
-        child(
-          ref(database),
-          "/https://nomadhair-79e6c-default-rtdb.firebaseio.com/appointment/",
-        ),
-      )
-    ).val();
+    const dbResponse = (await get(child(ref(database), "/appointment"))).val();
     const responseBody = await filterAppointments(dbResponse, userId);
     const response = NextResponse.json(responseBody, { status: 200 });
     return response;
