@@ -8,11 +8,11 @@ import Link from "next/link";
 const HeroSection = () => {
   return (
     <section aria-label="Hero">
-      <SplitContainer className="h-[80vh] py-12 md:flex-row-reverse md:justify-between md:py-44">
+      <SplitContainer className="md: py-12 md:flex-row-reverse md:justify-between md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={barber} width={400} alt="barber image" priority />
         </SplitContainer.Left>
-        <SplitContainer.Right className="group flex basis-1/2 flex-col gap-10">
+        <SplitContainer.Right className="flex basis-1/2 flex-col gap-10">
           <h1
             className="animate-fade-in text-center text-xl font-medium text-primary-100 motion-reduce:animate-none md:text-left lg:text-2xl"
             style={{ "--index": 2 } as React.CSSProperties}
@@ -31,7 +31,7 @@ const HeroSection = () => {
             nec ullamcorper mattis, pulvinar dapibus leo.
           </p>
           <div
-            className="animate-fade-in w-full"
+            className="w-full animate-fade-in"
             style={{ "--index": 1 } as React.CSSProperties}
           >
             <Button size="lg" className="w-full md:w-auto" asChild>
