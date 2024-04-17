@@ -1,15 +1,15 @@
 
 > nomadhair@0.1.0 build-storybook
-> storybook build --output-dir /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--57363-O1Sqtz2ui0Gm
+> storybook build --output-dir /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--22485-6Blg1Yz0PXQ6
 
 @storybook/cli v7.6.17
 
-info => Cleaning outputDir: /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--57363-O1Sqtz2ui0Gm
+info => Cleaning outputDir: /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--22485-6Blg1Yz0PXQ6
 info => Loading presets
 info => Building manager..
-info => Manager built (99 ms)
+info => Manager built (108 ms)
 info => Building preview..
-info => Copying static files: /Users/tnam/Documents/Projects/nomadhair/node_modules/@storybook/manager/static at /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--57363-O1Sqtz2ui0Gm/sb-common-assets
+info => Copying static files: /Users/tnam/Documents/Projects/nomadhair-vercel/node_modules/@storybook/manager/static at /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--22485-6Blg1Yz0PXQ6/sb-common-assets
 info Using Babel compiler
 info Addon-docs: using MDX2
 info => Using implicit CSS loaders
@@ -19,14 +19,15 @@ WARN This can impact web performance.
 WARN Assets: 
 WARN   609.d6dcfa09.iframe.bundle.js (690 KiB)
 WARN   71.8f606b1e.iframe.bundle.js (583 KiB)
-WARN   540.afa7cf5f.iframe.bundle.js (1.05 MiB)
-WARN   216.eeb34c1a.iframe.bundle.js (716 KiB)
+WARN   438.c855d473.iframe.bundle.js (813 KiB)
+WARN   170.59b803e3.iframe.bundle.js (1.45 MiB)
+WARN   216.2da83a74.iframe.bundle.js (715 KiB)
 WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
 WARN Entrypoints:
-WARN   main (1.1 MiB)
-WARN       runtime~main.0b3fe447.iframe.bundle.js
-WARN       540.afa7cf5f.iframe.bundle.js
-WARN       main.4e677111.iframe.bundle.js
+WARN   main (1.56 MiB)
+WARN       runtime~main.1903b5a4.iframe.bundle.js
+WARN       170.59b803e3.iframe.bundle.js
+WARN       main.3f833429.iframe.bundle.js
 WARN 
-info => Preview built (9.67 s)
-info => Output directory: /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--57363-O1Sqtz2ui0Gm
+info => Preview built (13 s)
+info => Output directory: /var/folders/kd/5b6jn8gd5rg5bxlj8v178q440000gn/T/chromatic--22485-6Blg1Yz0PXQ6
