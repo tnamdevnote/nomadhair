@@ -51,6 +51,16 @@ jobs:
         run: npm run build-storybook --quiet
 
       - name: Serve Storybook and run tests
+        env:
+          API_KEY: ${{ vars.API_KEY }}
+          AUTH_DOMAIN: ${{ vars.AUTH_DOMAIN }}
+          PROJECT_ID: ${{ vars.PROJECT_ID }}
+          STORAGE_BUCKET: ${{ vars.STORAGE_BUCKET }}
+          MESSAGING_SENDER_ID: ${{ vars.MESSAGING_SENDER_ID }}
+          APP_ID: ${{ vars.APP_ID }}
+          MEASUREMENT_ID: ${{ vars.MEASUREMENT_ID }}
+          DATABASE_NAME: ${{ vars.DATABASE_NAME }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
         run: |
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --silent" \
