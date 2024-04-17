@@ -1,5 +1,3 @@
-# .github/workflows/chromatic.yml
-
 name: "UI Tests"
 
 on: push
