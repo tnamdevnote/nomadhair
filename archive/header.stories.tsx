@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Header from "../components/organisms/header";
 import { within, userEvent, expect } from "@storybook/test";
-import { AuthProvider } from "@/app/authProvider";
 
 const meta: Meta<typeof Header> = {
   title: "Organisms/Header",
@@ -15,9 +14,7 @@ const meta: Meta<typeof Header> = {
   },
   render: () => (
     <div style={{ minHeight: "100px" }}>
-      <AuthProvider>
-        <Header />
-      </AuthProvider>
+      <Header isAuthenticated={true} />
     </div>
   ),
   /** Disabling test due to error related to importing firebase app */
