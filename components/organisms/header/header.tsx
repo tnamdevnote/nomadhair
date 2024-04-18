@@ -13,11 +13,7 @@ interface HeaderProps {
   photo?: string | null;
   isAuthenticated: boolean;
 }
-/**
- * userName prop comes from the cookie via a server component (layout.tsx)
- * This is just a temporary workaround to prevent flickering login state upon refresh.
- * Be sure to remove this once server side authentication is properly implemented.
- */
+
 function Header({ photo, isAuthenticated }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
