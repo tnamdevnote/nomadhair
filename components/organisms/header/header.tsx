@@ -1,24 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { LogOutIcon, MenuIcon } from "lucide-react";
-import { useAuthContext } from "@/app/authProvider";
 import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
-import { onAuthStateChanged } from "@/lib/auth";
-import { auth } from "@/server/initFirebase";
 
+interface HeaderProps {
+  photo?: string | null;
+  isAuthenticated: boolean;
+}
 /**
  * userName prop comes from the cookie via a server component (layout.tsx)
  * This is just a temporary workaround to prevent flickering login state upon refresh.
  * Be sure to remove this once server side authentication is properly implemented.
  */
-function Header({ userName }: { userName?: string }) {
+function Header({ photo, isAuthenticated }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, signOut } = useAuthContext();
 
   // scroll lock when navMenu is open
   useEffect(() => {
@@ -78,7 +79,7 @@ function Header({ userName }: { userName?: string }) {
                 <Link href="/about">About</Link>
               </Button>
             </li>
-            {userName || user?.displayName ? (
+            {isAuthenticated ? (
               <li>
                 <Button
                   variant="link"
@@ -94,22 +95,22 @@ function Header({ userName }: { userName?: string }) {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {userName || user?.displayName ? (
+          {isAuthenticated ? (
             <>
               <Avatar className="ring-1 ring-neutral-15">
-                <AvatarImage src={user?.photoURL ?? ""} alt="profile" />
+                <AvatarImage src={photo ?? ""} alt="profile" />
                 <AvatarFallback>TN</AvatarFallback>
               </Avatar>
               <Button
+                className="font-bold"
                 aria-label="Sign out"
                 variant="ghost"
                 icon={<LogOutIcon size={16} />}
                 iconPosition="after"
                 size="sm"
-                className="font-bold"
-                onClick={signOut}
+                asChild
               >
-                Sign out
+                <LogoutLink>Sign out</LogoutLink>
               </Button>
             </>
           ) : (

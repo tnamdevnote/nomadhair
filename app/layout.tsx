@@ -28,16 +28,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const userName = cookies().get("displayName")?.value;
-
-  const { isAuthenticated } = getKindeServerSession();
-  console.log(await isAuthenticated());
+  const { getUser, isAuthenticated } = getKindeServerSession();
+  const userState = await Promise.all([getUser(), isAuthenticated()]);
+  console.log(userState);
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
         <AuthProvider>
-          <Header userName={userName} />
+          <Header
+            photo={userState[0]?.picture}
+            isAuthenticated={userState[1]}
+          />
           {children}
           <Toaster />
         </AuthProvider>
