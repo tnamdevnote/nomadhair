@@ -30,8 +30,8 @@ export default async function RootLayout({
 }>) {
   const userName = cookies().get("displayName")?.value;
 
-  const { getUser } = getKindeServerSession();
-  console.log(await getUser());
+  const { isAuthenticated } = getKindeServerSession();
+  console.log(await isAuthenticated());
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
