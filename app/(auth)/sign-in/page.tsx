@@ -1,13 +1,9 @@
-import {
-  LoginLink,
-  RegisterLink,
-  LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 
-const SignIn = () => {
+export default function SignIn() {
   return (
     <Container className="flex min-h-dvh max-w-screen-sm flex-col items-center justify-center">
       <h1 className="w-full text-left text-xl text-primary-100 lg:text-xl">
@@ -17,7 +13,7 @@ const SignIn = () => {
         aria-label="sign in form"
         className="mt-8 flex w-full flex-col gap-4"
       >
-        <Button className="w-full" size={"lg"} intent="primary">
+        <Button className="w-full" intent="primary" size={"lg"}>
           <LoginLink
             authUrlParams={{
               connection_id:
@@ -36,6 +32,4 @@ const SignIn = () => {
       </section>
     </Container>
   );
-};
-
-export default SignIn;
+}

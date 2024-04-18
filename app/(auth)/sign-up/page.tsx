@@ -1,13 +1,9 @@
-import {
-  LoginLink,
-  RegisterLink,
-  LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Link from "next/link";
 
-const SignUp = () => {
+export default function SignUp() {
   return (
     <Container className="flex min-h-dvh max-w-screen-sm flex-col items-center justify-center">
       <h1 className="w-full text-left text-xl text-primary-100 lg:text-xl">
@@ -36,6 +32,4 @@ const SignUp = () => {
       </section>
     </Container>
   );
-};
-
-export default SignUp;
+}
