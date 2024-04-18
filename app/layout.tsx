@@ -5,6 +5,7 @@ import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
 import { cookies } from "next/headers";
 import { AuthProvider } from "./authProvider";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,12 +23,15 @@ export const metadata: Metadata = {
   description: "Welcome to NomadHair",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const userName = cookies().get("displayName")?.value;
+
+  const { getUser } = getKindeServerSession();
+  console.log(await getUser());
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>

@@ -1,5 +1,10 @@
+import {
+  LoginLink,
+  RegisterLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 import { Container } from "@/components/templates/container";
-import SignInButton from "./components/signInButton";
+import { Button } from "@/components/atoms/button";
 
 const SignIn = () => {
   return (
@@ -11,8 +16,14 @@ const SignIn = () => {
         aria-label="sign in form"
         className="mt-8 flex w-full flex-col gap-4"
       >
-        <SignInButton provider="Google" />
-        <SignInButton provider="Facebook" />
+        <Button className="w-full" size={"lg"} intent="primary">
+          <LoginLink
+            authUrlParams={{
+              connection_id:
+                process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
+            }}
+          >{`Continue with Google`}</LoginLink>
+        </Button>
       </section>
     </Container>
   );
