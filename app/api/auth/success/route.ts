@@ -13,5 +13,5 @@ export async function GET() {
   await addCustomer(user);
 
   // TODO: update redirect path in production
-  return NextResponse.redirect("http://localhost:3000");
+  return NextResponse.redirect(`${process.env.BASE_URL}`);
 }
