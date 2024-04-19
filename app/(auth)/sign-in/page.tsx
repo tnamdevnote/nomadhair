@@ -19,7 +19,7 @@ export default function SignIn() {
               connection_id:
                 process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
             }}
-            postLoginRedirectURL={`${process.env.BASE_URL}/api/auth/success`}
+            postLoginRedirectURL={`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/success`}
           >{`Continue with Google`}</LoginLink>
         </Button>
         <div className="flex w-full justify-center">
