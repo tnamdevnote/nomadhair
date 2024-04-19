@@ -25,7 +25,7 @@ export default function SignUp() {
           <span className="text-sm">
             {"Already have an account? "}{" "}
             <Button className="text-sm font-bold" variant={"link"} asChild>
-              <Link href={"/sign-up"}>Sign in!</Link>
+              <Link href={"/sign-in"}>Sign in!</Link>
             </Button>
           </span>
         </div>
