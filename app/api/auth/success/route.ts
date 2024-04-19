@@ -9,7 +9,7 @@ export async function GET() {
   const user = await getUser();
 
   if (!user || user === null || !user.id) {
-    throw new Error("Something went wrong with authentication" + user);
+    throw new Error("Something went wrong with authentication " + user);
   }
   // Add customer to Sanity upon sign in
   await addCustomer(user);
