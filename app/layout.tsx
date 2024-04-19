@@ -26,13 +26,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { getUser, isAuthenticated } = getKindeServerSession();
-  const userState = await Promise.all([getUser(), isAuthenticated()]);
-
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
-        <Header photo={userState[0]?.picture} isAuthenticated={userState[1]} />
         {children}
         <Toaster />
       </body>
