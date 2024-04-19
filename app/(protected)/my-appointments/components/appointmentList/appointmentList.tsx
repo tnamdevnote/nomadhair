@@ -6,7 +6,6 @@ import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { Skeleton } from "@/components/atoms/skeleton";
 import { Error, Fallback } from "@/components/organisms/fallback";
 import { AppointmentCard } from "../appointmentCard/appointmentCard";
-import { Appointment } from "@/server/model/appointment";
 import Image from "next/image";
 import { booking } from "@/public/illustrations";
 import { Button } from "@/components/atoms/button";
@@ -81,7 +80,7 @@ export const AppointmentList = () => {
             </Card>
           ) : (
             <>
-              {data.upcomingAppointments.length === 0 ? (
+              {/* {data.upcomingAppointments.length === 0 ? (
                 <AppointmentPlaceHolder />
               ) : (
                 data.upcomingAppointments.map((appointment: Appointment) => (
@@ -91,7 +90,7 @@ export const AppointmentList = () => {
                     appointment={appointment}
                   />
                 ))
-              )}
+              )} */}
             </>
           )}
         </div>
@@ -111,13 +110,13 @@ export const AppointmentList = () => {
             </Card>
           ) : (
             <>
-              {data.pastAppointments.map((appointment: Appointment) => (
+              {/* {data.pastAppointments.map((appointment: Appointment) => (
                 <AppointmentCard
                   key={appointment.appointmentId}
                   type="past"
                   appointment={appointment}
                 />
-              ))}
+              ))} */}
             </>
           )}
         </div>

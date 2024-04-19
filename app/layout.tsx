@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/organisms/header";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
