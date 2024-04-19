@@ -3,8 +3,7 @@ import "./globals.css";
 import Header from "@/components/organisms/header";
 import { Montserrat, Quicksand } from "next/font/google";
 import { Toaster } from "@/components/molecules/toast";
-import { cookies } from "next/headers";
-import { AuthProvider } from "./authProvider";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -22,21 +21,20 @@ export const metadata: Metadata = {
   description: "Welcome to NomadHair",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const userName = cookies().get("displayName")?.value;
+  const { getUser, isAuthenticated } = getKindeServerSession();
+  const userState = await Promise.all([getUser(), isAuthenticated()]);
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
       <body className="bg-secondary-10">
-        <AuthProvider>
-          <Header userName={userName} />
-          {children}
-          <Toaster />
-        </AuthProvider>
+        <Header photo={userState[0]?.picture} isAuthenticated={userState[1]} />
+        {children}
+        <Toaster />
       </body>
     </html>
   );
