@@ -24,7 +24,6 @@ import { AppointmentForm } from "../appointmentForm/appointmentForm";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import cancel_img from "./cancel_img.svg";
-import { Appointment } from "@/server/model/appointment";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -113,7 +112,7 @@ const EditDialog = ({
   appointment,
 }: {
   trigger: React.ReactNode;
-  appointment: Appointment;
+  appointment: any;
 }) => {
   const [matches, setMatches] = useState(false);
   const [open, setOpen] = useState(false);
@@ -165,7 +164,7 @@ const EditDialog = ({
 
 interface AppointmentCardProps {
   type?: "upcoming" | "past";
-  appointment: Appointment;
+  appointment: any;
 }
 
 export const AppointmentCard = ({

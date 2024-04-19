@@ -11,10 +11,13 @@ export const client = createClient({
   token: process.env.SANITY_API_TOKEN_APPOINTMENT,
 });
 
-//
 export const addCustomer = async (user: KindeUser) => {
   const customer = mapUser(user);
 
   const res = await client.createIfNotExists(customer);
   return res;
+};
+
+export const getTimeSlot = async () => {
+  const timeSlots = await client.fetch('*[_type == "timeSlot"]');
 };

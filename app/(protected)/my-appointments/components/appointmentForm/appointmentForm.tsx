@@ -16,7 +16,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/molecules/toast";
-import { Appointment } from "@/server/model/appointment";
 import { unixToDateTimeStrings } from "@/lib/utils";
 import { mutate } from "swr";
 
@@ -24,7 +23,7 @@ import { mutate } from "swr";
  * Extracted async calls into its own functions to manage them separate from rendering logic.
  * We can potentially make them into server actions.
  */
-async function patchAppointment(formValues: Partial<Appointment>) {
+async function patchAppointment(formValues: any) {
   const res = await fetch("/api/my-appointments", {
     method: "PATCH",
     body: JSON.stringify({
@@ -83,7 +82,7 @@ const INITIAL_FORM_VALUES: z.infer<typeof formSchema> = {
 interface AppointmentFormProps {
   id?: string;
   mode?: "create" | "edit";
-  appointment?: Appointment;
+  appointment?: any;
   onClose?: () => void;
 }
 
