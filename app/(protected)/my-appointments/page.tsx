@@ -9,8 +9,15 @@ import {
 import { Container } from "@/components/templates/container";
 import { PlusIcon } from "lucide-react";
 import { AppointmentForm, AppointmentList, NewAppointment } from "./components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 
-function MyAppointments() {
+export default async function MyAppointments() {
+  const { isAuthenticated } = getKindeServerSession();
+  const isSignedIn = await isAuthenticated();
+  if (!isSignedIn) {
+    redirect("/sign-in");
+  }
   return (
     <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
       <Container className="flex justify-between">
@@ -46,5 +53,3 @@ function MyAppointments() {
     </div>
   );
 }
-
-export default MyAppointments;
