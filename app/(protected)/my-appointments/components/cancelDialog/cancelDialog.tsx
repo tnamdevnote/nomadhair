@@ -19,7 +19,7 @@ import cancel_img from "./cancel_img.svg";
 
 const cancelAppointment = async (
   url: string,
-  { arg }: { arg: { timeSlotId: string; appointmentId: string } },
+  { arg }: { arg: { timeSlotId?: string; appointmentId: string } },
 ) => {
   const res = await fetch(url, {
     method: "DELETE",
@@ -35,7 +35,7 @@ const cancelAppointment = async (
 };
 
 interface CancelDialogProps {
-  timeSlotId: string;
+  timeSlotId?: string;
   appointmentId: string;
   trigger: React.ReactNode;
 }

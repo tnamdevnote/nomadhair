@@ -1,5 +1,3 @@
-"use client";
-
 import useSWR from "swr";
 
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
@@ -8,13 +6,17 @@ import { Error, Fallback } from "@/components/organisms/fallback";
 import Image from "next/image";
 import { booking } from "@/public/illustrations";
 import { Button } from "@/components/atoms/button";
+import { getAppointments } from "@/lib/sanity/client";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Suspense } from "react";
+import { UpcomingAppointments } from "../appointments/upcomingAppointments";
 
-async function getAppointments() {
-  const res = await fetch(`/api/my-appointments`);
-  const responseObj = await res.json();
+// async function getAppointments() {
+//   const res = await fetch(`/api/my-appointments`);
+//   const responseObj = await res.json();
 
-  return responseObj;
-}
+//   return responseObj;
+// }
 
 const AppointmentPlaceHolder = () => {
   return (
@@ -29,7 +31,23 @@ const AppointmentPlaceHolder = () => {
   );
 };
 
-export const AppointmentList = () => {
+function Loading() {
+  return (
+    <Card>
+      <CardContent className="flex flex-col gap-4">
+        <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-4 w-1/2" />
+      </CardContent>
+      <CardFooter className="inline-flex justify-end gap-4">
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-8 w-32" />
+      </CardFooter>
+    </Card>
+  );
+}
+
+export async function AppointmentList() {
   // if (error) {
   //   return (
   //     <section
@@ -56,6 +74,9 @@ export const AppointmentList = () => {
           Upcoming
         </h2>
         <div className="flex flex-col gap-4">
+          <Suspense fallback={<Loading />}>
+            <UpcomingAppointments />
+          </Suspense>
           {/* {isLoading ? (
             <Card>
               <CardContent className="flex flex-col gap-4">
@@ -113,4 +134,4 @@ export const AppointmentList = () => {
       </section>
     </>
   );
-};
+}

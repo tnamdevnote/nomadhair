@@ -1,6 +1,7 @@
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
-import { createClient } from "next-sanity";
+import { createClient, groq } from "next-sanity";
 import { mapUser } from "./mapUser";
+import { APPOINTMENT_QUERYResult } from "./sanity.types";
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
@@ -20,4 +21,29 @@ export const addCustomer = async (user: KindeUser) => {
 
 export const getTimeSlot = async () => {
   const timeSlots = await client.fetch('*[_type == "timeSlot"]');
+};
+
+export const getAppointments = async (
+  userId = "",
+  type: "upcoming" | "past",
+) => {
+  const res = await client.fetch<APPOINTMENT_QUERYResult>(
+    `*[_type=='appointment'
+        && customer->_id == '${userId}'
+        && dateTime(dateTime) ${type === "upcoming" ? ">" : "<"} dateTime(now())
+      ]{
+        "id": _id,
+        dateTime,
+        address1,
+        address2,
+        city,
+        state,
+        zipCode,
+        comment,
+        customer->{"id": _id, firstName, lastName},
+        stylist->{"id": _id, firstName, lastName}
+      }`,
+  );
+
+  return res;
 };
