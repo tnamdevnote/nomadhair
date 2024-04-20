@@ -1,8 +1,8 @@
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { Skeleton } from "@/components/atoms/skeleton";
 import { Suspense } from "react";
-import { UpcomingAppointments } from "../appointments/upcomingAppointments";
-import { PastAppointments } from "../appointments/pastAppointments";
+import UpcomingAppointments from "../appointments/upcomingAppointments";
+import PastAppointments from "../appointments/pastAppointments";
 
 function LoadingSkeleton({ className }: { className?: string }) {
   return (

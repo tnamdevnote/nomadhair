@@ -5,7 +5,7 @@ import React from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getAppointments } from "@/lib/sanity/client";
 
-export async function PastAppointments() {
+export default async function PastAppointments() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
