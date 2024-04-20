@@ -12,10 +12,10 @@ interface AppointmentCardProps {
   appointment: any;
 }
 
-export const AppointmentCard = ({
+export default async function AppointmentCard({
   type = "upcoming",
   appointment,
-}: AppointmentCardProps) => {
+}: AppointmentCardProps) {
   const { timeSlot, address1, city, state, zip, comment } = appointment;
 
   const date = timeSlot ? new Date(timeSlot.startTime * 1000) : null;
@@ -68,4 +68,4 @@ export const AppointmentCard = ({
       ) : null}
     </Card>
   );
-};
+}
