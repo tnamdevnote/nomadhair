@@ -12,7 +12,7 @@ interface AppointmentCardProps {
   appointment: any;
 }
 
-export default async function AppointmentCard({
+export async function AppointmentCard({
   type = "upcoming",
   appointment,
 }: AppointmentCardProps) {
