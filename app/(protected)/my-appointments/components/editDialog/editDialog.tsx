@@ -22,7 +22,7 @@ import { AppointmentForm } from "../appointmentForm/appointmentForm";
  * Renders `<AppointmentForm />` in `<Dialog />`.
  * On mobile view, it renders the form in `<Drawer />`.
  */
-export function EditDialog({
+export default function EditDialog({
   trigger,
   appointment,
 }: {
