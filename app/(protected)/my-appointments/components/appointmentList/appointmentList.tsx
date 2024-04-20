@@ -5,11 +5,9 @@ import useSWR from "swr";
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { Skeleton } from "@/components/atoms/skeleton";
 import { Error, Fallback } from "@/components/organisms/fallback";
-import { AppointmentCard } from "../appointmentCard/appointmentCard";
 import Image from "next/image";
 import { booking } from "@/public/illustrations";
 import { Button } from "@/components/atoms/button";
-import Link from "next/link";
 
 async function getAppointments() {
   const res = await fetch(`/api/my-appointments`);
@@ -32,32 +30,24 @@ const AppointmentPlaceHolder = () => {
 };
 
 export const AppointmentList = () => {
-  const { data, isLoading, error, mutate } = useSWR(
-    "/api/my-appointments",
-    getAppointments,
-    {
-      revalidateOnFocus: false,
-    },
-  );
-
-  if (error) {
-    return (
-      <section
-        className="flex h-full w-full items-center justify-center"
-        aria-label="something went wrong"
-      >
-        <Fallback
-          className="h-full gap-4 lg:p-16"
-          image={<Error className="h-2/3 w-2/3" />}
-          title="Oops! Something went wrong."
-        >
-          <Button onClick={() => mutate("/api/my-appointments")}>
-            Try again
-          </Button>
-        </Fallback>
-      </section>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <section
+  //       className="flex h-full w-full items-center justify-center"
+  //       aria-label="something went wrong"
+  //     >
+  //       <Fallback
+  //         className="h-full gap-4 lg:p-16"
+  //         image={<Error className="h-2/3 w-2/3" />}
+  //         title="Oops! Something went wrong."
+  //       >
+  //         <Button onClick={() => mutate("/api/my-appointments")}>
+  //           Try again
+  //         </Button>
+  //       </Fallback>
+  //     </section>
+  //   );
+  // }
 
   return (
     <>
@@ -66,7 +56,7 @@ export const AppointmentList = () => {
           Upcoming
         </h2>
         <div className="flex flex-col gap-4">
-          {isLoading ? (
+          {/* {isLoading ? (
             <Card>
               <CardContent className="flex flex-col gap-4">
                 <Skeleton className="h-4 w-1/2" />
@@ -80,7 +70,7 @@ export const AppointmentList = () => {
             </Card>
           ) : (
             <>
-              {/* {data.upcomingAppointments.length === 0 ? (
+              {data.upcomingAppointments.length === 0 ? (
                 <AppointmentPlaceHolder />
               ) : (
                 data.upcomingAppointments.map((appointment: Appointment) => (
@@ -90,9 +80,9 @@ export const AppointmentList = () => {
                     appointment={appointment}
                   />
                 ))
-              )} */}
+              )}
             </>
-          )}
+          )} */}
         </div>
       </section>
       <section aria-labelledby="past" className="mt-8 font-bold">
@@ -100,7 +90,7 @@ export const AppointmentList = () => {
           Expired
         </h2>
         <div className="flex h-full flex-col gap-4">
-          {isLoading ? (
+          {/* {isLoading ? (
             <Card className="bg-neutral-10">
               <CardContent className="flex flex-col gap-4">
                 <Skeleton className="h-4 w-1/2" />
@@ -110,15 +100,15 @@ export const AppointmentList = () => {
             </Card>
           ) : (
             <>
-              {/* {data.pastAppointments.map((appointment: Appointment) => (
+              {data.pastAppointments.map((appointment: Appointment) => (
                 <AppointmentCard
                   key={appointment.appointmentId}
                   type="past"
                   appointment={appointment}
                 />
-              ))} */}
+              ))}
             </>
-          )}
+          )} */}
         </div>
       </section>
     </>
