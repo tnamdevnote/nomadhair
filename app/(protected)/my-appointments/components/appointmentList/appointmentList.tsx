@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { UpcomingAppointments } from "../appointments/upcomingAppointments";
 import { PastAppointments } from "../appointments/pastAppointments";
 
-function Loading() {
+function LoadingSkeleton({ className }: { className?: string }) {
   return (
-    <Card>
+    <Card className={className}>
       <CardContent className="flex flex-col gap-4">
         <Skeleton className="h-4 w-1/2" />
         <Skeleton className="h-4 w-1/2" />
@@ -29,7 +29,7 @@ export async function AppointmentList() {
         </h2>
 
         <div className="flex flex-col gap-4">
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingSkeleton />}>
             <UpcomingAppointments />
           </Suspense>
         </div>
@@ -39,7 +39,7 @@ export async function AppointmentList() {
           Expired
         </h2>
         <div className="flex h-full flex-col gap-4">
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingSkeleton className="bg-neutral-10" />}>
             <PastAppointments />
           </Suspense>
         </div>
