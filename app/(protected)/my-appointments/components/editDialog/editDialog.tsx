@@ -27,7 +27,7 @@ export default function EditDialog({
   appointment,
 }: {
   trigger: React.ReactNode;
-  appointment: any;
+  appointment?: any;
 }) {
   const [matches, setMatches] = useState(false);
   const [open, setOpen] = useState(false);
@@ -53,11 +53,11 @@ export default function EditDialog({
             Change your appointment details.
           </DialogDescription>
         </DialogHeader>
-        <AppointmentForm
+        {/* <AppointmentForm
           mode="edit"
           appointment={appointment}
           onClose={() => setOpen(false)}
-        />
+        /> */}
       </DialogContent>
     </Dialog>
   ) : (
@@ -67,11 +67,11 @@ export default function EditDialog({
         <DrawerHeader>
           <DrawerTitle>Edit Appointment</DrawerTitle>
         </DrawerHeader>
-        <AppointmentForm
+        {/* <AppointmentForm
           mode="edit"
           appointment={appointment}
           onClose={() => setOpen(false)}
-        />
+        /> */}
       </DrawerContent>
     </Drawer>
   );

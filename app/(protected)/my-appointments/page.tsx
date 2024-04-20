@@ -8,7 +8,7 @@ import {
 } from "@/components/molecules/drawer";
 import { Container } from "@/components/templates/container";
 import { PlusIcon } from "lucide-react";
-import { AppointmentForm, AppointmentList, NewAppointment } from "./components";
+import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -47,7 +47,17 @@ export default async function MyAppointments() {
           <AppointmentList />
         </div>
         <div className="hidden md:sticky md:top-32 md:col-span-6 md:block">
-          <NewAppointment />
+          <section
+            aria-labelledby="new-appointment"
+            className="flex h-full flex-col"
+          >
+            <h2 id="new-appointment" className="py-3 text-base font-bold">
+              New Appointment
+            </h2>
+            <div className="h-full w-full rounded-2xl bg-white p-6 shadow-md">
+              <AppointmentForm />
+            </div>
+          </section>
         </div>
       </div>
     </div>
