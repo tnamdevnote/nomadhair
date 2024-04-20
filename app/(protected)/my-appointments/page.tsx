@@ -27,12 +27,11 @@ export default async function MyAppointments() {
         <Drawer>
           <DrawerTrigger asChild>
             <Button
+              aria-label="New Appointment"
               icon={<PlusIcon />}
               size="lg"
-              className="fixed bottom-12 right-8 bg-primary-90 md:hidden"
-            >
-              New Appointment
-            </Button>
+              className="fixed bottom-12 right-8 shadow-lg shadow-neutral-100/50 md:hidden"
+            />
           </DrawerTrigger>
           <DrawerContent className="p-6">
             <DrawerHeader>

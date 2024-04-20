@@ -20,7 +20,7 @@ function LoadingSkeleton({ className }: { className?: string }) {
   );
 }
 
-export async function AppointmentList() {
+export function AppointmentList() {
   return (
     <>
       <section aria-labelledby="upcoming">
