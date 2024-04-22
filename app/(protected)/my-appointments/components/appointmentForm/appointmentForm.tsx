@@ -1,5 +1,10 @@
 "use client";
 
+import { mutate } from "swr";
+import { z } from "zod";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
 import { Input, inputVariants } from "@/components/atoms/input";
 import {
@@ -12,12 +17,15 @@ import {
   FormMessage,
 } from "@/components/molecules/form";
 import { cn, toDateInputValue } from "@/lib/utils";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { useToast } from "@/components/molecules/toast";
 import { unixToDateTimeStrings } from "@/lib/utils";
-import { mutate } from "swr";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/molecules/popover";
+import { Calendar } from "@/components/atoms/calendar";
+import { CalendarIcon } from "lucide-react";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -58,7 +66,9 @@ async function sendEmail(formValues: z.infer<typeof formSchema>) {
 }
 
 const formSchema = z.object({
-  date: z.string().min(1, "Required"),
+  date: z.date({
+    required_error: "Required",
+  }),
   time: z.string().min(1, "Required"),
   address1: z.string().min(1, "Required"),
   address2: z.string().optional(),
@@ -68,16 +78,16 @@ const formSchema = z.object({
   comment: z.string().max(50).optional(),
 });
 
-const INITIAL_FORM_VALUES: z.infer<typeof formSchema> = {
-  date: "",
-  time: "",
-  address1: "",
-  address2: "",
-  city: "",
-  state: "",
-  zip: "",
-  comment: "",
-};
+// const INITIAL_FORM_VALUES: z.infer<typeof formSchema> = {
+//   date: "",
+//   time: "",
+//   address1: "",
+//   address2: "",
+//   city: "",
+//   state: "",
+//   zip: "",
+//   comment: "",
+// };
 
 interface AppointmentFormProps {
   id?: string;
@@ -97,23 +107,23 @@ export const AppointmentForm = ({
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues:
-      mode === "edit" && !!appointment
-        ? {
-            date: appointment.timeSlot
-              ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
-              : "",
-            time: appointment.timeSlot
-              ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
-              : "",
-            address1: appointment.address1,
-            address2: appointment.address2,
-            city: appointment.city,
-            state: appointment.state,
-            zip: appointment.zip,
-            comment: appointment.comment,
-          }
-        : INITIAL_FORM_VALUES,
+    // defaultValues:
+    //   mode === "edit" && !!appointment
+    //     ? {
+    //         date: appointment.timeSlot
+    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
+    //           : "",
+    //         time: appointment.timeSlot
+    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
+    //           : "",
+    //         address1: appointment.address1,
+    //         address2: appointment.address2,
+    //         city: appointment.city,
+    //         state: appointment.state,
+    //         zip: appointment.zip,
+    //         comment: appointment.comment,
+    //       }
+    //     : INITIAL_FORM_VALUES,
     resolver: zodResolver(formSchema),
   });
 
@@ -132,7 +142,7 @@ export const AppointmentForm = ({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
         intent: "success",
       });
-      form.reset(INITIAL_FORM_VALUES);
+      // form.reset(INITIAL_FORM_VALUES);
     } catch (e) {
       toast({
         title: "Oops! Something went wrong! Please try again.",
@@ -157,15 +167,35 @@ export const AppointmentForm = ({
             render={({ field, fieldState }) => (
               <FormItem className="col-span-3">
                 <FormLabel className="sr-only">Select Date</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    type="date"
-                    min={toDateInputValue(new Date())}
-                    {...field}
-                  />
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        className={cn(
+                          "h-8 w-full justify-start rounded-md border border-neutral-15 md:h-10",
+                          !field.value && "text-muted-foreground",
+                        )}
+                        icon={<CalendarIcon size={16} />}
+                        variant={"outline"}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
                 <FormDescription />
                 <FormMessage />
               </FormItem>
