@@ -1,4 +1,3 @@
-# new workflow
 name: "UI Tests"
 
 on: pull_request
@@ -28,7 +27,6 @@ jobs:
   # Run interaction and accessibility tests
   interaction-and-accessibility:
     runs-on: ubuntu-latest
-    environment: dev
     needs: install-cache
     steps:
       - uses: actions/checkout@v4
