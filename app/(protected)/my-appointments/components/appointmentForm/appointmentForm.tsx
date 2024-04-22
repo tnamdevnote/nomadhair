@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/molecules/popover";
 import { Calendar } from "@/components/atoms/calendar";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, ClockIcon } from "lucide-react";
 import {
   Select,
   SelectTrigger,
@@ -219,8 +219,14 @@ export const AppointmentForm = ({
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger aria-label="Pick a time">
-                      <SelectValue placeholder="Pick a time" />
+                    <SelectTrigger
+                      className="h-8 md:h-10"
+                      aria-label="Pick a time"
+                    >
+                      <div className="inline-flex items-center gap-2">
+                        <ClockIcon size={16} />
+                        <SelectValue placeholder="Pick a time" />
+                      </div>
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
