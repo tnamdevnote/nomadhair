@@ -26,6 +26,13 @@ import {
 } from "@/components/molecules/popover";
 import { Calendar } from "@/components/atoms/calendar";
 import { CalendarIcon } from "lucide-react";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/molecules/select";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -172,8 +179,8 @@ export const AppointmentForm = ({
                     <FormControl>
                       <Button
                         className={cn(
-                          "h-8 w-full justify-start rounded-md border border-neutral-15 md:h-10",
-                          !field.value && "text-muted-foreground",
+                          "h-8 w-full justify-start rounded-md border border-neutral-15 font-normal md:h-10",
+                          !field.value && "text-neutral-70",
                         )}
                         icon={<CalendarIcon size={16} />}
                         variant={"outline"}
@@ -207,14 +214,21 @@ export const AppointmentForm = ({
             render={({ field, fieldState }) => (
               <FormItem className="col-span-3">
                 <FormLabel className="sr-only">Select Time</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    type="time"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger aria-label="Pick a time">
+                      <SelectValue placeholder="Pick a time" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="m@example.com">m@example.com</SelectItem>
+                    <SelectItem value="m@google.com">m@google.com</SelectItem>
+                    <SelectItem value="m@support.com">m@support.com</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormDescription />
                 <FormMessage />
               </FormItem>
