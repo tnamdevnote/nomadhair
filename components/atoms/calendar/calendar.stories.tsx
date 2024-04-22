@@ -8,6 +8,19 @@ const meta: Meta<typeof Calendar> = {
   parameters: {
     layout: "centered",
   },
+  render: ({ disabled }) => {
+    const [date, setDate] = useState<Date | undefined>(() => new Date());
+    return (
+      <Calendar
+        className="rounded-xl border shadow"
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        disabled={disabled}
+        footer={date?.toDateString()}
+      />
+    );
+  },
   /**
    * Disabling tests temporarily as there are accessibility issues with react-day-picker components.
    * Re-implement test once this gets resolved.
@@ -18,17 +31,4 @@ const meta: Meta<typeof Calendar> = {
 export default meta;
 type Story = StoryObj<typeof Calendar>;
 
-export const Default: Story = {
-  render: () => {
-    const [date, setDate] = useState<Date | undefined>(() => new Date());
-    return (
-      <Calendar
-        className="rounded-xl border shadow"
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        footer={date?.toDateString()}
-      />
-    );
-  },
-};
+export const Default: Story = {};
