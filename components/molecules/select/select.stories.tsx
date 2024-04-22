@@ -22,8 +22,8 @@ export const Default: Story = {
   render: () => {
     return (
       <Select>
-        <SelectTrigger aria-label="Hello">
-          <SelectValue placeholder="Hello" />
+        <SelectTrigger aria-label="Select">
+          <SelectValue placeholder="Select" />
         </SelectTrigger>
         <SelectContent position="popper">
           <SelectItem value="Profile">Profile</SelectItem>
