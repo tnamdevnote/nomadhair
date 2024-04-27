@@ -93,3 +93,16 @@ export const createAppointment = async (
 
   return res;
 };
+
+export const updateAppointment = async (
+  form: z.infer<typeof FormSchema>,
+  userId: string,
+) => {
+  const appointment = mapAppointment(form, userId);
+  const res = await client
+    .patch("YamW7iUfTGgX1JkiOPz5iP")
+    .set(appointment)
+    .commit();
+
+  return res;
+};
