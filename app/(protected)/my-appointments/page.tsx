@@ -18,6 +18,7 @@ export default async function MyAppointments() {
   if (!isSignedIn) {
     redirect("/sign-in");
   }
+
   return (
     <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
       <Container className="flex justify-between">

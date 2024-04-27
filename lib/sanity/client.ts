@@ -1,7 +1,11 @@
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
-import { createClient, groq } from "next-sanity";
+import { createClient } from "next-sanity";
 import { mapUser } from "./mapUser";
-import { APPOINTMENT_QUERYResult } from "./sanity.types";
+import {
+  APPOINTMENT_QUERYResult,
+  AVAILABLE_DATE_QUERYResult,
+  TIMESLOT_QUERYResult,
+} from "./sanity.types";
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
@@ -19,8 +23,38 @@ export const addCustomer = async (user: KindeUser) => {
   return res;
 };
 
-export const getTimeSlot = async () => {
-  const timeSlots = await client.fetch('*[_type == "timeSlot"]');
+export const getAvailableDate = async () => {
+  const dates = await client.fetch<AVAILABLE_DATE_QUERYResult>(
+    `*[_type=='timeslot' 
+      && reserved==false
+    ]{
+      'id': _id,
+      date
+    }`,
+  );
+
+  const distinctDates: { [key in string]: number } = {};
+  dates.forEach((d) => {
+    if (!distinctDates[d.date]) {
+      distinctDates[d.date] = 1;
+    }
+  });
+  return Object.keys(distinctDates);
+};
+
+export const getTimeSlot = async (date: string) => {
+  const timeSlots = await client.fetch<TIMESLOT_QUERYResult>(
+    `*[_type=='timeslot' 
+      && reserved==false
+      && date=='${date}'
+    ]{
+      'id': _id,
+      'start': duration.start,
+      reserved
+    }`,
+  );
+
+  return timeSlots;
 };
 
 export const getAppointments = async (
