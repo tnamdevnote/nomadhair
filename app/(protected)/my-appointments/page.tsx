@@ -12,7 +12,7 @@ import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { getAvailableDate } from "@/lib/sanity/client";
-import NewAppointment from "./components/appointmentForm/newAppointment";
+import AppointmentDateTimePicker from "./components/appointmentForm/appointmentDateTimePicker";
 
 export default async function MyAppointments() {
   const { isAuthenticated } = getKindeServerSession();
@@ -59,7 +59,7 @@ export default async function MyAppointments() {
             </h2>
             <div className="h-full w-full rounded-2xl bg-white p-6 shadow-md">
               {/* <AppointmentForm /> */}
-              <NewAppointment availableDates={availableDates} />
+              <AppointmentDateTimePicker availableDates={availableDates} />
             </div>
           </section>
         </div>

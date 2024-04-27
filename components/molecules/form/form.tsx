@@ -25,6 +25,11 @@ const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue,
 );
 
+/**
+ * This is a wrapper component to turn your form field in to controlled component.
+ * For uncontrolled input, refer consider using register method
+ * @link https://react-hook-form.com/docs/useform/register
+ */
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,

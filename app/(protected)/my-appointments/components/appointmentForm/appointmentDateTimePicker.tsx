@@ -1,17 +1,24 @@
 "use client";
 
 import { Calendar } from "@/components/atoms/calendar";
+import { TIMESLOT_QUERYResult, TimeSlot } from "@/lib/sanity/sanity.types";
 import { formatISO } from "date-fns";
 import React, { useState } from "react";
 import useSWR from "swr";
 
-interface NewAppointmentProps {
+interface AppointmentDateTimePickerProps {
   availableDates: string[];
 }
 
-function NewAppointment({ availableDates }: NewAppointmentProps) {
+function AppointmentDateTimePicker({
+  availableDates,
+}: AppointmentDateTimePickerProps) {
   const [date, setDate] = useState<Date | undefined>(() => new Date());
-  const { data, isLoading, mutate } = useSWR(`${date}`, async () => {
+  const {
+    data: availableTimeslots,
+    isLoading,
+    mutate,
+  } = useSWR(`${date}`, async () => {
     const res = await fetch(`api/timeslots/${date}`);
     return res.json();
   });
@@ -21,7 +28,7 @@ function NewAppointment({ availableDates }: NewAppointmentProps) {
     mutate(date);
   };
 
-  console.log(isLoading, data);
+  console.log(isLoading, availableTimeslots);
   return (
     <div>
       <Calendar
@@ -35,8 +42,11 @@ function NewAppointment({ availableDates }: NewAppointmentProps) {
           return !availableDates.includes(UTCDate);
         }}
       />
+      {availableTimeslots?.map((timeslot: typeof availableTimeslots) => (
+        <div key={timeslot.id}>{timeslot.start}</div>
+      ))}
     </div>
   );
 }
 
-export default NewAppointment;
+export default AppointmentDateTimePicker;
