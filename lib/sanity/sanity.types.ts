@@ -120,7 +120,7 @@ export type Geopoint = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -181,39 +181,18 @@ export type TimeValue =
   | "23:00"
   | "23:30";
 
-export type Duration = {
-  _type: "duration";
-  start?: TimeValue;
-  end?: TimeValue;
-};
-
-export type TimeSlot = {
-  _id: string;
-  _type: "timeSlot";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  dayOfWeek: string;
-  duration: Array<
-    {
-      _key: string;
-    } & Duration
-  >;
-  stylist: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "stylist";
-  };
-};
-
 export type Appointment = {
   _id: string;
   _type: "appointment";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  status?: "active" | "expired";
+  timeslot?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "timeslot";
+  };
   stylist?: {
     _ref: string;
     _type: "reference";
@@ -226,7 +205,6 @@ export type Appointment = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "customer";
   };
-  dateTime?: string;
   address1?: string;
   address2?: string;
   city?: string;
@@ -241,9 +219,9 @@ export type Customer = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   image?: string;
 };
 
@@ -253,10 +231,27 @@ export type Stylist = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   image?: string;
+};
+
+export type Timeslot = {
+  _id: string;
+  _type: "timeslot";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  date?: string;
+  duration?: Duration;
+  reserved?: boolean;
+};
+
+export type Duration = {
+  _type: "duration";
+  start?: TimeValue;
+  end?: TimeValue;
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
@@ -267,21 +262,24 @@ export type AVAILABLE_DATE_QUERYResult = Array<{
   id: string;
   date: string;
 }>;
-
-// Source: ./groq/groq.ts
 // Variable: TIMESLOT_QUERY
 // Query: *[_type=='timeslot'   && reserved==false  && date=='' ]{  'id': _id,  date,  'start': duration.start,  reserved }
 export type TIMESLOT_QUERYResult = Array<{
   id: string;
+  date: string | null;
   start: TimeValue | null;
-  reserved: boolean | null;
 }>;
-
+// Variable: IS_TIMESLOT_RESERVED_QUERY
+// Query: *[_type=='appointment'  && timeslot->_id=='' ]{  "timeslotId": timeslot->_id }
+export type IS_TIMESLOT_RESERVED_QUERYResult = Array<{
+  timeslotId: string | null;
+}>;
 // Variable: APPOINTMENT_QUERY
-// Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(dateTime) > dateTime(now())]{  dateTime,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{_id, firstName, lastName},  stylist->{_id, firstName, lastName}}
+// Query: *[_type=='appointment'  && customer->_id == ''  && timeslot->date < now()]{  "id":_id,  "date":timeslot->date,  "time":timeslot->duration.start,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
   id: string;
-  dateTime: string;
+  date: string;
+  time: TimeValue;
   address1: string;
   address2: string | null;
   city: string;

@@ -1,11 +1,13 @@
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { createClient } from "next-sanity";
-import { mapUser } from "./mapUser";
+import { mapUser, mapAppointment } from "./mapper";
 import {
   APPOINTMENT_QUERYResult,
   AVAILABLE_DATE_QUERYResult,
   TIMESLOT_QUERYResult,
 } from "./sanity.types";
+import { FormSchema } from "../formSchema";
+import { z } from "zod";
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
@@ -78,6 +80,16 @@ export const getAppointments = async (
         stylist->{"id": _id, firstName, lastName}
       }`,
   );
+
+  return res;
+};
+
+export const createAppointment = async (
+  form: z.infer<typeof FormSchema>,
+  userId: string,
+) => {
+  const appointment = mapAppointment(form, userId);
+  const res = await client.create(appointment);
 
   return res;
 };
