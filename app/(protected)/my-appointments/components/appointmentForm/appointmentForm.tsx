@@ -2,7 +2,7 @@
 
 import { mutate } from "swr";
 import { z } from "zod";
-import { format } from "date-fns";
+import { format, getDay } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -16,9 +16,8 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/molecules/form";
-import { cn, toDateInputValue } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
-import { unixToDateTimeStrings } from "@/lib/utils";
 import {
   Popover,
   PopoverContent,
@@ -33,6 +32,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/molecules/select";
+import { FormSchema } from "@/lib/formSchema";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -53,7 +53,7 @@ async function patchAppointment(formValues: any) {
   return Response.json(res);
 }
 
-async function sendEmail(formValues: z.infer<typeof formSchema>) {
+async function sendEmail(formValues: z.infer<typeof FormSchema>) {
   const { date, time, address1, address2, city, state, zip, comment } =
     formValues;
   const location = [address1, address2, city, state, zip].join(", ");
@@ -72,20 +72,7 @@ async function sendEmail(formValues: z.infer<typeof formSchema>) {
   return Response.json(res);
 }
 
-const formSchema = z.object({
-  date: z.date({
-    required_error: "Required",
-  }),
-  time: z.string().min(1, "Required"),
-  address1: z.string().min(1, "Required"),
-  address2: z.string().optional(),
-  city: z.string().max(30).min(2, "City must contain at least 2 characters"),
-  state: z.string().length(2, "State must contain exactly 2 characters"),
-  zip: z.string().length(5, "Zip code must be 5 digits long."),
-  comment: z.string().max(50).optional(),
-});
-
-// const INITIAL_FORM_VALUES: z.infer<typeof formSchema> = {
+// const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
 //   date: "",
 //   time: "",
 //   address1: "",
@@ -113,7 +100,7 @@ export const AppointmentForm = ({
 }: AppointmentFormProps) => {
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof FormSchema>>({
     // defaultValues:
     //   mode === "edit" && !!appointment
     //     ? {
@@ -131,10 +118,10 @@ export const AppointmentForm = ({
     //         comment: appointment.comment,
     //       }
     //     : INITIAL_FORM_VALUES,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
       await patchAppointment({
         ...values,
@@ -198,7 +185,9 @@ export const AppointmentForm = ({
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) => date < new Date()}
+                      disabled={(date) => {
+                        return date < new Date();
+                      }}
                       initialFocus
                     />
                   </PopoverContent>

@@ -261,27 +261,22 @@ export type Stylist = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./groq/groq.ts
-// Variable: TIMESLOT_QUERY
-// Query: *[_type == "timeSlot"]
-export type TIMESLOT_QUERYResult = Array<{
-  _id: string;
-  _type: "timeSlot";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  dayOfWeek: string;
-  duration: Array<
-    {
-      _key: string;
-    } & Duration
-  >;
-  stylist: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "stylist";
-  };
+// Variable: AVAILABLE_DATE_QUERY
+// Query: *[_type=='timeslot'   && reserved==false ]{  'id': _id,  date, }
+export type AVAILABLE_DATE_QUERYResult = Array<{
+  id: string;
+  date: string;
 }>;
+
+// Source: ./groq/groq.ts
+// Variable: TIMESLOT_QUERY
+// Query: *[_type=='timeslot'   && reserved==false  && date=='' ]{  'id': _id,  date,  'start': duration.start,  reserved }
+export type TIMESLOT_QUERYResult = Array<{
+  id: string;
+  start: TimeValue | null;
+  reserved: boolean | null;
+}>;
+
 // Variable: APPOINTMENT_QUERY
 // Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(dateTime) > dateTime(now())]{  dateTime,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{_id, firstName, lastName},  stylist->{_id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
