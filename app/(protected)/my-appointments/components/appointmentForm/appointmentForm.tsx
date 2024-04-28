@@ -321,7 +321,7 @@ export const AppointmentForm = ({
                     className="h-8 md:h-10"
                     type="number"
                     error={!!fieldState.error}
-                    placeholder="zipCode Code"
+                    placeholder="Zip Code"
                     {...field}
                   />
                 </FormControl>

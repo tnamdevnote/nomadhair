@@ -11,6 +11,7 @@ import { PlusIcon } from "lucide-react";
 import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
+import { Calendar } from "@/components/atoms/calendar";
 
 export default async function MyAppointments() {
   const { isAuthenticated } = getKindeServerSession();
@@ -55,7 +56,8 @@ export default async function MyAppointments() {
               New Appointment
             </h2>
             <div className="h-full w-full rounded-2xl bg-white p-6 shadow-md">
-              <AppointmentForm />
+              <Calendar />
+              {/* <AppointmentForm /> */}
             </div>
           </section>
         </div>

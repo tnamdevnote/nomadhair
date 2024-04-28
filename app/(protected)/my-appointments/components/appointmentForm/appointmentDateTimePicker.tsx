@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar } from "@/components/atoms/calendar";
-import { TIMESLOT_QUERYResult } from "@/lib/sanity/sanity.types";
 import { formatISO } from "date-fns";
 import React, { useState } from "react";
 import useSWR from "swr";
