@@ -12,38 +12,49 @@ interface AppointmentDateTimePickerProps {
 function AppointmentDateTimePicker({
   availableDates,
 }: AppointmentDateTimePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(() => new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const {
-    data: availableTimeslots,
+    data: availableHours,
     isLoading,
+    error,
     mutate,
-  } = useSWR(`${date}`, async () => {
-    const res = await fetch(`api/timeslots/${date}`);
-    return res.json();
-  });
+  } = useSWR(
+    selectedDate ? `${selectedDate}` : null,
+    async () => {
+      const res = await fetch(`api/timeslots/${selectedDate}`);
+      return res.json();
+    },
+    {},
+  );
 
-  const handleSelect = (date: Date | undefined) => {
-    setDate(date);
-    mutate(date);
+  const handleSelect = (selectedDate: Date | undefined) => {
+    setSelectedDate(selectedDate);
+    mutate();
   };
 
-  console.log(isLoading, availableTimeslots);
+  console.log(selectedDate, isLoading, availableHours);
   return (
-    <div>
+    <div className="flex h-full flex-col gap-8">
       <Calendar
         mode="single"
-        selected={date}
-        onSelect={(date) => handleSelect(date)}
-        disabled={(date) => {
-          const UTCDate = formatISO(new Date(date), {
+        selected={selectedDate}
+        onSelect={(selectedDate) => handleSelect(selectedDate)}
+        disabled={(selectedDate) => {
+          const UTCDate = formatISO(new Date(selectedDate), {
             representation: "date",
           });
           return !availableDates.includes(UTCDate);
         }}
       />
-      {availableTimeslots?.map((timeslot: typeof availableTimeslots) => (
-        <div key={timeslot.id}>{timeslot.start}</div>
-      ))}
+      <div className="border-1 flex flex-grow flex-wrap border">
+        {isLoading ? (
+          <div>loading...</div>
+        ) : (
+          availableHours.map((hour: typeof availableHours) => (
+            <div key={hour.id}>{hour.start}</div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

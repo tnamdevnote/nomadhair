@@ -155,80 +155,17 @@ export const AppointmentForm = ({
           <legend className="mb-2 text-sm font-bold text-primary-100">
             Appointment date
           </legend>
-          {/* <FormField
+          <FormField
             control={form.control}
-            name="date"
+            name="timeslotId"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-3">
                 <FormLabel className="sr-only">Select Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        className={cn(
-                          "h-8 w-full justify-start rounded-md border border-neutral-15 font-normal md:h-10",
-                          !field.value && "text-neutral-70",
-                        )}
-                        icon={<CalendarIcon size={16} />}
-                        variant={"outline"}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => {
-                        return date < new Date();
-                      }}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
                 <FormDescription />
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="time"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">Select Time</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      className="h-8 md:h-10"
-                      aria-label="Pick a time"
-                    >
-                      <div className="inline-flex items-center gap-2">
-                        <ClockIcon size={16} />
-                        <SelectValue placeholder="Pick a time" />
-                      </div>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
         </fieldset>
         <fieldset className="grid grid-cols-6 gap-x-2">
           <legend className="mb-2 text-sm font-bold text-primary-100">

@@ -7,6 +7,7 @@ import EditDialog from "../editDialog/editDialog";
 import CancelDialog from "../cancelDialog/cancelDialog";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getAppointments } from "@/lib/sanity/client";
+import { format } from "date-fns";
 
 export default async function UpcomingAppointments() {
   const { getUser } = getKindeServerSession();
@@ -20,7 +21,6 @@ export default async function UpcomingAppointments() {
       {appointments.map(
         ({
           id,
-          timeslotId,
           date,
           time,
           address1,
@@ -34,13 +34,11 @@ export default async function UpcomingAppointments() {
             <CardContent className="flex flex-col gap-4">
               <p className="inline-flex gap-2 text-base font-bold">
                 <CalendarIcon />
-                {new Date(date).toDateString()}
+                {new Date(date).toUTCString().slice(0, 16)}
               </p>
               <p className="inline-flex gap-2 text-base font-bold">
                 <ClockIcon />
-                {new Date(`${date} ${time}`).toLocaleTimeString("en-US", {
-                  timeStyle: "short",
-                })}
+                {format(new Date(`${date} ${time}`), "p")}
               </p>
               <p className="text-sm">
                 {[address1, address2, city, state, zipCode]

@@ -12,6 +12,8 @@ import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { Calendar } from "@/components/atoms/calendar";
+import AppointmentDateTimePicker from "./components/appointmentForm/appointmentDateTimePicker";
+import { getAvailableDate } from "@/lib/sanity/client";
 
 export default async function MyAppointments() {
   const { isAuthenticated } = getKindeServerSession();
@@ -19,6 +21,8 @@ export default async function MyAppointments() {
   if (!isSignedIn) {
     redirect("/sign-in");
   }
+
+  const availableDate = await getAvailableDate();
 
   return (
     <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
@@ -56,7 +60,7 @@ export default async function MyAppointments() {
               New Appointment
             </h2>
             <div className="h-full w-full rounded-2xl bg-white p-6 shadow-md">
-              <Calendar />
+              <AppointmentDateTimePicker availableDates={availableDate} />
               {/* <AppointmentForm /> */}
             </div>
           </section>
