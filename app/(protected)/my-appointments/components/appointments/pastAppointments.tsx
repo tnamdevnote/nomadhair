@@ -15,16 +15,26 @@ export default async function PastAppointments() {
   return (
     <>
       {appointments.map(
-        ({ id, dateTime, address1, address2, city, state, zipCode }) => (
+        ({
+          id,
+          timeslotId,
+          date,
+          time,
+          address1,
+          address2,
+          city,
+          state,
+          zipCode,
+        }) => (
           <Card key={id} className="bg-neutral-10 shadow-none">
             <CardContent className="flex flex-col gap-4">
               <p className="inline-flex gap-2 text-base font-bold">
                 <CalendarIcon />
-                {new Date(dateTime).toDateString()}
+                {new Date(date).toDateString()}
               </p>
               <p className="inline-flex gap-2 text-base font-bold">
                 <ClockIcon />
-                {new Date(dateTime).toLocaleTimeString("en-US", {
+                {new Date(`${date} ${time}`).toLocaleTimeString("en-US", {
                   timeStyle: "short",
                 })}
               </p>

@@ -20,7 +20,9 @@ export default async function UpcomingAppointments() {
       {appointments.map(
         ({
           id,
-          dateTime,
+          timeslotId,
+          date,
+          time,
           address1,
           address2,
           city,
@@ -32,11 +34,11 @@ export default async function UpcomingAppointments() {
             <CardContent className="flex flex-col gap-4">
               <p className="inline-flex gap-2 text-base font-bold">
                 <CalendarIcon />
-                {new Date(dateTime).toDateString()}
+                {new Date(date).toDateString()}
               </p>
               <p className="inline-flex gap-2 text-base font-bold">
                 <ClockIcon />
-                {new Date(dateTime).toLocaleTimeString("en-US", {
+                {new Date(`${date} ${time}`).toLocaleTimeString("en-US", {
                   timeStyle: "short",
                 })}
               </p>
