@@ -53,24 +53,24 @@ async function patchAppointment(formValues: any) {
   return Response.json(res);
 }
 
-async function sendEmail(formValues: z.infer<typeof FormSchema>) {
-  const { date, time, address1, address2, city, state, zip, comment } =
-    formValues;
-  const location = [address1, address2, city, state, zip].join(", ");
-  const res = await fetch("/api/email", {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    // This is a mock data. Replace with proper form values later.
-    body: JSON.stringify({
-      date: new Date(date).toDateString(),
-      time,
-      location,
-      comment,
-    }),
-  });
+// async function sendEmail(formValues: z.infer<typeof FormSchema>) {
+//   const { timeslotId, address1, address2, city, state, zipCode, comment } =
+//     formValues;
+//   const location = [address1, address2, city, state, zipCode].join(", ");
+//   const res = await fetch("/api/email", {
+//     method: "POST",
+//     headers: { "Content-type": "application/json" },
+//     // This is a mock data. Replace with proper form values later.
+//     body: JSON.stringify({
+//       date: new Date(date).toDateString(),
+//       time,
+//       location,
+//       comment,
+//     }),
+//   });
 
-  return Response.json(res);
-}
+//   return Response.json(res);
+// }
 
 // const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
 //   date: "",
@@ -79,7 +79,7 @@ async function sendEmail(formValues: z.infer<typeof FormSchema>) {
 //   address2: "",
 //   city: "",
 //   state: "",
-//   zip: "",
+//   zipCode: "",
 //   comment: "",
 // };
 
@@ -114,7 +114,7 @@ export const AppointmentForm = ({
     //         address2: appointment.address2,
     //         city: appointment.city,
     //         state: appointment.state,
-    //         zip: appointment.zip,
+    //         zipCode: appointment.zipCode,
     //         comment: appointment.comment,
     //       }
     //     : INITIAL_FORM_VALUES,
@@ -128,7 +128,7 @@ export const AppointmentForm = ({
         appointmentId: appointment?.appointmentId ?? undefined,
       });
 
-      await sendEmail(values);
+      // await sendEmail(values);
       // Re-validates the <AppointmentList /> successful submission.
       mutate("/api/my-appointments");
       onClose ? onClose() : null;
@@ -155,7 +155,7 @@ export const AppointmentForm = ({
           <legend className="mb-2 text-sm font-bold text-primary-100">
             Appointment date
           </legend>
-          <FormField
+          {/* <FormField
             control={form.control}
             name="date"
             render={({ field, fieldState }) => (
@@ -228,7 +228,7 @@ export const AppointmentForm = ({
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </fieldset>
         <fieldset className="grid grid-cols-6 gap-x-2">
           <legend className="mb-2 text-sm font-bold text-primary-100">
@@ -312,16 +312,16 @@ export const AppointmentForm = ({
           />
           <FormField
             control={form.control}
-            name="zip"
+            name="zipCode"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Zip Code</FormLabel>
+                <FormLabel className="sr-only">zipCode Code</FormLabel>
                 <FormControl>
                   <Input
                     className="h-8 md:h-10"
                     type="number"
                     error={!!fieldState.error}
-                    placeholder="Zip Code"
+                    placeholder="zipCode Code"
                     {...field}
                   />
                 </FormControl>

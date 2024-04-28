@@ -1,11 +1,13 @@
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { createClient } from "next-sanity";
-import { mapUser } from "./mapUser";
+import { mapUser, mapAppointment } from "./mapper";
 import {
   APPOINTMENT_QUERYResult,
   AVAILABLE_DATE_QUERYResult,
   TIMESLOT_QUERYResult,
 } from "./sanity.types";
+import { FormSchema } from "../formSchema";
+import { z } from "zod";
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
@@ -25,11 +27,11 @@ export const addCustomer = async (user: KindeUser) => {
 
 export const getAvailableDate = async () => {
   const dates = await client.fetch<AVAILABLE_DATE_QUERYResult>(
-    `*[_type=='timeslot' 
-      && reserved==false
+    `*[_type=='timeslot'
+      && !(_id in *[_type=='appointment'].timeslot._ref)
     ]{
-      'id': _id,
-      date
+      "id": _id,
+      date,
     }`,
   );
 
@@ -64,10 +66,12 @@ export const getAppointments = async (
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'
         && customer->_id == '${userId}'
-        && dateTime(dateTime) ${type === "upcoming" ? ">" : "<"} dateTime(now())
+        && timeslot->date ${type === "upcoming" ? ">" : "<"} now()
       ]{
-        "id": _id,
-        dateTime,
+        "id":_id,
+        "timeslotId":timeslot->_id,
+        "date":timeslot->date,
+        "time":timeslot->duration.start,
         address1,
         address2,
         city,
@@ -76,8 +80,32 @@ export const getAppointments = async (
         comment,
         customer->{"id": _id, firstName, lastName},
         stylist->{"id": _id, firstName, lastName}
-      }`,
+      }
+    `,
   );
+
+  return res;
+};
+
+export const createAppointment = async (
+  form: z.infer<typeof FormSchema>,
+  userId: string,
+) => {
+  const appointment = mapAppointment(form, userId);
+  const res = await client.create(appointment);
+
+  return res;
+};
+
+export const updateAppointment = async (
+  form: z.infer<typeof FormSchema>,
+  userId: string,
+) => {
+  const appointment = mapAppointment(form, userId);
+  const res = await client
+    .patch("YamW7iUfTGgX1JkiOPz5iP")
+    .set(appointment)
+    .commit();
 
   return res;
 };
