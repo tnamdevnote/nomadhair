@@ -51,7 +51,9 @@ export const Clickable: Story = {
     label: "Clickable",
     onClick: () => console.log("clicked"),
   },
-  render: ({ label, selected, onClick }) => {
-    return <Badge label={label} selected={selected} onClick={onClick} />;
+  render: ({ label, selected, onClick, ...rest }) => {
+    return (
+      <Badge label={label} selected={selected} onClick={onClick} {...rest} />
+    );
   },
 };
