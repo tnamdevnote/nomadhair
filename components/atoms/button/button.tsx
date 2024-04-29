@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./../../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-full font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       intent: {
@@ -21,9 +21,9 @@ const buttonVariants = cva(
         link: "bg-transparent text-current underline-offset-4 hover:underline hover:bg-transparent",
       },
       size: {
-        sm: "h-9 px-3 py-1.5 text-sm [&_svg]:w-auto [&_svg]:h-auto",
-        md: "h-10 px-4 py-2 text-sm [&_svg]:w-auto [&_svg]:h-auto",
-        lg: "h-11 px-6 py-3 text-base [&_svg]:w-auto [&_svg]:h-auto",
+        sm: "h-9 px-3 py-1.5 text-sm/[100%] [&_svg]:w-auto [&_svg]:h-auto",
+        md: "h-10 px-4 py-2 text-sm/[100%] [&_svg]:w-auto [&_svg]:h-auto",
+        lg: "h-11 px-6 py-3 text-base/[100%] [&_svg]:w-auto [&_svg]:h-auto",
       },
       _hasChild: {
         false: undefined,
