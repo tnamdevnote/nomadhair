@@ -72,8 +72,8 @@ const config = {
       quicksand: ["var(--font-quicksand)"],
     },
     fontSize: {
-      sm: ["0.875rem", "150%"],
-      base: ["1rem", "150%"],
+      sm: ["0.875rem", "110%"],
+      base: ["1rem", "110%"],
       lg: ["1.5rem", "150%"],
       xl: ["2.25rem", "110%"],
       "2xl": ["3.5rem", "110%"],

@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./badge";
+import { useState } from "react";
 
 const meta: Meta<typeof Badge> = {
   title: "Atoms/Badge",
@@ -12,9 +13,27 @@ const meta: Meta<typeof Badge> = {
     layout: "centered",
   },
   args: {
-    label: "Label",
-    selected: true,
-    onClick: () => console.log("click"),
+    label: "Badge",
+    selected: false,
+    size: "sm",
+    onClick: undefined,
+  },
+  argTypes: {
+    label: {
+      type: "string",
+    },
+    selected: {
+      control: "boolean",
+      if: { arg: "onClick" },
+    },
+    size: {
+      options: ["sm", "md", "lg"],
+      control: { type: "radio" },
+    },
+    onClick: {
+      type: "function",
+      description: "Optional click handler. Enables `selected` prop.",
+    },
   },
 };
 
@@ -23,3 +42,16 @@ export default meta;
 type Story = StoryObj<typeof Badge>;
 
 export const Default: Story = {};
+
+/**
+ * Badge with `onClick` prop defined change appearance on focus, hover, and click.
+ */
+export const Clickable: Story = {
+  args: {
+    label: "Clickable",
+    onClick: () => console.log("clicked"),
+  },
+  render: ({ label, selected, onClick }) => {
+    return <Badge label={label} selected={selected} onClick={onClick} />;
+  },
+};
