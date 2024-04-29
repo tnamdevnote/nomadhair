@@ -2,6 +2,12 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./badge";
 import { useState } from "react";
 
+/**
+ * Badge is a component that serves as a visual representation of a specific
+ * information, input, or an action.
+ * It is commonly used to display various types of content, such as
+ * categories, label, options, or a product attributes.
+ */
 const meta: Meta<typeof Badge> = {
   title: "Atoms/Badge",
   component: Badge,
