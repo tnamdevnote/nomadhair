@@ -51,8 +51,7 @@ export const getTimeSlot = async (date: string) => {
       && date=='${date}'
     ]{
       'id': _id,
-      'start': duration.start,
-      reserved
+      'start': duration.start
     }`,
   );
 

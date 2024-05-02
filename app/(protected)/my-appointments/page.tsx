@@ -12,7 +12,7 @@ import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { Calendar } from "@/components/atoms/calendar";
-import AppointmentDateTimePicker from "./components/appointmentForm/appointmentDateTimePicker";
+import AppointmentDateTimePicker from "./components/appointmentDateTimePicker/appointmentDateTimePicker";
 import { getAvailableDate } from "@/lib/sanity/client";
 
 export default async function MyAppointments() {
