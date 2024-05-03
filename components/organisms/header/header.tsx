@@ -2,12 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { LogOutIcon, MenuIcon } from "lucide-react";
+import { CalendarIcon, LogOutIcon } from "lucide-react";
 import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import Logo from "@/components/atoms/logo";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/molecules/popover";
 
 interface HeaderProps {
   photo?: string | null;
@@ -38,98 +43,49 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
   }, []);
 
   return (
-    <header className="fixed top-0 z-10 h-navbar-height-sm w-full border-b-[0.5px] border-primary-10/90 bg-secondary-10 md:bg-transparent md:backdrop-blur-md lg:h-navbar-height-lg">
-      <Container className="flex items-center py-4 lg:py-5">
+    <header className="fixed top-0 z-10 h-navbar-height-sm w-full border-b-[0.5px] border-primary-10/90 bg-secondary-10 md:bg-transparent md:backdrop-blur-md">
+      <Container className="flex items-center py-4">
         <Link href="/" aria-label="Home">
           <Logo className="h-5 lg:h-7" />
         </Link>
-        <nav
-          className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto md:bg-transparent`}
-        >
-          <ul className="mt-16 flex w-full flex-col gap-2 px-4 md:mt-0 md:flex-row md:px-0">
-            <li
-              className={`${isOpen ? "animate-fade-in" : ""}`}
-              style={{ "--index": 1 } as React.CSSProperties}
-            >
-              <Button
-                variant="link"
-                size="sm"
-                asChild
-                className="w-full"
-                onClick={() => setIsOpen(false)}
+        <nav className={`top-0 ml-auto bg-secondary-10 bg-transparent`}>
+          {isAuthenticated ? (
+            <Popover>
+              <PopoverTrigger className="hover:cursor-pointer" asChild>
+                <Avatar className="ring-1 ring-neutral-15">
+                  <AvatarImage src={photo ?? ""} alt="profile" />
+                  <AvatarFallback>TN</AvatarFallback>
+                </Avatar>
+              </PopoverTrigger>
+              <PopoverContent
+                className=" flex w-fit flex-col items-start"
+                align="end"
               >
-                <Link href="/">Home</Link>
-              </Button>
-            </li>
-            <li
-              className={`${isOpen ? "animate-fade-in" : ""}`}
-              style={{ "--index": 2 } as React.CSSProperties}
-            >
-              <Button
-                variant="link"
-                size="sm"
-                asChild
-                className="w-full"
-                onClick={() => setIsOpen(false)}
-              >
-                <Link href="/about">About</Link>
-              </Button>
-            </li>
-            {isAuthenticated ? (
-              <li>
                 <Button
                   variant="link"
                   size="sm"
+                  icon={<CalendarIcon size={16} />}
                   asChild
-                  className="w-full"
-                  onClick={() => setIsOpen(false)}
                 >
                   <Link href="/my-appointments">My Appointments</Link>
                 </Button>
-              </li>
-            ) : null}
-          </ul>
-        </nav>
-        <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
-          {isAuthenticated ? (
-            <>
-              <Avatar className="ring-1 ring-neutral-15">
-                <AvatarImage src={photo ?? ""} alt="profile" />
-                <AvatarFallback>TN</AvatarFallback>
-              </Avatar>
-              <Button
-                className="font-bold"
-                aria-label="Sign out"
-                variant="ghost"
-                icon={<LogOutIcon size={16} />}
-                iconPosition="after"
-                size="sm"
-                asChild
-              >
-                <LogoutLink>Sign out</LogoutLink>
-              </Button>
-            </>
+                <Button
+                  aria-label="Sign out"
+                  variant="link"
+                  size="sm"
+                  icon={<LogOutIcon size={16} />}
+                  asChild
+                >
+                  <LogoutLink>Sign out</LogoutLink>
+                </Button>
+              </PopoverContent>
+            </Popover>
           ) : (
-            <>
-              <Button
-                aria-label="Sign in"
-                iconPosition="after"
-                size="sm"
-                asChild
-              >
-                <Link href="/sign-in">Sign in</Link>
-              </Button>
-            </>
+            <Button aria-label="Sign in" iconPosition="after" size="sm" asChild>
+              <Link href="/sign-in">Sign in</Link>
+            </Button>
           )}
-        </div>
-        <Button
-          aria-label="Toggle Menu Button"
-          variant="ghost"
-          icon={<MenuIcon size={16} />}
-          size="sm"
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden"
-        />
+        </nav>
       </Container>
     </header>
   );
