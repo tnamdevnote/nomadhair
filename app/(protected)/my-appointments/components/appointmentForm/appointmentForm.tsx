@@ -33,6 +33,7 @@ import {
 } from "@/components/molecules/select";
 import { FormSchema } from "@/lib/formSchema";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
+import { useState } from "react";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -91,6 +92,10 @@ interface AppointmentFormProps {
 }
 
 const AVAILABLE_DATES = ["2024-05-06", "2024-05-02", "2024-05-13"];
+const NUM_STEP = [
+  { id: "step-1", name: "Step 1" },
+  { id: "step-2", name: "Step 2" },
+];
 
 /**
  * A client side form component that handles both creating and editing appointments.
@@ -102,6 +107,7 @@ export const AppointmentForm = ({
 }: AppointmentFormProps) => {
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
+  const [currentStep, setCurrentStep] = useState(0);
   const form = useForm<z.infer<typeof FormSchema>>({
     // defaultValues:
     //   mode === "edit" && !!appointment
@@ -122,6 +128,17 @@ export const AppointmentForm = ({
     //     : INITIAL_FORM_VALUES,
     resolver: zodResolver(FormSchema),
   });
+
+  const next = () => {
+    if (currentStep < NUM_STEP.length - 1) {
+      setCurrentStep((step) => step + 1);
+    }
+  };
+  const prev = () => {
+    if (currentStep >= 0 && currentStep === 1) {
+      setCurrentStep((step) => step - 1);
+    }
+  };
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
@@ -146,164 +163,193 @@ export const AppointmentForm = ({
       });
     }
   };
-
+  console.log(currentStep);
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4"
+        className="flex w-full flex-col justify-between gap-4"
       >
-        <fieldset className="grid grid-cols-6 gap-2">
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Appointment date
-          </legend>
-          <FormField
-            control={form.control}
-            name="timeslotId"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Select Date</FormLabel>
-                <AppointmentDateTimePicker availableDates={AVAILABLE_DATES} />
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </fieldset>
-        <fieldset className="grid grid-cols-6 gap-x-2">
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Address
-          </legend>
-          <FormField
-            control={form.control}
-            name="address1"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Address 1</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="Address 1"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="address2"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Address 2</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="Address 2"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">City</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="City"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="state"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">State</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="State"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="zipCode"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Zip code</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    type="number"
-                    error={!!fieldState.error}
-                    placeholder="Zip Code"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </fieldset>
-        <fieldset>
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Note
-          </legend>
-          <FormField
-            control={form.control}
-            name="comment"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="sr-only">Note</FormLabel>
-                <FormControl>
-                  <textarea
-                    className={cn(
-                      inputVariants(),
-                      "h-16 outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2",
-                    )}
-                    placeholder="Anything I should know before the visit?"
-                    {...field}
-                  ></textarea>
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </fieldset>
-        <Button
-          type="submit"
-          disabled={form.formState.isSubmitting}
-          className="self-end"
-        >
-          {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
-        </Button>
+        {currentStep === 0 && (
+          <fieldset className="grid grid-cols-6 gap-2">
+            <legend className="mb-2 text-sm font-bold text-primary-100">
+              Appointment date
+            </legend>
+            <FormField
+              control={form.control}
+              name="timeslotId"
+              render={() => (
+                <FormItem className="col-span-6">
+                  <FormLabel className="sr-only">
+                    Pick your appointment date
+                  </FormLabel>
+                  <AppointmentDateTimePicker availableDates={AVAILABLE_DATES} />
+                  <FormDescription />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </fieldset>
+        )}
+        {currentStep === 1 && (
+          <>
+            <fieldset className="grid grid-cols-6 gap-x-2">
+              <legend className="mb-2 text-sm font-bold text-primary-100">
+                Address
+              </legend>
+              <FormField
+                control={form.control}
+                name="address1"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-6">
+                    <FormLabel className="sr-only">Address 1</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-8 md:h-10"
+                        error={!!fieldState.error}
+                        placeholder="Address 1"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address2"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-6">
+                    <FormLabel className="sr-only">Address 2</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-8 md:h-10"
+                        error={!!fieldState.error}
+                        placeholder="Address 2"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-3">
+                    <FormLabel className="sr-only">City</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-8 md:h-10"
+                        error={!!fieldState.error}
+                        placeholder="City"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="state"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-3">
+                    <FormLabel className="sr-only">State</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-8 md:h-10"
+                        error={!!fieldState.error}
+                        placeholder="State"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="zipCode"
+                render={({ field, fieldState }) => (
+                  <FormItem className="col-span-6">
+                    <FormLabel className="sr-only">Zip code</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-8 md:h-10"
+                        type="number"
+                        error={!!fieldState.error}
+                        placeholder="Zip Code"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </fieldset>
+            <fieldset>
+              <legend className="mb-2 text-sm font-bold text-primary-100">
+                Comment
+              </legend>
+              <FormField
+                control={form.control}
+                name="comment"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="sr-only">Comment</FormLabel>
+                    <FormControl>
+                      <textarea
+                        className={cn(
+                          inputVariants(),
+                          "h-16 outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2",
+                        )}
+                        placeholder="Anything I should know before the visit?"
+                        {...field}
+                      ></textarea>
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </fieldset>
+          </>
+        )}
+        <div className="flex w-full">
+          {currentStep === 0 ? null : (
+            <Button
+              className="self-start"
+              disabled={currentStep <= 0}
+              onClick={prev}
+            >
+              Prev
+            </Button>
+          )}
+          {currentStep === 1 ? (
+            <Button
+              className="ml-auto"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
+            </Button>
+          ) : (
+            <Button
+              className="ml-auto"
+              disabled={currentStep >= NUM_STEP.length - 1}
+              onClick={next}
+            >
+              Next
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   );

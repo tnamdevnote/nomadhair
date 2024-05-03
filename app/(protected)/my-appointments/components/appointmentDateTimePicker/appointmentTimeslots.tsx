@@ -17,10 +17,8 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
-  const {} = useFormField();
-  const { setValue, getValues, register } = useFormContext();
-  const { name, ref } = register("timeslotId");
-  console.log(setValue, name, getValues());
+
+  const { setValue, register } = useFormContext();
 
   const handleSelect = (
     e: React.SyntheticEvent<HTMLDivElement>,
