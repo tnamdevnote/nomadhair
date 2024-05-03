@@ -1,5 +1,7 @@
 import { Badge } from "@/components/atoms/badge";
-import { MouseEventHandler, useState } from "react";
+import { useFormField } from "@/components/molecules/form";
+import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import useSWR from "swr";
 
 interface AppointmentTimeslotsProps {
@@ -15,8 +17,16 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
+  const {} = useFormField();
+  const { setValue, getValues, register } = useFormContext();
+  const { name, ref } = register("timeslotId");
+  console.log(setValue, name, getValues());
 
-  const handleSelect = (timeslotId: string) => {
+  const handleSelect = (
+    e: React.SyntheticEvent<HTMLDivElement>,
+    timeslotId: string,
+  ) => {
+    setValue("timeslotId", timeslotId);
     if (selected !== timeslotId) {
       return setSelected(timeslotId);
     }
@@ -30,7 +40,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   if (error) {
     return <p className="m-auto">Something went wrong. Try again.</p>;
   }
-  console.log(data);
+
   return (
     <>
       {data && data.length !== 0 ? (
@@ -40,7 +50,8 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
             key={id}
             selected={selected === id}
             label={start}
-            onClick={() => handleSelect(id)}
+            onClick={(e) => handleSelect(e, id)}
+            {...register("timeslotId")}
           />
         ))
       ) : (

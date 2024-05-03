@@ -2,7 +2,6 @@
 
 import { mutate } from "swr";
 import { z } from "zod";
-import { format, getDay } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -33,6 +32,7 @@ import {
   SelectItem,
 } from "@/components/molecules/select";
 import { FormSchema } from "@/lib/formSchema";
+import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -89,6 +89,8 @@ interface AppointmentFormProps {
   appointment?: any;
   onClose?: () => void;
 }
+
+const AVAILABLE_DATES = ["2024-05-06", "2024-05-02", "2024-05-13"];
 
 /**
  * A client side form component that handles both creating and editing appointments.
@@ -159,8 +161,9 @@ export const AppointmentForm = ({
             control={form.control}
             name="timeslotId"
             render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
+              <FormItem className="col-span-6">
                 <FormLabel className="sr-only">Select Date</FormLabel>
+                <AppointmentDateTimePicker availableDates={AVAILABLE_DATES} />
                 <FormDescription />
                 <FormMessage />
               </FormItem>
@@ -252,7 +255,7 @@ export const AppointmentForm = ({
             name="zipCode"
             render={({ field, fieldState }) => (
               <FormItem className="col-span-6">
-                <FormLabel className="sr-only">zipCode Code</FormLabel>
+                <FormLabel className="sr-only">Zip code</FormLabel>
                 <FormControl>
                   <Input
                     className="h-8 md:h-10"
