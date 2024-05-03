@@ -47,36 +47,11 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
           className={`${isOpen ? "visible" : "invisible"} fixed left-0 top-navbar-height-sm h-[calc(100vh-var(--navbar-height-sm))] w-full bg-secondary-10 md:visible md:relative md:top-0 md:ml-auto md:block md:h-auto md:w-auto md:bg-transparent`}
         >
           <ul className="mt-16 flex w-full flex-col gap-2 px-4 md:mt-0 md:flex-row md:px-0">
-            <li
-              className={`${isOpen ? "animate-fade-in" : ""}`}
-              style={{ "--index": 1 } as React.CSSProperties}
-            >
-              <Button
-                variant="link"
-                size="sm"
-                asChild
-                className="w-full"
-                onClick={() => setIsOpen(false)}
-              >
-                <Link href="/">Home</Link>
-              </Button>
-            </li>
-            <li
-              className={`${isOpen ? "animate-fade-in" : ""}`}
-              style={{ "--index": 2 } as React.CSSProperties}
-            >
-              <Button
-                variant="link"
-                size="sm"
-                asChild
-                className="w-full"
-                onClick={() => setIsOpen(false)}
-              >
-                <Link href="/about">About</Link>
-              </Button>
-            </li>
             {isAuthenticated ? (
-              <li>
+              <li
+                className={`${isOpen ? "animate-fade-in" : ""}`}
+                style={{ "--index": 1 } as React.CSSProperties}
+              >
                 <Button
                   variant="link"
                   size="sm"
