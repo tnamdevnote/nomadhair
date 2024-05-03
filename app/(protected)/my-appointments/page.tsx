@@ -11,8 +11,12 @@ import { PlusIcon } from "lucide-react";
 import { AppointmentForm, AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
-import AppointmentDateTimePicker from "./components/appointmentDateTimePicker/appointmentDateTimePicker";
 import { getAvailableDate } from "@/lib/sanity/client";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+} from "@/components/molecules/dialog";
 
 export default async function MyAppointments() {
   const { isAuthenticated } = getKindeServerSession();
@@ -43,27 +47,23 @@ export default async function MyAppointments() {
             <DrawerHeader>
               <DrawerTitle>New Appointment</DrawerTitle>
             </DrawerHeader>
-            <AppointmentForm />
-          </DrawerContent>
-        </Drawer>
-      </Container>
-      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:px-32">
-        <div className="col-span-6 md:max-h-[40rem] md:overflow-auto md:pb-4">
-          <AppointmentList />
-        </div>
-        <div className="hidden md:sticky md:top-32 md:col-span-6 md:block">
-          <section
-            aria-labelledby="new-appointment"
-            className="flex h-full flex-col"
-          >
-            <h2 id="new-appointment" className="py-3 text-base font-bold">
-              New Appointment
-            </h2>
-            <div className="h-full w-full rounded-2xl bg-white p-6 shadow-md">
-              {/* <AppointmentDateTimePicker availableDates={availableDate} /> */}
+            <div className="p-4">
               <AppointmentForm />
             </div>
-          </section>
+          </DrawerContent>
+        </Drawer>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="hidden md:block">New Appointment</Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+            <AppointmentForm />
+          </DialogContent>
+        </Dialog>
+      </Container>
+      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:px-32">
+        <div className="col-span-12 md:max-h-[40rem] md:overflow-auto md:pb-4">
+          <AppointmentList />
         </div>
       </div>
     </div>

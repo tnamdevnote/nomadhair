@@ -53,7 +53,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
           />
         ))
       ) : (
-        <p className="m-auto">There are no available appointments.</p>
+        <p>There are no available appointments.</p>
       )}
     </>
   );

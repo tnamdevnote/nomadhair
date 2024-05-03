@@ -23,9 +23,8 @@ function AppointmentDateTimePicker({
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div>
       <Calendar
-        className=""
         mode="single"
         selected={selectedDate}
         onSelect={(selectedDate) => handleSelect(selectedDate)}
@@ -36,7 +35,7 @@ function AppointmentDateTimePicker({
           return !availableDates.includes(UTCDate);
         }}
       />
-      <div className="flex h-full flex-none gap-4 p-3">
+      <div className="flex gap-4 p-3">
         <AppointmentTimeslots currentDate={selectedDate} />
       </div>
     </div>
