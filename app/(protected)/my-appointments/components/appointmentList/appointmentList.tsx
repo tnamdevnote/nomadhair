@@ -34,7 +34,7 @@ export function AppointmentList() {
           </Suspense>
         </div>
       </section>
-      <section aria-labelledby="past" className="mt-8 font-bold">
+      {/* <section aria-labelledby="past" className="mt-8 font-bold">
         <h2 id="past" className="py-3 text-base">
           Expired
         </h2>
@@ -43,7 +43,7 @@ export function AppointmentList() {
             <PastAppointments />
           </Suspense>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

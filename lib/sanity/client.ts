@@ -28,7 +28,8 @@ export const addCustomer = async (user: KindeUser) => {
 export const getAvailableDate = async () => {
   const dates = await client.fetch<AVAILABLE_DATE_QUERYResult>(
     `*[_type=='timeslot'
-      && !(_id in *[_type=='appointment'].timeslot._ref)
+     && !(_id in *[_type=='appointment'].timeslot._ref)
+     && date >= now()
     ]{
       "id": _id,
       date,
@@ -49,6 +50,7 @@ export const getTimeSlot = async (date: string) => {
     `*[_type=='timeslot' 
       && reserved==false
       && date=='${date}'
+      && !(_id in *[_type=='appointment'].timeslot._ref)
     ]{
       'id': _id,
       'start': duration.start
@@ -65,7 +67,6 @@ export const getAppointments = async (
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'
         && customer->_id == '${userId}'
-        && timeslot->date ${type === "upcoming" ? ">" : "<"} now()
       ]{
         "id":_id,
         "timeslotId":timeslot->_id,
