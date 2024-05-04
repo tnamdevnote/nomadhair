@@ -63,6 +63,18 @@ export const getAvailableTimeSlot = async (date: string) => {
   return timeSlots;
 };
 
+export const isTimeSlotReserved = async (timeslotId: string) => {
+  const isReserved = await client.fetch(
+    `count(*[_type=='appointment' 
+        && references('${timeslotId}')
+    ]) > 0`,
+    {},
+    { cache: "no-store" },
+  );
+
+  return isReserved;
+};
+
 export const getAppointments = async (userId = "") => {
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'

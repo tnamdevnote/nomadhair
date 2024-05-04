@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const TimeslotSchema = z.object({
-  id: z.string(),
-  date: z.string(),
-  time: z.string(),
+  id: z.string().min(1, "Required"),
+  date: z.string().min(1, "Required"),
+  time: z.string().min(1, "Required"),
 });
 
 export const FormSchema = z.object({

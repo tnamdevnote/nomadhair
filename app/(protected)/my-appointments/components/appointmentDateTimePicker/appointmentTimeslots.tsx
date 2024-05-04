@@ -19,12 +19,13 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
-  const { setValue, register } = useFormContext();
+  const { getValues, setValue, register } = useFormContext();
 
   const handleSelect = (
     e: React.SyntheticEvent<HTMLDivElement>,
     timeslot: z.infer<typeof TimeslotSchema>,
   ) => {
+    // getValues('timeslot').id
     setValue("timeslot", timeslot);
     if (selected !== timeslot.id) {
       return setSelected(timeslot.id);

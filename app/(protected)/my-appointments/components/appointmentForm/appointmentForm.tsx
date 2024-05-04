@@ -1,6 +1,5 @@
 "use client";
 
-import { mutate } from "swr";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +24,7 @@ import { format } from "date-fns";
  * Extracted async calls into its own functions to manage them separate from rendering logic.
  * We can potentially make them into server actions.
  */
-async function patchAppointment(formValues: any) {
+async function createAppointment(formValues: any) {
   const res = await fetch("/api/my-appointments", {
     method: "POST",
     body: JSON.stringify({
@@ -111,15 +110,18 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      await patchAppointment({ ...values });
-      await sendEmail(values);
-      onClose ? onClose() : null;
-      toast({
-        title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
-        intent: "success",
-      });
-      // form.reset(INITIAL_FORM_VALUES);
-    } catch (e) {
+      const res = await createAppointment({ ...values });
+
+      if (res.ok) {
+        await sendEmail(values);
+        onClose ? onClose() : null;
+        toast({
+          title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
+          intent: "success",
+        });
+        form.reset(INITIAL_FORM_VALUES);
+      }
+    } catch (error) {
       toast({
         title: "Oops! Something went wrong! Please try again.",
         intent: "danger",
@@ -290,7 +292,7 @@ export const AppointmentForm = ({
         <Button
           className="ml-auto"
           type="submit"
-          disabled={form.formState.isSubmitting}
+          disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
           {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
         </Button>
