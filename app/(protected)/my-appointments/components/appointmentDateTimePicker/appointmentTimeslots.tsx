@@ -40,7 +40,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   }
 
   return (
-    <>
+    <div className="flex gap-4 p-3">
       {data && data.length !== 0 ? (
         data.map(({ id, start }: typeof data) => (
           <Badge
@@ -55,7 +55,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       ) : (
         <p>There are no available appointments.</p>
       )}
-    </>
+    </div>
   );
 }
 

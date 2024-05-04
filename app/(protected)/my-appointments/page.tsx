@@ -16,6 +16,7 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
+  DialogTitle,
 } from "@/components/molecules/dialog";
 
 export default async function MyAppointments() {
@@ -26,7 +27,6 @@ export default async function MyAppointments() {
   }
 
   const availableDate = await getAvailableDate();
-  console.log(availableDate);
 
   return (
     <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
@@ -47,7 +47,7 @@ export default async function MyAppointments() {
             <DrawerHeader>
               <DrawerTitle>New Appointment</DrawerTitle>
             </DrawerHeader>
-            <div className="p-4">
+            <div className="p-2">
               <AppointmentForm />
             </div>
           </DrawerContent>
@@ -57,14 +57,13 @@ export default async function MyAppointments() {
             <Button className="hidden md:block">New Appointment</Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
+            <DialogTitle>New Appointment</DialogTitle>
             <AppointmentForm />
           </DialogContent>
         </Dialog>
       </Container>
-      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-6 gap-10 p-4 md:grid-cols-12 md:px-32">
-        <div className="col-span-12 md:max-h-[40rem] md:overflow-auto md:pb-4">
-          <AppointmentList />
-        </div>
+      <div className="mx-auto w-full max-w-screen-xl gap-10 p-4 md:px-32">
+        <AppointmentList />
       </div>
     </div>
   );

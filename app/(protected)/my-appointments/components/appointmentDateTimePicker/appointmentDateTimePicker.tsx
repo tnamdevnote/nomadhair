@@ -35,9 +35,7 @@ function AppointmentDateTimePicker({
           return !availableDates.includes(UTCDate);
         }}
       />
-      <div className="flex gap-4 p-3">
-        <AppointmentTimeslots currentDate={selectedDate} />
-      </div>
+      <AppointmentTimeslots currentDate={selectedDate} />
     </div>
   );
 }
