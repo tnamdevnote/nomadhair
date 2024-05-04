@@ -17,23 +17,8 @@ import {
 } from "@/components/molecules/form";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/molecules/popover";
-import { Calendar } from "@/components/atoms/calendar";
-import { CalendarIcon, ClockIcon } from "lucide-react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/molecules/select";
 import { FormSchema } from "@/lib/formSchema";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
-import { useState } from "react";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -152,7 +137,7 @@ export const AppointmentForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-8 "
+        className="flex w-full flex-col gap-8"
       >
         <div className="max-h-[400px] overflow-auto p-2 md:max-h-none">
           <div className="flex flex-col gap-2 md:flex-row">

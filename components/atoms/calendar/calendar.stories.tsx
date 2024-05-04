@@ -24,6 +24,7 @@ const meta: Meta<typeof Calendar> = {
   /**
    * Disabling tests temporarily as there are accessibility issues with react-day-picker components.
    * Re-implement test once this gets resolved.
+   * https://github.com/gpbl/react-day-picker/issues/1688
    */
   tags: ["no-tests"],
 };
