@@ -58,11 +58,14 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent
-                className=" flex w-fit flex-col items-start"
+
+                className="flex w-fit flex-col items-start p-2"
                 align="end"
               >
                 <Button
-                  variant="link"
+                  className="w-full justify-start rounded-md"
+                  aria-label="My appointments"
+                  variant="ghost"
                   size="sm"
                   icon={<CalendarIcon size={16} />}
                   asChild
@@ -70,8 +73,9 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
                   <Link href="/my-appointments">My Appointments</Link>
                 </Button>
                 <Button
+                  className="w-full justify-start rounded-md"
                   aria-label="Sign out"
-                  variant="link"
+                  variant="ghost"
                   size="sm"
                   icon={<LogOutIcon size={16} />}
                   asChild

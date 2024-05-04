@@ -2,7 +2,6 @@
 
 import { mutate } from "swr";
 import { z } from "zod";
-import { format, getDay } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -18,21 +17,8 @@ import {
 } from "@/components/molecules/form";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/molecules/popover";
-import { Calendar } from "@/components/atoms/calendar";
-import { CalendarIcon, ClockIcon } from "lucide-react";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/molecules/select";
 import { FormSchema } from "@/lib/formSchema";
+import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -89,6 +75,8 @@ interface AppointmentFormProps {
   appointment?: any;
   onClose?: () => void;
 }
+
+const AVAILABLE_DATES = ["2024-05-06", "2024-05-02", "2024-05-13"];
 
 /**
  * A client side form component that handles both creating and editing appointments.
@@ -149,218 +137,166 @@ export const AppointmentForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4"
+        className="flex w-full flex-col gap-8"
       >
-        <fieldset className="grid grid-cols-6 gap-2">
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Appointment date
-          </legend>
-          {/* <FormField
-            control={form.control}
-            name="date"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">Select Date</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        className={cn(
-                          "h-8 w-full justify-start rounded-md border border-neutral-15 font-normal md:h-10",
-                          !field.value && "text-neutral-70",
-                        )}
-                        icon={<CalendarIcon size={16} />}
-                        variant={"outline"}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => {
-                        return date < new Date();
-                      }}
-                      initialFocus
+        <div className="max-h-[400px] overflow-auto p-2 md:max-h-none">
+          <div className="flex flex-col gap-2 md:flex-row">
+            <fieldset className="flex-1">
+              <legend className="mb-2 text-sm font-bold text-primary-100">
+                Appointment date
+              </legend>
+              <FormField
+                control={form.control}
+                name="timeslotId"
+                render={() => (
+                  <FormItem>
+                    <FormLabel className="sr-only">
+                      Pick your appointment date
+                    </FormLabel>
+                    <AppointmentDateTimePicker
+                      availableDates={AVAILABLE_DATES}
                     />
-                  </PopoverContent>
-                </Popover>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="time"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">Select Time</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      className="h-8 md:h-10"
-                      aria-label="Pick a time"
-                    >
-                      <div className="inline-flex items-center gap-2">
-                        <ClockIcon size={16} />
-                        <SelectValue placeholder="Pick a time" />
-                      </div>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-        </fieldset>
-        <fieldset className="grid grid-cols-6 gap-x-2">
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Address
-          </legend>
-          <FormField
-            control={form.control}
-            name="address1"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Address 1</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="Address 1"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="address2"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">Address 2</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="Address 2"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">City</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="City"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="state"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-3">
-                <FormLabel className="sr-only">State</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    error={!!fieldState.error}
-                    placeholder="State"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="zipCode"
-            render={({ field, fieldState }) => (
-              <FormItem className="col-span-6">
-                <FormLabel className="sr-only">zipCode Code</FormLabel>
-                <FormControl>
-                  <Input
-                    className="h-8 md:h-10"
-                    type="number"
-                    error={!!fieldState.error}
-                    placeholder="zipCode Code"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </fieldset>
-        <fieldset>
-          <legend className="mb-2 text-sm font-bold text-primary-100">
-            Note
-          </legend>
-          <FormField
-            control={form.control}
-            name="comment"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="sr-only">Note</FormLabel>
-                <FormControl>
-                  <textarea
-                    className={cn(
-                      inputVariants(),
-                      "h-16 outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2",
-                    )}
-                    placeholder="Anything I should know before the visit?"
-                    {...field}
-                  ></textarea>
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </fieldset>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </fieldset>
+            <div className="flex flex-1 flex-col">
+              <fieldset className="flex flex-col gap-2">
+                <legend className="mb-2 text-sm font-bold text-primary-100">
+                  Address
+                </legend>
+                <FormField
+                  control={form.control}
+                  name="address1"
+                  render={({ field, fieldState }) => (
+                    <FormItem>
+                      <FormLabel className="sr-only">Address 1</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="h-8 md:h-10"
+                          error={!!fieldState.error}
+                          placeholder="Address 1"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="address2"
+                  render={({ field, fieldState }) => (
+                    <FormItem className="col-span-6">
+                      <FormLabel className="sr-only">Address 2</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="h-8 md:h-10"
+                          error={!!fieldState.error}
+                          placeholder="Address 2"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="city"
+                  render={({ field, fieldState }) => (
+                    <FormItem className="col-span-3">
+                      <FormLabel className="sr-only">City</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="h-8 md:h-10"
+                          error={!!fieldState.error}
+                          placeholder="City"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="state"
+                  render={({ field, fieldState }) => (
+                    <FormItem className="col-span-3">
+                      <FormLabel className="sr-only">State</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="h-8 md:h-10"
+                          error={!!fieldState.error}
+                          placeholder="State"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="zipCode"
+                  render={({ field, fieldState }) => (
+                    <FormItem className="col-span-6">
+                      <FormLabel className="sr-only">Zip code</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="h-8 md:h-10"
+                          type="number"
+                          error={!!fieldState.error}
+                          placeholder="Zip Code"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </fieldset>
+              <fieldset>
+                <legend className="mb-2 text-sm font-bold text-primary-100">
+                  Comment
+                </legend>
+                <FormField
+                  control={form.control}
+                  name="comment"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="sr-only">Comment</FormLabel>
+                      <FormControl>
+                        <textarea
+                          className={cn(
+                            inputVariants(),
+                            "h-16 outline-none focus-visible:ring-2 focus-visible:ring-primary-100 focus-visible:ring-offset-2",
+                          )}
+                          placeholder="Anything I should know before the visit?"
+                          {...field}
+                        ></textarea>
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </fieldset>
+            </div>
+          </div>
+        </div>
         <Button
+          className="ml-auto"
           type="submit"
           disabled={form.formState.isSubmitting}
-          className="self-end"
         >
           {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
         </Button>

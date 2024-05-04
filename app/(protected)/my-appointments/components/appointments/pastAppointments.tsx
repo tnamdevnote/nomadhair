@@ -30,7 +30,7 @@ export default async function PastAppointments() {
             <CardContent className="flex flex-col gap-4">
               <p className="inline-flex gap-2 text-base font-bold">
                 <CalendarIcon />
-                {new Date(date).toDateString()}
+                {new Date(date).toUTCString().slice(0, 16)}
               </p>
               <p className="inline-flex gap-2 text-base font-bold">
                 <ClockIcon />
