@@ -55,7 +55,7 @@ export default async function MyAppointments() {
         <Dialog>
           <DialogTrigger asChild>
             <Button
-              className="invisible md:visible md:absolute md:right-32 md:top-0"
+              className="hidden md:absolute md:right-32 md:top-0 md:flex"
               icon={<PlusIcon />}
             >
               New Appointment
