@@ -58,6 +58,7 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent
+
                 className="flex w-fit flex-col items-start p-2"
                 align="end"
               >
