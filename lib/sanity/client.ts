@@ -4,7 +4,7 @@ import { mapUser, mapAppointment } from "./mapper";
 import {
   APPOINTMENT_QUERYResult,
   AVAILABLE_DATE_QUERYResult,
-  TIMESLOT_QUERYResult,
+  AVAILABLE_TIMESLOT_QUERYResult,
 } from "./sanity.types";
 import { FormSchema } from "../formSchema";
 import { z } from "zod";
@@ -45,15 +45,15 @@ export const getAvailableDate = async () => {
   return Object.keys(distinctDates);
 };
 
-export const getTimeSlot = async (date: string) => {
-  const timeSlots = await client.fetch<TIMESLOT_QUERYResult>(
-    `*[_type=='timeslot' 
-      && reserved==false
+export const getAvailableTimeSlot = async (date: string) => {
+  const timeSlots = await client.fetch<AVAILABLE_TIMESLOT_QUERYResult>(
+    `*[_type=='timeslot'
       && date=='${date}'
       && !(_id in *[_type=='appointment'].timeslot._ref)
     ]{
-      'id': _id,
-      'start': duration.start
+      "id": _id,
+      date,
+      "time": duration.start
     }`,
   );
 

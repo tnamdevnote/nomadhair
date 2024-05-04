@@ -10,6 +10,7 @@ interface AppointmentTimeslotsProps {
 
 function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   const [selected, setSelected] = useState<string | null>(null);
+  // TODO: Find ways to type returned data from SWR
   const { data, isLoading, error } = useSWR(
     currentDate ? `${currentDate}` : null,
     async () => {
@@ -42,12 +43,12 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   return (
     <div className="flex gap-4 p-3">
       {data && data.length !== 0 ? (
-        data.map(({ id, start }: typeof data) => (
+        data.map(({ id, time }: typeof data) => (
           <Badge
             className="shrink flex-grow-0"
             key={id}
             selected={selected === id}
-            label={start}
+            label={time}
             onClick={(e) => handleSelect(e, id)}
             {...register("timeslotId")}
           />
