@@ -30,8 +30,8 @@ export default async function MyAppointments() {
 
   return (
     <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
-      <Container className="flex justify-between">
-        <h1 className="text-lg font-medium text-primary-100 lg:text-xl">
+      <Container className="relative">
+        <h1 className="text-lg font-medium text-primary-100 lg:text-lg">
           My Appointments
         </h1>
         <Drawer>
@@ -54,17 +54,20 @@ export default async function MyAppointments() {
         </Drawer>
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="hidden md:block">New Appointment</Button>
+            <Button
+              className="invisible md:visible md:absolute md:right-32 md:top-0"
+              icon={<PlusIcon />}
+            >
+              New Appointment
+            </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogTitle>New Appointment</DialogTitle>
             <AppointmentForm />
           </DialogContent>
         </Dialog>
-      </Container>
-      <div className="mx-auto w-full max-w-screen-xl gap-10 p-4 md:px-32">
         <AppointmentList />
-      </div>
+      </Container>
     </div>
   );
 }

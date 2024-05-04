@@ -14,7 +14,7 @@ const HeroSection = () => {
         </SplitContainer.Left>
         <SplitContainer.Right className="group flex basis-1/2 flex-col gap-10">
           <h1
-            className="animate-fade-in text-center text-xl font-medium text-primary-100 motion-reduce:animate-none md:text-left lg:text-2xl"
+            className="animate-fade-in text-center text-xl font-medium text-primary-100 motion-reduce:animate-none md:text-left"
             style={{ "--index": 2 } as React.CSSProperties}
           >
             Bringing style to your place
@@ -25,13 +25,10 @@ const HeroSection = () => {
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-            luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus
-            nec ullamcorper mattis, pulvinar dapibus leo.
+            ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <div
-            className="animate-fade-in w-full"
+            className="w-full animate-fade-in"
             style={{ "--index": 1 } as React.CSSProperties}
           >
             <Button size="lg" className="w-full md:w-auto" asChild>

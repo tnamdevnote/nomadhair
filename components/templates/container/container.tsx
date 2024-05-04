@@ -14,7 +14,7 @@ export default function Container({
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-screen-xl px-4 md:px-32",
+        "mx-auto w-full max-w-screen-lg px-4 md:px-32",
         `${className}`,
       )}
       {...props}
