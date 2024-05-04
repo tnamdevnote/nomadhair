@@ -1,5 +1,5 @@
 import ConfirmationEmail from "@/emails/confirmationEmail";
-import { cookies } from "next/headers";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import React from "react";
 import { Resend } from "resend";
 
@@ -7,17 +7,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const payload = await req.json();
-    const email = cookies().get("email")?.value as string;
-    const username = cookies().get("displayName")?.value as string;
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
 
+    if (!user || user === null || !user.email) {
+      throw new Error("Something went wrong with authentication " + user);
+    }
+
+    const payload = await req.json();
     const res = await resend.emails.send({
       // TODO Update sender email once domain is verified
       from: "Acme <onboarding@resend.dev>",
-      to: [email],
+      to: [user.email],
       subject: "Appointment Confirmation",
       react: React.createElement(ConfirmationEmail, {
-        username,
+        username: user.given_name + " " + user.family_name,
         date: payload.date,
         time: payload.time,
         location: payload.location,

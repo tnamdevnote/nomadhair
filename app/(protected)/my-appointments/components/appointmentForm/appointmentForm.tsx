@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
+import { format } from "date-fns";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -39,24 +40,24 @@ async function patchAppointment(formValues: any) {
   return Response.json(res);
 }
 
-// async function sendEmail(formValues: z.infer<typeof FormSchema>) {
-//   const { timeslotId, address1, address2, city, state, zipCode, comment } =
-//     formValues;
-//   const location = [address1, address2, city, state, zipCode].join(", ");
-//   const res = await fetch("/api/email", {
-//     method: "POST",
-//     headers: { "Content-type": "application/json" },
-//     // This is a mock data. Replace with proper form values later.
-//     body: JSON.stringify({
-//       date: new Date(date).toDateString(),
-//       time,
-//       location,
-//       comment,
-//     }),
-//   });
+async function sendEmail(formValues: z.infer<typeof FormSchema>) {
+  const { timeslot, address1, address2, city, state, zipCode, comment } =
+    formValues;
+  const location = [address1, address2, city, state, zipCode].join(", ");
+  const res = await fetch("/api/email", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    // This is a mock data. Replace with proper form values later.
+    body: JSON.stringify({
+      date: new Date(timeslot.date).toUTCString().slice(0, 16),
+      time: format(new Date(`${timeslot.date} ${timeslot.time}`), "p"),
+      location,
+      comment,
+    }),
+  });
 
-//   return Response.json(res);
-// }
+  return Response.json(res);
+}
 
 const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
   timeslot: { id: "", date: "", time: "" },
@@ -110,11 +111,8 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      await patchAppointment({
-        ...values,
-      });
-
-      // await sendEmail(values);
+      await patchAppointment({ ...values });
+      await sendEmail(values);
       onClose ? onClose() : null;
       toast({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
