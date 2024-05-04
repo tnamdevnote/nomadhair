@@ -4,7 +4,6 @@ import { mapUser, mapAppointment } from "./mapper";
 import {
   APPOINTMENT_QUERYResult,
   AVAILABLE_DATE_QUERYResult,
-  AVAILABLE_TIMESLOT_QUERYResult,
 } from "./sanity.types";
 import { FormSchema } from "../formSchema";
 import { z } from "zod";
@@ -34,6 +33,8 @@ export const getAvailableDate = async () => {
       "id": _id,
       date,
     }`,
+    {},
+    { cache: "no-store" },
   );
 
   const distinctDates: { [key in string]: number } = {};
@@ -46,7 +47,7 @@ export const getAvailableDate = async () => {
 };
 
 export const getAvailableTimeSlot = async (date: string) => {
-  const timeSlots = await client.fetch<AVAILABLE_TIMESLOT_QUERYResult>(
+  const timeSlots = await client.fetch(
     `*[_type=='timeslot'
       && date=='${date}'
       && !(_id in *[_type=='appointment'].timeslot._ref)
@@ -55,18 +56,18 @@ export const getAvailableTimeSlot = async (date: string) => {
       date,
       "time": duration.start
     }`,
+    {},
+    { cache: "no-store" },
   );
 
   return timeSlots;
 };
 
-export const getAppointments = async (
-  userId = "",
-  type: "upcoming" | "past",
-) => {
+export const getAppointments = async (userId = "") => {
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'
         && customer->_id == '${userId}'
+        && timeslot->date >= now()
       ]{
         "id":_id,
         "timeslotId":timeslot->_id,

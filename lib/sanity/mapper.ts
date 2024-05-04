@@ -18,8 +18,7 @@ export const mapAppointment = (
   form: z.infer<typeof FormSchema>,
   userId: string,
 ) => {
-  const { timeslotId, address1, address2, city, state, zipCode, comment } =
-    form;
+  const { timeslot, address1, address2, city, state, zipCode, comment } = form;
   const result = {
     _type: "appointment",
     customer: {
@@ -31,7 +30,7 @@ export const mapAppointment = (
       _type: "reference",
     },
     timeslot: {
-      _ref: timeslotId,
+      _ref: timeslot.id,
       _type: "reference",
     },
     address1,

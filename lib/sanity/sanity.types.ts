@@ -267,7 +267,7 @@ export type AVAILABLE_DATE_QUERYResult = Array<{
 export type AVAILABLE_TIMESLOT_QUERYResult = Array<{
   id: string;
   date: string;
-  time: TimeValue;
+  time: string;
 }>;
 // Variable: IS_TIMESLOT_RESERVED_QUERY
 // Query: count(*[_type=='appointment'   && references('') ]) > 0
@@ -278,7 +278,7 @@ export type APPOINTMENT_QUERYResult = Array<{
   id: string;
   timeslotId: string;
   date: string;
-  time: TimeValue;
+  time: string;
   address1: string;
   address2: string | null;
   city: string;

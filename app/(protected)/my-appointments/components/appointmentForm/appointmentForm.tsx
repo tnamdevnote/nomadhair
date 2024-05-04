@@ -26,10 +26,10 @@ import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentD
  */
 async function patchAppointment(formValues: any) {
   const res = await fetch("/api/my-appointments", {
-    method: "PATCH",
+    method: "POST",
     body: JSON.stringify({
       ...formValues,
-    }), // TODO: pass time slot ID intead of time
+    }),
   });
 
   if (!res.ok) {
@@ -58,16 +58,15 @@ async function patchAppointment(formValues: any) {
 //   return Response.json(res);
 // }
 
-// const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
-//   date: "",
-//   time: "",
-//   address1: "",
-//   address2: "",
-//   city: "",
-//   state: "",
-//   zipCode: "",
-//   comment: "",
-// };
+const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
+  timeslot: { id: "", date: "", time: "" },
+  address1: "",
+  address2: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  comment: "",
+};
 
 interface AppointmentFormProps {
   id?: string;
@@ -89,23 +88,23 @@ export const AppointmentForm = ({
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
-    // defaultValues:
-    //   mode === "edit" && !!appointment
-    //     ? {
-    //         date: appointment.timeSlot
-    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
-    //           : "",
-    //         time: appointment.timeSlot
-    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
-    //           : "",
-    //         address1: appointment.address1,
-    //         address2: appointment.address2,
-    //         city: appointment.city,
-    //         state: appointment.state,
-    //         zipCode: appointment.zipCode,
-    //         comment: appointment.comment,
-    //       }
-    //     : INITIAL_FORM_VALUES,
+    defaultValues: INITIAL_FORM_VALUES,
+    // mode === "edit" && !!appointment
+    //   ? {
+    //       date: appointment.timeSlot
+    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
+    //         : "",
+    //       time: appointment.timeSlot
+    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
+    //         : "",
+    //       address1: appointment.address1,
+    //       address2: appointment.address2,
+    //       city: appointment.city,
+    //       state: appointment.state,
+    //       zipCode: appointment.zipCode,
+    //       comment: appointment.comment,
+    //     }
+    //   : INITIAL_FORM_VALUES,
     resolver: zodResolver(FormSchema),
   });
 
@@ -113,12 +112,9 @@ export const AppointmentForm = ({
     try {
       await patchAppointment({
         ...values,
-        appointmentId: appointment?.appointmentId ?? undefined,
       });
 
       // await sendEmail(values);
-      // Re-validates the <AppointmentList /> successful submission.
-      mutate("/api/my-appointments");
       onClose ? onClose() : null;
       toast({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
@@ -147,7 +143,7 @@ export const AppointmentForm = ({
               </legend>
               <FormField
                 control={form.control}
-                name="timeslotId"
+                name="timeslot"
                 render={() => (
                   <FormItem>
                     <FormLabel className="sr-only">
