@@ -28,12 +28,15 @@ function AppointmentDateTimePicker({
         mode="single"
         selected={selectedDate}
         onSelect={(selectedDate) => handleSelect(selectedDate)}
-        disabled={(selectedDate) => {
-          const UTCDate = formatISO(new Date(selectedDate), {
-            representation: "date",
-          });
-          return !availableDates.includes(UTCDate);
-        }}
+        disabled={
+          (date) => date < new Date()
+          //   {
+          //   const UTCDate = formatISO(new Date(selectedDate), {
+          //     representation: "date",
+          //   });
+          //   return !availableDates.includes(UTCDate);
+          // }
+        }
       />
       <AppointmentTimeslots currentDate={selectedDate} />
     </div>

@@ -1,8 +1,9 @@
 import { Badge } from "@/components/atoms/badge";
-import { useFormField } from "@/components/molecules/form";
+import { TimeslotSchema } from "@/lib/formSchema";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import useSWR from "swr";
+import { z } from "zod";
 
 interface AppointmentTimeslotsProps {
   currentDate: Date | undefined;
@@ -10,6 +11,7 @@ interface AppointmentTimeslotsProps {
 
 function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   const [selected, setSelected] = useState<string | null>(null);
+  // TODO: Find ways to type returned data from SWR
   const { data, isLoading, error } = useSWR(
     currentDate ? `${currentDate}` : null,
     async () => {
@@ -17,16 +19,16 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
-
-  const { setValue, register } = useFormContext();
+  const { getValues, setValue, register } = useFormContext();
 
   const handleSelect = (
     e: React.SyntheticEvent<HTMLDivElement>,
-    timeslotId: string,
+    timeslot: z.infer<typeof TimeslotSchema>,
   ) => {
-    setValue("timeslotId", timeslotId);
-    if (selected !== timeslotId) {
-      return setSelected(timeslotId);
+    // getValues('timeslot').id
+    setValue("timeslot", timeslot);
+    if (selected !== timeslot.id) {
+      return setSelected(timeslot.id);
     }
     setSelected(null);
   };
@@ -42,14 +44,14 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   return (
     <div className="flex gap-4 p-3">
       {data && data.length !== 0 ? (
-        data.map(({ id, start }: typeof data) => (
+        data.map((timeslot: z.infer<typeof TimeslotSchema>) => (
           <Badge
             className="shrink flex-grow-0"
-            key={id}
-            selected={selected === id}
-            label={start}
-            onClick={(e) => handleSelect(e, id)}
-            {...register("timeslotId")}
+            key={timeslot.id}
+            selected={selected === timeslot.id}
+            label={timeslot.time}
+            onClick={(e) => handleSelect(e, timeslot)}
+            {...register("timeslot")}
           />
         ))
       ) : (

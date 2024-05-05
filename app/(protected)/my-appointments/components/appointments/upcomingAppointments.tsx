@@ -13,7 +13,7 @@ export default async function UpcomingAppointments() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  const appointments = await getAppointments(user?.id, "upcoming");
+  const appointments = await getAppointments(user?.id);
 
   // TODO: add logic for handling error and empty array state.
   return (

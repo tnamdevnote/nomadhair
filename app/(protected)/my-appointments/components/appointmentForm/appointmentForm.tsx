@@ -1,7 +1,7 @@
 "use client";
 
-import { mutate } from "swr";
 import { z } from "zod";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -15,59 +15,54 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/molecules/form";
-import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
+import { cn } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
  * We can potentially make them into server actions.
  */
-async function patchAppointment(formValues: any) {
+async function createAppointment(formValues: any) {
   const res = await fetch("/api/my-appointments", {
-    method: "PATCH",
+    method: "POST",
     body: JSON.stringify({
       ...formValues,
-    }), // TODO: pass time slot ID intead of time
+    }),
   });
-
-  if (!res.ok) {
-    throw new Error();
-  }
 
   return Response.json(res);
 }
 
-// async function sendEmail(formValues: z.infer<typeof FormSchema>) {
-//   const { timeslotId, address1, address2, city, state, zipCode, comment } =
-//     formValues;
-//   const location = [address1, address2, city, state, zipCode].join(", ");
-//   const res = await fetch("/api/email", {
-//     method: "POST",
-//     headers: { "Content-type": "application/json" },
-//     // This is a mock data. Replace with proper form values later.
-//     body: JSON.stringify({
-//       date: new Date(date).toDateString(),
-//       time,
-//       location,
-//       comment,
-//     }),
-//   });
+async function sendEmail(formValues: z.infer<typeof FormSchema>) {
+  const { timeslot, address1, address2, city, state, zipCode, comment } =
+    formValues;
+  const location = [address1, address2, city, state, zipCode].join(", ");
+  const res = await fetch("/api/email", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    // This is a mock data. Replace with proper form values later.
+    body: JSON.stringify({
+      date: new Date(timeslot.date).toUTCString().slice(0, 16),
+      time: format(new Date(`${timeslot.date} ${timeslot.time}`), "p"),
+      location,
+      comment,
+    }),
+  });
 
-//   return Response.json(res);
-// }
+  return Response.json(res);
+}
 
-// const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
-//   date: "",
-//   time: "",
-//   address1: "",
-//   address2: "",
-//   city: "",
-//   state: "",
-//   zipCode: "",
-//   comment: "",
-// };
+const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
+  timeslot: { id: "", date: "", time: "" },
+  address1: "",
+  address2: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  comment: "",
+};
 
 interface AppointmentFormProps {
   id?: string;
@@ -89,43 +84,38 @@ export const AppointmentForm = ({
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
-    // defaultValues:
-    //   mode === "edit" && !!appointment
-    //     ? {
-    //         date: appointment.timeSlot
-    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
-    //           : "",
-    //         time: appointment.timeSlot
-    //           ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
-    //           : "",
-    //         address1: appointment.address1,
-    //         address2: appointment.address2,
-    //         city: appointment.city,
-    //         state: appointment.state,
-    //         zipCode: appointment.zipCode,
-    //         comment: appointment.comment,
-    //       }
-    //     : INITIAL_FORM_VALUES,
+    defaultValues: INITIAL_FORM_VALUES,
+    // mode === "edit" && !!appointment
+    //   ? {
+    //       date: appointment.timeSlot
+    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
+    //         : "",
+    //       time: appointment.timeSlot
+    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
+    //         : "",
+    //       address1: appointment.address1,
+    //       address2: appointment.address2,
+    //       city: appointment.city,
+    //       state: appointment.state,
+    //       zipCode: appointment.zipCode,
+    //       comment: appointment.comment,
+    //     }
+    //   : INITIAL_FORM_VALUES,
     resolver: zodResolver(FormSchema),
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      await patchAppointment({
-        ...values,
-        appointmentId: appointment?.appointmentId ?? undefined,
-      });
+      await createAppointment({ ...values });
+      await sendEmail(values);
 
-      // await sendEmail(values);
-      // Re-validates the <AppointmentList /> successful submission.
-      mutate("/api/my-appointments");
       onClose ? onClose() : null;
       toast({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
         intent: "success",
       });
-      // form.reset(INITIAL_FORM_VALUES);
-    } catch (e) {
+      form.reset(INITIAL_FORM_VALUES);
+    } catch (error) {
       toast({
         title: "Oops! Something went wrong! Please try again.",
         intent: "danger",
@@ -147,7 +137,7 @@ export const AppointmentForm = ({
               </legend>
               <FormField
                 control={form.control}
-                name="timeslotId"
+                name="timeslot"
                 render={() => (
                   <FormItem>
                     <FormLabel className="sr-only">
@@ -296,7 +286,7 @@ export const AppointmentForm = ({
         <Button
           className="ml-auto"
           type="submit"
-          disabled={form.formState.isSubmitting}
+          disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
           {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
         </Button>

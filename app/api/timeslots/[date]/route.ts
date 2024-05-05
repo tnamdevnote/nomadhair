@@ -1,4 +1,4 @@
-import { getTimeSlot } from "@/lib/sanity/client";
+import { getAvailableTimeSlot } from "@/lib/sanity/client";
 import { formatISO } from "date-fns";
 import { NextRequest } from "next/server";
 
@@ -12,6 +12,6 @@ export async function GET(
     representation: "date",
   });
 
-  const res = await getTimeSlot(formattedDate);
+  const res = await getAvailableTimeSlot(formattedDate);
   return Response.json(res, { status: 200 });
 }

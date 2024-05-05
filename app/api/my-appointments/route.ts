@@ -1,5 +1,10 @@
-import { createAppointment, updateAppointment } from "@/lib/sanity/client";
+import {
+  createAppointment,
+  isTimeSlotReserved,
+  updateAppointment,
+} from "@/lib/sanity/client";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -11,8 +16,19 @@ export async function POST(req: NextRequest) {
   }
 
   const payload = await req.json();
+
+  const isReserved = await isTimeSlotReserved(payload.timeslot.id);
+
+  if (isReserved) {
+    return Response.json(isReserved, {
+      status: 409,
+      statusText: "This timeslot has already been taken.",
+    });
+  }
+
   const res = await createAppointment(payload, user.id);
 
+  revalidateTag("appointments");
   return Response.json(res);
 }
 

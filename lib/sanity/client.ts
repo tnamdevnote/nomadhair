@@ -4,7 +4,6 @@ import { mapUser, mapAppointment } from "./mapper";
 import {
   APPOINTMENT_QUERYResult,
   AVAILABLE_DATE_QUERYResult,
-  TIMESLOT_QUERYResult,
 } from "./sanity.types";
 import { FormSchema } from "../formSchema";
 import { z } from "zod";
@@ -34,6 +33,8 @@ export const getAvailableDate = async () => {
       "id": _id,
       date,
     }`,
+    {},
+    { cache: "no-store" },
   );
 
   const distinctDates: { [key in string]: number } = {};
@@ -45,28 +46,40 @@ export const getAvailableDate = async () => {
   return Object.keys(distinctDates);
 };
 
-export const getTimeSlot = async (date: string) => {
-  const timeSlots = await client.fetch<TIMESLOT_QUERYResult>(
-    `*[_type=='timeslot' 
-      && reserved==false
+export const getAvailableTimeSlot = async (date: string) => {
+  const timeSlots = await client.fetch(
+    `*[_type=='timeslot'
       && date=='${date}'
       && !(_id in *[_type=='appointment'].timeslot._ref)
     ]{
-      'id': _id,
-      'start': duration.start
+      "id": _id,
+      date,
+      "time": duration.start
     }`,
+    {},
+    { cache: "no-store" },
   );
 
   return timeSlots;
 };
 
-export const getAppointments = async (
-  userId = "",
-  type: "upcoming" | "past",
-) => {
+export const isTimeSlotReserved = async (timeslotId: string) => {
+  const isReserved = await client.fetch(
+    `count(*[_type=='appointment' 
+        && references('${timeslotId}')
+    ]) > 0`,
+    {},
+    { cache: "no-store" },
+  );
+
+  return isReserved;
+};
+
+export const getAppointments = async (userId = "") => {
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'
         && customer->_id == '${userId}'
+        && timeslot->date >= now()
       ]{
         "id":_id,
         "timeslotId":timeslot->_id,
@@ -82,6 +95,9 @@ export const getAppointments = async (
         stylist->{"id": _id, firstName, lastName}
       }
     `,
+    {},
+    // this will let next js trigger revalidation when revalidate function is called
+    { next: { tags: ["appointments"] } },
   );
 
   return res;
