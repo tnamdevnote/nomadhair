@@ -19,13 +19,13 @@ import cancel_img from "./cancel_img.svg";
 
 const cancelAppointment = async (
   url: string,
-  { arg }: { arg: { timeSlotId?: string; appointmentId: string } },
+  { arg }: { arg: { appointmentId: string } },
 ) => {
   const res = await fetch(url, {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
-      ...arg,
+      id: arg.appointmentId,
     }),
   });
 
@@ -54,7 +54,7 @@ export default function CancelDialog({
 
   const handleClick = async () => {
     try {
-      await swrTrigger({ timeSlotId, appointmentId });
+      await swrTrigger({ appointmentId });
       if (!isMutating) {
         setOpen(false);
         toast({
