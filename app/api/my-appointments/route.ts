@@ -4,6 +4,7 @@ import {
   updateAppointment,
 } from "@/lib/sanity/client";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -27,10 +28,8 @@ export async function POST(req: NextRequest) {
 
   const res = await createAppointment(payload, user.id);
 
-  return Response.json(res, {
-    status: 201,
-    statusText: "Your appointment has been booked successfully!",
-  });
+  revalidateTag("appointments");
+  return Response.json(res);
 }
 
 export async function PATCH(req: NextRequest) {

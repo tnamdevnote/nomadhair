@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -14,11 +15,10 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/molecules/form";
-import { cn } from "@/lib/utils";
 import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
+import { cn } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
-import { format } from "date-fns";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -31,10 +31,6 @@ async function createAppointment(formValues: any) {
       ...formValues,
     }),
   });
-
-  if (!res.ok) {
-    throw new Error();
-  }
 
   return Response.json(res);
 }
@@ -110,17 +106,15 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      const res = await createAppointment({ ...values });
+      await createAppointment({ ...values });
+      await sendEmail(values);
 
-      if (res.ok) {
-        await sendEmail(values);
-        onClose ? onClose() : null;
-        toast({
-          title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
-          intent: "success",
-        });
-        form.reset(INITIAL_FORM_VALUES);
-      }
+      onClose ? onClose() : null;
+      toast({
+        title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
+        intent: "success",
+      });
+      form.reset(INITIAL_FORM_VALUES);
     } catch (error) {
       toast({
         title: "Oops! Something went wrong! Please try again.",

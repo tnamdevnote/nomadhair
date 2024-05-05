@@ -95,6 +95,9 @@ export const getAppointments = async (userId = "") => {
         stylist->{"id": _id, firstName, lastName}
       }
     `,
+    {},
+    // this will let next js trigger revalidation when revalidate function is called
+    { next: { tags: ["appointments"] } },
   );
 
   return res;
