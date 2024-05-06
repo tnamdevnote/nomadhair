@@ -1,7 +1,8 @@
 import { Badge } from "@/components/atoms/badge";
+import { FormControl } from "@/components/molecules/form";
 import { TimeslotSchema } from "@/lib/formSchema";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useController } from "react-hook-form";
 import useSWR from "swr";
 import { z } from "zod";
 
@@ -19,14 +20,15 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
-  const { getValues, setValue, register } = useFormContext();
+  // const { getValues, setValue, register } = useFormContext();
+  const { field } = useController({ name: "timeslot" });
 
   const handleSelect = (
     e: React.SyntheticEvent<HTMLDivElement>,
     timeslot: z.infer<typeof TimeslotSchema>,
   ) => {
     // getValues('timeslot').id
-    setValue("timeslot", timeslot);
+    field.onChange(timeslot);
     if (selected !== timeslot.id) {
       return setSelected(timeslot.id);
     }
@@ -42,22 +44,23 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
   }
 
   return (
-    <div className="flex gap-4 p-3">
-      {data && data.length !== 0 ? (
-        data.map((timeslot: z.infer<typeof TimeslotSchema>) => (
-          <Badge
-            className="shrink flex-grow-0"
-            key={timeslot.id}
-            selected={selected === timeslot.id}
-            label={timeslot.time}
-            onClick={(e) => handleSelect(e, timeslot)}
-            {...register("timeslot")}
-          />
-        ))
-      ) : (
-        <p>There are no available appointments.</p>
-      )}
-    </div>
+    <FormControl>
+      <div className="flex gap-4 p-3">
+        {data && data.length !== 0 ? (
+          data.map((timeslot: z.infer<typeof TimeslotSchema>) => (
+            <Badge
+              className="shrink flex-grow-0"
+              key={timeslot.id}
+              selected={selected === timeslot.id}
+              label={timeslot.time}
+              onClick={(e) => handleSelect(e, timeslot)}
+            />
+          ))
+        ) : (
+          <p>There are no available appointments.</p>
+        )}
+      </div>
+    </FormControl>
   );
 }
 
