@@ -1,5 +1,6 @@
 import {
   createAppointment,
+  deleteAppointment,
   isTimeSlotReserved,
   updateAppointment,
 } from "@/lib/sanity/client";
@@ -42,6 +43,21 @@ export async function PATCH(req: NextRequest) {
 
   const payload = await req.json();
   const res = await updateAppointment(payload, user.id);
+
+  return Response.json(res);
+}
+
+export async function DELETE(req: NextRequest) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user || user === null || !user.id) {
+    throw new Error("Something went wrong with authentication " + user);
+  }
+
+  const payload = await req.json();
+
+  const res = await deleteAppointment(payload.id);
 
   return Response.json(res);
 }

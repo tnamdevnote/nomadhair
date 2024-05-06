@@ -14,7 +14,6 @@ export default async function UpcomingAppointments() {
   const user = await getUser();
 
   const appointments = await getAppointments(user?.id);
-
   // TODO: add logic for handling error and empty array state.
   return (
     <>

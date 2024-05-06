@@ -125,3 +125,9 @@ export const updateAppointment = async (
 
   return res;
 };
+
+export const deleteAppointment = async (appointmentId: string) => {
+  const res = await client.delete(appointmentId);
+
+  return res;
+};
