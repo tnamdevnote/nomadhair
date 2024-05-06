@@ -20,7 +20,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
       return res.json();
     },
   );
-  // const { getValues, setValue, register } = useFormContext();
+
   const { field } = useController({ name: "timeslot" });
 
   const handleSelect = (
