@@ -42,10 +42,10 @@ async function sendEmail(formValues: z.infer<typeof FormSchema>) {
   const res = await fetch("/api/email", {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    // This is a mock data. Replace with proper form values later.
+
     body: JSON.stringify({
       date: new Date(timeslot.date).toUTCString().slice(0, 16),
-      time: format(new Date(`${timeslot.date} ${timeslot.time}`), "p"),
+      time: format(new Date(`${timeslot.time}`), "p"),
       location,
       comment,
     }),
@@ -104,6 +104,7 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
+      console.log(values);
       await createAppointment({ ...values });
       await sendEmail(values);
 
