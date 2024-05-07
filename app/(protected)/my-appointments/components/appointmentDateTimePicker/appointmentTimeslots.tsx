@@ -1,6 +1,8 @@
 import { Badge } from "@/components/atoms/badge";
 import { FormControl } from "@/components/molecules/form";
 import { TimeslotSchema } from "@/lib/formSchema";
+import { formatToDisplayTime } from "@/lib/utils";
+import { format } from "date-fns";
 import { useState } from "react";
 import { useController } from "react-hook-form";
 import useSWR from "swr";
@@ -27,7 +29,6 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
     e: React.SyntheticEvent<HTMLDivElement>,
     timeslot: z.infer<typeof TimeslotSchema>,
   ) => {
-    // getValues('timeslot').id
     field.onChange(timeslot);
     if (selected !== timeslot.id) {
       return setSelected(timeslot.id);
@@ -52,7 +53,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
               className="shrink flex-grow-0"
               key={timeslot.id}
               selected={selected === timeslot.id}
-              label={timeslot.time}
+              label={formatToDisplayTime(timeslot.time)}
               onClick={(e) => handleSelect(e, timeslot)}
             />
           ))

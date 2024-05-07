@@ -7,7 +7,7 @@ import { mutate } from "swr";
 import AppointmentTimeslots from "./appointmentTimeslots";
 
 interface AppointmentDateTimePickerProps {
-  availableDates: string[];
+  availableDates?: string[];
 }
 
 function AppointmentDateTimePicker({

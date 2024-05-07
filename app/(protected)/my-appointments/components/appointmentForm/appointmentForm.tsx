@@ -17,7 +17,7 @@ import {
 } from "@/components/molecules/form";
 import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
-import { cn } from "@/lib/utils";
+import { cn, formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 
 /**
@@ -42,10 +42,10 @@ async function sendEmail(formValues: z.infer<typeof FormSchema>) {
   const res = await fetch("/api/email", {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    // This is a mock data. Replace with proper form values later.
+
     body: JSON.stringify({
-      date: new Date(timeslot.date).toUTCString().slice(0, 16),
-      time: format(new Date(`${timeslot.date} ${timeslot.time}`), "p"),
+      date: formatToDisplayDate(timeslot.date),
+      time: formatToDisplayTime(timeslot.time),
       location,
       comment,
     }),
@@ -70,8 +70,6 @@ interface AppointmentFormProps {
   appointment?: any;
   onClose?: () => void;
 }
-
-const AVAILABLE_DATES = ["2024-05-06", "2024-05-02", "2024-05-13"];
 
 /**
  * A client side form component that handles both creating and editing appointments.
@@ -143,9 +141,7 @@ export const AppointmentForm = ({
                     <FormLabel className="sr-only">
                       Pick your appointment date
                     </FormLabel>
-                    <AppointmentDateTimePicker
-                      availableDates={AVAILABLE_DATES}
-                    />
+                    <AppointmentDateTimePicker />
                     <FormDescription />
                     <FormMessage />
                   </FormItem>
