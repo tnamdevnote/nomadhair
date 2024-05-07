@@ -104,7 +104,6 @@ export const AppointmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      console.log(values);
       await createAppointment({ ...values });
       await sendEmail(values);
 
