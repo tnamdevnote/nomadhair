@@ -49,13 +49,14 @@ export const getAvailableDate = async () => {
 export const getAvailableTimeSlot = async (date: string) => {
   const timeSlots = await client.fetch(
     `*[_type=='timeslot'
-      && date=='${date}'
       && !(_id in *[_type=='appointment'].timeslot._ref)
-    ]{
-      "id": _id,
-      date,
-      "time": duration.start
-    }`,
+      && date == '${date}' 
+      && dateTime(time) >= dateTime(now())
+      ]{
+        "id": _id,
+        date,
+        time,
+      }`,
     {},
     { cache: "no-store" },
   );
@@ -79,12 +80,12 @@ export const getAppointments = async (userId = "") => {
   const res = await client.fetch<APPOINTMENT_QUERYResult>(
     `*[_type=='appointment'
         && customer->_id == '${userId}'
-        && timeslot->date >= now()
+        && dateTime(timeslot->time) >= dateTime(now())
       ]{
         "id":_id,
         "timeslotId":timeslot->_id,
         "date":timeslot->date,
-        "time":timeslot->duration.start,
+        "time":timeslot->time,
         address1,
         address2,
         city,

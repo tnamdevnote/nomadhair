@@ -37,7 +37,7 @@ export default async function UpcomingAppointments() {
               </p>
               <p className="inline-flex gap-2 text-base font-bold">
                 <ClockIcon />
-                {format(new Date(`${date} ${time}`), "p")}
+                {format(new Date(`${time}`), "p")}
               </p>
               <p className="text-sm">
                 {[address1, address2, city, state, zipCode]

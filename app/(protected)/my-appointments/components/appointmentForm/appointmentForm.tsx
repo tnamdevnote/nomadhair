@@ -71,8 +71,6 @@ interface AppointmentFormProps {
   onClose?: () => void;
 }
 
-const AVAILABLE_DATES = ["2024-05-06", "2024-05-02", "2024-05-13"];
-
 /**
  * A client side form component that handles both creating and editing appointments.
  */
@@ -143,9 +141,7 @@ export const AppointmentForm = ({
                     <FormLabel className="sr-only">
                       Pick your appointment date
                     </FormLabel>
-                    <AppointmentDateTimePicker
-                      availableDates={AVAILABLE_DATES}
-                    />
+                    <AppointmentDateTimePicker />
                     <FormDescription />
                     <FormMessage />
                   </FormItem>
