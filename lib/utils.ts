@@ -1,16 +1,24 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { get, set, ref, child } from "firebase/database";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function dateTimeToUnixTimeStamp(date: string, time: string) {
-  const combinedDateTimeString = date + "T" + time;
-  const dateTime = new Date(combinedDateTimeString);
-  const unixTimeStamp = dateTime.getTime() / 1000;
-  return unixTimeStamp;
+/** Convert incoming date string to UTC format. This only returns date portion. */
+export function formatToDisplayDate(date: string): string {
+  const res = new Date(date).toUTCString().slice(0, 16);
+
+  return res;
+}
+
+/** Convert incoming date string to HH:mm AM/PM format*/
+export function formatToDisplayTime(time: string): string {
+  const res = format(new Date(`${time}`), "p");
+
+  return res;
 }
 
 export function unixToDateTimeStrings(unixTimeStamp: number) {

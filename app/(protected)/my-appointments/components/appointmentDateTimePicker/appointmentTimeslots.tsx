@@ -1,6 +1,7 @@
 import { Badge } from "@/components/atoms/badge";
 import { FormControl } from "@/components/molecules/form";
 import { TimeslotSchema } from "@/lib/formSchema";
+import { formatToDisplayTime } from "@/lib/utils";
 import { format } from "date-fns";
 import { useState } from "react";
 import { useController } from "react-hook-form";
@@ -52,7 +53,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
               className="shrink flex-grow-0"
               key={timeslot.id}
               selected={selected === timeslot.id}
-              label={format(new Date(`${timeslot.time}`), "p")}
+              label={formatToDisplayTime(timeslot.time)}
               onClick={(e) => handleSelect(e, timeslot)}
             />
           ))

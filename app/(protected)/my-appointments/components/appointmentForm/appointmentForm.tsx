@@ -17,7 +17,7 @@ import {
 } from "@/components/molecules/form";
 import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
-import { cn } from "@/lib/utils";
+import { cn, formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 
 /**
@@ -44,8 +44,8 @@ async function sendEmail(formValues: z.infer<typeof FormSchema>) {
     headers: { "Content-type": "application/json" },
 
     body: JSON.stringify({
-      date: new Date(timeslot.date).toUTCString().slice(0, 16),
-      time: format(new Date(`${timeslot.time}`), "p"),
+      date: formatToDisplayDate(timeslot.date),
+      time: formatToDisplayTime(timeslot.time),
       location,
       comment,
     }),
