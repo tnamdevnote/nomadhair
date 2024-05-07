@@ -46,7 +46,7 @@ export const getAvailableDate = async () => {
   return Object.keys(distinctDates);
 };
 
-export const getAvailableTimeSlot = async (date: string) => {
+export const getAvailableTimeSlots = async (date: string) => {
   const timeSlots = await client.fetch(
     `*[_type=='timeslot'
       && !(_id in *[_type=='appointment'].timeslot._ref)
