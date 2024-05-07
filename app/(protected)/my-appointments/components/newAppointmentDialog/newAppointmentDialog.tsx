@@ -49,7 +49,7 @@ export default function NewAppointmentDialog({
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Edit Appointment</DialogTitle>
+          <DialogTitle>New Appointment</DialogTitle>
           <DialogDescription>
             Change your appointment details.
           </DialogDescription>

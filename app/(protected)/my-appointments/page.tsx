@@ -1,18 +1,10 @@
 import { Button } from "@/components/atoms/button";
 import { Container } from "@/components/templates/container";
 import { PlusIcon } from "lucide-react";
-import { AppointmentForm, AppointmentList } from "./components";
+import { AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import NewAppointmentDialog from "./components/newAppointmentDialog/newAppointmentDialog";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/molecules/dialog";
 
 export default async function MyAppointments() {
   const { isAuthenticated } = getKindeServerSession();
@@ -27,25 +19,6 @@ export default async function MyAppointments() {
         <h1 className="text-lg font-medium text-primary-100 lg:text-lg">
           My Appointments
         </h1>
-        {/* <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              className="hidden md:absolute md:right-32 md:top-0 md:flex"
-              icon={<PlusIcon />}
-            >
-              New Appointment
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Edit Appointment</DialogTitle>
-              <DialogDescription>
-                Change your appointment details.
-              </DialogDescription>
-            </DialogHeader>
-            <AppointmentForm />
-          </DialogContent>
-        </Dialog> */}
         <NewAppointmentDialog
           trigger={
             <Button
