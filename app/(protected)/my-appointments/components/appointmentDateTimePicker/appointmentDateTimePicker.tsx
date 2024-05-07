@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar } from "@/components/atoms/calendar";
-import { formatISO } from "date-fns";
 import React, { useState } from "react";
 import { mutate } from "swr";
 import AppointmentTimeslots from "./appointmentTimeslots";
@@ -28,15 +27,10 @@ function AppointmentDateTimePicker({
         mode="single"
         selected={selectedDate}
         onSelect={(selectedDate) => handleSelect(selectedDate)}
-        disabled={
-          (date) => date < new Date()
-          //   {
-          //   const UTCDate = formatISO(new Date(selectedDate), {
-          //     representation: "date",
-          //   });
-          //   return !availableDates.includes(UTCDate);
-          // }
-        }
+        disabled={(date) => {
+          console.log(date < new Date(), date);
+          return new Date(date).getTime() < new Date().setHours(0, 0, 0, 0);
+        }}
       />
       <AppointmentTimeslots currentDate={selectedDate} />
     </div>
