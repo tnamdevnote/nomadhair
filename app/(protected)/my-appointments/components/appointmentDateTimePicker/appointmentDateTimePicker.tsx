@@ -28,7 +28,6 @@ function AppointmentDateTimePicker({
         selected={selectedDate}
         onSelect={(selectedDate) => handleSelect(selectedDate)}
         disabled={(date) => {
-          console.log(date < new Date(), date);
           return new Date(date).getTime() < new Date().setHours(0, 0, 0, 0);
         }}
       />

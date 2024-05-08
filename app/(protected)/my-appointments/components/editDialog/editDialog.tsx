@@ -17,6 +17,7 @@ import {
 } from "@/components/molecules/drawer";
 import { useEffect, useState } from "react";
 import { AppointmentForm } from "../appointmentForm/appointmentForm";
+import { APPOINTMENT_QUERYResult } from "@/lib/sanity/sanity.types";
 
 /**
  * Renders `<AppointmentForm />` in `<Dialog />`.
@@ -27,7 +28,7 @@ export default function EditDialog({
   appointment,
 }: {
   trigger: React.ReactNode;
-  appointment?: any;
+  appointment: APPOINTMENT_QUERYResult[0];
 }) {
   const [matches, setMatches] = useState(false);
   const [open, setOpen] = useState(false);
@@ -46,18 +47,18 @@ export default function EditDialog({
   return matches ? (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Edit Appointment</DialogTitle>
           <DialogDescription>
             Change your appointment details.
           </DialogDescription>
         </DialogHeader>
-        {/* <AppointmentForm
+        <AppointmentForm
           mode="edit"
           appointment={appointment}
           onClose={() => setOpen(false)}
-        /> */}
+        />
       </DialogContent>
     </Dialog>
   ) : (
@@ -67,11 +68,11 @@ export default function EditDialog({
         <DrawerHeader>
           <DrawerTitle>Edit Appointment</DrawerTitle>
         </DrawerHeader>
-        {/* <AppointmentForm
+        <AppointmentForm
           mode="edit"
           appointment={appointment}
           onClose={() => setOpen(false)}
-        /> */}
+        />
       </DrawerContent>
     </Drawer>
   );

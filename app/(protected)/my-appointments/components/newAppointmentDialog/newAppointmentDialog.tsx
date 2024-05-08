@@ -28,7 +28,6 @@ export default function NewAppointmentDialog({
   trigger,
 }: {
   trigger: React.ReactNode;
-  appointment?: any;
 }) {
   const [matches, setMatches] = useState(false);
   const [open, setOpen] = useState(false);
@@ -69,7 +68,7 @@ export default function NewAppointmentDialog({
       </DrawerTrigger>
       <DrawerContent className="p-6">
         <DrawerHeader>
-          <DrawerTitle>Edit Appointment</DrawerTitle>
+          <DrawerTitle>New Appointment</DrawerTitle>
         </DrawerHeader>
         <div className="p-2">
           <AppointmentForm onClose={() => setOpen(false)} />

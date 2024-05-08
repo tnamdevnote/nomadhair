@@ -42,7 +42,7 @@ export async function PATCH(req: NextRequest) {
   }
 
   const payload = await req.json();
-  const res = await updateAppointment(payload, user.id);
+  const res = await updateAppointment(payload.formValues, user.id, payload.id);
 
   return Response.json(res);
 }
