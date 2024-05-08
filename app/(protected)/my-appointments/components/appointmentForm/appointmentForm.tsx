@@ -298,7 +298,7 @@ export const AppointmentForm = ({
         <Button
           className="ml-auto"
           type="submit"
-          disabled={form.formState.isSubmitting || !form.formState.isValid}
+          disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Processing..." : submitBtnLabel}
         </Button>
