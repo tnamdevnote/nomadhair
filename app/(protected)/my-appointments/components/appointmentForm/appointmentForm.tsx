@@ -137,6 +137,7 @@ export const AppointmentForm = ({
     }
   };
 
+  console.log(form.getValues());
   return (
     <Form {...form}>
       <form

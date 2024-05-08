@@ -29,11 +29,12 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
     e: React.SyntheticEvent<HTMLDivElement>,
     timeslot: z.infer<typeof TimeslotSchema>,
   ) => {
-    field.onChange(timeslot);
-    if (selected !== timeslot.id) {
-      return setSelected(timeslot.id);
+    if (selected === timeslot.id && !!field.value.id) {
+      field.onChange({ id: "", date: "", time: "" });
+      return setSelected(null);
     }
-    setSelected(null);
+    field.onChange(timeslot);
+    setSelected(timeslot.id);
   };
 
   if (isLoading) {
