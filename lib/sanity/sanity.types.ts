@@ -281,11 +281,11 @@ export type APPOINTMENT_QUERYResult = Array<{
   date: string;
   time: string;
   address1: string;
-  address2: string | null;
+  address2: string | undefined;
   city: string;
   state: string;
   zipCode: string;
-  comment: string | null;
+  comment: string | undefined;
   customer: {
     id: string;
     firstName: string;

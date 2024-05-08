@@ -1,7 +1,6 @@
 "use client";
 
 import { z } from "zod";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/atoms/button";
@@ -19,16 +18,32 @@ import { useToast } from "@/components/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
 import { cn, formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
+import { APPOINTMENT_QUERYResult } from "@/lib/sanity/sanity.types";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
  * We can potentially make them into server actions.
  */
-async function createAppointment(formValues: any) {
+async function createAppointment(formValues: z.infer<typeof FormSchema>) {
   const res = await fetch("/api/my-appointments", {
     method: "POST",
     body: JSON.stringify({
       ...formValues,
+    }),
+  });
+
+  return Response.json(res);
+}
+
+async function editAppointment(
+  formValues: z.infer<typeof FormSchema>,
+  appointmentId: string,
+) {
+  const res = await fetch("/api/my-appointments", {
+    method: "PATCH",
+    body: JSON.stringify({
+      id: appointmentId,
+      formValues,
     }),
   });
 
@@ -67,7 +82,7 @@ const INITIAL_FORM_VALUES: z.infer<typeof FormSchema> = {
 interface AppointmentFormProps {
   id?: string;
   mode?: "create" | "edit";
-  appointment?: any;
+  appointment?: APPOINTMENT_QUERYResult[0];
   onClose?: () => void;
 }
 
@@ -82,29 +97,30 @@ export const AppointmentForm = ({
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
-    defaultValues: INITIAL_FORM_VALUES,
-    // mode === "edit" && !!appointment
-    //   ? {
-    //       date: appointment.timeSlot
-    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).date
-    //         : "",
-    //       time: appointment.timeSlot
-    //         ? unixToDateTimeStrings(appointment.timeSlot?.startTime).time
-    //         : "",
-    //       address1: appointment.address1,
-    //       address2: appointment.address2,
-    //       city: appointment.city,
-    //       state: appointment.state,
-    //       zipCode: appointment.zipCode,
-    //       comment: appointment.comment,
-    //     }
-    //   : INITIAL_FORM_VALUES,
+    defaultValues:
+      mode === "edit" && !!appointment
+        ? {
+            timeslot: {
+              id: appointment.timeslotId,
+              date: appointment.date,
+              time: appointment.time,
+            },
+            address1: appointment.address1,
+            address2: appointment.address2,
+            city: appointment.city,
+            state: appointment.state,
+            zipCode: appointment.zipCode,
+            comment: appointment.comment,
+          }
+        : INITIAL_FORM_VALUES,
     resolver: zodResolver(FormSchema),
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
-      await createAppointment({ ...values });
+      mode === "edit" && !!appointment
+        ? await editAppointment(values, appointment.id)
+        : await createAppointment({ ...values });
       await sendEmail(values);
 
       onClose ? onClose() : null;

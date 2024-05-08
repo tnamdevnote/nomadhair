@@ -35,13 +35,11 @@ const cancelAppointment = async (
 };
 
 interface CancelDialogProps {
-  timeSlotId?: string;
   appointmentId: string;
   trigger: React.ReactNode;
 }
 
 export default function CancelDialog({
-  timeSlotId,
   appointmentId,
   trigger,
 }: CancelDialogProps) {

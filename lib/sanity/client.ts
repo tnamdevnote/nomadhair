@@ -117,12 +117,10 @@ export const createAppointment = async (
 export const updateAppointment = async (
   form: z.infer<typeof FormSchema>,
   userId: string,
+  appointmentId: string,
 ) => {
   const appointment = mapAppointment(form, userId);
-  const res = await client
-    .patch("YamW7iUfTGgX1JkiOPz5iP")
-    .set(appointment)
-    .commit();
+  const res = await client.patch(appointmentId).set(appointment).commit();
 
   return res;
 };
