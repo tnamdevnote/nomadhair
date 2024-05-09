@@ -137,22 +137,23 @@ export const AppointmentForm = ({
     }
   };
 
-  console.log(form.formState.errors);
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col gap-8"
       >
-        <div className="max-h-[400px] overflow-auto p-2 md:max-h-none">
-          <div className="flex flex-col gap-2 md:flex-row">
+        <div className="max-h-[400px] overflow-auto md:max-h-none">
+          <div className="flex flex-col gap-12 md:flex-row">
             <fieldset className="flex-1">
               <FormField
                 control={form.control}
                 name="timeslot"
                 render={() => (
                   <FormItem>
-                    <FormLabel>Pick your appointment date</FormLabel>
+                    <FormLabel className="sr-only">
+                      Pick your appointment date
+                    </FormLabel>
                     <AppointmentDateTimePicker />
                     <FormDescription />
                     <FormMessage />
@@ -160,13 +161,13 @@ export const AppointmentForm = ({
                 )}
               />
             </fieldset>
-            <fieldset className="flex flex-1 flex-col gap-2">
+            <fieldset className="flex flex-1 flex-wrap gap-2">
               <FormField
                 control={form.control}
                 name="address1"
                 render={({ field, fieldState }) => (
-                  <FormItem>
-                    <FormLabel>Address 1</FormLabel>
+                  <FormItem className="w-full">
+                    <FormLabel className="sr-only">Address 1</FormLabel>
                     <FormControl>
                       <Input
                         className="h-8 md:h-10"
@@ -184,8 +185,8 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="address2"
                 render={({ field, fieldState }) => (
-                  <FormItem className="col-span-6">
-                    <FormLabel className="text-[12px]">
+                  <FormItem className="w-full">
+                    <FormLabel className="sr-only">
                       Address 2 (optional)
                     </FormLabel>
                     <FormControl>
@@ -205,8 +206,8 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="city"
                 render={({ field, fieldState }) => (
-                  <FormItem className="col-span-3">
-                    <FormLabel>City</FormLabel>
+                  <FormItem className="w-full">
+                    <FormLabel className="sr-only">City</FormLabel>
                     <FormControl>
                       <Input
                         className="h-8 md:h-10"
@@ -224,8 +225,8 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="state"
                 render={({ field, fieldState }) => (
-                  <FormItem className="col-span-3">
-                    <FormLabel>State</FormLabel>
+                  <FormItem className="flex-1">
+                    <FormLabel className="sr-only">State</FormLabel>
                     <FormControl>
                       <Input
                         className="h-8 md:h-10"
@@ -243,8 +244,8 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="zipCode"
                 render={({ field, fieldState }) => (
-                  <FormItem className="col-span-6">
-                    <FormLabel>Zip code</FormLabel>
+                  <FormItem className="flex-1">
+                    <FormLabel className="sr-only">Zip code</FormLabel>
                     <FormControl>
                       <Input
                         className="h-8 md:h-10"
@@ -263,8 +264,10 @@ export const AppointmentForm = ({
                 control={form.control}
                 name="comment"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Comment (optional)</FormLabel>
+                  <FormItem className="w-full">
+                    <FormLabel className="sr-only">
+                      Comment (optional)
+                    </FormLabel>
                     <FormControl>
                       <textarea
                         className={cn(
