@@ -1,11 +1,16 @@
-import Image from "next/image";
-import { SplitContainer } from "@/components/templates/container";
-import { barber } from "@/public/illustrations";
 import React from "react";
+import Image from "next/image";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { barber } from "@/public/illustrations";
+import { SplitContainer } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
 
-const HeroSection = () => {
+async function HeroSection() {
+  const { isAuthenticated } = getKindeServerSession();
+  const isSignedIn = await isAuthenticated();
+
   return (
     <section aria-label="Hero">
       <SplitContainer className="h-[80vh] py-12 md:flex-row-reverse md:justify-between md:py-44">
@@ -31,14 +36,25 @@ const HeroSection = () => {
             className="w-full animate-fade-in"
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            <Button size="lg" className="w-full md:w-auto" asChild>
-              <Link href={"/sign-in"}>Get started!</Link>
+            <Button size="md" className="w-full md:w-auto" asChild>
+              {isSignedIn ? (
+                <Link href="/my-appointments">Book your next appointment</Link>
+              ) : (
+                <RegisterLink
+                  authUrlParams={{
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
+                  }}
+                >
+                  Get started!
+                </RegisterLink>
+              )}
             </Button>
           </div>
         </SplitContainer.Right>
       </SplitContainer>
     </section>
   );
-};
+}
 
 export default HeroSection;
