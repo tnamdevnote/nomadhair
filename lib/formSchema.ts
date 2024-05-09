@@ -12,7 +12,7 @@ export const FormSchema = z.object({
   }),
   address1: z.string().min(1, "Invalid address."),
   address2: z.string().optional(),
-  city: z.string().max(30).min(2, "Minimum length for city is 2."),
+  city: z.string().max(30).min(2, "Invalid city name."),
   state: z.string().length(2, "Invalid state code."),
   zipCode: z.string().length(5, "Invalid zip code."),
   comment: z.string().max(50).optional(),
