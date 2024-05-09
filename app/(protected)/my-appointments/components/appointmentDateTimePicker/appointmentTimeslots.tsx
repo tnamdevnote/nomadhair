@@ -59,7 +59,7 @@ function AppointmentTimeslots({ currentDate }: AppointmentTimeslotsProps) {
             />
           ))
         ) : (
-          <p>There are no available appointments.</p>
+          <p className="m-auto text-sm">There are no available appointments.</p>
         )}
       </div>
     </FormControl>
