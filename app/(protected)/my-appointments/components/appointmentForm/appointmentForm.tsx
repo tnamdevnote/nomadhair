@@ -20,6 +20,7 @@ import { cn, formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 import { APPOINTMENT_QUERYResult } from "@/lib/sanity/sanity.types";
 import { SplitContainer } from "@/components/templates/container";
+import { useRouter } from "next/navigation";
 
 /**
  * Extracted async calls into its own functions to manage them separate from rendering logic.
@@ -97,6 +98,7 @@ export const AppointmentForm = ({
 }: AppointmentFormProps) => {
   const submitBtnLabel = (mode === "create" ? "Book" : "Edit") + " Appointment";
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     defaultValues:
       mode === "edit" && !!appointment
@@ -125,6 +127,7 @@ export const AppointmentForm = ({
       await sendEmail(values);
 
       onClose ? onClose() : null;
+      router.refresh();
       toast({
         title: `Your appointment has been successfully ${mode === "create" ? "booked" : "updated"}!`,
         intent: "success",
