@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { CalendarIcon, LogOutIcon } from "lucide-react";
 import { Container } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
@@ -58,7 +58,6 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent
-
                 className="flex w-fit flex-col items-start p-2"
                 align="end"
               >
@@ -86,7 +85,15 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
             </Popover>
           ) : (
             <Button aria-label="Sign in" iconPosition="after" size="sm" asChild>
-              <Link href="/sign-in">Sign in</Link>
+              <LoginLink
+                authUrlParams={{
+                  connection_id:
+                    process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
+                }}
+                postLoginRedirectURL={`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/success`}
+              >
+                {"Sign in"}
+              </LoginLink>
             </Button>
           )}
         </nav>

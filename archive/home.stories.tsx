@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Home from "./page";
+import Home from "../app/(main)/page";
 
 const meta: Meta<typeof Home> = {
   title: "Pages/Home",
@@ -11,6 +11,10 @@ const meta: Meta<typeof Home> = {
     },
     layout: "fullscreen",
   },
+  /** Disabling the test since current version of storybook does not support dynamic server components.
+   * This should be fixed in version 8.
+   */
+  tags: ["no-tests"],
 };
 
 export default meta;

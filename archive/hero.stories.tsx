@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import HeroSection from "./heroSection";
+import HeroSection from "../app/(main)/components/heroSection/heroSection";
 
 const meta: Meta<typeof HeroSection> = {
   title: "Pages/Home/HeroSection",
@@ -11,9 +11,15 @@ const meta: Meta<typeof HeroSection> = {
     },
     layout: "fullscreen",
   },
+  /** Disabling the test since current version of storybook does not support dynamic server components.
+   * This should be fixed in version 8.
+   */
+  tags: ["no-tests"],
 };
 
 export default meta;
 type Story = StoryObj<typeof HeroSection>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => <HeroSection />,
+};
