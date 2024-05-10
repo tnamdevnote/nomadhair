@@ -8,12 +8,12 @@ import Link from "next/link";
 const AboutSection = () => {
   return (
     <section className="bg-secondary-15" aria-labelledby="about">
-      <SplitContainer className="py-12 md:py-44">
+      <SplitContainer className="py-12 md:py-32">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={departing} width={300} alt="departing image" priority />
         </SplitContainer.Left>
         <SplitContainer.Right
-          className="animate-fade-in flex basis-1/2 flex-col items-center gap-10"
+          className="flex basis-1/2 animate-fade-in flex-col items-center gap-10"
           style={{ "--index": 3 } as React.CSSProperties}
         >
           <h2
@@ -36,14 +36,6 @@ const AboutSection = () => {
             id varius risus. Fusce tempus tellus sed erat scelerisque venenatis.
             Donec consequat ultrices quam, vitae dignissim mi sodales non.
           </p>
-          <div
-            className="animate-fade-in w-full"
-            style={{ "--index": 3 } as React.CSSProperties}
-          >
-            <Button className="w-full md:w-auto" asChild>
-              <Link href={"/about"}>Learn More</Link>
-            </Button>
-          </div>
         </SplitContainer.Right>
       </SplitContainer>
     </section>

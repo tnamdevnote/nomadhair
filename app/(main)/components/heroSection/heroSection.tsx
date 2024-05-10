@@ -15,7 +15,7 @@ async function HeroSection() {
     <section aria-label="Hero">
       <SplitContainer className="h-[80vh] py-12 md:flex-row-reverse md:justify-between md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
-          <Image src={barber} width={400} alt="barber image" priority />
+          <Image src={barber} width={300} alt="barber image" priority />
         </SplitContainer.Left>
         <SplitContainer.Right className="group flex basis-1/2 flex-col gap-10">
           <h1
