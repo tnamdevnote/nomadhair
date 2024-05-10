@@ -20,4 +20,6 @@ const meta: Meta<typeof HeroSection> = {
 export default meta;
 type Story = StoryObj<typeof HeroSection>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => <HeroSection />,
+};
