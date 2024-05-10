@@ -11,12 +11,12 @@ import { formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import Image from "next/image";
 import walk from "@/public/illustrations/walk.svg";
 
-export default async function UpcomingAppointments() {
+export default async function Appointments() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   const appointments = await getAppointments(user?.id);
-  // TODO: add logic for handling error and empty array state.
+
   if (appointments.length === 0) {
     return (
       <div className="flex w-full flex-col items-center gap-16 pt-20">

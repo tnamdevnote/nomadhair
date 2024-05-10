@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from "@/components/molecules/card";
 import { Skeleton } from "@/components/atoms/skeleton";
 import { Suspense } from "react";
-import UpcomingAppointments from "./upcomingAppointments";
+import Appointments from "./appointments";
 
 function LoadingSkeleton({ className }: { className?: string }) {
   return (
@@ -23,7 +23,7 @@ export function AppointmentList() {
   return (
     <section className="mt-8 md:mt-16" aria-labelledby="upcoming">
       <Suspense fallback={<LoadingSkeleton />}>
-        <UpcomingAppointments />
+        <Appointments />
       </Suspense>
     </section>
   );
