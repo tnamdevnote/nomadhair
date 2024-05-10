@@ -271,7 +271,7 @@ export const AppointmentForm = ({
                 />
               </fieldset>
               <fieldset>
-                <legend>Comment</legend>
+                <legend className="mb-2">Comment</legend>
                 <FormField
                   control={form.control}
                   name="comment"
