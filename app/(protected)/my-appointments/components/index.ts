@@ -1,14 +1,12 @@
 import { AppointmentForm } from "./appointmentForm/appointmentForm";
 import { AppointmentList } from "./appointmentList/appointmentList";
-import UpcomingAppointments from "./appointmentList/upcomingAppointments";
-import PastAppointments from "./appointments/pastAppointments";
 import EditDialog from "./editDialog/editDialog";
 import CancelDialog from "./cancelDialog/cancelDialog";
+import NewAppointmentDialog from "./newAppointmentDialog/newAppointmentDialog";
 export {
   AppointmentForm,
   AppointmentList,
-  UpcomingAppointments,
-  PastAppointments,
   EditDialog,
   CancelDialog,
+  NewAppointmentDialog,
 };
