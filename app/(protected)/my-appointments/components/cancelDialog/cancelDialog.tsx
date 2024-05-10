@@ -16,6 +16,7 @@ import {
 import { useToast } from "@/components/molecules/toast";
 import { Button } from "@/components/atoms/button";
 import cancel_img from "./cancel_img.svg";
+import { useRouter } from "next/navigation";
 
 const cancelAppointment = async (
   url: string,
@@ -45,6 +46,7 @@ export default function CancelDialog({
 }: CancelDialogProps) {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const { trigger: swrTrigger, isMutating } = useSWRMutation(
     "/api/my-appointments",
     cancelAppointment,
@@ -54,6 +56,7 @@ export default function CancelDialog({
     try {
       await swrTrigger({ appointmentId });
       if (!isMutating) {
+        router.refresh();
         setOpen(false);
         toast({
           title: "Your appointment has been cancelled!",
