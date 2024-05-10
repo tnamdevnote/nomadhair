@@ -8,6 +8,8 @@ import CancelDialog from "../cancelDialog/cancelDialog";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getAppointments } from "@/lib/sanity/client";
 import { formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
+import Image from "next/image";
+import walk from "@/public/illustrations/walk.svg";
 
 export default async function UpcomingAppointments() {
   const { getUser } = getKindeServerSession();
@@ -15,6 +17,17 @@ export default async function UpcomingAppointments() {
 
   const appointments = await getAppointments(user?.id);
   // TODO: add logic for handling error and empty array state.
+  if (appointments.length === 0) {
+    return (
+      <div className="flex w-full flex-col items-center gap-16 pt-20">
+        <Image src={walk} width={280} alt="walk image" />
+        <p className="max-w-96 text-center">
+          There are no upcoming appointments. Please schedule your next
+          appointment.
+        </p>
+      </div>
+    );
+  }
   return (
     <>
       {appointments.map((appointment) => (

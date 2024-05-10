@@ -22,15 +22,9 @@ function LoadingSkeleton({ className }: { className?: string }) {
 export function AppointmentList() {
   return (
     <section className="mt-8 md:mt-16" aria-labelledby="upcoming">
-      <h2 id="upcoming" className="py-3 text-base font-bold">
-        Upcoming
-      </h2>
-
-      <div className="flex flex-col gap-4">
-        <Suspense fallback={<LoadingSkeleton />}>
-          <UpcomingAppointments />
-        </Suspense>
-      </div>
+      <Suspense fallback={<LoadingSkeleton />}>
+        <UpcomingAppointments />
+      </Suspense>
     </section>
   );
 }
