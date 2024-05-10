@@ -19,16 +19,7 @@ export default async function MyAppointments() {
         <h1 className="text-lg font-medium text-primary-100 lg:text-lg">
           My Appointments
         </h1>
-        <NewAppointmentDialog
-          trigger={
-            <Button
-              className="hidden md:absolute md:right-32 md:top-0 md:flex"
-              icon={<PlusIcon />}
-            >
-              New Appointment
-            </Button>
-          }
-        />
+        <NewAppointmentDialog />
         <AppointmentList />
       </Container>
     </div>
