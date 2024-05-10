@@ -15,7 +15,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/molecules/drawer";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { AppointmentForm } from "../appointmentForm/appointmentForm";
 import { Button } from "@/components/atoms/button";
 import { PlusIcon } from "lucide-react";
@@ -25,11 +25,12 @@ import { PlusIcon } from "lucide-react";
  * On mobile view, it renders the form in `<Drawer />`.
  */
 export default function NewAppointmentDialog() {
-  const [open, setOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <Button
             className="hidden md:absolute md:right-32 md:top-0 md:flex"
@@ -45,10 +46,10 @@ export default function NewAppointmentDialog() {
               Change your appointment details.
             </DialogDescription>
           </DialogHeader>
-          <AppointmentForm onClose={() => setOpen(false)} />
+          <AppointmentForm onClose={() => setDialogOpen(false)} />
         </DialogContent>
       </Dialog>
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
         <DrawerTrigger asChild>
           <Button
             aria-label="New Appointment"
@@ -62,7 +63,7 @@ export default function NewAppointmentDialog() {
             <DrawerTitle>New Appointment</DrawerTitle>
           </DrawerHeader>
           <div className="p-2">
-            <AppointmentForm onClose={() => setOpen(false)} />
+            <AppointmentForm onClose={() => setDrawerOpen(false)} />
           </div>
         </DrawerContent>
       </Drawer>

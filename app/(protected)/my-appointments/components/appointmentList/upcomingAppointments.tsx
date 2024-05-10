@@ -7,7 +7,6 @@ import EditDialog from "../editDialog/editDialog";
 import CancelDialog from "../cancelDialog/cancelDialog";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getAppointments } from "@/lib/sanity/client";
-import { format } from "date-fns";
 import { formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 
 export default async function UpcomingAppointments() {
