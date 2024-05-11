@@ -17,16 +17,16 @@ const AboutSection = () => {
           style={{ "--index": 3 } as React.CSSProperties}
         >
           <h2
-            className="text-center text-lg text-primary-100 md:text-left lg:text-xl"
+            className="text-center text-lg font-medium text-primary-100 md:text-left"
             style={{ "--index": 2 } as React.CSSProperties}
           >
             <strong
               id="about"
-              className="mb-4 flex items-center justify-center gap-2 text-base font-normal md:justify-start"
+              className="mb-4 flex items-center justify-center gap-2 text-sm font-normal md:justify-start"
             >
-              <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+              <span className="inline-block h-[0.5px] w-8 bg-primary-100"></span>
               ABOUT NOMADHAIR
-              <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+              <span className="inline-block h-[0.5px] w-8 bg-primary-100"></span>
             </strong>
             Your friendly neighborhood hair designer
           </h2>
