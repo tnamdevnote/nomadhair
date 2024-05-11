@@ -7,7 +7,10 @@ import Link from "next/link";
 
 const AboutSection = () => {
   return (
-    <section className="bg-secondary-15" aria-labelledby="about">
+    <section
+      className="flex justify-center bg-secondary-15"
+      aria-labelledby="about"
+    >
       <SplitContainer className="py-12 md:py-32">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={departing} width={300} alt="departing image" priority />

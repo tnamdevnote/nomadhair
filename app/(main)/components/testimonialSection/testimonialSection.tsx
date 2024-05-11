@@ -12,7 +12,7 @@ import React from "react";
 
 const TestimonialSection = () => {
   return (
-    <section aria-labelledby="testimonials">
+    <section aria-labelledby="testimonials" className="flex justify-center">
       <Container className="flex flex-col items-center justify-center gap-8 py-12 md:py-44">
         <h2 className="text-center text-lg font-medium text-primary-100">
           <strong

@@ -12,8 +12,8 @@ async function HeroSection() {
   const isSignedIn = await isAuthenticated();
 
   return (
-    <section aria-label="Hero">
-      <SplitContainer className="h-[80vh] py-12 md:flex-row-reverse md:justify-between md:py-44">
+    <section aria-label="Hero" className="flex justify-center">
+      <SplitContainer className="py-12 md:flex-row-reverse md:justify-between md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={barber} width={300} alt="barber image" priority />
         </SplitContainer.Left>
