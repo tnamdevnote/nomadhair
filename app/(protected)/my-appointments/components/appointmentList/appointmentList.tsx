@@ -21,10 +21,15 @@ function LoadingSkeleton({ className }: { className?: string }) {
 
 export function AppointmentList() {
   return (
-    <section className="mt-8 md:mt-16" aria-labelledby="upcoming">
-      <Suspense fallback={<LoadingSkeleton />}>
-        <Appointments />
-      </Suspense>
+    <section
+      className="mt-8 flex justify-center md:mt-16"
+      aria-labelledby="upcoming appointments"
+    >
+      <div className="max-w-screen-m flex-shrink-0">
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Appointments />
+        </Suspense>
+      </div>
     </section>
   );
 }

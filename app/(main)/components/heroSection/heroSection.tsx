@@ -13,13 +13,13 @@ async function HeroSection() {
 
   return (
     <section aria-label="Hero" className="flex justify-center">
-      <SplitContainer className="py-12 md:flex-row-reverse md:justify-between md:py-44">
+      <SplitContainer className="h-[80vh] py-12 md:h-auto md:flex-row-reverse md:justify-between md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
-          <Image src={barber} width={300} alt="barber image" priority />
+          <Image src={barber} width={400} alt="barber image" priority />
         </SplitContainer.Left>
         <SplitContainer.Right className="group flex basis-1/2 flex-col gap-10">
           <h1
-            className="animate-fade-in text-center text-xl font-medium text-primary-100 motion-reduce:animate-none md:text-left"
+            className="animate-fade-in text-center text-lg font-medium text-primary-100 motion-reduce:animate-none md:text-left md:text-xl"
             style={{ "--index": 2 } as React.CSSProperties}
           >
             Bringing style to your place
@@ -33,10 +33,10 @@ async function HeroSection() {
             ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
           <div
-            className="w-full animate-fade-in"
+            className="flex w-full animate-fade-in justify-center md:justify-start"
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            <Button size="md" className="w-full md:w-auto" asChild>
+            <Button size="md" className="w-full max-w-xs md:w-auto" asChild>
               {isSignedIn ? (
                 <Link href="/my-appointments">Book your next appointment</Link>
               ) : (

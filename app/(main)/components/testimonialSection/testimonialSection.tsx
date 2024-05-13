@@ -14,7 +14,7 @@ const TestimonialSection = () => {
   return (
     <section aria-labelledby="testimonials" className="flex justify-center">
       <Container className="flex flex-col items-center justify-center gap-8 py-12 md:py-44">
-        <h2 className="text-center text-lg font-medium text-primary-100">
+        <h2 className="text-center text-lg text-neutral-80">
           <strong
             id="testimonials"
             className="mb-4 flex items-center justify-center gap-2 text-sm font-normal"

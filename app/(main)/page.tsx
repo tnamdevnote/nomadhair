@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <TestimonialSection />
+      {/* <AboutSection /> */}
+      {/* <TestimonialSection /> */}
     </>
   );
 }

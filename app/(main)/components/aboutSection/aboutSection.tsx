@@ -20,7 +20,7 @@ const AboutSection = () => {
           style={{ "--index": 3 } as React.CSSProperties}
         >
           <h2
-            className="text-center text-lg font-medium text-primary-100 md:text-left"
+            className="text-center text-lg text-neutral-80 md:text-left"
             style={{ "--index": 2 } as React.CSSProperties}
           >
             <strong
