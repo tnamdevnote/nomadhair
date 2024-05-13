@@ -31,7 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${quicksand.className} ${montserrat.variable}`}>
-      <body className="bg-secondary-10">
+      <body>
         <Header photo={userState[0]?.picture} isAuthenticated={userState[1]} />
         {children}
         <Toaster />
