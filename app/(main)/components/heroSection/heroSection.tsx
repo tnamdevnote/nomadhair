@@ -17,7 +17,7 @@ async function HeroSection() {
       aria-label="Hero"
       className="relative flex justify-center bg-secondary-15"
     >
-      <SplitContainer className="h-[70dvh] py-12 md:h-auto md:flex-row-reverse md:justify-between md:py-44">
+      <SplitContainer className="h-[80dvh] py-32 md:h-auto md:flex-row-reverse md:justify-between md:py-56 lg:pb-72 xl:pb-80">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={barber} width={300} alt="barber image" priority />
         </SplitContainer.Left>
@@ -56,7 +56,7 @@ async function HeroSection() {
           </div>
         </SplitContainer.Right>
       </SplitContainer>
-      <DividerWave className="absolute bottom-[-1px] left-0 w-full overflow-hidden md:h-auto" />
+      <DividerWave className="absolute bottom-0 w-full overflow-hidden md:h-auto" />
     </section>
   );
 }
