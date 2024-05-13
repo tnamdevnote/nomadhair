@@ -13,11 +13,8 @@ async function HeroSection() {
   const isSignedIn = await isAuthenticated();
 
   return (
-    <section
-      aria-label="Hero"
-      className="relative flex justify-center bg-secondary-15"
-    >
-      <SplitContainer className="h-[80dvh] py-32 md:h-auto md:flex-row-reverse md:justify-between md:py-64 lg:pb-72 xl:pb-80">
+    <section aria-label="Hero" className="relative bg-secondary-15">
+      <SplitContainer className="h-[80dvh] py-32 md:h-auto md:flex-row-reverse md:justify-between md:pb-48 md:pt-64 xl:pb-80">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
           <Image src={barber} width={300} alt="barber image" priority />
         </SplitContainer.Left>
@@ -29,7 +26,7 @@ async function HeroSection() {
             Bringing style to your place
           </h1>
           <p
-            className="w-80 animate-fade-in"
+            className="max-w-80 animate-fade-in"
             style={{ "--index": 3 } as React.CSSProperties}
           >
             Enjoy a quality haircut without leaving the comfort of your own
