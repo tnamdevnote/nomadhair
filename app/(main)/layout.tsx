@@ -8,9 +8,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <main className="flex-grow pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
   );

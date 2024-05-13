@@ -14,9 +14,9 @@ export default async function MyAppointments() {
   }
 
   return (
-    <div className="relative flex flex-col gap-8 py-8 md:min-h-0">
+    <div className="relative flex flex-col items-center gap-8 py-8 md:min-h-0">
       <Container className="relative">
-        <h1 className="text-lg font-medium text-primary-100 lg:text-lg">
+        <h1 className="text-lg font-medium text-primary-100">
           My Appointments
         </h1>
         <NewAppointmentDialog />

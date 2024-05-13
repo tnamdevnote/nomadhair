@@ -19,11 +19,13 @@ export default async function Appointments() {
 
   if (appointments.length === 0) {
     return (
-      <div className="flex w-full flex-col items-center gap-16 pt-20">
+      <div className="flex w-full flex-col items-center pt-20">
         <Image src={walk} width={280} alt="walk image" />
+        <p className="mt-16 max-w-96 text-center">
+          There are no upcoming appointments.
+        </p>
         <p className="max-w-96 text-center">
-          There are no upcoming appointments. Please schedule your next
-          appointment.
+          Please schedule your next appointment.
         </p>
       </div>
     );

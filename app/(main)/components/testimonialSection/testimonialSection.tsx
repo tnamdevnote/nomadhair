@@ -12,24 +12,24 @@ import React from "react";
 
 const TestimonialSection = () => {
   return (
-    <section aria-labelledby="testimonials">
+    <section aria-labelledby="testimonials" className="flex justify-center">
       <Container className="flex flex-col items-center justify-center gap-8 py-12 md:py-44">
-        <h2 className="text-center text-lg text-primary-100 lg:text-xl">
+        <h2 className="text-center text-lg text-neutral-80">
           <strong
             id="testimonials"
-            className="mb-4 flex items-center justify-center gap-2 text-base font-normal"
+            className="mb-4 flex items-center justify-center gap-2 text-sm font-normal"
           >
-            <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+            <span className="inline-block h-[0.5px] w-8 bg-primary-100"></span>
             TESTIMONIALS
-            <span className="inline-block h-0.5 w-8 bg-primary-100"></span>
+            <span className="inline-block h-[0.5px] w-8 bg-primary-100"></span>
           </strong>
-          Sweet Reviews From My Clients
+          What my clients are saying
         </h2>
-        <Carousel className="w-full">
+        <Carousel className="w-full md:w-1/2">
           <CarouselContent className="p-2">
             {reviews.map(({ id, avatar, name, occupation, review }) => (
-              <CarouselItem key={id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="min-w-0" intent="primary">
+              <CarouselItem key={id} className="pl-4">
+                <Card className="min-w-0 bg-transparent shadow-none">
                   <CardHeader
                     avatar={
                       <Avatar size="lg">
@@ -59,8 +59,7 @@ export default TestimonialSection;
 const reviews = [
   {
     id: 0,
-    avatar:
-      "https://images.unsplash.com/photo-1610483178766-8092d96033f3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjA2fHxsZWdvJTIwZmlndXJlfGVufDB8fDB8fHww",
+    avatar: "",
     name: "Eunsub Cho",
     occupation: "Professor at Calvin University",
     review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
@@ -70,8 +69,7 @@ const reviews = [
   },
   {
     id: 1,
-    avatar:
-      "https://images.unsplash.com/photo-1600637453426-7c64826b19d9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGxlZ28lMjBmaWd1cmV8ZW58MHx8MHx8fDA%3D",
+    avatar: "",
     name: "Moon Kim",
     occupation: "Pastor at Korean Grace Church",
     review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
@@ -81,8 +79,7 @@ const reviews = [
   },
   {
     id: 2,
-    avatar:
-      "https://images.unsplash.com/photo-1600637453281-b121a101f1fe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxlZ28lMjBmaWd1cmV8ZW58MHx8MHx8fDA%3D",
+    avatar: "",
     name: "Youngkwang Choi",
     occupation: "Software Engineer at TwistThink",
     review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
@@ -92,8 +89,7 @@ const reviews = [
   },
   {
     id: 3,
-    avatar:
-      "https://images.unsplash.com/photo-1599744249842-ada1047fd47e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTg0fHxsZWdvJTIwZmlndXJlfGVufDB8fDB8fHww",
+    avatar: "",
     name: "HyeongGyu Jang",
     occupation: "Software Engineer at Vervint",
     review: `“Lorem ipsum dolor sit amet, consec tetur adi piscing
