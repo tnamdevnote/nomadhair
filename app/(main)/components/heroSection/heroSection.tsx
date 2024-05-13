@@ -6,39 +6,42 @@ import { SplitContainer } from "@/components/templates/container";
 import { Button } from "@/components/atoms/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
+import DividerWave from "./dividerWave";
 
 async function HeroSection() {
   const { isAuthenticated } = getKindeServerSession();
   const isSignedIn = await isAuthenticated();
 
   return (
-    <section aria-label="Hero" className="flex justify-center">
-      <SplitContainer className="h-[80vh] py-12 md:h-auto md:flex-row-reverse md:justify-between md:py-44">
+    <section
+      aria-label="Hero"
+      className="relative flex justify-center bg-secondary-15"
+    >
+      <SplitContainer className="h-[70dvh] py-12 md:h-auto md:flex-row-reverse md:justify-between md:py-44">
         <SplitContainer.Left className="flex basis-1/2 justify-center">
-          <Image src={barber} width={400} alt="barber image" priority />
+          <Image src={barber} width={300} alt="barber image" priority />
         </SplitContainer.Left>
-        <SplitContainer.Right className="group flex basis-1/2 flex-col gap-10">
+        <SplitContainer.Right className="group flex basis-1/2 flex-col gap-4">
           <h1
-            className="animate-fade-in text-center text-lg font-medium text-primary-100 motion-reduce:animate-none md:text-left md:text-xl"
+            className="animate-fade-in text-left text-lg font-semibold text-primary-100 motion-reduce:animate-none md:text-xl"
             style={{ "--index": 2 } as React.CSSProperties}
           >
             Bringing style to your place
           </h1>
           <p
-            className="animate-fade-in text-center md:text-left"
+            className="w-80 animate-fade-in"
             style={{ "--index": 3 } as React.CSSProperties}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit.
+            Enjoy a quality haircut without leaving the comfort of your own
+            home.
           </p>
           <div
-            className="flex w-full animate-fade-in justify-center md:justify-start"
+            className="mt-8 animate-fade-in"
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            <Button size="md" className="w-full max-w-xs md:w-auto" asChild>
+            <Button size="md" className="shadow-md shadow-primary-100" asChild>
               {isSignedIn ? (
-                <Link href="/my-appointments">Book your next appointment</Link>
+                <Link href="/my-appointments">Book appointment</Link>
               ) : (
                 <RegisterLink
                   authUrlParams={{
@@ -53,6 +56,7 @@ async function HeroSection() {
           </div>
         </SplitContainer.Right>
       </SplitContainer>
+      <DividerWave className="absolute bottom-0 left-0 w-full overflow-hidden md:h-auto" />
     </section>
   );
 }
