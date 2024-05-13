@@ -56,7 +56,7 @@ async function HeroSection() {
           </div>
         </SplitContainer.Right>
       </SplitContainer>
-      <DividerWave className="absolute bottom-0 left-0 w-full overflow-hidden md:h-auto" />
+      <DividerWave className="absolute bottom-[-1px] left-0 w-full overflow-hidden md:h-auto" />
     </section>
   );
 }
