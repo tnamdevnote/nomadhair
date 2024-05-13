@@ -3,9 +3,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <main className="flex-grow pt-[var(--navbar-height-sm)] lg:pt-[var(--navbar-height-lg)]">
-      {children}
-    </main>
-  );
+  return <main className="min-h-dvh">{children}</main>;
 }

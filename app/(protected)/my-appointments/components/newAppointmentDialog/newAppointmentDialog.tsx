@@ -33,7 +33,7 @@ export default function NewAppointmentDialog() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>
           <Button
-            className="hidden md:absolute md:right-16 md:top-0 md:flex"
+            className="hidden shadow-md shadow-primary-100 md:absolute md:right-16 md:top-32 md:flex"
             icon={<PlusIcon />}
           >
             New Appointment
