@@ -43,7 +43,7 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
   }, []);
 
   return (
-    <header className="fixed top-0 z-10 flex h-navbar-height-sm w-full justify-center border-b-[0.5px] border-primary-10/90 bg-transparent backdrop-blur-md">
+    <header className="fixed top-0 z-10 flex h-navbar-height-sm w-full justify-center border-b-[0.5px] border-secondary-10/30 bg-transparent backdrop-blur-md">
       <Container className="flex items-center py-4">
         <Link href="/" aria-label="Home">
           <Logo className="h-5 lg:h-7" />
