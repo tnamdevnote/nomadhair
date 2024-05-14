@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { CalendarIcon, LogOutIcon } from "lucide-react";
 import { Container } from "@/shared/templates/container";
@@ -13,6 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/shared/molecules/popover";
+import avatar from "@/public/illustrations/avatar.svg";
 
 interface HeaderProps {
   photo?: string | null;
@@ -54,7 +56,9 @@ function Header({ photo, isAuthenticated }: HeaderProps) {
               <PopoverTrigger className="hover:cursor-pointer" asChild>
                 <Avatar className="ring-1 ring-neutral-15">
                   <AvatarImage src={photo ?? ""} alt="profile" />
-                  <AvatarFallback>TN</AvatarFallback>
+                  <AvatarFallback>
+                    <Image src={avatar} width={40} alt="avatar" />
+                  </AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent
