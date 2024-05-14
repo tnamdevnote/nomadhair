@@ -16,9 +16,8 @@ export async function POST(req: Request) {
 
     const payload = await req.json();
     const res = await resend.emails.send({
-      // TODO Update sender email once domain is verified
-      from: "Acme <onboarding@resend.dev>",
-      to: [user.email],
+      from: "NomadHair <noreply@nomadhair.co>",
+      to: [user.email, "taekbeen93@gmail.com"],
       subject: "Appointment Confirmation",
       react: React.createElement(ConfirmationEmail, {
         username: user.given_name + " " + user.family_name,
