@@ -1,5 +1,5 @@
-import { Button } from "@/components/atoms/button";
-import { Container } from "@/components/templates/container";
+import { Button } from "@/shared/atoms/button";
+import { Container } from "@/shared/templates/container";
 import { PlusIcon } from "lucide-react";
 import { AppointmentList } from "./components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

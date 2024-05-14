@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./skeleton";
-import { Card, CardContent, CardHeader } from "@/components/molecules/card";
+import { Card, CardContent, CardHeader } from "@/shared/molecules/card";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Atoms/Skeleton",

@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { CalendarIcon, LogOutIcon } from "lucide-react";
-import { Container } from "@/components/templates/container";
-import { Button } from "@/components/atoms/button";
-import Logo from "@/components/atoms/logo";
+import { Container } from "@/shared/templates/container";
+import { Button } from "@/shared/atoms/button";
+import Logo from "@/shared/atoms/logo";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/atoms/avatar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/molecules/popover";
+} from "@/shared/molecules/popover";
 
 interface HeaderProps {
   photo?: string | null;

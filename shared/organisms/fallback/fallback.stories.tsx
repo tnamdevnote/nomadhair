@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Fallback from "./fallback";
 import NotFound from "./notfound";
 import Error from "./error";
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/shared/atoms/button";
 import Link from "next/link";
 
 const meta: Meta<typeof Fallback> = {

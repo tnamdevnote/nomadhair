@@ -10,7 +10,7 @@ import {
 } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
-import Label from "@/components/atoms/label";
+import Label from "@/shared/atoms/label";
 
 const Form = FormProvider;
 
@@ -160,7 +160,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-xs mt-0 font-medium text-danger-100", className)}
+      className={cn("mt-0 text-xs font-medium text-danger-100", className)}
       {...props}
     >
       {body}

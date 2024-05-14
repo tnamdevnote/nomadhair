@@ -1,8 +1,5 @@
-import { Button } from "@/components/atoms/button";
-import {
-  Fallback,
-  NotFound as NotFoundImg,
-} from "@/components/organisms/fallback";
+import { Button } from "@/shared/atoms/button";
+import { Fallback, NotFound as NotFoundImg } from "@/shared/organisms/fallback";
 import Link from "next/link";
 
 import React from "react";

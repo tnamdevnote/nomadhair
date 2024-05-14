@@ -7,14 +7,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/molecules/dialog";
+} from "@/shared/molecules/dialog";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/molecules/drawer";
+} from "@/shared/molecules/drawer";
 import { useEffect, useState } from "react";
 import { AppointmentForm } from "../appointmentForm/appointmentForm";
 import { APPOINTMENT_QUERYResult } from "@/lib/sanity/sanity.types";

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardFooter } from "@/components/molecules/card";
+import { Card, CardContent, CardFooter } from "@/shared/molecules/card";
 import { CalendarIcon, ClockIcon } from "lucide-react";
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/shared/atoms/button";
 
 import React from "react";
 import EditDialog from "../editDialog/editDialog";

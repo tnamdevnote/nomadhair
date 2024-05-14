@@ -1,4 +1,4 @@
-import { Container } from "@/components/templates/container";
+import { Container } from "@/shared/templates/container";
 import React from "react";
 
 const AboutSection = () => {

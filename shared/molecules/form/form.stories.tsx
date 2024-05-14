@@ -11,10 +11,10 @@ import {
   FormMessage,
 } from "./form";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/atoms/input";
-import { Button } from "@/components/atoms/button";
+import { Input } from "@/shared/atoms/input";
+import { Button } from "@/shared/atoms/button";
 import { Card } from "../card";
-import Separator from "@/components/atoms/separator";
+import Separator from "@/shared/atoms/separator";
 import { within, userEvent, expect } from "@storybook/test";
 import { useToast } from "../toast";
 

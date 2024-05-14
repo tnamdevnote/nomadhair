@@ -3,8 +3,8 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/atoms/button";
-import { Input, inputVariants } from "@/components/atoms/input";
+import { Button } from "@/shared/atoms/button";
+import { Input, inputVariants } from "@/shared/atoms/input";
 import {
   Form,
   FormField,
@@ -13,13 +13,13 @@ import {
   FormControl,
   FormDescription,
   FormMessage,
-} from "@/components/molecules/form";
-import { useToast } from "@/components/molecules/toast";
+} from "@/shared/molecules/form";
+import { useToast } from "@/shared/molecules/toast";
 import { FormSchema } from "@/lib/formSchema";
 import { cn, formatToDisplayDate, formatToDisplayTime } from "@/lib/utils";
 import AppointmentDateTimePicker from "../appointmentDateTimePicker/appointmentDateTimePicker";
 import { APPOINTMENT_QUERYResult } from "@/lib/sanity/sanity.types";
-import { SplitContainer } from "@/components/templates/container";
+import { SplitContainer } from "@/shared/templates/container";
 import { useRouter } from "next/navigation";
 
 /**

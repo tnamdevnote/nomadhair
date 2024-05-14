@@ -1,5 +1,5 @@
-import { Badge } from "@/components/atoms/badge";
-import { FormControl } from "@/components/molecules/form";
+import { Badge } from "@/shared/atoms/badge";
+import { FormControl } from "@/shared/molecules/form";
 import { TimeslotSchema } from "@/lib/formSchema";
 import { formatToDisplayTime } from "@/lib/utils";
 import { format } from "date-fns";

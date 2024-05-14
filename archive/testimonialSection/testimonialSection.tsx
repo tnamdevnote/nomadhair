@@ -1,13 +1,13 @@
-import { Container } from "@/components/templates/container";
+import { Container } from "@/shared/templates/container";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/molecules/carousel";
-import { Card, CardContent, CardHeader } from "@/components/molecules/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar";
+} from "@/shared/molecules/carousel";
+import { Card, CardContent, CardHeader } from "@/shared/molecules/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/atoms/avatar";
 import React from "react";
 
 const TestimonialSection = () => {

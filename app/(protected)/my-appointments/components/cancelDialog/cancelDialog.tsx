@@ -12,9 +12,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/molecules/dialog";
-import { useToast } from "@/components/molecules/toast";
-import { Button } from "@/components/atoms/button";
+} from "@/shared/molecules/dialog";
+import { useToast } from "@/shared/molecules/toast";
+import { Button } from "@/shared/atoms/button";
 import cancel_img from "./cancel_img.svg";
 import { useRouter } from "next/navigation";
 

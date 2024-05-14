@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader } from "@/components/molecules/card";
-import { Container } from "@/components/templates/container";
+import { Card, CardContent, CardHeader } from "@/shared/molecules/card";
+import { Container } from "@/shared/templates/container";
 import search from "@/public/illustrations/location_search.svg";
 import place from "@/public/illustrations/place.svg";
 import confirmed from "@/public/illustrations/confirmed.svg";

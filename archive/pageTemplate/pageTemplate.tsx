@@ -1,5 +1,5 @@
-import Header from "@/components/organisms/header";
-import Footer from "@/components/organisms/footer";
+import Header from "@/shared/organisms/header";
+import Footer from "@/shared/organisms/footer";
 import React from "react";
 
 export interface PageTemplateProps {

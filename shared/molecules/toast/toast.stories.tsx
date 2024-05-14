@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Toast } from "./toast";
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/shared/atoms/button";
 import { useToast } from "./use-toast";
 import { within, expect, userEvent } from "@storybook/test";
 

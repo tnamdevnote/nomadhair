@@ -1,5 +1,5 @@
-import Separator from "@/components/atoms/separator";
-import Logo from "@/components/atoms/logo";
+import Separator from "@/shared/atoms/separator";
+import Logo from "@/shared/atoms/logo";
 import {
   GlobeIcon,
   EnvelopeClosedIcon,
@@ -7,9 +7,9 @@ import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/shared/atoms/button";
 import Link from "next/link";
-import { Container } from "@/components/templates/container";
+import { Container } from "@/shared/templates/container";
 
 function Footer() {
   return (

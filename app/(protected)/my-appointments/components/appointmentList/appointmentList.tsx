@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter } from "@/components/molecules/card";
-import { Skeleton } from "@/components/atoms/skeleton";
+import { Card, CardContent, CardFooter } from "@/shared/molecules/card";
+import { Skeleton } from "@/shared/atoms/skeleton";
 import { Suspense } from "react";
 import Appointments from "./appointments";
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/atoms/button";
-import { Fallback, Error as ErrorImage } from "@/components/organisms/fallback";
+import { Button } from "@/shared/atoms/button";
+import { Fallback, Error as ErrorImage } from "@/shared/organisms/fallback";
 import Link from "next/link";
 
 import React, { useEffect } from "react";

@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "./dialog";
-import { Button } from "@/components/atoms/button";
+import { Button } from "@/shared/atoms/button";
 import { within, userEvent, expect, screen } from "@storybook/test";
 
 const meta: Meta<typeof Dialog> = {
