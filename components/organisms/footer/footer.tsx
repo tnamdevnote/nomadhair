@@ -1,14 +1,6 @@
 import Separator from "@/components/atoms/separator";
 import Logo from "@/components/atoms/logo";
-import {
-  GlobeIcon,
-  EnvelopeClosedIcon,
-  IdCardIcon,
-  GitHubLogoIcon,
-  LinkedInLogoIcon,
-} from "@radix-ui/react-icons";
-import { Button } from "@/components/atoms/button";
-import Link from "next/link";
+import { EnvelopeClosedIcon, IdCardIcon } from "@radix-ui/react-icons";
 import { Container } from "@/components/templates/container";
 
 function Footer() {
