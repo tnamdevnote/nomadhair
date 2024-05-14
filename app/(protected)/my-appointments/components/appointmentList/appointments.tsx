@@ -33,7 +33,7 @@ export default async function Appointments() {
   return (
     <>
       {appointments.map((appointment) => (
-        <Card key={appointment.id}>
+        <Card key={appointment.id} className="w-full min-w-0 shadow-lg">
           <CardContent className="flex flex-col gap-4">
             <p className="inline-flex gap-2 text-base font-bold">
               <CalendarIcon />
@@ -74,7 +74,10 @@ export default async function Appointments() {
             <EditDialog
               appointment={appointment}
               trigger={
-                <Button size="sm" className="flex-1 md:w-32 md:flex-none">
+                <Button
+                  size="sm"
+                  className="flex-1 bg-primary-10 text-primary-100 hover:bg-primary-10/50 md:w-32 md:flex-none"
+                >
                   Edit
                 </Button>
               }

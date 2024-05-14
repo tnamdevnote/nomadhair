@@ -14,11 +14,9 @@ export default async function MyAppointments() {
   }
 
   return (
-    <div className="relative flex flex-col items-center gap-8 py-8 md:min-h-0">
-      <Container className="relative">
-        <h1 className="text-lg font-medium text-primary-100">
-          My Appointments
-        </h1>
+    <div className="flex flex-col items-center">
+      <Container className="relative w-full max-w-screen-md pt-32">
+        <h1 className="text-lg font-bold text-primary-100">My Appointments</h1>
         <NewAppointmentDialog />
         <AppointmentList />
       </Container>
