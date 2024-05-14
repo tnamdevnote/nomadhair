@@ -46,7 +46,10 @@ function Footer() {
               size="sm"
               className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
             >
-              <Link href="#" aria-label="Github" />
+              <Link
+                href="https://github.com/tnamdevnote/nomadhair"
+                aria-label="Github"
+              />
             </Button>
             <Button
               asChild
@@ -54,7 +57,10 @@ function Footer() {
               size="sm"
               className="h-8 w-8 rounded-full bg-white p-0 text-primary-100 hover:bg-white/90"
             >
-              <Link href="#" aria-label="LinkedIn" />
+              <Link
+                href="https://www.linkedin.com/in/luke-tb-nam/"
+                aria-label="LinkedIn"
+              />
             </Button>
           </div>
         </div>

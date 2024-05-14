@@ -16,7 +16,6 @@ export async function POST(req: Request) {
 
     const payload = await req.json();
     const res = await resend.emails.send({
-      // TODO Update sender email once domain is verified
       from: "NomadHair <noreply@nomadhair.co>",
       to: [user.email, "taekbeen93@gmail.com"],
       subject: "Appointment Confirmation",
