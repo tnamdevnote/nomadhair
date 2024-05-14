@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import HeroSection from "../app/(main)/components/heroSection/heroSection";
+import { HeroSection } from "@/app/(main)/components";
 
 const meta: Meta<typeof HeroSection> = {
   title: "Pages/Home/HeroSection",

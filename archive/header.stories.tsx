@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Header from "../components/organisms/header";
+import Header from "../shared/organisms/header";
 import { within, userEvent, expect } from "@storybook/test";
 
 const meta: Meta<typeof Header> = {
