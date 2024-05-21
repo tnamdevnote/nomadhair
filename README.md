@@ -19,10 +19,9 @@
 
 <h2>Motivation</h2>
 <p>
-For quite a while, I have been giving free haircuts to people around me as my sidekick. It started out as cutting my own hair back in college dorm, but over time, it grew into a monthly thing where I was giving free haircuts to more than 10 people. (Never had I expected that I’ll be giving hair cut to a pastor at my local church back then).
+For quite a while, I have been giving free haircuts to people around me as my side gig. It started out as cutting my own hair back in college dorm, but over time, it grew into a monthly thing where I was giving free haircuts to more than a dozen of people. (Never had I expected that I would be giving a haircut to a pastor at my local church back then).
 
-It reached a point where scheduling and managing a haircut session
-with every individual became a hassle, and I needed an appointment booking system to communicate my availability to my clients more effectively. I decided to create my own scheduling app - NomadHair. Of course, scheduling solutions like Google Calendar were already available, but I wanted to create a more personalized service as a brand.
+It reached a point where scheduling and managing a haircut session with every individual became a hassle, and I needed an appointment booking system to communicate my availability to my clients more effectively. I decided to create my own scheduling app - NomadHair. Of course, scheduling solutions like Google Calendar were already available, but I wanted to create a more personalized service as a brand.
 </p>
 
 
