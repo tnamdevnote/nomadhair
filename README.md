@@ -36,9 +36,17 @@ It reached a point where scheduling and managing a haircut session with every in
 </div>
 
 #### Planning and Design Process
-- Coming soon
+##### Design and Build
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/025a95c5-9ed1-40d1-ad43-408dbf7eec3c" width="512" alt="design process" />
+
+
 #### Product Development
-- Coming soon
+##### Component Driven Approach w/ Storybook and Github Actions
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/c17732e0-969f-4c0c-9a6f-fa46028c740b" alt="development process" />
+
+##### High Level Architecture
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/2b62ce5b-2469-4943-adc3-3ecbcb81696a" width="512" alt="system" />
+
 #### Deployment
 - Coming soon
 
@@ -49,7 +57,7 @@ It reached a point where scheduling and managing a haircut session with every in
 Storybook was used in this project to build and test UI component in isolation.
 Checkout Storybook [here.](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
 
-![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/5e7a2218-6593-4688-910f-010f6efb239d)
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/630f6653-d52d-4fbb-bb8c-63fee24376ad)
 
 
 ### Figma Design Documents
@@ -59,9 +67,6 @@ Another byproduct of this project is a Figma design documents, which includes:
 - Style Guide <br>
 
 Checkout Figma design document [here.](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
-
-![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/0b313032-6c7d-4df8-a563-dc2529c02e7f)
-
 
 
 
