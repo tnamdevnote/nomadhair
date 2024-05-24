@@ -45,11 +45,21 @@ It reached a point where scheduling and managing a haircut session with every in
 
 <h2>What's Included</h2>
 
-### [Storybook UI Component library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
+### Storybook UI Component library
+Storybook was used in this project to build and test UI component in isolation.
+Checkout Storybook [here.](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
+
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/5e7a2218-6593-4688-910f-010f6efb239d)
 
 
-### [Figma UI Kit](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
+### Figma Design Documents
+Another byproduct of this project is a Figma design documents, which includes:
+- Final design mockups
+- UI Kit
+- Style Guide <br>
+
+Checkout Figma design document [here.](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
+
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/0b313032-6c7d-4df8-a563-dc2529c02e7f)
 
 
