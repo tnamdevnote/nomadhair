@@ -35,26 +35,28 @@ It reached a point where scheduling and managing a haircut session with every in
   <img src="https://img.shields.io/badge/Figma-%23FFFFFF?logo=figma" alt='figma'/>
 </div>
 
-#### Planning and Design Process
-##### Design and Build
-<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/025a95c5-9ed1-40d1-ad43-408dbf7eec3c" width="512" alt="design process" />
+### Planning and Design Process
+##### Establishing brand identity
+##### Designing components (feat. Atomic Design)
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/4795f52f-b547-42b3-bb47-c6609f2ca32b" width="512" alt="buttom components"/>
 
 
-#### Product Development
+
+### Product Development
 ##### Component Driven Approach w/ Storybook and Github Actions
 <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/c17732e0-969f-4c0c-9a6f-fa46028c740b" alt="development process" />
 
 ##### High Level Architecture
 <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/2b62ce5b-2469-4943-adc3-3ecbcb81696a" width="512" alt="system" />
 
-#### Deployment
+### Deployment
 - Coming soon
 
 
 <h2>What's Included</h2>
 
 ### Storybook UI Component library
-Storybook was used in this project to build and test UI component in isolation.
+Storybook was used in this project to build and test UI component in isolation.<br>
 Checkout Storybook [here.](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
 
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/630f6653-d52d-4fbb-bb8c-63fee24376ad)
