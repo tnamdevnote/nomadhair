@@ -68,5 +68,6 @@ Another byproduct of this project is a Figma design documents, which includes:
 
 Checkout Figma design document [here.](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
 
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/cc7a09e9-58bf-40a2-9d1c-4db7c60a839a)
 
 
