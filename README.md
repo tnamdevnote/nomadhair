@@ -59,11 +59,9 @@ In order to truly harness the benefit of CDD, each UI component needs to be thor
 <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/390569ee-fde9-4560-8abd-586474a60cc2" alt="development process" />
 <br>
 <br>
-Fortunately, Storybook offered a way to integrate various UI tests (Axe, Jest, and Playwright) into a single automated workflow using Github CI. With Github Action, I was able to quickly tests for accessibility, user interactions, and modifications in UI every time Pull Request was created. This allowed me to quickly build UI components with more confidence.
+Fortunately, Storybook offered a way to integrate various UI tests (Axe, Jest, and Playwright) into a single automated workflow using Github CI. With Github Action, I was able to quickly tests for accessibility, user interactions, and modifications in UI each time I created Pull Request. This enabled me to develop UI components more confidently and without sacrificing speed.
 
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/e4988d0f-0268-4ec7-a9d3-7a20835b37f0)
-
-
 
 
 #### 2-2. High Level Architecture
