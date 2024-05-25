@@ -18,14 +18,16 @@
 
 <h2>Motivation</h2>
 <p>
-For quite a while, I have been giving free haircuts to people around me as my side gig. It started out as cutting my own hair back in college dorm, but over time, it grew into a monthly thing where I was giving free haircuts to more than a dozen of people. (Never had I expected that I would be giving a haircut to a pastor at my local church back then).
-
-It reached a point where scheduling and managing a haircut session with every individual became a hassle, and I needed an appointment booking system to communicate my availability to my clients more effectively. I decided to create my own scheduling app - NomadHair. Of course, scheduling solutions like Google Calendar were already available, but I wanted to create a more personalized service as a brand.
+There were two motivations behind this project:
+<br>
+<br>
+1. To communicate my availability to my friends and family more effectively, so that they can easily schedule haircut appointment with me.
+<br>
+<br>
+2. To Investigate how a component-driven development can efficiently manage complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 </p>
 
-<h2>How it works</h2>
-
-<h2>Built with</h2>
+<h2>How I Built NomadHair</h2>
 <div>
   <img src="https://img.shields.io/badge/Next.js-%23000000?logo=next.js" alt='next.js'/>
   <img src="https://img.shields.io/badge/Sanity-%23000000?logo=sanity" alt='sanity'/>
@@ -36,9 +38,16 @@ It reached a point where scheduling and managing a haircut session with every in
 </div>
 
 ### Planning and Design Process
-##### Establishing brand identity
-##### Designing components (feat. Atomic Design)
-<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/4795f52f-b547-42b3-bb47-c6609f2ca32b" width="512" alt="buttom components"/>
+#### Establishing brand identity
+I started out by defining a system that can help me make design decision more quickly. Rather than including all elements from the start, I focused on the key elements such as color scheme, typography, and logo. This not only prevented me from getting lost in limitless poof of colors and font sizes, but also made it much easier to ensure consistency in overall UI as the design evolved.
+<br>
+<br>
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/9a056e64-4141-4e12-af78-eb7195968d4c)
+
+##### Designing components (feat. Figma & Storybook)
+
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/54aedd40-9a3b-4db4-a78c-1cdc6b71b1f1)
+
 
 
 
