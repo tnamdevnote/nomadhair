@@ -37,28 +37,44 @@ There were two motivations behind this project:
   <img src="https://img.shields.io/badge/Figma-%23FFFFFF?logo=figma" alt='figma'/>
 </div>
 
-### Planning and Design Process
-#### Establishing brand identity
-I started out by defining a system that can help me make design decision more quickly. Rather than including all elements from the start, I focused on the key elements such as color scheme, typography, and logo. This not only prevented me from getting lost in limitless poof of colors and font sizes, but also made it much easier to ensure consistency in overall UI as the design evolved.
+### 1. Planning and Design Process
+#### 1-1. Establishing brand identity
+I started out by defining a system that can help me make design decision more quickly. Rather than including all elements from the start, I focused on the key elements such as color scheme, typography, and logo. This not only prevented me from getting lost in limitless pool of colors and font sizes, but also made it much easier to ensure consistency in overall UI as the design evolved.
 <br>
 <br>
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/9a056e64-4141-4e12-af78-eb7195968d4c)
 
-##### Designing components (feat. Figma & Storybook)
+#### 1-2. Prototyping components (feat. Figma & Storybook)
+Prototyping these UI building blocks was an iterative process that involved designing components using Figma, then quickly building out those components in Storybook to verify each of them functions as designed in different scenarios (viewport size, component states, color variants, etc.). A benefit of this approach was that I can quickly adapt to the evolving layout design simply by reassembling each pieces of components. 
+<br>
+<br>
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/ba422348-0db4-41f9-929f-259fc2b77c7c)
 
-![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/54aedd40-9a3b-4db4-a78c-1cdc6b71b1f1)
+
+### 2. Development
+#### 2-1. Automating UI testing workflow
+In order to truly harness the benefit of CDD, each UI component needs to be thoroughly tried and tested. The issue was that this process required multiple rounds of testing, including accessibility, user interaction, and visual tests. It’s easy to find tools that test different parts of the UI, but the challenge was to combine them into a productive workflow, ensuring reliability of each UI components without compromising the development speed.
+<br>
+<br>
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/390569ee-fde9-4560-8abd-586474a60cc2" alt="development process" />
+<br>
+<br>
+Fortunately, Storybook offered a way to integrate various UI tests (Axe, Jest, and Playwright) into a single automated workflow using Github CI. With Github Action, I was able to quickly tests for accessibility, user interactions, and modifications in UI every time Pull Request was created. This allowed me to quickly build UI components with more confidence.
+
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/e4988d0f-0268-4ec7-a9d3-7a20835b37f0)
 
 
 
 
-### Product Development
-##### Component Driven Approach w/ Storybook and Github Actions
-<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/c17732e0-969f-4c0c-9a6f-fa46028c740b" alt="development process" />
+#### 2-2. High Level Architecture
 
-##### High Level Architecture
+
 <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/2b62ce5b-2469-4943-adc3-3ecbcb81696a" width="512" alt="system" />
 
-### Deployment
+
+#### 2-3. 
+
+### 3. Deployment
 - Coming soon
 
 
