@@ -45,8 +45,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -73,18 +71,18 @@ There are two goals I wanted to achieve through this project:
 * To launch my personal haircut service as a brand.
 * To investigate how component-driven development (CDD) can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 
-To learn more about how I built this project, check out folowing articles & docs:
-#### How I Built NomadHair
-1. Planning and Design Process - coming soon.
-2. Product Development - coming soon.
-3. Deployment - coming soon.
+To learn more about how I built this project, check out following articles & docs:
+* #### How I Built NomadHair
+  1. Planning and Design Process - coming soon.
+  2. Product Development - coming soon.
+  3. Deployment - coming soon.
 
-#### Docs
-* [Figma Design Documents](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
-<br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/0475d331-4972-4fbb-b95b-ceb63c60106d" width="256" alt="figma" />
-
-* [Storybook Component Library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
-<br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
+* #### Docs
+  * [Figma Design Documents](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
+  <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/0475d331-4972-4fbb-b95b-ceb63c60106d" width="256" alt="figma" />
+  
+  * [Storybook Component Library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
+  <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -102,7 +100,10 @@ To learn more about how I built this project, check out folowing articles & docs
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Checkout the demo video to learn how to use NomadHair!
+
+The app m
+
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -119,24 +120,6 @@ Next release: v1.0.0
 - [ ] Add "Buy Me Coffee" button
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -159,44 +142,5 @@ Luke (Taek) Nam
 * SVG Illustrations - [unDraw.co](https://undraw.co)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-# NomadHair
-
-### Bringing Style to your place!
-
-
-
-<h2>Motivation</h2>
-<p>
-There were two motivations behind this project:
-<br>
-<br>
-1. To communicate my availability to my friends and family more effectively, so that they can easily schedule haircut appointment with me.
-<br>
-<br>
-2. To Investigate how a component-driven development can efficiently manage complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
-</p>
-
-<h2>How I Built NomadHair</h2>
-<div>
-  <img src="https://img.shields.io/badge/Next.js-%23000000?logo=next.js" alt='next.js'/>
-  <img src="https://img.shields.io/badge/Sanity-%23000000?logo=sanity" alt='sanity'/>
-  <img src="https://img.shields.io/badge/Resend-%23000000?logo=resend" alt='resend'/>
-  <img src="https://img.shields.io/badge/Storybook-%23ffffff?logo=storybook" alt='storybook'/>
-  <img src="https://img.shields.io/badge/TailwindCSS-%23FFFFFF?logo=tailwindcss" alt='tailwindcss'/>
-  <img src="https://img.shields.io/badge/Figma-%23FFFFFF?logo=figma" alt='figma'/>
-</div>
-
-### Storybook UI Component library
-Storybook was used in this project to build and test UI component in isolation.<br>
-Checkout Storybook [here.](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
-
-
-### Figma Design Documents
-Checkout Figma design document [here.](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
-
 
 
