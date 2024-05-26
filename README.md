@@ -6,7 +6,7 @@
   NomadHair is a men's haircut service that is delivered to your place.</br>
   Sign up, book your appointment, and enjoy the quality haircut without having to leaving your home.
 </p>
-<p>Check out the demo <a href="www.nomadhair.co">here.</a></p>
+<p>Check out the live site <a href="www.nomadhair.co">here.</a></p>
 <br>
 <div align="center">
   <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/5fdd27f1-8b11-462f-b585-a8e67c78be47" alt='logo'/>
@@ -38,8 +38,8 @@ There were two motivations behind this project:
 </div>
 
 ### 1. Planning and Design Process
-#### 1-1. Establishing brand identity
-I started out by defining a system that can help me make design decision more quickly. Rather than including all elements from the start, I focused on the key elements such as color scheme, typography, and logo. This not only prevented me from getting lost in limitless pool of colors and font sizes, but also made it much easier to ensure consistency in overall UI as the design evolved.
+#### 1-1. Establishing style guide
+I started out by defining a system that can help me make design decision more quickly. Rather than trying to set the guides for all elements from the start, I decided to focus on the key elements such as color scheme, typography, and logo. This not only prevented me from getting lost in limitless pool of colors and font sizes, but also made it much easier to ensure consistency in overall UI as the design evolved.
 <br>
 <br>
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/9a056e64-4141-4e12-af78-eb7195968d4c)
