@@ -7,7 +7,7 @@
   </a>
 
 
-  <h3 align="center">NomadHair</h3>
+  <h1 align="center">NomadHair</h1>
 
   <p align="center">
     Bringing Style to Your Place!
@@ -16,14 +16,9 @@
     <a href="https://nomadhair.co"><strong>Live site</strong></a>
     <br />
     <br />
-<!--     <a href="https://nomadhair.co">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
   </p>
   <div align="center">
-    <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/fe4ee045-ce1d-4dd2-909d-af5dcc50e938" width="768" alt="landing page img"/>
+    <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/fe4ee045-ce1d-4dd2-909d-af5dcc50e938" alt="landing page img"/>
   </div>
 </div>
 
@@ -32,8 +27,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open>
-  <summary>Table of Contents</summary>
+## Table of Contents
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -43,19 +37,19 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#user-guide">User Guide</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
-</details>
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/09d0d6b3-f00a-4c1f-8444-6ff645d76184)
+![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/7a00dc7a-372e-4030-a0c4-73f58a8de38b)
+
 
 
 ### What is NomadHair?
@@ -71,7 +65,7 @@ There are two goals I wanted to achieve through this project:
 * To launch my personal haircut service as a brand.
 * To investigate how component-driven development (CDD) can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 
-To learn more about how I built this project, check out following articles & docs:
+If you would like to learn more about how I built this project, check out following articles & docs:
 * #### How I Built NomadHair
   1. Planning and Design Process - coming soon.
   2. Product Development - coming soon.
@@ -83,7 +77,6 @@ To learn more about how I built this project, check out following articles & doc
   
   * [Storybook Component Library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -98,41 +91,48 @@ To learn more about how I built this project, check out following articles & doc
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## User Guide
 
-Checkout the demo video to learn how to use NomadHair!
+### 1.Sign up
+Click on "Get Started" button to register. You will be redirected to Kinde authentication page where you'll be prompted to sign up using your Google account.
 
-The app m
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/ac017587-faa6-4f15-9735-e8ad8e9eb583" />
 
+Once you are signed in, you'll be redirected to the home page. You'll notice that "Get started" button has now become "Book appointment" button. Click on the button to be redirected to "My appointment" page.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/fa5d9eba-f6f5-4238-bbae-131e15a18c5e" />
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### 2.Book Appointment
+Open up new appointment form by clicking on "+ New Appointment" or "+" button on the mobile browser.
 
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/9ddb6b2b-b436-402f-bcfb-f1ef5afa6344" />
+
+Here, select your desired dates and available timeslots and fill out the address and other details.
+
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/828b95e4-6cfa-4a1f-8c8c-07fed42d3b87" />
+
+### 3.Confirmation
+Once the appointment is booked successfully, you will receive a confirmation through your google account email. Please verify the appointment details, and if you need to make updates, click on the "Edit" button to rearrange your schedule.
+
+<img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/9706431c-b59e-4cda-ab66-758d7bbefe95" />
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-Next release: v1.0.0
+- [ ] Optimize form on iPhone
 - [ ] Add "Add to Calendar" on Confirmation Email
 - [ ] Address validation
 - [ ] Add "Buy Me Coffee" button
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
 For any questions regarding the project, feel free to reach out to me 🙂
 
-Luke (Taek) Nam 
 * [Email](luke.tb.nam@outlook.com)
 * [LinkedIn](https://www.linkedin.com/in/luke-tb-nam/)
 * [Github](https://github.com/tnamdevnote)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
