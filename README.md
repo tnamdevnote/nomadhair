@@ -63,7 +63,7 @@ For quite a while, I have been giving free haircuts to my friends and family as 
 
 There are two goals I wanted to achieve through this project:
 * To launch my personal haircut service as a brand.
-* To investigate how component-driven development (CDD) can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
+* To build a web application using component-driven development (CDD) apporach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 
 If you would like to learn more about how I built this project, check out following articles & docs:
 * #### How I Built NomadHair
@@ -73,9 +73,15 @@ If you would like to learn more about how I built this project, check out follow
 
 * #### Docs
   * [Figma Design Documents](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
+    <br />
+    A design document that includes UI mock ups, component design, and style guide.
+    <br />
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/0475d331-4972-4fbb-b95b-ceb63c60106d" width="256" alt="figma" />
   
   * [Storybook Component Library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
+    <br />
+    A component library for this project.
+    <br />
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
 
 ### Built With
