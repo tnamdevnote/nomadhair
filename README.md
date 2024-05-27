@@ -52,26 +52,26 @@
 
 
 
-### What is NomadHair?
+### 💇‍♂️ What is NomadHair?
 
 NomadHair is a men's haircut service that is delivered to your place.</br>
 Sign up, book your appointment, and enjoy the quality haircut without having to leaving your home.
 
-For quite a while, I have been giving free haircuts to my friends and family as my side gig. As my little side gig started growing, figuring out a good time for everyone started becoming a bit of a headache. I knew I needed to find more effective way to let folks know when I was free. That is where NomadHair comes in.
+### 🧐 Why?
+I have been giving free haircuts to my friends and family for almost 5 years. It started as a hobby during my college years, but over time it became a monthly routine - never had I expected that I would be giving a haircut to a pastor at my local church back then 😅. As more people came to me for a haircut, figuring out a good time for everyone started becoming a bit of a headache. I knew I needed to find a more effective way to let them know when I was free. This is where NomadHair comes in.
 
-### Motivations
-
+### ⛳️ Goals
 There are two goals I wanted to achieve through this project:
-* To launch my personal haircut service as a brand.
-* To build a web application using component-driven development (CDD) apporach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
+1. To launch my personal haircut service as a brand.
+2. To build a web application using component-driven development (CDD) apporach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 
 If you would like to learn more about how I built this project, check out following articles & docs:
-* #### How I Built NomadHair
+* ##### How I Built NomadHair
   1. Planning and Design Process - coming soon.
   2. Product Development - coming soon.
   3. Deployment - coming soon.
 
-* #### Docs
+* ##### Docs
   * [Figma Design Documents](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
     <br />
     A design document that includes UI mock ups, component design, and style guide.
@@ -84,7 +84,7 @@ If you would like to learn more about how I built this project, check out follow
     <br />
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
 
-### Built With
+### 🛠️ Built With
 
 * <img src="https://img.shields.io/badge/next.js-333333?style=for-the-badge&logo=nextdotjs&logoColor=white" alt='next.js'/>
 * <img src="https://img.shields.io/badge/Storybook-333333?style=for-the-badge&logo=storybook" alt='storybook'/>
