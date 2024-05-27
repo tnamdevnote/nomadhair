@@ -32,9 +32,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#💇‍♂️-What-is-NomadHair?">What is NomadHair?</a></li>
-        <li><a href="#why?">Why?</a></li>
-        <li><a href="#motivations">Motivations</a></li>
+        <li><a href="#what-is-nomadhair">What is NomadHair?</a></li>
+        <li><a href="#why">Why?</a></li>
+        <li><a href="#goals">Goals</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -51,17 +51,15 @@
 
 ![image](https://github.com/tnamdevnote/nomadhair/assets/44216709/7a00dc7a-372e-4030-a0c4-73f58a8de38b)
 
-
-
-### 💇‍♂️ What is NomadHair?
+### What is NomadHair?
 
 NomadHair is a men's haircut service that is delivered to your place.</br>
 Sign up, book your appointment, and enjoy the quality haircut without having to leaving your home.
 
-### 🧐 Why?
+### Why?
 I have been giving free haircuts to my friends and family for almost 5 years. It started as a hobby during my college years, but over time it became a monthly routine - never had I expected that I would be giving a haircut to a pastor at my local church back then 😅. As more people came to me for a haircut, figuring out a good time for everyone started becoming a bit of a headache. I knew I needed to find a more effective way to let them know when I was free. This is where NomadHair comes in.
 
-### ⛳️ Goals
+### Goals
 There are two goals I wanted to achieve through this project:
 1. To launch my personal haircut service as a brand.
 2. To build a web application using component-driven development (CDD) apporach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
@@ -85,7 +83,7 @@ If you would like to learn more about how I built this project, check out follow
     <br />
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/bd5222ba-8371-4222-bcd5-f153e4907fac" width="256" alt="storybook" /> 
 
-### 🛠️ Built With
+### Built With
 
 * <img src="https://img.shields.io/badge/next.js-333333?style=for-the-badge&logo=nextdotjs&logoColor=white" alt='next.js'/>
 * <img src="https://img.shields.io/badge/Storybook-333333?style=for-the-badge&logo=storybook" alt='storybook'/>
