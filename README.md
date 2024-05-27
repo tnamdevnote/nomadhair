@@ -32,7 +32,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#💇‍♂️-what-is-nomadhair">What is NomadHair?</a></li>
+        <li><a href="#💇‍♂️-What-is-NomadHair?">What is NomadHair?</a></li>
         <li><a href="#why?">Why?</a></li>
         <li><a href="#motivations">Motivations</a></li>
         <li><a href="#built-with">Built With</a></li>
