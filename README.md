@@ -62,7 +62,7 @@ I have been giving free haircuts to my friends and family for almost 5 years. It
 ### Goals
 There are two goals I wanted to achieve through this project:
 1. To launch my personal haircut service as a brand.
-2. To build a web application using component-driven development (CDD) apporach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
+2. To build a web application in component-driven development (CDD) approach to investigate how CDD can solve complexities that arise in UI development, potentially leading to a more uniform user experience and design across the product.
 
 If you would like to learn more about how I built this project, check out following articles & docs:
 * ##### How I Built NomadHair
