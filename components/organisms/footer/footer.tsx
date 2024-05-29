@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer role="contentinfo" className="flex justify-center bg-primary-100">
       <Container className="flex min-h-[300px] flex-col justify-center gap-4">
-        <Logo mode="dark" className="h-4 w-fit md:h-7" />
+        <Logo mode="dark" className="h-4 self-start md:h-7" />
         <h2 className="text-sm text-white md:text-base">
           Have any questions? Feel free to reach out
         </h2>
