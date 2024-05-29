@@ -7,7 +7,7 @@ const theme = create({
   // Brand assets
   brandTitle: "NomadHair",
   // TODO: Replace with real url.
-  brandUrl: "https://nomadhair-79e6c.web.app/",
+  brandUrl: "https://nomadhair.co/",
   brandImage:
     "https://res.cloudinary.com/dtsdpcbcv/image/upload/v1712891768/logo-light-lg_pmi0xn.svg",
   brandTarget: "_self",
