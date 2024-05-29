@@ -18,7 +18,7 @@
     <br />
   </p>
   <div align="center">
-    <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/fe4ee045-ce1d-4dd2-909d-af5dcc50e938" alt="landing page img"/>
+    <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/aa0bcdca-8b8c-4e32-b660-36de81cc1814" alt="landing page img"/>
   </div>
 </div>
 
