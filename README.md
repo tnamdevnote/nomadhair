@@ -57,7 +57,7 @@ NomadHair is a men's haircut service that is delivered to your place.</br>
 Sign up, book your appointment, and enjoy the quality haircut without having to leaving your home.
 
 ### Why?
-I have been giving free haircuts to my friends and family for almost 5 years. It started as a hobby during my college years, but over time it became a monthly routine - never had I expected that I would be giving a haircut to a pastor at my local church back then 😅. As more people came to me for a haircut, figuring out a good time for everyone started becoming a bit of a headache. I knew I needed to find a more effective way to let them know when I was free. This is where NomadHair comes in.
+I have been giving free haircuts to my friends and family for almost 5 years. It started as a hobby during my college years, but over time it became a monthly work - never had I expected that I would be giving a haircut to a pastor at my local church back then 😅. As more people came to me for a haircut, figuring out a good time for everyone started becoming a bit of a headache. I knew I needed to find a more effective way to let them know when I was free. This is where NomadHair comes in.
 
 ### Goals
 There are two goals I wanted to achieve through this project:
