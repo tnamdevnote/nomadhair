@@ -124,7 +124,7 @@ export const ConfirmationEmail = ({
               color: "rgb(0,0,0, 0.7)",
             }}
           >
-            © 2024 | NomadHair, Grand Rapids, MI, U.S.A. | www.nomadhair.com
+            © 2024 | NomadHair, Grand Rapids, MI, U.S.A. | www.nomadhair.co
           </Text>
         </Container>
       </Body>
