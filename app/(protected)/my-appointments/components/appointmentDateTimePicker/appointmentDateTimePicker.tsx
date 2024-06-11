@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "@/components/atoms/calendar";
+import { Calendar } from "@/components/molecules/calendar";
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 import AppointmentTimeslots from "./appointmentTimeslots";
