@@ -1,38 +1,22 @@
 import { cn } from "@/lib/utils";
 import React, { forwardRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 
-const cardVariants = cva(
-  "flex min-w-56 flex-col gap-4 p-6 shadow-md rounded-2xl",
-  {
-    variants: {
-      intent: {
-        primary: "bg-primary-90 text-neutral-10",
-        secondary: "bg-secondary-90 text-neutral-90",
-        tertiary: "bg-tertiary-90 text-neutral-90",
-        neutral: "bg-white text-neutral-90",
-      },
-    },
-    defaultVariants: {
-      intent: "neutral",
-    },
+const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "flex min-w-56 flex-col gap-4 rounded-2xl bg-white p-6 text-neutral-90 shadow-md",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
   },
 );
-
-const Card = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>
->(({ className, intent, children, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn(cardVariants({ intent }), className)}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-});
 Card.displayName = "Card";
 
 interface CardHeader extends React.HTMLAttributes<HTMLDivElement> {
