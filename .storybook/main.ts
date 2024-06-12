@@ -13,6 +13,7 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-designs",
   ],
+  staticDirs: ["../public", "../docs/assets"],
   webpackFinal: async (config) => {
     if (config && config.resolve && config.resolve.alias) {
       config.resolve.alias = {

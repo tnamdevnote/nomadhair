@@ -52,7 +52,7 @@ const preview: Preview = {
       storySort: {
         method: "",
         order: [
-          "Introduction",
+          "Getting Started",
           "Style Guide",
           "Atoms",
           "Molecules",
