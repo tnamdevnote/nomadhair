@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
 
+/**
+ * Avatar component is used to represent a user, and display the profile picture, initials or fallback icon.
+ */
 const meta: Meta<typeof Avatar> = {
   title: "Atoms/Avatar",
   component: Avatar,

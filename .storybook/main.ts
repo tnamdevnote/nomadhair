@@ -4,7 +4,7 @@ import path from "path";
 const config: StorybookConfig = {
   stories: [
     "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../app/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../docs/*.stories.mdx",
   ],
   addons: [
     "@storybook/addon-links",
@@ -13,6 +13,7 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-designs",
   ],
+  staticDirs: ["../public", "../docs/assets"],
   webpackFinal: async (config) => {
     if (config && config.resolve && config.resolve.alias) {
       config.resolve.alias = {

@@ -12,18 +12,12 @@ type Story = StoryObj<typeof Skeleton>;
 
 export const Default: Story = {
   render: () => (
-    <>
-      <Card>
-        <div className="flex w-full items-center gap-4">
-          <Skeleton className="h-10 w-10 rounded-full" />
-          <Skeleton className="h-8 w-20 flex-grow" />
-        </div>
-        <CardContent className="flex flex-col gap-2">
-          <Skeleton className="h-6 w-full " />
-          <Skeleton className="h-6 w-full " />
-          <Skeleton className="h-6 w-full " />
-        </CardContent>
-      </Card>
-    </>
+    <div className="flex w-full items-center gap-4">
+      <Skeleton className="h-10 w-10 rounded-full" />
+      <div>
+        <Skeleton className="mb-2 h-4 w-32 flex-grow" />
+        <Skeleton className="h-4 w-32 flex-grow" />
+      </div>
+    </div>
   ),
 };

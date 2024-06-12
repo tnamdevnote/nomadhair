@@ -1,0 +1,96 @@
+import { Meta } from "@storybook/blocks";
+import banner from "./assets/nomadhair-banner.png";
+
+<Meta title="Getting Started/Introduction" />
+
+<style>
+  {`
+  .link-list {
+    display: grid;
+    grid-template-column: 1fr;
+    gap: 1rem;
+  }
+  .link-item {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid #f3f3f6;
+    border-radius: 0.5rem;
+    transition: box-shadow 250ms ease, border-color 250ms ease, transform 250ms ease-in-out;
+    color: #555555;
+  }
+  .link-item:hover, .link-item:active {
+    border-color: #cfcfd6;
+    box-shadow: 5px 10px 20px #f3f3f6;
+    transform: translateY(-0.25rem);
+  }
+  .link-item strong {
+    display: block;
+  }
+  .link-item img {
+    border-radius: 0.5rem;
+  }
+
+  @media(min-width: 768px) {
+    .link-list {
+      grid-template-columns: 1fr 1fr;
+
+    }
+  }
+`}
+</style>
+
+# Welcome to the Component Library
+
+The source of truth for style and components when building product for NomadHair.
+Use this library as your development environment, documentation, and testing tools.
+
+<img src="/ui-library-banner.png" alt="ui library banner" />
+
+<br />
+### Check this out
+<br />
+<div className="link-list">
+  <a className="link-item" href="https://www.nomadhair.co" target="_blank">
+    <img src="/nomadhair-banner.png" width={128} alt="nomadhair banner" />
+    <span>
+      <strong>NomadHair app</strong>
+      Schedule your appointment today!
+    </span>
+  </a>
+  <a
+    className="link-item"
+    href="https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506-3194&t=t05Bq0jbqZLCBvss-1"
+    target="_blank"
+  >
+    <img src="/figma-banner.png" width={128} alt="figma banner" />
+    <span>
+      <strong>Figma design</strong>
+      Designed by Luke (Taek) Nam
+    </span>
+  </a>
+</div>
+
+<br />
+### Follow me for updates!
+<br />
+
+<div className="link-list">
+  <a className="link-item" href="https://x.com/luketbnam" target="_blank">
+    <img src="/x-twitter.svg" width={48} alt="x twitter" />
+    <span>
+      <strong>Twitter</strong>
+    </span>
+  </a>
+  <a
+    className="link-item"
+    href="https://github.com/tnamdevnote/nomadhair"
+    target="_blank"
+  >
+    <img src="/github.svg" width={48} alt="github" />
+    <span>
+      <strong>Github</strong>
+    </span>
+  </a>
+</div>

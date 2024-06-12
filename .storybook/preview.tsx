@@ -48,6 +48,18 @@ const preview: Preview = {
         ...MINIMAL_VIEWPORTS,
       },
     },
+    options: {
+      storySort: {
+        method: "",
+        order: [
+          "Getting Started",
+          "Style Guide",
+          "Atoms",
+          "Molecules",
+          "Organisms",
+        ],
+      },
+    },
   },
 };
 

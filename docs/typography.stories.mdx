@@ -1,0 +1,53 @@
+import { Meta, Typeset } from "@storybook/blocks";
+
+<Meta title="Style Guide/Typography" />
+
+export const typography = {
+  type: {
+    heading: "'Montserrat'",
+    body: "'Quicksand'",
+  },
+  weight: {},
+  size: {
+    xs: 12,
+    sm: 14,
+    base: 16,
+    lg: 24,
+    xl: 36,
+    "2xl": 56,
+  },
+};
+
+export const SampleText =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+# Typography
+
+<br />
+## Heading
+
+**Font:** Montserrat
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.lg),
+    Number(typography.size.xl),
+    Number(typography.size["2xl"]),
+  ]}
+  sampleText={SampleText}
+  fontFamily={typography.type.heading}
+/>
+
+## Body
+
+**Font:** Quicksand
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.xs),
+    Number(typography.size.sm),
+    Number(typography.size.base),
+  ]}
+  sampleText={SampleText}
+  fontFamily={typography.type.body}
+/>
