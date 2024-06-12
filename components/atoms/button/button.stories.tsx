@@ -1,6 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./button";
-import { PlusIcon, icons } from "lucide-react";
+import { PlusIcon } from "lucide-react";
+
+/**
+ * Button allows users to take action, and make choices, with a single step.
+ * The component can be used as native `<button>` element or can embed `<a>` to redirect user to new page.
+ */
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -20,7 +25,7 @@ const meta: Meta<typeof Button> = {
   },
   argTypes: {
     intent: {
-      options: ["primary", "secondary", "tertiary", "danger"],
+      options: ["primary", "secondary", "danger"],
       control: { type: "radio" },
     },
     variant: {

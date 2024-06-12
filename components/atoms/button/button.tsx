@@ -11,7 +11,6 @@ const buttonVariants = cva(
       intent: {
         primary: "bg-primary-100 text-white hover:bg-primary-100/90",
         secondary: "bg-secondary-100 text-neutral-90 hover:bg-secondary-100/90",
-        tertiary: "bg-tertiary-100 text-neutral-90 hover:bg-tertiary-100/90",
         danger: "bg-danger-100 text-white hover:bg-danger-100/90",
       },
       variant: {
@@ -41,11 +40,6 @@ const buttonVariants = cva(
         className: "text-secondary-100 hover:bg-secondary-100/5",
       },
       {
-        intent: "tertiary",
-        variant: ["outline", "ghost"],
-        className: "text-tertiary-100 hover:bg-tertiary-100/5",
-      },
-      {
         intent: "danger",
         variant: ["outline", "ghost"],
         className: "text-danger-100 hover:bg-danger-100/5",
@@ -59,11 +53,6 @@ const buttonVariants = cva(
         intent: "secondary",
         variant: "link",
         className: "text-secondary-100",
-      },
-      {
-        intent: "tertiary",
-        variant: "link",
-        className: "text-tertiary-100",
       },
       {
         intent: "danger",
