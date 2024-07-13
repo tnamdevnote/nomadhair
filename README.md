@@ -65,7 +65,7 @@ There are two goals I wanted to achieve through this project:
 2. To build a web application in component-driven development (CDD) approach to investigate how CDD can solve complexities that arise in UI development, potentially leading to more consistent design and user experience across the product.
 
 If you would like to learn more about how I built this project, check out following articles & docs:
-* ##### How I Built NomadHair
+* ##### Building NomadHair: A Journey in Component Driven Development
   1. [Laying the groundwork](https://medium.com/@lukenam/building-nomadhair-in-component-driven-approach-8b827d6be8d7)
   2. [UI Library and Reusable Components](https://medium.com/@lukenam/cdd-building-nomadhair-in-component-driven-approach-part-ii-376b7c3112d1)
   3. [UI Tests and Automating Testing Workflow](https://medium.com/@lukenam/building-nomadhair-in-component-driven-approach-final-ui-tests-and-automating-testing-workflow-6ba230987540)
