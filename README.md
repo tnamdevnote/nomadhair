@@ -66,9 +66,9 @@ There are two goals I wanted to achieve through this project:
 
 If you would like to learn more about how I built this project, check out following articles & docs:
 * ##### How I Built NomadHair
-  1. Planning and Design Process - coming soon.
-  2. Product Development - coming soon.
-  3. Deployment - coming soon.
+  1. [Laying the groundwork](https://medium.com/@lukenam/building-nomadhair-in-component-driven-approach-8b827d6be8d7)
+  2. [UI Library and Reusable Components](https://medium.com/@lukenam/cdd-building-nomadhair-in-component-driven-approach-part-ii-376b7c3112d1)
+  3. [UI Tests and Automating Testing Workflow](https://medium.com/@lukenam/building-nomadhair-in-component-driven-approach-final-ui-tests-and-automating-testing-workflow-6ba230987540)
 
 * ##### Docs
   * [Figma Design Documents](https://www.figma.com/design/cURR8cW2EUkTgpHLf5RiVW/NomadHair?node-id=1506%3A3194&t=hWKvw14LmD6E2GKy-1)
