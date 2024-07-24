@@ -77,7 +77,7 @@ If you would like to learn more about how I built this project, check out follow
     <br />
   <br> <img src="https://github.com/tnamdevnote/nomadhair/assets/44216709/0475d331-4972-4fbb-b95b-ceb63c60106d" width="256" alt="figma" />
   
-  * [Storybook Component Library](https://65f86d160015b8443704c163-ojovnerorg.chromatic.com/?path=/docs/atoms-avatar--docs)
+  * [Storybook Component Library](https://65f86d160015b8443704c163-ahoxnsujqd.chromatic.com/?path=/docs/getting-started-introduction--docs)
     <br />
     A component library for this project.
     <br />
